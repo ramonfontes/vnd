@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bridge="bridge.*"
+				height="150" minWidth="400" alpha="1.0" backgroundAlpha="0.74"
+				backgroundColor="#FFFFFF" close="donothing()" creationComplete="init()"
+				horizontalAlign="center" showCloseButton="true" verticalAlign="middle">
+	<mx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+			
+			public var func:Function;
+			public var ob:Object; 
+			[Bindable]
+			public var str:String;  
+			public var arr:Array=new Array();  
+			
+			public function init():void {				
+				arr.push(ob);
+				FlexGlobals.topLevelApplication.enabled=false;
+				PopUpManager.centerPopUp(this);
+			}
+			
+			public function setfunction():void {
+				callLater(this.func,arr);
+				FlexGlobals.topLevelApplication.enabled=true;
+				PopUpManager.removePopUp(this);
+			}
+			
+			public function donothing():void {
+				FlexGlobals.topLevelApplication.enabled=true;
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Label text="{str}" fontWeight="bold" fontSize="12" fontFamily="Arial" horizontalCenter="0" verticalCenter="-25" color="black"/>
+	<mx:HBox>
+		
+		
+		<mx:Button label="Ok" click="setfunction()" fontFamily="Arial" horizontalCenter="-45" verticalCenter="0" width="70" fontSize="12" color="black"/>
+		<mx:Button label="Cancel"  click="donothing()"  fontFamily="Arial" horizontalCenter="45" verticalCenter="0" width="70" fontSize="12" color="black"/>
+	</mx:HBox>
+	<bridge:FABridge/>
+</mx:TitleWindow>

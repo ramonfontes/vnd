@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bridge="bridge.*"
+				height="150" minWidth="400" alpha="1.0" backgroundAlpha="0.74"
+				backgroundColor="#FFFFFF" close="donothing()" creationComplete="init()"
+				horizontalAlign="center" showCloseButton="true" verticalAlign="middle">
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			import mx.managers.PopUpManager;
+			import mx.core.FlexGlobals;
+			
+			public var func1:Function;
+			public var func2:Function;
+			public var ob:Object; 
+			[Bindable]
+			public var str:String;  
+			public var arr:Array=new Array();  
+			public function init():void {
+				PopUpManager.centerPopUp(this);
+				FlexGlobals.topLevelApplication.enabled=false;
+			}
+			public function setfunction1():void {
+				//callLater(this.func1,arr);
+				FlexGlobals.topLevelApplication.d123(ob,true);
+				FlexGlobals.topLevelApplication.enabled=true;
+				PopUpManager.removePopUp(this);
+			}
+			public function setfunction2():void {
+				//	callLater(this.func2,arr);
+				FlexGlobals.topLevelApplication.d123(ob,false);
+				FlexGlobals.topLevelApplication.enabled=true;
+				PopUpManager.removePopUp(this);
+			} 
+			public function donothing():void {
+				PopUpManager.removePopUp(this);
+				FlexGlobals.topLevelApplication.enabled=true;
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Label text="{str}" fontWeight="bold" fontSize="12" fontFamily="Arial" horizontalCenter="0" verticalCenter="-25" color="black"/>
+	<mx:HBox>
+		<mx:Button label="Copy properties of Template"  click="setfunction1()"  fontFamily="Arial" horizontalCenter="45" verticalCenter="0" fontSize="12" color="black"/>
+		<mx:Button label="Delete All Items" click="setfunction2()" fontFamily="Arial" horizontalCenter="-45" verticalCenter="0" fontSize="12" color="black"/>
+	</mx:HBox>
+	<bridge:FABridge/>
+</mx:TitleWindow>

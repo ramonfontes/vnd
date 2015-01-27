@@ -1,0 +1,62 @@
+<nsdl>
+  <network>
+    <templates/>
+    <objects>
+      <link id="wireless_6">
+        <delay/>
+        <loss/>
+        <maxqueue/>
+        <connection source="computer_1" destination="wirelessRouter_2"/>
+      </link>
+      <link id="ethernet_5">
+        <delay/>
+        <loss/>
+        <maxqueue/>
+        <connection source="switchOpenflow_3" destination="wirelessRouter_2"/>
+      </link>
+      <computer id="computer_1">
+        <computerIPAddress>10.0.0.1</computerIPAddress>
+        <mask>255.0.0.0</mask>
+        <computerMacAddress>00:00:00:00:00:01</computerMacAddress>
+        <notes/>
+      </computer>
+      <wirelessRouter id="wirelessRouter_2">
+        <switchMacAddress>00:00:00:00:00:02</switchMacAddress>
+        <notes/>
+      </wirelessRouter>
+      <switchOpenflow id="switchOpenflow_3">
+        <switchMacAddress>00:00:00:00:00:03</switchMacAddress>
+        <notes/>
+      </switchOpenflow>
+    </objects>
+    <views/>
+  </network>
+  <scenarios>
+    <visualizations>
+      <visualization id="vis01">
+        <description>
+          <object id="computer_1">
+            <x.position>115</x.position>
+            <y.position>72</y.position>
+            <z.position>0</z.position>
+            <color/>
+          </object>
+          <object id="wirelessRouter_2">
+            <x.position>231</x.position>
+            <y.position>261</y.position>
+            <z.position>0</z.position>
+            <color/>
+          </object>
+          <object id="switchOpenflow_3">
+            <x.position>7</x.position>
+            <y.position>392</y.position>
+            <z.position>0</z.position>
+            <color/>
+          </object>
+        </description>
+      </visualization>
+    </visualizations>
+    <simulations/>
+    <openflow/>
+  </scenarios>
+</nsdl>

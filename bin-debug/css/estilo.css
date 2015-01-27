@@ -1,0 +1,28 @@
+/*Alert{
+	color : #08487A;
+	title-style-name : "alertTitle";
+	header-height:19;
+	border-thickness: 1;
+	drop-shadow-enabled: true;
+	drop-shadow-color :#d1ddf7;
+	background-color: #ffffff;
+	corner-radius :6;
+	border-style :solid;
+	header-colors : #08487A, #08487A;
+	footer-colors : #9db6d9, #ffffff;
+	border-color : #08487A;
+}*/
+
+global{
+	font-family:'Arial';
+	fontType:bold;
+}
+
+.alertTitle{
+	font-family :Verdana;
+	font-size :10;
+	font-weight :bold;
+	text-align :left;
+	/*color :#ffffff;*/
+	color :#ffffff;
+}

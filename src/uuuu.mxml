@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" fontFamily="Georgia" >
+	
+	<mx:Object id="ob" />
+	<mx:Script>
+		<![CDATA[
+			
+			import mx.controls.Alert;
+			import mx.events.MenuEvent;
+			import mx.controls.Menu;
+			import action_alert.HAlert;
+			import action_alert.HMensagens;
+			[Bindable] 
+			public var menuData:Array = [
+				{label: "File", children: [
+					{label: "New",data:"clear" },
+					{label: "Open from local machine...", type: "normal",data:"upload"},
+					{label: "Save on local machine...", type: "normal",data:"save"},
+					
+					//{label: "Import Library file", children: [
+						//{label: "Import from Server...", type: "normal" ,data:"Import"},
+						//{label: "Export to server...", type: "normal",data:"Export"}, 
+					//]},
+					
+					{label: "Export", children: [						
+						{label: "Export to Mininet...", type: "normal",data:"ExportMininetScript"},						
+						{label: "Export to NS3 (under development)...", type: "normal",data:"ExportNS3"},
+						{label: "Export to NSDL File...", type: "normal" ,data:"Exportation"},
+						{label: "Export to Openflow Controller...", type: "normal",data:"ExportControllerScript"},
+						{label: "Export to QoS...", type: "normal",data:"ExportControllerScriptQoS"},
+					]},
+					
+					{label: "Print Network Scenario...", type: "normal",data:"print"} 
+					
+				]},
+				{label: "Edit", children: [
+					{label: "Undo" ,data:"undo"},
+					{label: "Redo", type: "normal" ,data:"redo"}, 
+					{label: "Zoom in", type: "normal",data:"zoomin"}, 
+					{label: "Zoom out", type: "normal",data:"zoomout"}, 
+					/*                     {label: "Delete", type: "normal",data:"delete"}
+					*/                    
+				]},
+				{label: "Options", children: [
+					{label: "Create Template",data:"template",enabled: false },
+					{label: "Delete Template", type: "normal",data:"deleteTemplate",enabled: false }, 
+					{label: "Create view", type: "normal",data:"createView",enabled: false}, 
+					{label: "Delete view", type: "normal",data:"deleteView",enabled: false}, 
+					{label: "Create Simulation", type: "normal",data:"createSim",enabled: false}, 
+					{label: "Delete Simulation", type: "normal",data:"deleteSim",enabled: false}, 
+					{label: "Configuration", type: "normal",data:"",enabled: false}
+				]},
+				{label: "About", children: [
+					{label: "Publications",data:"publications" },		
+					{label: "Videos",data:"videos" },	
+					{label: "About VND (SDN version)",data:"aboutvnd" }
+				]}
+				
+				
+				/*{label: "File", children: [
+				{label: "SubMenuItem A-1",children: [
+				{label: "SubMenuItem A-1" },
+				{label: "SubMenuItem A-2" } 
+				] },
+				{label: "SubMenuItem A-2", type: "normal",} 
+				]},
+				{label: "Edit", type: "check", toggled: true},
+				{label: "Options", type: "check", toggled: false},
+				{label: "MenuItem D", children: [
+				{label: "SubMenuItem D-1", type: "radio", 
+				groupName: "g1"},
+				{label: "SubMenuItem D-2", type: "radio", 
+				groupName: "g1", toggled: true}, 
+				{label: "SubMenuItem D-3", type: "radio", 
+				groupName: "g1"} 
+				]} */ 
+			];
+			private function menuHandler(event:MenuEvent):void {
+				if(event.item.data=='clear'){
+					parentApplication.showPopupForNew();
+				}
+				else if(event.item.data=='redo'){
+					parentApplication.redo();
+				}
+				else if(event.item.data=='undo')
+					parentApplication.undo(event);
+				else if(event.item.data=='delete')
+					parentApplication.deleteItem(event);
+				else if(event.item.data=='zoomin')
+					parentApplication.applyZoom(parentApplication.dozooom());
+				else if(event.item.data=='zoomout')
+					parentApplication.applyZoom(parentApplication.dozooomOut());
+				else if(event.item.data=='print')
+					parentApplication.doPrint();
+				else if(event.item.data=='save')
+					parentApplication.saveFile();
+				else if(event.item.data=='upload')
+					parentApplication.upload();
+				else if(event.item.data=='Exportation')
+					parentApplication.exportFile();
+				else if(event.item.data=='ExportMininetScript')
+					parentApplication.exportMininetScriptFile();
+				else if(event.item.data=='ExportNS3')
+					parentApplication.exportNS3File();
+				else if(event.item.data=='ExportControllerScript')
+					parentApplication.exportControllerScriptFile();	
+				else if(event.item.data=='ExportControllerScriptQoS')
+					parentApplication.exportControllerScriptFileQoS();	
+				else if(event.item.data=='createView')
+					parentApplication.setView();
+				else if(event.item.data=='deleteView')
+					parentApplication.delView();
+				else if(event.item.data=='createSim')
+					parentApplication.setSimuOnConfig();
+				else if(event.item.data=='deleteSim')
+					parentApplication.delSimuOnTree();
+				else if(event.item.data=='Import')
+					parentApplication.importfromServer();
+				else if(event.item.data=='Export')
+					parentApplication.userobjupload();
+				else if(event.item.data=='aboutvnd')
+					parentApplication.pupupAbout();
+				else if(event.item.data=='videos')
+					parentApplication.videosget();
+				else if(event.item.data=='publications')
+					parentApplication.publications();
+				else  if(event.item.data=='deleteTemplate'){
+					if(parentApplication.networkTree!=null){
+						parentApplication.deleteTemplate();
+					}
+				}
+				
+				else  if(event.item.data=='template'){
+					if(parentApplication.focusobject!=null){
+						parentApplication.addAsATemplate(parentApplication.focusobject);
+						// Alert.show('dd');
+					}}
+					
+				else ;
+				//Alert.show(event.item.data);
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:MenuBar labelField="label"  itemClick="menuHandler(event)" id="me"
+				dataProvider="{menuData}"
+				fillAlphas="[0.0, 0.0, 0.0, 0.0]" color="black" borderColor="#009ACD" 
+				fontWeight="bold" fontFamily="Verdana" fontSize="12"/>
+</mx:Canvas>

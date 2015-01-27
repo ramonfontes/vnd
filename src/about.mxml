@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:bridge="bridge.*"
+				height="460" title="About" fontSize="12" minWidth="480" alpha="1.0" backgroundAlpha="0.74"
+				backgroundColor="#FFFFFF" close="donothing()" creationComplete="init()"
+				horizontalAlign="center" showCloseButton="true" verticalAlign="middle">
+	<mx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.managers.PopUpManager;
+	
+			public var arr:Array=new Array();  
+			
+			public function init():void {
+               var bool:String='yes'
+               arr.push(bool)
+               PopUpManager.centerPopUp(this);
+			   FlexGlobals.topLevelApplication.enabled=false;
+            }
+    
+			public function donothing():void {
+	       		PopUpManager.removePopUp(this);
+				FlexGlobals.topLevelApplication.enabled=true;
+       		}
+			
+			private function myLabel_initialize():void {
+			myLabel.htmlText = "<p align=\"center\">Visual Network Description - (SDN version) is a web-based graphical\n" +
+				"user interface for the authoring of generic and SDN Network Scenarios.\n" +
+				"VND allows to generate scripts for <b>Mininet</b> and <b>Openflow Controllers</b>.\n" +
+				"You can also import and export <b>NSDL</b> files.</p>";
+			}
+			
+			private function myLabel_initialize1():void {
+				myLabel1.htmlText = "<a href=\"http://www.ramonfontes.com\" target=\"_blank\">ramonfontes.com</a>";
+			}
+			
+			private function myLabel_initialize2():void {
+				myLabel2.htmlText = "<p align=\"center\"><b>VND is still in development. We apologize if some features do not work.<b></p>";
+			}
+			
+			private function myLabel_initialize3():void {
+				myLabel3.htmlText = "<p align=\"center\"><b>Send suggestions to ramonreisfontes@gmail.com<b></p>";
+			}
+       
+		]]>
+	</mx:Script>
+	<mx:Image id="image" source="assets/logo.png"/> 
+	<mx:Label text="Visual Network Description - (SDN version)" fontSize="14" fontWeight="bold" fontFamily="Arial" horizontalCenter="0" verticalCenter="-25" color="black"/>
+	<mx:Label>
+		
+	</mx:Label>
+	<mx:Label id="myLabel" horizontalCenter="0" width="420" height="80"  fontFamily="Arial" fontSize="12" initialize="myLabel_initialize()"/>
+	<mx:Image id="image1" source="assets/user-boss.png"/> 	
+	<mx:Label id="myLabel1" initialize="myLabel_initialize1()"/>
+	<mx:Label id="myLabel2" initialize="myLabel_initialize2()"/>
+	<mx:Label id="myLabel3" initialize="myLabel_initialize3()"/>
+	<mx:Label>
+		
+	</mx:Label>
+	<!--<mx:Label text="© 2013 All Rights Reserved." fontSize="12" fontFamily="Arial" horizontalCenter="0" verticalCenter="-25" color="black"/>-->
+	<mx:HBox>
+	<mx:Button label="Close" click="donothing()" fontFamily="Arial" horizontalCenter="-45" verticalCenter="0" fontSize="10" color="black" width="100"/>
+</mx:HBox>
+	<bridge:FABridge/>
+</mx:TitleWindow>

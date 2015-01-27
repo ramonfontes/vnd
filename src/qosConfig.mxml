@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"  
+		   creationComplete="init()" >
+	<mx:Script>
+		<![CDATA[
+			import action_alert.HAlert;
+			import action_alert.HMensagens;
+			
+			import mx.collections.ArrayCollection;
+			import mx.containers.Form;
+			import mx.containers.FormItem;
+			import mx.containers.HBox;
+			import mx.controls.Button;
+			import mx.controls.ComboBox;
+			import mx.controls.Text;
+			import mx.controls.TextInput;
+			public var boxViewer:TextInput=new TextInput();
+			public var boxViewer1:TextInput=new TextInput();
+			
+			public var countNumberInterface:int=1;
+			public var regular:int=2;
+			public var regularInterface:int=2;
+			public var test:Boolean=false;	
+			public var buttonGo:Button=new Button();				
+			public var listInterface1:Array =[];
+			public var listqosName1:Array =[];				
+			public var listSwitch1:Array =[];
+			public 	var listService1:Array =[];
+			public 	var listQueue1:Array =[];
+			public 	var listEnqueuePort1:Array =[];
+			public 	var listPriority1:Array =[];
+			public 	var listProtocol1:Array =[];
+			public 	var listEthType1:Array =[];
+			public 	var listIngressPort1:Array =[];
+			public 	var listSourceIP1:Array =[];
+			public 	var listDestinationIP1:Array =[];
+			public 	var listTos1:Array =[];
+			public 	var listVlanID1:Array =[];
+			public 	var listEthSource1:Array =[];
+			public 	var listEthDestination1:Array =[];
+			public 	var listSourcePort1:Array =[];
+			public 	var listDestinationPort1:Array =[];			
+			
+			//var obj:Object;
+			private var tb3:ComboBox = new ComboBox();		
+			public var isChildTemplatedOne:Boolean;
+			public var valueObjArr:ArrayCollection=new ArrayCollection();	
+			public var objparaArrayCol:ArrayCollection=new ArrayCollection();
+			[Bindable] public var form:Form=new Form();			
+			
+			private 	var interfacee:String="";			
+			private 	var qosName:String="";
+			private 	var switchh:String="";
+			private 	var service:String="";
+			private 	var queue:String="";
+			private 	var enqueuePort:String="";
+			private 	var priority:String="";
+			private 	var protocol:String="";
+			private 	var ethType:String="";
+			private 	var ingressPort:String="";
+			private 	var sourceip:String="";
+			private 	var destinationip:String="";
+			private 	var tos:String="";
+			private 	var vlanid:String="";
+			private 	var sourceeth:String="";
+			private 	var destinationeth:String="";
+			private 	var sourceport:String="";
+			private 	var destinationport:String="";
+			[Bindable] public var rec:Rectangle;
+			public var listInt1:Array =[];
+			private var ye:int=0;				
+			
+			public function change(eve:Event):void {
+				var bool:Boolean=false;
+				var obj:ChangedTemp=new ChangedTemp();
+				
+				if(eve.target.parent.label=="QoS Name")
+					obj.id="name";
+				else if(eve.target.parent.label=="Switch (Disabled)")
+					obj.id="sw";
+				else if(eve.target.parent.label=="Service (Disabled)")
+					obj.id="service";
+				else if(eve.target.parent.label=="Queue")
+					obj.id="queue";
+				else if(eve.target.parent.label=="Enqueue Port (Disabled)")
+					obj.id="enqueueport";
+				else if(eve.target.parent.label=="Priority (Disabled)")
+					obj.id="priority";
+				else if(eve.target.parent.label=="Protocol")
+					obj.id="protocol";
+				else if(eve.target.parent.label=="Ethernet Type")
+					obj.id="ethtype";
+				else if(eve.target.parent.label=="Ingress Port (Disabled)")
+					obj.id="ingressport";
+				else if(eve.target.parent.label=="Source IP")
+					obj.id="ipsrc";
+				else if(eve.target.parent.label=="Destination IP")
+					obj.id="ipdst";
+				else if(eve.target.parent.label=="TOS (Disabled)")
+					obj.id="tos";
+				else if(eve.target.parent.label=="Vlan ID (Disabled)")
+					obj.id="vlanid";
+				else if(eve.target.parent.label=="Source Eth (Disabled)")
+					obj.id="ethsrc";
+				else if(eve.target.parent.label=="Destination Eth (Disabled)")
+					obj.id="ethdst";
+				else if(eve.target.parent.label=="Source Port (Disabled)")
+					obj.id="srcport";
+				else if(eve.target.parent.label=="Destination Port (Disabled)")
+					obj.id="dstport";
+				else if(eve.target.parent.label=="Switch Interface")
+					obj.id="interface";				
+				//else
+				//obj.id=eve.target.parent.label;
+								
+				if(eve.target.className=='TextInput'){
+					obj.name=eve.target.text;
+					if(obj.id=='name'){
+						qosName=eve.target.text;
+					}
+					else if(obj.id=='sw'){
+						switchh=eve.target.text;
+					}
+					else if(obj.id=='service'){
+						service=eve.target.text;
+					}
+					else if(obj.id=='queue'){
+						queue=eve.target.text;
+					}
+					else if(obj.id=='enqueueport'){
+						enqueuePort=eve.target.text;
+					}
+					else if(obj.id=='priority'){
+						priority=eve.target.text;
+					}
+					else if(obj.id=='protocol'){
+						protocol=eve.target.text;
+					}
+					else if(obj.id=='ethtype'){
+						ethType=eve.target.text;
+					}
+					else if(obj.id=='ingressport'){
+						ingressPort=eve.target.text;
+					}
+					else if(obj.id=='ipsrc'){
+						sourceip=eve.target.text;
+					}
+					else if(obj.id=='ipdst'){
+						destinationip=eve.target.text;
+					}
+					else if(obj.id=='tos'){
+						tos=eve.target.text;
+					}
+					else if(obj.id=='vlanid'){
+						vlanid=eve.target.text;
+					}
+					else if(obj.id=='ethsrc'){
+						sourceeth=eve.target.text;
+					}
+					else if(obj.id=='ethdst'){
+						destinationeth=eve.target.text;
+					}
+					else if(obj.id=='srcport'){
+						sourceport=eve.target.text;
+					}
+					else if(obj.id=='dstport'){
+						destinationport=eve.target.text;
+					}
+				}				
+				if(eve.target.className=='ComboBox'){
+					
+					if(obj.id=='interface'){
+						interfacee=eve.target.selectedItem;
+					}
+					
+					obj.name=eve.target.selectedIndex;
+					obj.IsCombo=true;
+					obj.combeValue=eve.target.value.toString()					
+				}				
+				for(var j:int=0;j<valueObjArr.length;j++){
+					if(valueObjArr[j].id==obj.id){
+						bool=true;						
+						if(isChildTemplatedOne){
+							valueObjArr[j].haschanged=true;							
+						}						
+						valueObjArr[j].name=obj.name;
+						valueObjArr[j].combeValue=obj.combeValue;
+						break;
+					}
+				}				
+				if(!bool){
+					if(isChildTemplatedOne)obj.haschanged=true;
+					valueObjArr.addItem(obj);
+				}				
+				//focusobject=eve.target;
+				//focusobject.setFoc();
+			}
+			
+			private function clickBackQos(evt:MouseEvent):void {
+				regularInterface=2;
+				regular=2;
+				this.removeChild(form); 
+				init();
+			}
+			
+			private function clickGo(evt:MouseEvent):void {
+				regular=1;
+				regularInterface=2;
+				//this.secondTime=true;
+				this.removeChild(form); 
+				init();				
+			}
+			
+			public function listnerAddHandler():void {
+				this.addEventListener(MouseEvent.MOUSE_MOVE,uppd);
+			}
+			
+			private function uppd(eve:MouseEvent):void {
+				var muev:Event=new Event("click");
+				dispatchEvent(muev);
+			}
+			
+			private function clickBack(evt:MouseEvent):void {
+				regular=0;
+				regularInterface=2;
+				//this.secondTime=true;
+				this.removeChild(form); 
+				init();
+			}
+			
+			public function init():void {
+				form=new Form();
+				//this.removeChild(form); 
+				this.addChild(form);
+				
+				for(var i:int=0;i<objparaArrayCol.length;i++){
+					var obj:objParameter=objparaArrayCol[i];
+				}
+				
+				for(i=0; i<parentApplication.allnames.length; i++) {					
+					var tb:TextInput = new TextInput();
+					var frmItem:FormItem = new FormItem();
+					var frmItem1:FormItem = new FormItem();
+					frmItem.direction = "horizontal";
+					buttonGo=new Button();								
+					var buttonBack:Button=new Button();
+					var buttonBackQos:Button=new Button();
+					var contein3:HBox = new HBox();
+					var contein2:HBox = new HBox();
+					var contein1:HBox = new HBox();
+					var word:Text = new Text();	
+					//tb.addEventListener(Event.CHANGE UPDATE_COMPLETE,change);					
+					//tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+					if(parentApplication.allnames[i]=="name"){
+						//Alert.show("Q");
+							tb.width=100;		
+						//	frmItem.label = "Flow Name";
+							var test:Boolean=false;		
+							if(regular==1){
+								if(parentApplication.countNumber3-1!=parentApplication.listqosqosName.length){																
+									tb.text="Qos"+(parentApplication.countNumber3+1);
+									test=true;
+									boxViewer.text=String(parentApplication.countNumber3++);
+								}											
+								else if(parentApplication.countNumber3-1==parentApplication.listqosqosName.length){			
+									qosName="Qos"+parentApplication.countNumber3;
+									parentApplication.listqosqosName[parentApplication.countNumber3-1]=qosName;
+									obj.arrayqosName=[];
+									for(var j:int=0;j<parentApplication.listqosqosName.length;j++){	
+										obj.arrayqosName.push(parentApplication.listqosqosName[j]);
+									}			
+									tb.text="Qos"+(parentApplication.countNumber3+1);
+									qosName=tb.text;
+									boxViewer.text=String(parentApplication.countNumber3++);
+								}
+							}									
+							else if(regular==0){
+								boxViewer.text=String(parentApplication.countNumber3--);
+								tb.text=obj.arrayqosName[parentApplication.countNumber3-1];
+							}
+							else{
+								qosName="Qos"+parentApplication.countNumber3;
+								tb.text=qosName;
+								if (parentApplication.countNumber3-1==parentApplication.listqosqosName.length)
+									buttonGo.enabled=false;
+							}
+							frmItem.label="QoS Name";
+						//}						
+						
+						if (parentApplication.countNumber3 == 1)
+							buttonBack.enabled=false;
+						else if(parentApplication.countNumber3-1==parentApplication.listqosqosName.length)
+							buttonGo.enabled=false;
+													
+						word.text = "--- Qos Table ---";
+						word.setStyle("fontSize", "16");
+						word.setStyle("textAlign", "right");
+						
+						if (parentApplication.countNumber3 == 1)
+							buttonBack.enabled=false;
+						
+						boxViewer.width=30;
+						boxViewer.editable=false;
+						boxViewer.text=String(parentApplication.countNumber3);
+						buttonGo.label = ">"
+						buttonGo.addEventListener(MouseEvent.CLICK, clickGo);
+						buttonBack.label = "<"
+						buttonBack.addEventListener(MouseEvent.CLICK, clickBack);
+						contein1.addChild(word);
+						contein2.addChild(buttonBack);
+						contein2.addChild(boxViewer);
+						contein2.addChild(buttonGo);
+						contein2.setStyle("horizontalAlign","center");
+						contein1.setStyle("horizontalAlign","center");
+						contein2.percentWidth=100;							
+						contein1.percentWidth=100;
+						form.addChild(contein1);
+						form.addChild(contein2);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);						
+					}
+					if(parentApplication.allnames[i]=="sw"){	
+						tb.width=100;
+						tb.enabled=false;
+						frmItem.label="Switch (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosSwitch.length){	
+								if(parentApplication.listqosSwitch[parentApplication.countNumber3-2]==""&&switchh!=""||(switchh!=parentApplication.listqosSwitch[parentApplication.countNumber3-2]&&switchh!="")){
+									parentApplication.listqosSwitch[parentApplication.countNumber3-2]=switchh;
+									obj.arrayqosSwitch[parentApplication.countNumber3-2]=switchh;
+									switchh="";
+								}
+								listSwitch1[ye]=obj.arrayqosSwitch[parentApplication.countNumber3-1];
+								tb.text=obj.arrayqosSwitch[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosSwitch[parentApplication.countNumber3-2]=switchh;
+								listSwitch1[ye]=switchh;
+								obj.arrayqosSwitch=[];								
+								for(j=0;j<parentApplication.listqosSwitch.length;j++){	
+									obj.arrayqosSwitch.push(parentApplication.listqosSwitch[j]);
+								}							
+								tb.text="";
+								switchh="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=obj.arrayqosSwitch[parentApplication.countNumber3-1];
+							listSwitch1[ye]=obj.arrayqosSwitch[parentApplication.countNumber3-1];
+						}
+						else {
+							tb.text=listSwitch1[ye];
+						}
+						
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="service"){	
+						tb.width=100;
+						tb.enabled=false;
+						frmItem.label="Service (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosService.length){	
+								if(parentApplication.listqosService[parentApplication.countNumber3-2]==""&&service!=""||(service!=parentApplication.listqosService[parentApplication.countNumber3-2]&&service!="")){
+									parentApplication.listqosService[parentApplication.countNumber3-2]=service;
+									obj.arrayqosService[parentApplication.countNumber3-2]=service;
+									service="";
+								}
+								tb.text=parentApplication.listqosService[parentApplication.countNumber3-1];
+								listService1[ye]=parentApplication.listqosService[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosService[parentApplication.countNumber3-2]=service;
+								listService1[ye]=service;
+								obj.arrayqosService=[];								
+								for(j=0;j<parentApplication.listqosService.length;j++){	
+									obj.arrayqosService.push(parentApplication.listqosService[j]);
+								}										
+								tb.text="";
+								service="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=listService1[ye];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="queue"){
+						tb.width=50;
+						frmItem.label="Queue";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosQueue.length){	
+								if(parentApplication.listqosQueue[parentApplication.countNumber3-2]==""&&queue!=""||(queue!=parentApplication.listqosQueue[parentApplication.countNumber3-2]&&queue!="")){
+									parentApplication.listqosQueue[parentApplication.countNumber3-2]=queue;
+									obj.arrayqosQueue[parentApplication.countNumber3-2]=queue;
+									queue="";
+								}
+								tb.text=obj.arrayqosQueue[parentApplication.countNumber3-1];
+								listQueue1[ye]=obj.arrayqosQueue[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosQueue[parentApplication.countNumber3-2]=queue;
+								listQueue1[ye]=queue;
+								obj.arrayqosQueue=[];								
+								for(j=0;j<parentApplication.listqosQueue.length;j++){	
+									obj.arrayqosQueue.push(parentApplication.listqosQueue[j]);
+								}										
+								tb.text="";
+								queue="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=obj.arrayqosQueue[parentApplication.countNumber3-1];
+							listQueue1[ye]=obj.arrayqosQueue[parentApplication.countNumber3-1];
+						}
+						else{
+							tb.text=listQueue1[ye];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="enqueueport"){
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="Enqueue Port (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosEnqueuePort.length){	
+								if(parentApplication.listqosEnqueuePort[parentApplication.countNumber3-2]==""&&enqueuePort!=""||(enqueuePort!=parentApplication.listqosEnqueuePort[parentApplication.countNumber3-2]&&enqueuePort!="")){
+									parentApplication.listqosEnqueuePort[parentApplication.countNumber3-2]=enqueuePort;
+									obj.arrayqosEnqueuePort[parentApplication.countNumber3-2]=enqueuePort;
+									enqueuePort="";
+								}
+								tb.text=parentApplication.listqosEnqueuePort[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosEnqueuePort[parentApplication.countNumber3-2]=enqueuePort;
+								obj.arrayqosEnqueuePort=[];
+								listEnqueuePort1[ye]=enqueuePort;
+								for(j=0;j<parentApplication.listqosEnqueuePort.length;j++){	
+									obj.arrayqosEnqueuePort.push(parentApplication.listqosEnqueuePort[j]);
+								}										
+								tb.text="";
+								enqueuePort="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosEnqueuePort[parentApplication.countNumber3-1];
+						}
+						else{
+							tb.text=listEnqueuePort1[ye];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="priority"){
+						tb.width=50;
+						//tb.enabled=false;
+						frmItem.label="Priority";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosPriority.length){	
+								if(parentApplication.listqosPriority[parentApplication.countNumber3-2]==""&&priority!=""||(priority!=parentApplication.listqosPriority[parentApplication.countNumber3-2]&&priority!="")){
+									parentApplication.listqosPriority[parentApplication.countNumber3-2]=priority;
+									obj.arrayqosPriority[parentApplication.countNumber3-2]=priority;
+									priority="";
+								}
+								tb.text=parentApplication.listqosPriority[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosPriority[parentApplication.countNumber3-2]=priority;
+								obj.arrayqosPriority=[];							
+								for(j=0;j<parentApplication.listqosPriority.length;j++){	
+									obj.arrayqosPriority.push(parentApplication.listqosPriority[j]);
+								}										
+								tb.text="";
+								priority="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosPriority[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="protocol"){	
+						tb.width=50;
+						tb.text="6"
+						tb.addEventListener(Event.CHANGE,change);						
+						frmItem.label="Protocol";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosProtocol.length){	
+								if(parentApplication.listqosProtocol[parentApplication.countNumber3-2]==""&&protocol!=""||(protocol!=parentApplication.listqosProtocol[parentApplication.countNumber3-2]&&protocol!="")){
+									parentApplication.listqosProtocol[parentApplication.countNumber3-2]=protocol;
+									obj.arrayqosProtocol[parentApplication.countNumber3-2]=protocol;
+									protocol="";
+								}
+								if(obj.arrayqosProtocol[parentApplication.countNumber3-1]==undefined){
+									tb.text="6";
+									test=true;
+								}
+								else{
+									tb.text=obj.arrayqosProtocol[parentApplication.countNumber3-1];
+									listProtocol1[ye]=obj.arrayqosProtocol[parentApplication.countNumber3-1];
+									test=true;
+								}
+							}										
+							else if(test==false){
+								if(tb.text=="6"&&protocol=="")
+									protocol="6";
+								parentApplication.listqosProtocol[parentApplication.countNumber3-2]=protocol;
+								listProtocol1[ye]=protocol;
+								obj.arrayqosProtocol=[];							
+								for(j=0;j<parentApplication.listqosProtocol.length;j++){	
+									obj.arrayqosProtocol.push(parentApplication.listqosProtocol[j]);
+								}										
+								tb.text="6";
+								//protocol="6";
+							}
+						}	
+						else if (regular==0){
+							tb.text=obj.arrayqosProtocol[parentApplication.countNumber3-1];
+							listProtocol1[ye]=obj.arrayqosProtocol[parentApplication.countNumber3-1];
+						}
+						else{
+							if(listProtocol1[ye]==undefined)
+								tb.text="6";
+							else{}
+								//tb.text=listProtocol1[ye];
+						}
+						frmItem.addChild(tb);
+						form.addChild(frmItem);						
+					}
+					else if(parentApplication.allnames[i]=="ethtype"){	
+						tb.width=100;
+						tb.text="0x0800"
+						tb.addEventListener(Event.CHANGE,change);						
+						frmItem.label="Ethernet Type";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosEthType.length){	
+								if(parentApplication.listqosEthType[parentApplication.countNumber3-2]==""&&ethType!=""||(ethType!=parentApplication.listqosEthType[parentApplication.countNumber3-2]&&ethType!="")){
+									parentApplication.listqosEthType[parentApplication.countNumber3-2]=ethType;
+									obj.arrayqosEthType[parentApplication.countNumber3-2]=ethType;
+									ethType="";
+								}
+								if(obj.arrayqosEthType[parentApplication.countNumber3-1]==undefined){
+									tb.text="0x0800";
+									test=true;
+								}
+								else{
+								tb.text=obj.arrayqosEthType[parentApplication.countNumber3-1];
+								listEthType1[ye]=obj.arrayqosEthType[parentApplication.countNumber3-1];
+								test=true;
+								}
+							}										
+							else if(test==false){
+								if(tb.text=="0x0800"&&ethType=="")
+									ethType="0x0800";
+								parentApplication.listqosEthType[parentApplication.countNumber3-2]=ethType;
+								listEthType1[ye]=ethType;
+								obj.arrayqosEthType=[];							
+								for(j=0;j<parentApplication.listqosEthType.length;j++){	
+									obj.arrayqosEthType.push(parentApplication.listqosEthType[j]);
+								}										
+								tb.text="0x0800"
+								//ethType="0x0800";
+							}
+						}	
+						else if (regular==0){
+							tb.text=obj.arrayqosEthType[parentApplication.countNumber3-1];
+							listEthType1[ye]=obj.arrayqosEthType[parentApplication.countNumber3-1];
+						}
+						else{
+							if(listEthType1[ye]==undefined)
+								tb.text="0x0800";
+							else{}
+								//tb.text=listEthType1[ye];
+						}
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="ingressport"){	
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="Ingress Port (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosIngressPort.length){	
+								if(parentApplication.listqosIngressPort[parentApplication.countNumber3-2]==""&&ingressPort!=""||(ingressPort!=parentApplication.listqosIngressPort[parentApplication.countNumber3-2]&&ingressPort!="")){
+									parentApplication.listqosIngressPort[parentApplication.countNumber3-2]=ingressPort;
+									obj.arrayqosIngressPort[parentApplication.countNumber3-2]=ingressPort;
+									ingressPort="";
+								}
+								tb.text=parentApplication.listqosIngressPort[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosIngressPort[parentApplication.countNumber3-2]=ingressPort;
+								obj.arrayqosIngressPort=[];								
+								for(j=0;j<parentApplication.listqosIngressPort.length;j++){	
+									obj.arrayqosIngressPort.push(parentApplication.listqosIngressPort[j]);
+								}										
+								tb.text="";
+								ingressPort="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosIngressPort[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="ipsrc"){
+						tb.width=100;
+						frmItem.label="Source IP";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosSourceIP.length){	
+								if(parentApplication.listqosSourceIP[parentApplication.countNumber3-2]==""&&sourceip!=""||(sourceip!=parentApplication.listqosSourceIP[parentApplication.countNumber3-2]&&sourceip!="")){
+									parentApplication.listqosSourceIP[parentApplication.countNumber3-2]=sourceip;
+									obj.arrayqosSourceIP[parentApplication.countNumber3-2]=sourceip;
+									sourceip="";
+								}
+								tb.text=obj.arrayqosSourceIP[parentApplication.countNumber3-1];
+								listSourceIP1[ye]=obj.arrayqosSourceIP[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosSourceIP[parentApplication.countNumber3-2]=sourceip;
+								listSourceIP1[ye]=sourceip;
+								obj.arrayqosSourceIP=[];
+								for(j=0;j<parentApplication.listqosSourceIP.length;j++){	
+									obj.arrayqosSourceIP.push(parentApplication.listqosSourceIP[j]);
+								}										
+								tb.text="";
+								sourceip="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=obj.arrayqosSourceIP[parentApplication.countNumber3-1];
+							listSourceIP1[ye]=obj.arrayqosSourceIP[parentApplication.countNumber3-1];
+						}
+						else{
+							//tb.text=listSourceIP1[ye];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="ipdst"){
+						tb.width=100;
+						frmItem.label="Destination IP";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosDestinationIP.length){	
+								if(parentApplication.listqosDestinationIP[parentApplication.countNumber3-2]==""&&destinationip!=""||(destinationip!=parentApplication.listqosDestinationIP[parentApplication.countNumber3-2]&&destinationip!="")){
+									parentApplication.listqosDestinationIP[parentApplication.countNumber3-2]=destinationip;
+									obj.arrayqosDestinationIP[parentApplication.countNumber3-2]=destinationip;
+									destinationip="";
+								}
+								tb.text=obj.arrayqosDestinationIP[parentApplication.countNumber3-1];
+								listDestinationIP1[ye]=obj.arrayqosDestinationIP[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosDestinationIP[parentApplication.countNumber3-2]=destinationip;
+								listDestinationIP1[ye]=destinationip;
+								obj.arrayqosDestinationIP=[];								
+								for(j=0;j<parentApplication.listqosDestinationIP.length;j++){	
+									obj.arrayqosDestinationIP.push(parentApplication.listqosDestinationIP[j]);
+								}										
+								tb.text="";
+								destinationip="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=obj.arrayqosDestinationIP[parentApplication.countNumber3-1];
+							listDestinationIP1[ye]=obj.arrayqosDestinationIP[parentApplication.countNumber3-1];
+						}
+						else{
+							//tb.text=listDestinationIP1[ye];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="tos"){	
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="TOS (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosTos.length){	
+								if(parentApplication.listqosTos[parentApplication.countNumber3-2]==""&&tos!=""||(tos!=parentApplication.listqosTos[parentApplication.countNumber3-2]&&tos!="")){
+									parentApplication.listqosTos[parentApplication.countNumber3-2]=tos;
+									obj.arrayqosTos[parentApplication.countNumber3-2]=tos;
+									tos="";
+								}
+								tb.text=parentApplication.listqosTos[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosTos[parentApplication.countNumber3-2]=tos;
+								obj.arrayqosTos=[];							
+								for(j=0;j<parentApplication.listqosTos.length;j++){	
+									obj.arrayqosTos.push(parentApplication.listqosTos[j]);
+								}										
+								tb.text="";
+								tos="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosTos[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="vlanid"){	
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="Vlan ID (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosVlanID.length){	
+								if(parentApplication.listqosVlanID[parentApplication.countNumber3-2]==""&&vlanid!=""||(vlanid!=parentApplication.listqosVlanID[parentApplication.countNumber3-2]&&vlanid!="")){
+									parentApplication.listqosVlanID[parentApplication.countNumber3-2]=vlanid;
+									obj.arrayqosVlanID[parentApplication.countNumber3-2]=vlanid;
+									vlanid="";
+								}
+								tb.text=parentApplication.listqosVlanID[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosVlanID[parentApplication.countNumber3-2]=vlanid;
+								obj.arrayqosVlanID=[];							
+								for(j=0;j<parentApplication.listqosVlanID.length;j++){	
+									obj.arrayqosVlanID.push(parentApplication.listqosVlanID[j]);
+								}										
+								tb.text="";
+								vlanid="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosVlanID[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="ethsrc"){	
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="Source Eth (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosEthSource.length){	
+								if(parentApplication.listqosEthSource[parentApplication.countNumber3-2]==""&&sourceeth!=""||(sourceeth!=parentApplication.listqosEthSource[parentApplication.countNumber3-2]&&sourceeth!="")){
+									parentApplication.listqosEthSource[parentApplication.countNumber3-2]=sourceeth;
+									obj.arrayqosSourceEth[parentApplication.countNumber3-2]=sourceeth;
+									sourceeth="";
+								}
+								tb.text=parentApplication.listqosEthSource[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosEthSource[parentApplication.countNumber3-2]=sourceeth;
+								obj.arrayqosSourceEth=[];								
+								for(j=0;j<parentApplication.listqosEthSource.length;j++){	
+									obj.arrayqosSourceEth.push(parentApplication.listqosEthSource[j]);
+								}										
+								tb.text="";
+								sourceeth="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosEthSource[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="ethdst"){	
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="Destination Eth (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosEthDestination.length){	
+								if(parentApplication.listqosEthDestination[parentApplication.countNumber3-2]==""&&destinationeth!=""||(destinationeth!=parentApplication.listqosEthDestination[parentApplication.countNumber3-2]&&destinationeth!="")){
+									parentApplication.listqosEthDestination[parentApplication.countNumber3-2]=destinationeth;
+									obj.arrayqosDestinationEth[parentApplication.countNumber3-2]=destinationeth;
+									destinationeth="";
+								}
+								tb.text=parentApplication.listqosEthDestination[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosEthDestination[parentApplication.countNumber3-2]=destinationeth;
+								obj.arrayqosDestinationEth=[];								
+								for(j=0;j<parentApplication.listqosEthDestination.length;j++){	
+									obj.arrayqosDestinationEth.push(parentApplication.listqosEthDestination[j]);
+								}										
+								tb.text="";
+								destinationeth="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosEthDestination[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="srcport"){	
+						tb.width=50;
+						tb.enabled=false;						
+						frmItem.label="Source Port (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosSourcePort.length){	
+								if(parentApplication.listqosSourcePort[parentApplication.countNumber3-2]==""&&sourceport!=""||(sourceport!=parentApplication.listqosSourcePort[parentApplication.countNumber3-2]&&sourceport!="")){
+									parentApplication.listqosSourcePort[parentApplication.countNumber3-2]=sourceport;
+									obj.arrayqosSourcePort[parentApplication.countNumber3-2]=sourceport;
+									sourceport="";
+								}
+								tb.text=parentApplication.listqosSourcePort[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosSourcePort[parentApplication.countNumber3-2]=sourceport;
+								obj.arrayqosSourcePort=[];						
+								for(j=0;j<parentApplication.listqosSourcePort.length;j++){	
+									obj.arrayqosSourcePort.push(parentApplication.listqosSourcePort[j]);
+								}										
+								tb.text="";
+								sourceport="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosSourcePort[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					else if(parentApplication.allnames[i]=="dstport"){	
+						tb.width=50;
+						tb.enabled=false;
+						frmItem.label="Destination Port (Disabled)";
+						if(regular==1){
+							if(parentApplication.countNumber3-2!=parentApplication.listqosDestinationPort.length){	
+								if(parentApplication.listqosDestinationPort[parentApplication.countNumber3-2]==""&&destinationport!=""||(destinationport!=parentApplication.listqosDestinationPort[parentApplication.countNumber3-2]&&destinationport!="")){
+									parentApplication.listqosDestinationPort[parentApplication.countNumber3-2]=destinationport;
+									obj.arrayqosDestinationPort[parentApplication.countNumber3-2]=destinationport;
+									destinationport="";
+								}
+								tb.text=parentApplication.listqosDestinationPort[parentApplication.countNumber3-1];
+								test=true;
+							}										
+							else if(test==false){
+								parentApplication.listqosDestinationPort[parentApplication.countNumber3-2]=destinationport;
+								obj.arrayqosDestinationPort=[];							
+								for(j=0;j<parentApplication.listqosDestinationPort.length;j++){	
+									obj.arrayqosDestinationPort.push(parentApplication.listqosDestinationPort[j]);
+								}										
+								tb.text="";
+								destinationport="";
+							}
+						}	
+						else if (regular==0){
+							tb.text=parentApplication.listqosDestinationPort[parentApplication.countNumber3-1];
+						}
+						tb.addEventListener(Event.CHANGE,change);
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					
+					if(parentApplication.allnames[i]=="dstport"){
+						frmItem = new FormItem();
+						var button:Button = new Button();
+						button.label="Apply Settings";
+						frmItem.addChild(button);
+						//if(regular!=1&&test!=true)
+							button.addEventListener(MouseEvent.CLICK,success);
+						button.addEventListener(MouseEvent.CLICK,clickGo);
+						form.addChild(frmItem);	
+					}					
+					this.addChild(form);
+							
+			}
+			}
+			private function success(evt:MouseEvent):void {	
+				HAlert.success(HMensagens.Success);
+			}
+		]]>
+	</mx:Script>	
+
+</mx:Canvas>
