@@ -23,6 +23,6 @@ VND is available on www.ramonfontes.com/vnd
 3. FONTES, R. R. ; SAMPAIO, P. N. M. . Visual Network Description: A Customizable GUI for the Creation of Software Defined Network Simulations. In: EUROSIS – The European Multidisciplinary Society for Modelling and Simulation Technology / European Simulation Multiconference (ESM´ 2013), 2013, Lancaster. EUROSIS – The European Multidisciplinary Society for Modelling and Simulation Technology / European Simulation Multiconference (ESM´ 2013), 2013. p. 149-153.
 
 
-# -
+# Miscellaneous
 Whether you want to colaborate with VND, you can reach me via email (ramonreisfontes@gmail.com).
 At the moment I am PhD Student (focusing on SDN, mainly) and unfortunately I don't have time to continue on VND. Therefore, let me know if you improve the code, please.
