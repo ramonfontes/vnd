@@ -1,2 +1,1 @@
-# vnd-sdn-version
-# IN SOON...
+# VND (SDN version)
