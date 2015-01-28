@@ -3,10 +3,10 @@ Visual Network Description – VND (SDN version) is a web-based graphical user i
 
 The VND (SDN version) aims at faciliting the creation of general network scenarios (experiments) for further simulation under different OpenFlow tools, such as mininet. For this purpose, VND (SDN version) exports Python scripts for the description of rules and flow tables in order to be executed on Openflow Controllers. Further interoperability is also provided by the automatic generation of NSDL, which can be imported by any NSDL-compliant simulation and analysis tool. The VND´s (SDN version) main target public area novice professionals, students and also expert SDN developers. It´s main features are:
 
-• Authoring of SDN Network Scenarios via GUI 
-• Automatic creation of Mininet Scripts
-• Automatic creation of Openflow Controllers Scripts.
-• Automatic creation of NSDL files.
+• Authoring of SDN Network Scenarios via GUI.  
+• Automatic creation of Mininet Scripts.  
+• Automatic creation of Openflow Controllers Scripts.  
+• Automatic creation of NSDL files.  
 
 
 # Videos Presenting some Features of VND
