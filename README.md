@@ -33,7 +33,7 @@ VND is available on www.ramonfontes.com/vnd
 
 
 ## Running on locally
-If you want to run the VND on locally, you have to install a Web Server, PHP (newest version), Flash Plugin and open /bin-debug/index.html file on your browser.
+If you want to run the VND on locally, you have to install a Web Server, PHP (can be a newest version), Flash Plugin and open /bin-debug/index.html file on your browser.
 
 
 ## Publications
