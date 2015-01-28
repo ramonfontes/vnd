@@ -51,8 +51,9 @@
 					{label: "Configuration", type: "normal",data:"",enabled: false}
 				]},
 				{label: "About", children: [
+					{label: "Code on GitHub",data:"code" },
 					{label: "Publications",data:"publications" },		
-					{label: "Videos",data:"videos" },	
+					{label: "Videos",data:"videos" },
 					{label: "About VND (SDN version)",data:"aboutvnd" }
 				]}
 				
@@ -122,6 +123,8 @@
 					parentApplication.pupupAbout();
 				else if(event.item.data=='videos')
 					parentApplication.videosget();
+				else if(event.item.data=='code')
+					parentApplication.code();
 				else if(event.item.data=='publications')
 					parentApplication.publications();
 				else  if(event.item.data=='deleteTemplate'){

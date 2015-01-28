@@ -14,6 +14,18 @@ public function videosget():void
 	}
 }
 
+public function code():void
+{
+	var url:String = "https://github.com/ramonfontes/vnd-sdn-version";
+	var request:URLRequest;
+	request = new URLRequest(url);
+	try {
+		navigateToURL(request, '_blank');
+	} catch (e:Error) {
+		trace("Error occurred!");
+	}
+}
+
 public function publications():void
 {
 	var url:String = "http://www.ramonfontes.com/publications/";
