@@ -12,18 +12,17 @@ The VND (SDN version) aims at faciliting the creation of general network scenari
 ### Videos Presenting some Features of VND
 Using Mininet - https://www.youtube.com/watch?v=oONmjHgXxpc    
 Basic Flow Control - https://www.youtube.com/watch?v=iZmYFKoSPV8  
-Using Mininet and Floodlight Controller - https://www.youtube.com/watch?v=Vh3TAP9RIE8  
 Using Mininet and Pox Controller (Vlans) - https://www.youtube.com/watch?v=U6I1-ejforU  
 Using Mininet and Floodlight Controller (Vlans) - https://www.youtube.com/watch?v=KsoRMnDP_PA  
 Using Mininet and Floodlight Controller (QoS) - https://www.youtube.com/watch?v=vAdtw1546oo  
 Using Link Configuration to Mininet - https://www.youtube.com/watch?v=tMaCsnCwnO4  
 
 
-
 ### Videos Related to SDN/OpenFlow
 Unbricking a Router - https://www.youtube.com/watch?v=8QW4vKnEs94  
 Wireless Network - https://www.youtube.com/watch?v=Bcu90aQGvqk  
 Packet Analysis with Wireshark - https://www.youtube.com/watch?v=i5HiR-ys1JI  
+Using Mininet and Floodlight Controller - https://www.youtube.com/watch?v=Vh3TAP9RIE8  
 
 ## Files
 Main Project File - src/network_new.mxml
