@@ -47,11 +47,11 @@
             params.allowscriptaccess = "sameDomain";
             params.allowfullscreen = "true";
             var attributes = {};
-            attributes.id = "network_new";
-            attributes.name = "network_new";
+            attributes.id = "main";
+            attributes.name = "main";
             attributes.align = "middle";
             swfobject.embedSWF(
-                "network_new.swf", "flashContent", 
+                "main.swf", "flashContent", 
                 "100%", "100%", 
                 swfVersionStr, xiSwfUrlStr, 
                 flashvars, params, attributes);
@@ -77,14 +77,14 @@
         </div>
         
         <noscript>
-            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="network_new">
-                <param name="movie" value="network_new.swf" />
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="main">
+                <param name="movie" value="main.swf" />
                 <param name="quality" value="high" />
                 <param name="bgcolor" value="#ffffff" />
                 <param name="allowScriptAccess" value="sameDomain" />
                 <param name="allowFullScreen" value="true" />
                 <!--[if !IE]>-->
-                <object type="application/x-shockwave-flash" data="network_new.swf" width="100%" height="100%">
+                <object type="application/x-shockwave-flash" data="main.swf" width="100%" height="100%">
                     <param name="quality" value="high" />
                     <param name="bgcolor" value="#ffffff" />
                     <param name="allowScriptAccess" value="sameDomain" />

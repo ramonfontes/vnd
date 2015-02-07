@@ -52,6 +52,7 @@ package
 		public var arrayVlanID_Switch:Array=[];
 		public var arrayMac_Switch:Array=[];
 		public var arrayGetSwitch:Array=[];
+		public var arrayGetOpenFlowVersion:Array=[];
 		
 		//Computer
 		public var arrayComputerIPAddress:Array=[];
@@ -64,6 +65,7 @@ package
 		public var arraySwitch:String;
 		public var arrayListenPortSwitch:Array=[];
 		public var arrayListenPortSwitch1:Array=[];
+		public var arrayOpenFlowVersion:Array=[];
 		
 		//Controller
 		public var arrayOpenflowController:Array=[];

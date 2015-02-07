@@ -283,9 +283,23 @@ public function exportMininetScriptFile():void {
 						else if(obj.name=="listeningPort"){	
 							listenPortSwitch = obj.arrayListenPortSwitch1[ye];
 						}
+						else if(obj.name=="ofp_version"){	
+							openFlowVersion = obj.arrayOpenFlowVersion[ye];
+						}
 					}
 					cont_mininet++;
-					sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					if(openFlowVersion==null||openFlowVersion=="")
+						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					else if(openFlowVersion=="1")
+						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow10', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					else if(openFlowVersion=="1.1")
+						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow11', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					else if(openFlowVersion=="1.2")
+						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow12', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					else if(openFlowVersion=="1.3")
+						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow13', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					else if(openFlowVersion=="1.4")
+						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow14', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}							

@@ -151,8 +151,10 @@
 			public var flowName:String;
 			public var macSwitch:String;
 			public var listenPortSwitch:String;
+			public var openFlowVersion:String;
 			public var switch_:String;
 			public var getSwitch_:String;
+			public var getopenflowversion_:String;
 			public var mac_Switch:String;
 			
 			
@@ -1034,7 +1036,7 @@
 	
 	<mx:HTTPService id="myData" url="inputXml.xml" result="result(event)" fault="Alert.show('there is an error in input xml ')" />
 	<mx:HBox width="100%" paddingRight="0" backgroundColor="#009ACD">
-		<local:uuuu borderColor="#009ACD" width="100%" height="20" ob="{this}"/>
+		<local:menu borderColor="#009ACD" width="100%" height="20" ob="{this}"/>
 	</mx:HBox>
 	<mx:HBox width="100%" backgroundColor="#B1CCF7" horizontalGap="0">
 	    <mx:Button click="showPopupForNew()" toolTip="New" icon="@Embed(source='assets/1new.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
@@ -1087,7 +1089,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 01/27/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 02/08/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

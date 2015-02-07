@@ -84,6 +84,7 @@
 			public var listEthType:Array = new Array();
 			
 			public var valofcomboswitch:String;
+			public var valofcomboopenflowversion:String;
 			public var valofcombocomputermask:String;
 			public var valofcombospecialcontroller:String;
 			public var valofcomboopenflowcontroller:String;
@@ -209,6 +210,8 @@
 					obj.id="specialController";
 				else if(eve.target.parent.label=="Switch")
 					obj.id="switch";
+				else if(eve.target.parent.label=="OpenFlow Version")
+					obj.id="ofp_version";
 				else if(eve.target.parent.label=="Switch MAC Address")
 					obj.id="switchMacAddress";		
 				else if(eve.target.parent.label=="Listening Port")
@@ -268,6 +271,8 @@
 						valofcombosetstripvlan=eve.target.selectedItem;
 					else if(obj.id=="openflowController")
 						valofcomboopenflowcontroller=eve.target.selectedItem;
+					else if(obj.id=="ofp_version")
+						valofcomboopenflowversion=eve.target.selectedItem;
 					else if(obj.id=="specialController")
 						valofcombospecialcontroller=eve.target.selectedItem;
 					else if(obj.id=="mask")
@@ -1579,7 +1584,7 @@
 										tb3.selectedIndex=-1;
 									frmItem.addChild(tb3);
 									tb3.addEventListener(Event.CHANGE,change);																
-								}
+								}								
 								else{
 									frmItem = new FormItem();
 									frmItem.direction = "horizontal";
@@ -1632,6 +1637,7 @@
 									obj.arraySwitch = String(tb3.selectedItem);
 									frmItem.label = "Switch";
 									frmItem.addChild(tb3);
+									tb3.enabled=false;
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
 									form.addChild(frmItem);								
 									for(o=0;o<valueObjArr.length;o++){		
@@ -1647,9 +1653,33 @@
 											}
 											else {
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.arrayGetSwitch[ye]=tb3.selectedItem;
-												obj.arraySwitch = tb3.selectedLabel;
-												parentApplication.getSwitch_ = obj.arraySwitch;
+												obj.arraySwitch = String(tb3.selectedItem);
+											}
+										}
+									}
+									tb3.addEventListener(Event.CHANGE,change);							
+								}
+								else if(obj.name=="ofp_version"){									
+									obj.arrayOpenFlowVersion[ye] = String(tb3.selectedItem);
+									frmItem.label = "OpenFlow Version";
+									frmItem.addChild(tb3);
+									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
+									form.addChild(frmItem);								
+									for(o=0;o<valueObjArr.length;o++){		
+										if(valueObjArr[o].id=="ofp_version"){										
+											if(parentApplication.exportControllforcombo==true){
+												if(valofcomboopenflowversion!=null&&valofcomboopenflowversion!=""&&valofcomboopenflowversion!=valueObjArr[o].name)
+													tb3.selectedItem=valofcomboopenflowversion;
+												else
+													tb3.selectedItem = valueObjArr[o].name;
+												obj.arrayOpenFlowVersion[ye]=String(tb3.selectedItem);
+												obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
+												parentApplication.getOpenFlowVersion_ = obj.arrayOpenFlowVersion[ye];
+											}
+											else {
+												
+												tb3.selectedIndex = valueObjArr[o].name;
+												obj.arrayOpenFlowVersion[ye] = tb3.selectedItem;
 											}
 										}
 									}
@@ -2562,6 +2592,7 @@
 							frmItem = new FormItem();
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
+							tb3.enabled=false;
 							tb3.dataProvider = obj.option;
 							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
 								tb3.selectedIndex=1;
@@ -2582,6 +2613,21 @@
 							frmItem.label = "Special Controller";
 							frmItem.addChild(tb3);
 							obj.arraySpecialController[ye]=tb3.selectedItem;
+							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+							form.addChild(frmItem);
+						}
+						else if(obj.name=="ofp_version"){	
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							tb3 = new ComboBox();
+							tb3.dataProvider = obj.option;
+							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
+								tb3.selectedIndex=0;
+							else
+								tb3.selectedItem=parentApplication.getSwitch_;
+							frmItem.label = "OpenFlow Version";
+							frmItem.addChild(tb3);
+							obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}
