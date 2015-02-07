@@ -32,6 +32,10 @@ Main Project File - src/main.mxml
 VND is available on www.ramonfontes.com/vnd
 
 
+## Running on locally
+If you want to run the VND on locally, you have to install a Web Server, PHP (can be a newest version), Flash Plugin and open /bin-debug/index.html file on your browser.
+
+
 ## Publications
 1. FONTES, R. R. ; OLIVEIRA, A. L. C. ; PINHEIRO, T. R. ; SAMPAIO, P. N. M. ; FIGUEIRA, R. A. Authoring of OpenFlow Networks with Visual Network Description (SDN Version). In: Summer Computer Simulation Conference 2014 (SCSC 2014), 2014, Monterey. 46th Summer Computer Simulation Conference 2014 (SCSC 2014), 2014.
 2. PINHEIRO, T. R. ; FONTES, R. R. ; SAMPAIO, P. N. M. ; MARQUES, E. M. D. . Simulation of OpenFlow Scenarios based on NSDL and NS-3. In: Summer Computer Simulation Conference 2014 (SCSC 2014), 2014, Monterey. 46th Summer Computer Simulation Conference 2014 (SCSC 2014), 2014.
