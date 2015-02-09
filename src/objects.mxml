@@ -2506,7 +2506,7 @@
 						}
 						else if(obj.name=="controllerPort"){
 							frmItem.label = "Controller Port";
-							tb.text="6633";//+(parentApplication.contController+parentApplication.contSwitch+2);	
+							tb.text="663"+(parentApplication.contController+2);
 							tb.width=60;
 							tb.maxChars=4;		
 							//obj.arrayControllerPort[ye] = new Array();
@@ -2538,7 +2538,7 @@
 							//tb.text="00:00:00:00:00:0"+ab;
 							//else
 							//tb.text="00:00:00:00:00:"+ab;
-							tb.text="663"+(parentApplication.contSwitch+3);							
+							tb.text="667"+(parentApplication.contSwitch+2);							
 							parentApplication.getValueListenPort.push(tb.text);														
 							obj.arrayListenPortSwitch1[ye]=tb.text;
 							obj.arrayListenPortSwitch = parentApplication.getValueListenPort;
