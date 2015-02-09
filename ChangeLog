@@ -4,4 +4,4 @@
            - Added OpenFlow Version on both nodes 'OpenFlow Switch' and 'Wireless Router' (Just for Mininet)
            - Fixed an error at Switch field on 'OpenFlow Switch' node
 ---------------------------
-02/09/2015 - Added MultiController functionality (Just for Mininet, but It can explored by the controllers)
+02/09/2015 - Added MultiController functionality (Just for Mininet, but It can be explored by the controllers)
