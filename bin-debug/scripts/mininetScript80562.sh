@@ -15,18 +15,18 @@ def topology():
 
     print "*** Creating nodes"
     c1 = net.addController( 'c1', controller=RemoteController, ip='127.0.0.1', port=6633 )
-    c2 = net.addController( 'c2', controller=RemoteController, ip='127.0.0.1', port=6634 )
-    s3 = net.addSwitch( 's3', listenPort=6635, mac='00:00:00:00:00:03' )
-    c4 = net.addController( 'c4', controller=RemoteController, ip='127.0.0.1', port=6636 )
-    s5 = net.addSwitch( 's5', listenPort=6637, mac='00:00:00:00:00:05' )
+    s2 = net.addSwitch( 's2', listenPort=6673, mac='00:00:00:00:00:02' )
+    c3 = net.addController( 'c3', controller=RemoteController, ip='127.0.0.1', port=6634 )
+    s4 = net.addSwitch( 's4', listenPort=6674, mac='00:00:00:00:00:04' )
 
     print "*** Creating links"
 
     print "*** Starting network"
     net.build()
     c1.start()
-    c2.start()
-    c4.start()
+    c3.start()
+    s4.start( [c3] )
+    s2.start( [c1] )
 
     print "*** Running CLI"
     CLI( net )
