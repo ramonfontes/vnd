@@ -73,38 +73,7 @@ public function exportMininetScriptFile():void {
 				else if(ob.id=="controllerOpenflow"){
 					ab = int(ob.name.slice(19,21));
 					ye=ab;
-				}/*
-				if(obj.name=="computerIPAddress"){												
-					if (obj.arrayComputerIPAddress[ye]==null&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.ipAddress+" for "+ob.name);
-					}
-				}	
-				else if(obj.name=="computerMacAddress"){		
-					if (obj.arrayComputerMacAddress[ye]==null||obj.arrayComputerMacAddress[ye]==""&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.macAddress+" for "+ob.name);
-					}
 				}
-				/*
-				else if(obj.name=="switchMacAddress"){	
-					if (obj.arrayMacSwitch1[ye]==null&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.macSwitch+" for "+ob.name);
-					}
-				}*/
-				/*else if(obj.name=="controllerIPAddress"){
-					if (obj.arrayControllerIPAddress[ye]==undefined || obj.arrayControllerIPAddress[ye]=="" && expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.controllerIPAddress+" for "+ob.name);
-					}
-				}	*/										
-				/*else if(obj.name=="controllerPort"){
-					if (obj.arrayControllerPort[ye]==undefined || obj.arrayControllerPort[ye]=="" && expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.controllerPort+" for "+ob.name);
-					}
-				}*/
 			}
 		}
 	}
@@ -131,7 +100,7 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "from mininet.node import Controller, RemoteController, OVSKernelSwitch, OVSLegacyKernelSwitch, UserSwitch@@";
+	sh = "from mininet.node import Controller, RemoteController, OVSKernelSwitch, UserSwitch@@";
 	//sh = "from mininet.node import Controller, RemoteController, OVSKernelSwitch, IVSSwitch, OVSLegacyKernelSwitch, UserSwitch@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
@@ -159,29 +128,7 @@ public function exportMininetScriptFile():void {
 	sh = "    \"Create a network.\"@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
-	/*if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-		ab = int(ob.name.slice(15,17));
-		ye=ab;
-		for(i=0;i<(obb.objparaArrayCol.length);i++){
-			obj=obb.objparaArrayCol[i] as objParameter;
-		}		
-		*for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-			obj=obb.objparaArrayCol[ir] as objParameter;									
-			if(obj.name=="switch"){	
-				switch_ = obj.arraySwitch;	
-			}	
-		}
-		if(switch_=="user")
-			switch_="UserSwitch"
-		else if(switch_=="ovsk")
-			switch_="OVSKernelSwitch"
-		else if(switch_=="ovsl")
-			switch_="OVSLegacyKernelSwitch"
-		else if(switch_=="ivs")
-			switch_="IVSSwitch"
-		else
-			switch_="OVSKernelSwitch"		
-	}*/
+	
 	cont_mininet++;
 	sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
 	objeto_mininet=sh;
@@ -747,7 +694,3 @@ public function exportMininetScriptFile():void {
 	
 	}		
 }
-
-/*private function alertpy2():void {	
-	HAlert.informacao(HMensagens.alertpy);
-}*/
