@@ -52,6 +52,7 @@
 				]},
 				{label: "About", children: [
 					{label: "Code on GitHub",data:"code" },
+					{label: "Docker",data:"docker" },
 					{label: "Publications",data:"publications" },		
 					{label: "Videos",data:"videos" },
 					{label: "About VND (SDN version)",data:"aboutvnd" }
@@ -127,6 +128,8 @@
 					parentApplication.code();
 				else if(event.item.data=='publications')
 					parentApplication.publications();
+				else if(event.item.data=='docker')
+					parentApplication.docker();
 				else  if(event.item.data=='deleteTemplate'){
 					if(parentApplication.networkTree!=null){
 						parentApplication.deleteTemplate();
