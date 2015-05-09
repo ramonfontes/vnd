@@ -10,7 +10,7 @@ private function tree_itemClick(evt:ListEvent):void {
     Parent = evt.itemRenderer.data.@parent;
     child = evt.itemRenderer.data.@name;
 	
-	if(child=="computer"||"controllerOpenflow"||"smartphone"||"switchOpenflow"||"wirelessRouter"||"ofdma"||"www"){
+	if(child=="computer"||"station"||"controllerOpenflow"||"smartphone"||"switchOpenflow"||"wirelessRouter"||"ofdma"||"www"){
 		var objs:Array=dropCanvas.getChildren();
 		line=null;
 		obj=null;

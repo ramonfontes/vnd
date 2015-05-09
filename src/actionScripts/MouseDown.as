@@ -20,6 +20,10 @@ private function mdown(event:MouseEvent):void {
 				namme="computer";
 				cont_click++;
 			}
+			else if(line._objectSrc=="station"){
+				namme="station";
+				cont_click++;
+			}
 			else if(line._objectSrc=="smartphone"){
 				namme="smartphone";
 				cont_click++;
@@ -46,6 +50,7 @@ private function mdown(event:MouseEvent):void {
 				namme="controllerOpenflow";
 				cont_click++;
 			}
+
 			for(var z:int=0;z<lin.par.length;z++){
 		        var objpar:objParameter=new objParameter();
 		        objpar.id=lin.par[z].type;
@@ -59,7 +64,7 @@ private function mdown(event:MouseEvent):void {
 			line.id=linkCombo.value.toString();
             line.name=line.can.name=linkCombo.value.toString()+'_'+(++numberOfNodes);			
 	            
-		line.can.source=event.target as objects;
+			line.can.source=event.target as objects;
 		
         obj=event.target;
 		src=event.target.id;
@@ -88,8 +93,12 @@ private function mUp(event:MouseEvent):void {
 			||dst=="smartphone"&&src=="controllerOpenflow"||src=="smartphone"&&dst=="controllerOpenflow"
 			||dst=="smartphone"&&src=="switchOpenflow"||src=="smartphone"&&dst=="switchOpenflow"
 			||dst=="smartphone"&&src=="wirelessRouter"||src=="smartphone"&&dst=="wirelessRouter"
-			||dst=="smartphone"&&src=="www"||src=="smartphone"&&dst=="www"){
+			||dst=="smartphone"&&src=="www"||src=="smartphone"&&dst=="www"||src=="station"&&dst=="controllerOpenflow"
+			||src=="controllerOpenflow"&&dst=="station"||src=="computer"&&dst=="station"||src=="station"&&dst=="computer"
+			||src=="computer"&&dst=="wirelessRouter"||src=="wirelessRouter"&&dst=="computer"){
 		Alert.show("You cannot connect these devices!");
+		src="";
+		dst="";
 		cont_click=0;
 		var tempp:String=String(bool);
 		var tempp1:String=String(objs);
@@ -134,9 +143,17 @@ private function mUp(event:MouseEvent):void {
 				line._checkSource=true;
 				line._computerPort=0;
 			}
+			else if(namme=="station"){
+				line._checkSource=true;
+				line._computerPort=0;
+			}
 			
 			line._objectDst = event.target.id;
 			if(line._objectDst=="computer"){
+				line._checkSource=false;
+				line._computerPort=0;
+			}
+			else if(line._objectDst=="station"){
 				line._checkSource=false;
 				line._computerPort=0;
 			}
@@ -167,7 +184,7 @@ private function mUp(event:MouseEvent):void {
             line.lineHeight=event.target.y+(event.target.height)/2;
 			obj.addToStartArray(line);
 			event.target.addToEndArray(line);
-            line.can.destination=event.target as objects;//destiantion object
+			line.can.destination=event.target as objects;//destination object
 			
             if(focusobject!=null){
 	        focusobject.removeFoc();

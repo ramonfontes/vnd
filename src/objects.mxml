@@ -85,7 +85,10 @@
 			
 			public var valofcomboswitch:String;
 			public var valofcomboopenflowversion:String;
+			public var valofcombochannel:String;
+			public var valofcombomode:String;
 			public var valofcombocomputermask:String;
+			public var valofcombostationmask:String;
 			public var valofcombospecialcontroller:String;
 			public var valofcomboopenflowcontroller:String;
 			public var valofcombosetstripvlan:String;
@@ -166,6 +169,12 @@
 					obj.id="computerMacAddress";
 				else if(eve.target.parent.label=="Computer Mask")
 					obj.id="mask";
+				else if(eve.target.parent.label=="Station IP Address")
+					obj.id="stationIPAddress";
+				else if(eve.target.parent.label=="Station MAC Address")
+					obj.id="stationMacAddress";
+				else if(eve.target.parent.label=="Station Mask")
+					obj.id="stationmask";
 				else if(eve.target.parent.label=="Controller Port")
 					obj.id="controllerPort";
 				else if(eve.target.parent.label=="Destination IP")
@@ -212,10 +221,18 @@
 					obj.id="switch";
 				else if(eve.target.parent.label=="OpenFlow Version")
 					obj.id="ofp_version";
+				else if(eve.target.parent.label=="Channel")
+					obj.id="channel";
+				else if(eve.target.parent.label=="Mode")
+					obj.id="mode";
 				else if(eve.target.parent.label=="Switch MAC Address")
 					obj.id="switchMacAddress";		
 				else if(eve.target.parent.label=="Listening Port")
 					obj.id="listeningPort";	
+				else if(eve.target.parent.label=="Router SSID")
+					obj.id="routerSSID";
+				else if(eve.target.parent.label=="Station SSID")
+					obj.id="stationSSID";
 				else if(eve.target.parent.label=="Switch MAC Address_")
 					obj.id="macSwitch";
 				else if(eve.target.parent.label=="Source IP")
@@ -273,10 +290,16 @@
 						valofcomboopenflowcontroller=eve.target.selectedItem;
 					else if(obj.id=="ofp_version")
 						valofcomboopenflowversion=eve.target.selectedItem;
+					else if(obj.id=="channel")
+						valofcombochannel=eve.target.selectedItem;
+					else if(obj.id=="mode")
+						valofcombomode=eve.target.selectedItem;
 					else if(obj.id=="specialController")
 						valofcombospecialcontroller=eve.target.selectedItem;
 					else if(obj.id=="mask")
 						valofcombocomputermask=eve.target.selectedItem;
+					else if(obj.id=="stationmask")
+						valofcombostationmask=eve.target.selectedItem;
 					else if(obj.id=="switch")
 						valofcomboswitch=eve.target.selectedItem;
 					else
@@ -325,7 +348,12 @@
 						var checkifcomputer:Boolean=true;
 						ab = int(this.name.slice(9,11));
 						ye=ab;
-					}					
+					}
+					if(this.name.slice(0,7)=="station"){
+						var checkifstation:Boolean=true;
+						ab = int(this.name.slice(8,10));
+						ye=ab;
+					}
 					var c9:String = this.name.slice(0,9);
 					var c21:String = this.name.slice(0,21);
 					if(this.name.slice(0,18)=="controllerOpenflow"){
@@ -1287,6 +1315,40 @@
 									}
 								}
 								//-------------------------------------------------------------------------------
+								//Station Configuration---------------------------------------------------------
+								if(obj.name=="stationIPAddress"){
+									frmItem.label = "Station IP Address";							
+									tb.width=100;
+									if(tb.text=="")
+										tb.text="no ip defined";
+									lable.text=lable.text+" - "+tb.text;
+									///tb.editable=false;
+									tb.maxChars=17;
+									if(parentApplication.getValueStationIPAddress.indexOf(tb.text)!=-1){									
+										checkIp=true;
+										obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
+									}
+									if(checkIp==false){
+										parentApplication.getValueStationIPAddress.push(tb.text);
+										obj.arrayStationIPAddress1[ye]=tb.text;
+										obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
+									}
+								}
+								if(obj.name=="stationMacAddress"){
+									frmItem.label = "Station MAC Address";							
+									tb.width=100;
+									tb.maxChars=17;
+									if(parentApplication.getValueStationMacAddress.indexOf(tb.text)!=-1){									
+										checkMac=true;								
+										obj.arrayStationMacAddress = parentApplication.getValueStationrMacAddress;
+									}
+									if(checkMac==false){
+										parentApplication.getValueStationMacAddress.push(tb.text);
+										obj.arrayStationMacAddress1[ye]=tb.text;
+										obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
+									}
+								}
+								//-------------------------------------------------------------------------------
 								//SwitchOpenflow Configuration---------------------------------------------------
 								if(obj.name=="switchMacAddress"){
 									frmItem.label = "Switch MAC Address";
@@ -1317,7 +1379,36 @@
 								}						
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
-								form.addChild(frmItem);					
+								form.addChild(frmItem);	
+								
+								if(obj.name=="stationSSID"){
+									frmItem.label = "Station SSID";
+									tb.width=60;
+									tb.enabled=true;
+									tb.text = tb.text;
+									tb.maxChars=5;
+									parentApplication.getValueStationSSID.push(tb.text);
+									obj.arrayStationSSID1[ye]=tb.text;
+									obj.arrayStationSSID = parentApplication.getValueStationSSID;
+								}					
+								tb.addEventListener(Event.CHANGE,change);
+								frmItem.addChild(tb);
+								form.addChild(frmItem);
+								
+								if(obj.name=="routerSSID"){
+									frmItem.label = "Router SSID";
+									tb.width=60;
+									tb.enabled=true;
+									tb.text = tb.text;
+									tb.maxChars=5;
+									parentApplication.getValueRouterSSID.push(tb.text);
+									obj.arrayRouterSSID1[ye]=tb.text;
+									obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
+								}					
+								tb.addEventListener(Event.CHANGE,change);
+								frmItem.addChild(tb);
+								form.addChild(frmItem);
+								
 							}
 								
 							else if(obj.id=='boolean'){
@@ -1352,7 +1443,6 @@
 								//------------------------------------------------------------------------------------------
 								//------------------------------------------------------------------------------------------	
 							else if(obj.id=='options') {	
-								
 								if(obj.name=="macSource"){
 									frmItem = new FormItem();
 									frmItem.direction = "horizontal";
@@ -1633,6 +1723,29 @@
 									}
 									tb3.addEventListener(Event.CHANGE,change);							
 								}
+								if(obj.name=="stationmask"){
+									obj.arrayStationMask[ye] = tb3.selectedItem;
+									frmItem.label = "Station Mask";
+									frmItem.addChild(tb3);
+									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
+									form.addChild(frmItem);								
+									for(o=0;o<valueObjArr.length;o++){		
+										if(valueObjArr[o].id=="stationmask"){
+											if(parentApplication.exportControllforcombo==true){
+												if(valofcombostationmask!=null&&valofcombostationmask!=""&&valofcombostationmask!=valueObjArr[o].name)
+													tb3.selectedItem=valofcombostationmask;
+												else
+													tb3.selectedItem = valueObjArr[o].name;
+												obj.arrayStationMask[ye]=tb3.selectedItem;
+											}
+											else {
+												tb3.selectedIndex = valueObjArr[o].name;
+												obj.arrayStationMask[ye] = tb3.selectedItem;
+											}
+										}
+									}
+									tb3.addEventListener(Event.CHANGE,change);							
+								}
 								else if(obj.name=="switch"){
 									obj.arraySwitch = String(tb3.selectedItem);
 									frmItem.label = "Switch";
@@ -1680,6 +1793,59 @@
 												
 												tb3.selectedIndex = valueObjArr[o].name;
 												obj.arrayOpenFlowVersion[ye] = tb3.selectedItem;
+											}
+										}
+									}
+									tb3.addEventListener(Event.CHANGE,change);							
+								}
+								else if(obj.name=="mode"){				
+									obj.arrayMode[ye] = String(tb3.selectedItem);
+									frmItem.label = "Mode";
+									frmItem.addChild(tb3);
+									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
+									form.addChild(frmItem);								
+									for(o=0;o<valueObjArr.length;o++){		
+										if(valueObjArr[o].id=="mode"){										
+											if(parentApplication.exportControllforcombo==true){
+												if(valofcombomode!=null&&valofcombomode!=""&&valofcombomode!=valueObjArr[o].name)
+													tb3.selectedItem=valofcombomode;
+												else
+													tb3.selectedItem = valueObjArr[o].name;
+												obj.arrayMode[ye]=String(tb3.selectedItem);
+												obj.arrayGetMode[ye]=tb3.selectedItem;
+												parentApplication.getMode_ = obj.arrayMode[ye];
+											}
+											else {
+												
+												tb3.selectedIndex = valueObjArr[o].name;
+												obj.arrayMode[ye] = tb3.selectedItem;
+											}
+										}
+									}
+									tb3.addEventListener(Event.CHANGE,change);							
+								}
+								
+								else if(obj.name=="channel"){		
+									obj.arrayChannel[ye] = String(tb3.selectedItem);
+									frmItem.label = "Channel";
+									frmItem.addChild(tb3);
+									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
+									form.addChild(frmItem);								
+									for(o=0;o<valueObjArr.length;o++){		
+										if(valueObjArr[o].id=="channel"){										
+											if(parentApplication.exportControllforcombo==true){
+												if(valofcombochannel!=null&&valofcombochannel!=""&&valofcombochannel!=valueObjArr[o].name)
+													tb3.selectedItem=valofcombochannel;
+												else
+													tb3.selectedItem = valueObjArr[o].name;
+												obj.arrayChannel[ye]=String(tb3.selectedItem);
+												obj.arrayGetChannel[ye]=tb3.selectedItem;
+												parentApplication.getChannel_ = obj.arrayChannel[ye];
+											}
+											else {
+												
+												tb3.selectedIndex = valueObjArr[o].name;
+												obj.arrayChannel[ye] = tb3.selectedItem;
 											}
 										}
 									}
@@ -2359,7 +2525,7 @@
 								}												
 							}
 							if(i+1==objparaArrayCol.length){
-								if(checkifcomputer||checkifswitchopenflow){
+								if(checkifcomputer||checkifswitchopenflow||checkifstation){
 									frmItem = new FormItem();
 									var button:Button = new Button();
 									button.label="Apply Settings";
@@ -2438,6 +2604,14 @@
 					ab = int(this.name.slice(9,11));
 					if(ab!=parentApplication.contComputer){
 						parentApplication.contComputer++;
+					}
+				}
+				
+				if(this.name.slice(0,7)=="station"){
+					var checkifstation:Boolean=true;
+					ab = int(this.name.slice(8,10));
+					if(ab!=parentApplication.contStation){
+						parentApplication.contStation++;
 					}
 				}	
 				
@@ -2545,6 +2719,18 @@
 							lable.text=lable.text+":"+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
+						else if(obj.name=="routerSSID"){
+							frmItem.label = "Router SSID";
+							tb.enabled=true;
+							tb.width=100;
+							tb.maxChars=10;		
+							tb.text="new-ssid"
+							parentApplication.getValueRouterSSID.push(tb.text);														
+							obj.arrayRouterSSID1[ye]=tb.text;
+							obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
+							lable.text=lable.text+":"+tb.text;
+							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+						}
 						else if(obj.name=="computerIPAddress"){
 							frmItem.label = "Computer IP Address";
 							tb.width=100;
@@ -2555,6 +2741,17 @@
 							//obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;
 							obj.arrayComputerIPAddress1[ye]=tb.text;
 							obj.arrayComputerIPAddress = parentApplication.getValueComputerIPAddress;
+							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+						}
+						else if(obj.name=="stationIPAddress"){
+							frmItem.label = "Station IP Address";
+							tb.width=100;
+							tb.maxChars=15;
+							tb.text="192.168.0."+ab;
+							lable.text=lable.text+" - "+tb.text;
+							parentApplication.getValueStationIPAddress.push(tb.text);
+							obj.arrayStationIPAddress1[ye]=tb.text;
+							obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="computerMacAddress"){
@@ -2569,7 +2766,20 @@
 							obj.arrayComputerMacAddress1[ye]=tb.text;
 							obj.arrayComputerMacAddress = parentApplication.getValueComputerMacAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-						}														
+						}	
+						else if(obj.name=="stationMacAddress"){
+							frmItem.label = "Station MAC Address";
+							tb.width=100;
+							tb.maxChars=17;
+							if(ab<10)
+								tb.text="00:02:00:00:00:0"+ab;
+							else
+								tb.text="00:02:00:00:00:"+ab;	
+							parentApplication.getValueStationMacAddress.push(tb.text);
+							obj.arrayStationMacAddress1[ye]=tb.text;
+							obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
+							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+						}	
 						frmItem.addChild(tb);
 						form.addChild(frmItem);
 					}
@@ -2631,6 +2841,36 @@
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}
+						else if(obj.name=="channel"){	
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							tb3 = new ComboBox();
+							tb3.dataProvider = obj.option;
+							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
+								tb3.selectedIndex=0;
+							else
+								tb3.selectedItem=parentApplication.getSwitch_;
+							frmItem.label = "Channel";
+							frmItem.addChild(tb3);
+							obj.arrayGetChannel[ye]=tb3.selectedItem;
+							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+							form.addChild(frmItem);
+						}
+						else if(obj.name=="mode"){	
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							tb3 = new ComboBox();
+							tb3.dataProvider = obj.option;
+							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
+								tb3.selectedIndex=2;
+							else
+								tb3.selectedItem=parentApplication.getSwitch_;
+							frmItem.label = "Mode";
+							frmItem.addChild(tb3);
+							obj.arrayGetMode[ye]=tb3.selectedItem;
+							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+							form.addChild(frmItem);
+						}
 						else if(obj.name=="openflowController"){
 							frmItem = new FormItem();
 							frmItem.direction = "horizontal";
@@ -2655,10 +2895,22 @@
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
 							form.addChild(frmItem);
 						}
+						else if(obj.name=="stationmask"){
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							tb3 = new ComboBox();
+							tb3.dataProvider = obj.option;
+							tb3.selectedIndex=0;
+							frmItem.label = "Station Mask"; 
+							frmItem.addChild(tb3);
+							obj.arrayStationMask[ye] = tb3.selectedItem;	
+							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
+							form.addChild(frmItem);
+						}
 					}
 					
 					if(i+1==objparaArrayCol.length){
-						if(checkifcomputer||checkifswitchopenflow){
+						if(checkifcomputer||checkifswitchopenflow||checkifstation){
 							frmItem = new FormItem();
 							var button:Button = new Button();
 							button.label="Apply Settings";							

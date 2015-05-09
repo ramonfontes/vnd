@@ -54,6 +54,9 @@ package
 		public var arrayGetSwitch:Array=[];
 		public var arrayGetOpenFlowVersion:Array=[];
 		
+		public var arrayGetMode:Array=[];
+		public var arrayGetChannel:Array=[];
+		
 		//Computer
 		public var arrayComputerIPAddress:Array=[];
 		public var arrayComputerIPAddress1:Array=[];
@@ -61,11 +64,26 @@ package
 		public var arrayComputerMacAddress:Array=[];
 		public var arrayComputerMacAddress1:Array=[];
 		
+		//Station
+		public var arrayStationIPAddress:Array=[];
+		public var arrayStationIPAddress1:Array=[];
+		public var arrayStationMask:Array=[];
+		public var arrayStationMacAddress:Array=[];
+		public var arrayStationMacAddress1:Array=[];
+		public var arrayStationPassword:Array=[];
+		public var arrayStationPassword1:Array=[];
+		
 		//SWitch
 		public var arraySwitch:String;
 		public var arrayListenPortSwitch:Array=[];
 		public var arrayListenPortSwitch1:Array=[];
 		public var arrayOpenFlowVersion:Array=[];
+		public var arrayChannel:Array=[];
+		public var arrayMode:Array=[];
+		public var arrayRouterSSID:Array=[];
+		public var arrayRouterSSID1:Array=[];
+		public var arrayStationSSID:Array=[];
+		public var arrayStationSSID1:Array=[];
 		
 		//Controller
 		public var arrayOpenflowController:Array=[];

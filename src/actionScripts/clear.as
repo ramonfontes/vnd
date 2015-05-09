@@ -45,8 +45,12 @@ public function clear():void{
 	 contComputer=0;			
 	 getValueMacAddress=[];
 	 getValueListenPort=[];
+	 getValueRouterSSID=[]
+	 getValueStationSSID=[]
 	 getValueComputerIPAddress=[];
 	 getValueComputerMacAddress=[];
+	 getValueStationIPAddress=[];
+	 getValueStationMacAddress=[];
 	 namme="";
 	 isInport=false;
  }

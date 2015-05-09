@@ -15,7 +15,7 @@ public function setobject(eve:Event):void {
 	}
 	
 	if(eve.target.name.slice(0,8)=="computer"||eve.target.name.slice(0,14)=="switchOpenflow"
-		||eve.target.name.slice(0,14)=="wirelessRouter"
+		||eve.target.name.slice(0,14)=="wirelessRouter"||eve.target.name.slice(0,7)=="station"
 		||eve.target.name.slice(0,5)=="fiber"||eve.target.name.slice(0,8)=="ethernet"
 		||eve.target.name.slice(0,3)=="www"||eve.target.name.slice(0,6)=="domain"
 		||eve.target.name.slice(0,8)=="wireless"||eve.target.name.slice(0,5)=="ofdma"

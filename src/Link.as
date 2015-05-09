@@ -36,6 +36,7 @@ package{
 		public var _objectDst:String;
 		public var _checkSource:Boolean;
 		public var _computerPort:int;
+		public var _stationPort:int;
 		public var _switchPortSource:int;
 		public var _switchPortDestination:int;
 		public var _switchDeviceSource:int;
@@ -112,6 +113,11 @@ package{
 		
 		public function set computerPort(value:int):void{
 			_computerPort = value;
+			draw();
+		}
+		
+		public function set stationPort(value:int):void{
+			_stationPort = value;
 			draw();
 		}
 		

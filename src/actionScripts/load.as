@@ -1,7 +1,8 @@
-import mx.controls.Alert;
-import mx.collections.ArrayCollection;
-import mx.rpc.events.ResultEvent;
 import flash.events.MouseEvent;
+
+import mx.collections.ArrayCollection;
+import mx.controls.Alert;
+import mx.rpc.events.ResultEvent;
 
 public function load(eve:ResultEvent):void{
 	var obj:objParameter = new objParameter();
@@ -181,6 +182,9 @@ public function load(eve:ResultEvent):void{
 			if(obsr.slice(0,14)=="switchOpenflow"){
 				sr="switchOpenflow";
 			}
+			if(obsr.slice(0,7)=="station"){
+				sr="station";
+			}
 			else if(obsr.slice(0,14)=="wirelessRouter"){
 				sr="wirelessRouter";
 			}
@@ -199,6 +203,9 @@ public function load(eve:ResultEvent):void{
 			}
 			else if(obds.slice(0,8)=="computer"){
 				ds="computer";
+			}
+			else if(obds.slice(0,7)=="station"){
+				ds="station";
 			}
 			else if(obds.slice(0,18)=="controllerOpenflow"){
 				ds="controllerOpenflow";
@@ -240,7 +247,12 @@ public function load(eve:ResultEvent):void{
 			else if(sr=="computer"&&ds!="controllerOpenflow"){
 				link.checkSource=true;
 				link.computerPort=0;
-			}													
+			}		
+			
+			else if(sr=="station"&&ds!="controllerOpenflow"){
+				link.checkSource=true;
+				link.stationPort=0;
+			}	
 			
 			if(ds=="switchOpenflow"&&sr!="controllerOpenflow"){
 				np=int(obds.slice(15,17));	
@@ -275,7 +287,12 @@ public function load(eve:ResultEvent):void{
 				ds="computer";
 				link.checkSource=false;
 				link.computerPort=0;
-			}		
+			}	
+			else if(ds=="station"&&sr!="controllerOpenflow"){
+				ds="station";
+				link.checkSource=false;
+				link.stationPort=0;
+			}	
 						
 			if(xmlInfo[a].isChildTemplatedOne=='true'){
 				link.can.isChildTemplatedOne=true;}

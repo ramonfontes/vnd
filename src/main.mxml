@@ -96,12 +96,17 @@
 			[Bindable] public var getInterfaces:Array=new Array;
 			[Bindable] public var contSwitch:int=0;
 			[Bindable] public var contController:int=0;
-			[Bindable] public var contComputer:int=0;			
+			[Bindable] public var contComputer:int=0;	
+			[Bindable] public var contStation:int=0;	
 			//[Bindable] public var getValueMacAddress:String="";
 			[Bindable] public var getValueListenPort:Array;
+			[Bindable] public var getValueRouterSSID:Array;
+			[Bindable] public var getValueStationSSID:Array;
 			[Bindable] public var getValueMacAddress:Array;//=new Array;
 			[Bindable] public var getValueComputerIPAddress:Array;
 			[Bindable] public var getValueComputerMacAddress:Array;
+			[Bindable] public var getValueStationIPAddress:Array;
+			[Bindable] public var getValueStationMacAddress:Array;
 			[Bindable] public var contNumberOfInterfaces:int=0;			
 			[Bindable] public var temaplateArrcol:ArrayCollection;		    
 			[Bindable] private var saveXml:XML;
@@ -152,9 +157,14 @@
 			public var macSwitch:String;
 			public var listenPortSwitch:String;
 			public var openFlowVersion:String;
+			public var routerSSID:String;
+			public var channel:String;
+			public var mode:String;
 			public var switch_:String;
 			public var getSwitch_:String;
 			public var getopenflowversion_:String;
+			public var getmode_:String;
+			public var getchannel_:String;
 			public var mac_Switch:String;
 			
 			
@@ -1089,7 +1099,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 04/11/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 05/10/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	
