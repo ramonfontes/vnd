@@ -1340,7 +1340,7 @@
 									tb.maxChars=17;
 									if(parentApplication.getValueStationMacAddress.indexOf(tb.text)!=-1){									
 										checkMac=true;								
-										obj.arrayStationMacAddress = parentApplication.getValueStationrMacAddress;
+										obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
 									}
 									if(checkMac==false){
 										parentApplication.getValueStationMacAddress.push(tb.text);
@@ -1381,26 +1381,12 @@
 								frmItem.addChild(tb);
 								form.addChild(frmItem);	
 								
-								if(obj.name=="stationSSID"){
-									frmItem.label = "Station SSID";
-									tb.width=60;
-									tb.enabled=true;
-									tb.text = tb.text;
-									tb.maxChars=5;
-									parentApplication.getValueStationSSID.push(tb.text);
-									obj.arrayStationSSID1[ye]=tb.text;
-									obj.arrayStationSSID = parentApplication.getValueStationSSID;
-								}					
-								tb.addEventListener(Event.CHANGE,change);
-								frmItem.addChild(tb);
-								form.addChild(frmItem);
-								
 								if(obj.name=="routerSSID"){
 									frmItem.label = "Router SSID";
 									tb.width=60;
 									tb.enabled=true;
-									tb.text = tb.text;
-									tb.maxChars=5;
+									lable.text=lable.text+" - "+tb.text;
+									tb.maxChars=10;
 									parentApplication.getValueRouterSSID.push(tb.text);
 									obj.arrayRouterSSID1[ye]=tb.text;
 									obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
@@ -1749,8 +1735,9 @@
 								else if(obj.name=="switch"){
 									obj.arraySwitch = String(tb3.selectedItem);
 									frmItem.label = "Switch";
+									tb3.selectedIndex=1;
 									frmItem.addChild(tb3);
-									tb3.enabled=false;
+									tb3.enabled=true;
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
 									form.addChild(frmItem);								
 									for(o=0;o<valueObjArr.length;o++){		
@@ -2724,7 +2711,7 @@
 							tb.enabled=true;
 							tb.width=100;
 							tb.maxChars=10;		
-							tb.text="new-ssid"
+							tb.text="newd-ssid"
 							parentApplication.getValueRouterSSID.push(tb.text);														
 							obj.arrayRouterSSID1[ye]=tb.text;
 							obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
@@ -2802,7 +2789,7 @@
 							frmItem = new FormItem();
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
-							tb3.enabled=false;
+							tb3.enabled=true;
 							tb3.dataProvider = obj.option;
 							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
 								tb3.selectedIndex=1;

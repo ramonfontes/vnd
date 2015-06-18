@@ -1283,7 +1283,7 @@ public function exportControllerScriptFile():void {
 		var rand:Number = Math.random();
 		var numeroRan:Number = Math.round(rand * 9999);
 		//var chave:String;
-		chave = "controllerScript"+String(numeroRan);
+		chave = "controllerCode"+String(numeroRan);
 		objSend.emptyspace=0;		
 		objSend.chave=chave;
 		objSend.gtemp_openflow_controller=temp_openflow_controller;
@@ -1680,7 +1680,7 @@ public function exportControllerScriptFileQoS():void {
 		var rand:Number = Math.random();
 		var numeroRan:Number = Math.round(rand * 99999);
 		//var chave:String;
-		chave = "QoSScript"+String(numeroRan);
+		chave = "QoSCode"+String(numeroRan);
 		objSend.emptyspace=1;
 		objSend.chave=chave;
 		objSend.gtemp_openflow_controller=temp_openflow_controller;

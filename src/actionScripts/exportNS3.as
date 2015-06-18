@@ -1539,7 +1539,7 @@ public function exportNS3File():void {
 	if(expo==true){					
 		var rand:Number = Math.random();
 		var numeroRan:Number = Math.round(rand * 99999);
-		chave = "NS3Script"+String(numeroRan);
+		chave = "NS3Code"+String(numeroRan);
 		objSend.chave=chave;
 		objSend.count2=cont_mininet;
 		objSend.gtemp_mininet=temp_mininet;		
