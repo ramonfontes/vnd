@@ -21,8 +21,8 @@
 	<mx:Metadata>
 		[Event(name="ChangedUpEveForComponent")]
 	</mx:Metadata>
-	<mx:Zoom id="myZoom" target="{this}" zoomHeightFrom="0.10" zoomHeightTo="1.00"
-			 zoomWidthFrom="0.10" zoomWidthTo="1.00"/>
+	<mx:Zoom id="myZoom" target="{this}" zoomHeightFrom="0.50" zoomHeightTo="1.00"
+			 zoomWidthFrom="0.50" zoomWidthTo="1.00"/>
 	<mx:Script>
 		<![CDATA[
 			import action_alert.HAlert;

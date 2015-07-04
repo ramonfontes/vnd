@@ -392,13 +392,13 @@
 					}
 					else if(obj.id=='options'){
 						checked=false;
-						if(ob.id=="computer"){
+						if(ob.id=="Computer"){
 							if(obj.name=="mask"){
 								xmlList = XMLList("<"+obj.name+">"+obj.arrayComputerMask[ye]+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}								
 						}
-						else if(ob.id=="wirelessRouter"||ob.id=="switchOpenflow"){
+						else if(ob.id=="Access Point"||ob.id=="Switch"){
 							if(obj.name=="switch"){
 								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetSwitch[ye]+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
@@ -418,7 +418,7 @@
 								//xmlLi.appendChild(xmlList);
 							//}		
 						}
-						else if(ob.id=="controllerOpenflow"){
+						else if(ob.id=="Controller"){
 							if(intnew==0){
 								if(obj.name=="specialController"){
 									checked=true;
@@ -571,26 +571,26 @@
 						var ob:objects=UIob as objects;						
 						if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
 							var ab:int;
-							if(ob.id=="computer"){
+							if(ob.id=="Computer"){
 								ab = int(ob.name.slice(9,11));
 								ye=ab;
 								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 								setObjectXml(ob,xmlLi);
 							}
-							else if(ob.id=="switchOpenflow"){
-								ab = int(ob.name.slice(15,17));
+							else if(ob.id=="Switch"){
+								ab = int(ob.name.slice(7,9));
 								ye=ab;
 								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 								setObjectXml(ob,xmlLi);
 							}
-							else if(ob.id=="wirelessRouter"){
-								ab = int(ob.name.slice(15,17));
+							else if(ob.id=="Access Point"){
+								ab = int(ob.name.slice(13,15));
 								ye=ab;
 								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 								setObjectXml(ob,xmlLi);
 							}
-							else if(ob.id=="controllerOpenflow"){
-								ab= int(ob.name.slice(19,21));
+							else if(ob.id=="Controller"){
+								ab= int(ob.name.slice(11,13));
 								ye=ab;									
 								var obb:Object=ob;
 								for(var i:int=0;i<(obb.objparaArrayCol.length);i++){
@@ -671,7 +671,7 @@
 							if(ob.id=="openflowScenario" || ob.id=="flowTable")
 								openflowxml.appendChild(xmlLi);
 								
-								else if (ob.id=="controllerOpenflow"){
+								else if (ob.id=="Controller"){
 								}
 								
 								else
@@ -948,17 +948,31 @@
 						var source:objects=dropCanvas.getChildByName(ob.can.source.name) as objects;
 						delSource(source.name,Link(ob).name);
 						var dell:int;
-						if(source.name.slice(0,14)=="switchOpenflow"||source.name.slice(0,14)=="wirelessRouter"){
-							dell = int(source.name.slice(15,17));
-							getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.sourcePort)));
-							//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
+						if(source.name.slice(0,6)=="Switch"||source.name.slice(0,12)=="Access Point"){
+							if(source.name.slice(0,6)=="Switch"){
+								dell = int(source.name.slice(7,9));
+								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.sourcePort)));
+								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
+							}
+							else{
+								dell = int(source.name.slice(13,15));
+								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.sourcePort)));
+								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
+							}
 						}
 						var dest:objects=dropCanvas.getChildByName(ob.can.destination.name) as objects;
 						delDestination(dest.name,Link(ob).name);							
-						if(dest.name.slice(0,14)=="switchOpenflow"||dest.name.slice(0,14)=="wirelessRouter"){
-							dell = int(dest.name.slice(15,17));
-							getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.destinationPort)));
-							//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
+						if(dest.name.slice(0,6)=="Switch"||dest.name.slice(0,13)=="Access Point"){
+							if(source.name.slice(0,6)=="Switch"){
+								dell = int(dest.name.slice(7,9));
+								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.destinationPort)));
+								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
+							}
+							else{
+								dell = int(dest.name.slice(13,15));
+								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.destinationPort)));
+								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
+							}
 						}														
 						dropCanvas.removeChild(ob as DisplayObject);
 						undoRedoDescriptor=-1;

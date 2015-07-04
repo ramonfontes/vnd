@@ -30,12 +30,12 @@ private function mdown(event:MouseEvent):void {
 			}
 			else if(line._objectSrc=="Access Point"){
 				namme="Access Point";
-				np=event.target.name.slice(15,17);	
+				np=event.target.name.slice(13,15);	
 				cont_click++;
 			}
 			else if(line._objectSrc=="Switch"){
 				namme="Switch";
-				np=event.target.name.slice(15,17);	
+				np=event.target.name.slice(7,9);	
 				cont_click++;
 			}
 			else if(line._objectSrc=="Controller"){
@@ -78,14 +78,13 @@ private function mUp(event:MouseEvent):void {
 	dst=event.target.id;
 	if(bool==obj||src=="Computer"&&dst=="Controller"||src=="Controller"&&dst=="Computer"
 		||(String(line)=="wireless"&&src=="Controller")||(String(line)=="wireless"&&dst=="Controller")
-			||(String(line)=="wireless"&&dst=="switchOpenflow")||(String(line)=="wireless"&&src=="switchOpenflow")
+			||(String(line)=="wireless"&&dst=="Switch")||(String(line)=="wireless"&&src=="Switch")
 			||src=="Smartphone"&&dst=="Computer"||dst=="Smartphone"&&src=="Computer"
 			||dst=="Smartphone"&&src=="Controller"||src=="Smartphone"&&dst=="Controller"
-			||dst=="Smartphone"&&src=="switchOpenflow"||src=="Smartphone"&&dst=="switchOpenflow"
+			||dst=="Smartphone"&&src=="Switch"||src=="Smartphone"&&dst=="Switch"
 			||dst=="Smartphone"&&src=="Access Point"||src=="Smartphone"&&dst=="Access Point"
 			||src=="Station"&&dst=="Controller"
-			||src=="Controller"&&dst=="Station"||src=="Computer"&&dst=="Station"||src=="Station"&&dst=="Computer"
-			||src=="Computer"&&dst=="Access Point"||src=="Access Point"&&dst=="Computer"){
+			||src=="Controller"&&dst=="Station"||src=="Computer"&&dst=="Station"||src=="Station"&&dst=="Computer"){
 		Alert.show("You cannot connect these devices!");
 		src="";
 		dst="";
@@ -112,7 +111,7 @@ private function mUp(event:MouseEvent):void {
 			if(checkinport[np]!=false)
 				checkinport[np]=isInport;
 			
-			if((namme=="switchOpenflow"||namme=="Access Point")&&dst!="Controller"&&dst!="www"&&dst!="domain"&&String(line)!="wireless"){
+			if((namme=="Switch"||namme=="Access Point")&&dst!="Controller"&&String(line)!="wireless"){
 				line._switchDeviceDestination=np;
 				if(arrayContIfacesCheck[np]==undefined){
 					arrayContIfacesCheck[np]=1;
@@ -147,8 +146,11 @@ private function mUp(event:MouseEvent):void {
 				line._checkSource=false;
 				line._computerPort=0;
 			}
-			else if((line._objectDst=="switchOpenflow"||line._objectDst=="Access Point")&&src!="Controller"&&src!="www"&&src!="domain"&&String(line)!="wireless"){
-				np=event.target.name.slice(15,17);	
+			else if((line._objectDst=="Switch"||line._objectDst=="Access Point")&&src!="Controller"&&String(line)!="wireless"){
+				if(line._objectDst=="Switch")
+					np=event.target.name.slice(7,9);	
+				else
+					np=event.target.name.slice(13,15);	
 				
 				if(checkinport[np]!=false)
 					checkinport[np]=isInport;

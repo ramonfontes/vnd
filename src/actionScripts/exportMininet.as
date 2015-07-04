@@ -358,17 +358,17 @@ public function exportMininetScriptFile():void {
 					}
 					cont_mininet++;
 					if(openFlowVersion==null||openFlowVersion=="")
-						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+						sh = "    s"+ob.name.slice(7,9)+" = net.addSwitch( 's"+ob.name.slice(7,9)+"', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					else if(openFlowVersion=="1")
-						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow10', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+						sh = "    s"+ob.name.slice(7,9)+" = net.addSwitch( 's"+ob.name.slice(7,9)+"', protocols='OpenFlow10', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					else if(openFlowVersion=="1.1")
-						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow11', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+						sh = "    s"+ob.name.slice(7,9)+" = net.addSwitch( 's"+ob.name.slice(7,9)+"', protocols='OpenFlow11', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					else if(openFlowVersion=="1.2")
-						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow12', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+						sh = "    s"+ob.name.slice(7,9)+" = net.addSwitch( 's"+ob.name.slice(7,9)+"', protocols='OpenFlow12', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					else if(openFlowVersion=="1.3")
-						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow13', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+						sh = "    s"+ob.name.slice(7,9)+" = net.addSwitch( 's"+ob.name.slice(7,9)+"', protocols='OpenFlow13', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					else if(openFlowVersion=="1.4")
-						sh = "    s"+ob.name.slice(15,17)+" = net.addSwitch( 's"+ob.name.slice(15,17)+"', protocols='OpenFlow14', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+						sh = "    s"+ob.name.slice(7,9)+" = net.addSwitch( 's"+ob.name.slice(7,9)+"', protocols='OpenFlow14', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}		
@@ -401,17 +401,17 @@ public function exportMininetScriptFile():void {
 					}
 					cont_mininet++;
 					if(openFlowVersion==null||openFlowVersion=="")
-						sh = "    ap"+ob.name.slice(15,17)+" = net.addBaseStation( 'ap"+ob.name.slice(15,17)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
+						sh = "    ap"+ob.name.slice(13,15)+" = net.addBaseStation( 'ap"+ob.name.slice(13,15)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
 					else if(openFlowVersion=="1")
-						sh = "    ap"+ob.name.slice(15,17)+" = net.addBaseStation( 'ap"+ob.name.slice(15,17)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
+						sh = "    ap"+ob.name.slice(13,15)+" = net.addBaseStation( 'ap"+ob.name.slice(13,15)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
 					else if(openFlowVersion=="1.1")
-						sh = "    ap"+ob.name.slice(15,17)+" = net.addBaseStation( 'ap"+ob.name.slice(15,17)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
+						sh = "    ap"+ob.name.slice(13,15)+" = net.addBaseStation( 'ap"+ob.name.slice(13,15)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
 					else if(openFlowVersion=="1.2")
-						sh = "    ap"+ob.name.slice(15,17)+" = net.addBaseStation( 'ap"+ob.name.slice(15,17)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
+						sh = "    ap"+ob.name.slice(13,15)+" = net.addBaseStation( 'ap"+ob.name.slice(13,15)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
 					else if(openFlowVersion=="1.3")
-						sh = "    ap"+ob.name.slice(15,17)+" = net.addBaseStation( 'ap"+ob.name.slice(15,17)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
+						sh = "    ap"+ob.name.slice(13,15)+" = net.addBaseStation( 'ap"+ob.name.slice(13,15)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
 					else if(openFlowVersion=="1.4")
-						sh = "    ap"+ob.name.slice(15,17)+" = net.addBaseStation( 'ap"+ob.name.slice(15,17)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
+						sh = "    ap"+ob.name.slice(13,15)+" = net.addBaseStation( 'ap"+ob.name.slice(13,15)+"', ssid= '"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"' )@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
@@ -432,7 +432,7 @@ public function exportMininetScriptFile():void {
 						}	
 					}					
 					cont_mininet++;
-					sh = "    c"+ob.name.slice(19,21)+" = net.addController( 'c"+ob.name.slice(19,21)+"', controller=RemoteController, ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
+					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', controller=RemoteController, ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
@@ -765,34 +765,34 @@ public function exportMininetScriptFile():void {
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;			
 			if(obLink.can.isMOtherTemplate==true || obLink.can.isChildTemplatedOne!=true ){		
-				if(exists==false && storeConnectivity.indexOf(obLink.can.source.name.slice(15,17))==-1 && (obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&obLink.can.destination.name.slice(0,10)=="Controller"){
-					if (obLink.can.source.name.slice(0,14)=="wirelessRouter"){
-						storeConnectivity.push(obLink.can.source.name.slice(15,17));	
+				if(exists==false && storeConnectivity.indexOf(obLink.can.source.name.slice(13,15))==-1 && (obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&obLink.can.destination.name.slice(0,10)=="Controller"){
+					if (obLink.can.source.name.slice(0,12)=="Access Point"){
+						storeConnectivity.push(obLink.can.source.name.slice(13,15));	
 						cont_mininet++;
-						sh = "    ap"+obLink.can.source.name.slice(15,17)+".start( [c"+obLink.can.destination.name.slice(19,21);
-						countControllerDestination=obLink.can.destination.name.slice(19,21);	
-						countSwitchSource=obLink.can.source.name.slice(15,17);
+						sh = "    ap"+obLink.can.source.name.slice(13,15)+".start( [c"+obLink.can.destination.name.slice(11,13);
+						countControllerDestination=obLink.can.destination.name.slice(11,13);	
+						countSwitchSource=obLink.can.source.name.slice(13,15);
 						exists=true;	
 					}
 					else{
-					storeConnectivity.push(obLink.can.source.name.slice(15,17));	
+					storeConnectivity.push(obLink.can.source.name.slice(7,9));	
 					cont_mininet++;
-					sh = "    s"+obLink.can.source.name.slice(15,17)+".start( [c"+obLink.can.destination.name.slice(19,21);
-					countControllerDestination=obLink.can.destination.name.slice(19,21);	
-					countSwitchSource=obLink.can.source.name.slice(15,17);
+					sh = "    s"+obLink.can.source.name.slice(7,9)+".start( [c"+obLink.can.destination.name.slice(11,13);
+					countControllerDestination=obLink.can.destination.name.slice(11,13);	
+					countSwitchSource=obLink.can.source.name.slice(7,9);
 					exists=true;
 					}
 					for(var o:int=0;o<dropCanvas.numChildren;o++){
 						UIob = dropCanvas.getChildAt(o);
 						if(UIob.className=='Link'){
 							obLink=UIob as Link;
-							if(obLink.can.destination.name.slice(19,21)!="" && (obLink.can.source.name.slice(15,17)==countSwitchSource) && (obLink.can.destination.name.slice(19,21)!=countControllerDestination)){
-								sh = sh+",c"+obLink.can.destination.name.slice(19,21);
-								countControllerDestination=obLink.can.destination.name.slice(19,21);
+							if(obLink.can.destination.name.slice(11,13)!="" && (obLink.can.source.name.slice(13,15)==countSwitchSource) && (obLink.can.destination.name.slice(11,13)!=countControllerDestination)){
+								sh = sh+",c"+obLink.can.destination.name.slice(11,13);
+								countControllerDestination=obLink.can.destination.name.slice(11,13);
 							}
-							else if((obLink.can.destination.name.slice(15,17)==countSwitchSource) && (obLink.can.destination.name.slice(0,6)=="Switch") && (obLink.can.source.name.slice(0,10)=="Controller")){
-								sh = sh+",c"+obLink.can.source.name.slice(19,21);
-								countControllerSource=obLink.can.source.name.slice(19,21);
+							else if((obLink.can.destination.name.slice(13,15)==countSwitchSource) && (obLink.can.destination.name.slice(0,6)=="Switch") && (obLink.can.source.name.slice(0,10)=="Controller")){
+								sh = sh+",c"+obLink.can.source.name.slice(11,13);
+								countControllerSource=obLink.can.source.name.slice(11,13);
 							}
 						}						
 					}	
@@ -801,35 +801,35 @@ public function exportMininetScriptFile():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(exists==false && storeConnectivity.indexOf(obLink.can.destination.name.slice(15,17))==-1 && (obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")&&obLink.can.source.name.slice(0,10)=="Controller"){
-					if(obLink.can.destination.name.slice(0,14)=="wirelessRouter"){
-						storeConnectivity.push(obLink.can.destination.name.slice(15,17));	
+				else if(exists==false && storeConnectivity.indexOf(obLink.can.destination.name.slice(13,15))==-1 && (obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")&&obLink.can.source.name.slice(0,10)=="Controller"){
+					if(obLink.can.destination.name.slice(0,12)=="Access Point"){
+						storeConnectivity.push(obLink.can.destination.name.slice(13,15));	
 						cont_mininet++;
-						sh = "    ap"+obLink.can.destination.name.slice(15,17)+".start( [c"+obLink.can.source.name.slice(19,21);
-						countControllerSource=obLink.can.source.name.slice(19,21);	
-						countSwitchDestination=obLink.can.destination.name.slice(15,17);	
+						sh = "    ap"+obLink.can.destination.name.slice(13,15)+".start( [c"+obLink.can.source.name.slice(11,13);
+						countControllerSource=obLink.can.source.name.slice(11,13);	
+						countSwitchDestination=obLink.can.destination.name.slice(13,15);	
 						exists=true;
 					}
 					else{
-					storeConnectivity.push(obLink.can.destination.name.slice(15,17));	
+					storeConnectivity.push(obLink.can.destination.name.slice(13,15));	
 					cont_mininet++;
-					sh = "    s"+obLink.can.destination.name.slice(15,17)+".start( [c"+obLink.can.source.name.slice(19,21);
-					countControllerSource=obLink.can.source.name.slice(19,21);	
-					countSwitchDestination=obLink.can.destination.name.slice(15,17);	
+					sh = "    s"+obLink.can.destination.name.slice(7,9)+".start( [c"+obLink.can.source.name.slice(11,13);
+					countControllerSource=obLink.can.source.name.slice(11,13);	
+					countSwitchDestination=obLink.can.destination.name.slice(7,9);	
 					exists=true;
 					}
 					for(o=0;o<dropCanvas.numChildren;o++){
 						UIob = dropCanvas.getChildAt(o);
 						if(UIob.className=='Link'){
 							obLink=UIob as Link;							
-							if(obLink.can.source.name.slice(19,21)!="" && (obLink.can.destination.name.slice(15,17)==countSwitchDestination) && (obLink.can.source.name.slice(19,21)!=countControllerSource)){
-								sh = sh+",c"+obLink.can.source.name.slice(19,21);
-								countControllerSource=obLink.can.source.name.slice(19,21);	
-								Alert.show(String(countSwitchDestination));
+							if(obLink.can.source.name.slice(11,13)!="" && (obLink.can.destination.name.slice(11,13)==countSwitchDestination) && (obLink.can.source.name.slice(11,13)!=countControllerSource)){
+								sh = sh+",c"+obLink.can.source.name.slice(11,13);
+								countControllerSource=obLink.can.source.name.slice(11,13);	
+							//	Alert.show(String(countSwitchDestination));
 							}
-							else if((obLink.can.source.name.slice(15,17)==countSwitchDestination) && (obLink.can.source.name.slice(0,6)=="Switch") && (obLink.can.destination.name.slice(0,10)=="Controller")){
-								sh = sh+",c"+obLink.can.destination.name.slice(19,21);
-								countControllerDestination=obLink.can.destination.name.slice(19,21);
+							else if((obLink.can.source.name.slice(7,9)==countSwitchDestination) && (obLink.can.source.name.slice(0,6)=="Switch") && (obLink.can.destination.name.slice(0,10)=="Controller")){
+								sh = sh+",c"+obLink.can.destination.name.slice(11,13);
+								countControllerDestination=obLink.can.destination.name.slice(11,13);
 							}
 						}						
 					}	
@@ -843,34 +843,34 @@ public function exportMininetScriptFile():void {
 			//----------------------------
 			//-----------------------------------------------
 			else if(obLink.can.isChildTemplatedOne==true){
-				if(exists==false && storeConnectivity.indexOf(obLink.can.source.name.slice(15,17))==-1 && (obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&obLink.can.destination.name.slice(0,10)=="Controller"){
-					if (obLink.can.source.name.slice(0,14)=="wirelessRouter"){
-						storeConnectivity.push(obLink.can.source.name.slice(15,17));	
+				if(exists==false && storeConnectivity.indexOf(obLink.can.source.name.slice(15,17))==-1 && (obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&obLink.can.destination.name.slice(0,10)=="Controller"){
+					if (obLink.can.source.name.slice(0,12)=="Access Point"){
+						storeConnectivity.push(obLink.can.source.name.slice(13,15));	
 						cont_mininet++;
-						sh = "    ap"+obLink.can.source.name.slice(15,17)+".start( [c"+obLink.can.destination.name.slice(19,21);
-						countControllerDestination=obLink.can.destination.name.slice(19,21);	
-						countSwitchSource=obLink.can.source.name.slice(15,17);
+						sh = "    ap"+obLink.can.source.name.slice(13,15)+".start( [c"+obLink.can.destination.name.slice(11,13);
+						countControllerDestination=obLink.can.destination.name.slice(11,13);	
+						countSwitchSource=obLink.can.source.name.slice(13,15);
 						exists=true;	
 					}
 					else{
-						storeConnectivity.push(obLink.can.source.name.slice(15,17));	
+						storeConnectivity.push(obLink.can.source.name.slice(7,9));	
 						cont_mininet++;
-						sh = "    s"+obLink.can.source.name.slice(15,17)+".start( [c"+obLink.can.destination.name.slice(19,21);
-						countControllerDestination=obLink.can.destination.name.slice(19,21);	
-						countSwitchSource=obLink.can.source.name.slice(15,17);
+						sh = "    s"+obLink.can.source.name.slice(7,9)+".start( [c"+obLink.can.destination.name.slice(11,13);
+						countControllerDestination=obLink.can.destination.name.slice(11,13);	
+						countSwitchSource=obLink.can.source.name.slice(7,9);
 						exists=true;
 					}
 					for(var o:int=0;o<dropCanvas.numChildren;o++){
 						UIob = dropCanvas.getChildAt(o);
 						if(UIob.className=='Link'){
 							obLink=UIob as Link;
-							if(obLink.can.destination.name.slice(19,21)!="" && (obLink.can.source.name.slice(15,17)==countSwitchSource) && (obLink.can.destination.name.slice(19,21)!=countControllerDestination)){
-								sh = sh+",c"+obLink.can.destination.name.slice(19,21);
-								countControllerDestination=obLink.can.destination.name.slice(19,21);
+							if(obLink.can.destination.name.slice(11,13)!="" && (obLink.can.source.name.slice(13,15)==countSwitchSource) && (obLink.can.destination.name.slice(11,13)!=countControllerDestination)){
+								sh = sh+",c"+obLink.can.destination.name.slice(11,13);
+								countControllerDestination=obLink.can.destination.name.slice(11,13);
 							}
-							else if((obLink.can.destination.name.slice(15,17)==countSwitchSource) && (obLink.can.destination.name.slice(0,6)=="Switch") && (obLink.can.source.name.slice(0,10)=="Controller")){
-								sh = sh+",c"+obLink.can.source.name.slice(19,21);
-								countControllerSource=obLink.can.source.name.slice(19,21);
+							else if((obLink.can.destination.name.slice(13,15)==countSwitchSource) && (obLink.can.destination.name.slice(0,6)=="Switch") && (obLink.can.source.name.slice(0,10)=="Controller")){
+								sh = sh+",c"+obLink.can.source.name.slice(11,13);
+								countControllerSource=obLink.can.source.name.slice(11,13);
 							}
 						}						
 					}	
@@ -879,35 +879,35 @@ public function exportMininetScriptFile():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(exists==false && storeConnectivity.indexOf(obLink.can.destination.name.slice(15,17))==-1 && (obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")&&obLink.can.source.name.slice(0,10)=="Controller"){
-					if(obLink.can.destination.name.slice(0,14)=="wirelessRouter"){
-						storeConnectivity.push(obLink.can.destination.name.slice(15,17));	
+				else if(exists==false && storeConnectivity.indexOf(obLink.can.destination.name.slice(13,15))==-1 && (obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")&&obLink.can.source.name.slice(0,10)=="Controller"){
+					if(obLink.can.destination.name.slice(0,12)=="Access Point"){
+						storeConnectivity.push(obLink.can.destination.name.slice(13,15));	
 						cont_mininet++;
-						sh = "    ap"+obLink.can.destination.name.slice(15,17)+".start( [c"+obLink.can.source.name.slice(19,21);
-						countControllerSource=obLink.can.source.name.slice(19,21);	
-						countSwitchDestination=obLink.can.destination.name.slice(15,17);	
+						sh = "    ap"+obLink.can.destination.name.slice(13,15)+".start( [c"+obLink.can.source.name.slice(11,13);
+						countControllerSource=obLink.can.source.name.slice(11,13);	
+						countSwitchDestination=obLink.can.destination.name.slice(13,15);	
 						exists=true;
 					}
 					else{
-						storeConnectivity.push(obLink.can.destination.name.slice(15,17));	
+						storeConnectivity.push(obLink.can.destination.name.slice(13,15));	
 						cont_mininet++;
-						sh = "    s"+obLink.can.destination.name.slice(15,17)+".start( [c"+obLink.can.source.name.slice(19,21);
-						countControllerSource=obLink.can.source.name.slice(19,21);	
-						countSwitchDestination=obLink.can.destination.name.slice(15,17);	
+						sh = "    s"+obLink.can.destination.name.slice(7,9)+".start( [c"+obLink.can.source.name.slice(11,13);
+						countControllerSource=obLink.can.source.name.slice(11,13);	
+						countSwitchDestination=obLink.can.destination.name.slice(7,9);	
 						exists=true;
 					}
 					for(o=0;o<dropCanvas.numChildren;o++){
 						UIob = dropCanvas.getChildAt(o);
 						if(UIob.className=='Link'){
 							obLink=UIob as Link;							
-							if(obLink.can.source.name.slice(19,21)!="" && (obLink.can.destination.name.slice(15,17)==countSwitchDestination) && (obLink.can.source.name.slice(19,21)!=countControllerSource)){
-								sh = sh+",c"+obLink.can.source.name.slice(19,21);
-								countControllerSource=obLink.can.source.name.slice(19,21);	
-								Alert.show(String(countSwitchDestination));
+							if(obLink.can.source.name.slice(11,13)!="" && (obLink.can.destination.name.slice(11,13)==countSwitchDestination) && (obLink.can.source.name.slice(11,13)!=countControllerSource)){
+								sh = sh+",c"+obLink.can.source.name.slice(11,13);
+								countControllerSource=obLink.can.source.name.slice(11,13);	
+								//	Alert.show(String(countSwitchDestination));
 							}
-							else if((obLink.can.source.name.slice(15,17)==countSwitchDestination) && (obLink.can.source.name.slice(0,6)=="Switch") && (obLink.can.destination.name.slice(0,10)=="Controller")){
-								sh = sh+",c"+obLink.can.destination.name.slice(19,21);
-								countControllerDestination=obLink.can.destination.name.slice(19,21);
+							else if((obLink.can.source.name.slice(7,9)==countSwitchDestination) && (obLink.can.source.name.slice(0,6)=="Switch") && (obLink.can.destination.name.slice(0,10)=="Controller")){
+								sh = sh+",c"+obLink.can.destination.name.slice(11,13);
+								countControllerDestination=obLink.can.destination.name.slice(11,13);
 							}
 						}						
 					}	
