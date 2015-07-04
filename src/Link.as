@@ -210,7 +210,7 @@ package{
 			uit.validateNow();
 			var matrix:Matrix = new Matrix();
 			var textBitmapData:BitmapData;
-			if(_objectSrc=="computer" && _objectDst=="computer"){
+			if(_objectSrc=="Computer" && _objectDst=="Computer"){
 				uit.text = String("eth"+_computerPort);
 				uit.width = 240;								
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -235,7 +235,7 @@ package{
 				graphics.endFill();
 				
 			}
-			else if(_objectSrc=="computer" && _checkSource==true && _objectDst!="www" && _objectDst!="domain" && lineName!="wireless"){
+			else if(_objectSrc=="Computer" && _checkSource==true && lineName!="wireless"){
 				//uit.text = String("Computer Port:"+_computerPort+" - s"+_switchDeviceSource+"-eth"+(_switchPortDestination)+":("+_switchPortDestination+")");
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				
@@ -263,7 +263,7 @@ package{
 				graphics.endFill();
 				
 			}
-			else if(_objectDst=="computer" && _checkSource==false && _objectSrc!="www" && _objectSrc!="domain" && lineName!="wireless"){
+			else if(_objectDst=="Computer" && _checkSource==false && lineName!="wireless"){
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));
 				uit.text = String("eth"+(_switchPortSource)+"("+_switchPortSource+")");
 				uit.width = 240;
@@ -290,7 +290,7 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 			}
-			else if((_objectDst=="switchOpenflow"||_objectDst=="wirelessRouter") && (_objectSrc=="switchOpenflow" ||_objectSrc=="wirelessRouter" ) && lineName!="wireless"){
+			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Access Point" ) && lineName!="wireless"){
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));				
 				uit.text = String("eth"+(_switchPortSource)+"("+_switchPortSource+")");

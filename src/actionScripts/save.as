@@ -43,8 +43,8 @@ public function saveFile():void{
 			}
 			
 			for(var k:int=0;k<UIob.valueObjArr.length;k++){
-				if(UIob.id=="controllerOpenflow"){
-					var ab:int = int(UIob.name.slice(19,21));
+				if(UIob.id=="Controller"){
+					var ab:int = int(UIob.name.slice(11,13));
 					ye=ab;
 					var obb:Object=ob;
 					for(var c:int=0;c<(obb.objparaArrayCol.length);c++){
@@ -207,7 +207,7 @@ public function saveFile():void{
 					}
 				
 				}
-				else if(UIob.id=="computer"){
+				else if(UIob.id=="Computer"){
 					ab = int(UIob.name.slice(9,11));
 					ye=ab;
 					obb=ob;
@@ -242,8 +242,8 @@ public function saveFile():void{
 						}
 					}
 				}
-				else if(UIob.id=="switchOpenflow"){
-					ab= int(UIob.name.slice(15,17));
+				else if(UIob.id=="Switch"){
+					ab= int(UIob.name.slice(7,9));
 					ye=ab;
 					obb=ob;
 					
@@ -277,8 +277,8 @@ public function saveFile():void{
 						}
 					}
 				}
-				else if(UIob.id=="wirelessRouter"){
-					ab = int(UIob.name.slice(15,17));
+				else if(UIob.id=="Access Point"){
+					ab = int(UIob.name.slice(13,15));
 					ye=ab;
 					obb=ob;
 					

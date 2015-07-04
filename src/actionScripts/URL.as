@@ -49,3 +49,16 @@ public function docker():void
 		trace("Error occurred!");
 	}
 }
+
+
+public function opennew():void
+{
+	var url:String = "https://github.com/intrig-unicamp/mininet-wifi";
+	var request:URLRequest;
+	request = new URLRequest(url);
+	try {
+		navigateToURL(request, '_blank');
+	} catch (e:Error) {
+		trace("Error occurred!");
+	}
+}

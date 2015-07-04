@@ -16,38 +16,30 @@ private function mdown(event:MouseEvent):void {
 		    var lin:Object=linksArrayCollection[linkCombo.selectedIndex];
 			line=new Link(lin.color); 
 			line._objectSrc = event.target.id;
-			if(line._objectSrc=="computer"){
-				namme="computer";
+			if(line._objectSrc=="Computer"){
+				namme="Computer";
 				cont_click++;
 			}
-			else if(line._objectSrc=="station"){
-				namme="station";
+			else if(line._objectSrc=="Station"){
+				namme="Computer";
 				cont_click++;
 			}
-			else if(line._objectSrc=="smartphone"){
-				namme="smartphone";
+			else if(line._objectSrc=="Smartphone"){
+				namme="Smartphone";
 				cont_click++;
 			}
-			else if(line._objectSrc=="ofdma"){
-				namme="ofdma";
-				cont_click++;
-			}
-			else if(line._objectSrc=="www"){
-				namme="www";
-				cont_click++;
-			}
-			else if(line._objectSrc=="wirelessRouter"){
-				namme="wirelessRouter";
+			else if(line._objectSrc=="Access Point"){
+				namme="Access Point";
 				np=event.target.name.slice(15,17);	
 				cont_click++;
 			}
-			else if(line._objectSrc=="switchOpenflow"){
-				namme="switchOpenflow";
+			else if(line._objectSrc=="Switch"){
+				namme="Switch";
 				np=event.target.name.slice(15,17);	
 				cont_click++;
 			}
-			else if(line._objectSrc=="controllerOpenflow"){
-				namme="controllerOpenflow";
+			else if(line._objectSrc=="Controller"){
+				namme="Controller";
 				cont_click++;
 			}
 
@@ -84,18 +76,16 @@ private function mUp(event:MouseEvent):void {
 	var bool:Object=event.target; 
 	var objs:Array=dropCanvas.getChildren();
 	dst=event.target.id;
-	if(bool==obj||src=="computer"&&dst=="controllerOpenflow"||src=="controllerOpenflow"&&dst=="computer"
-		||src=="controllerOpenflow"&&dst=="www"||src=="controllerOpenflow"&&dst=="domain"||src=="domain"&&dst=="controllerOpenflow"
-		||src=="www"&&dst=="controllerOpenflow"||(String(line)=="wireless"&&src=="controllerOpenflow")||(String(line)=="wireless"&&dst=="controllerOpenflow")
-			||(String(line)=="wireless"&&dst=="switchOpenflow")||(String(line)=="wireless"&&src=="switchOpenflow")||(String(line)=="fiber"&&src=="ofdma"&&dst!="controllerOpenflow")
-			||(String(line)=="fiber"&&dst=="ofdma"&&src!="controllerOpenflow")||(String(line)=="ethernet"&&src=="ofdma"&&dst!="controllerOpenflow")
-			||(String(line)=="ethernet"&&dst=="ofdma"&&src!="controllerOpenflow")||src=="smartphone"&&dst=="computer"||dst=="smartphone"&&src=="computer"
-			||dst=="smartphone"&&src=="controllerOpenflow"||src=="smartphone"&&dst=="controllerOpenflow"
-			||dst=="smartphone"&&src=="switchOpenflow"||src=="smartphone"&&dst=="switchOpenflow"
-			||dst=="smartphone"&&src=="wirelessRouter"||src=="smartphone"&&dst=="wirelessRouter"
-			||dst=="smartphone"&&src=="www"||src=="smartphone"&&dst=="www"||src=="station"&&dst=="controllerOpenflow"
-			||src=="controllerOpenflow"&&dst=="station"||src=="computer"&&dst=="station"||src=="station"&&dst=="computer"
-			||src=="computer"&&dst=="wirelessRouter"||src=="wirelessRouter"&&dst=="computer"){
+	if(bool==obj||src=="Computer"&&dst=="Controller"||src=="Controller"&&dst=="Computer"
+		||(String(line)=="wireless"&&src=="Controller")||(String(line)=="wireless"&&dst=="Controller")
+			||(String(line)=="wireless"&&dst=="switchOpenflow")||(String(line)=="wireless"&&src=="switchOpenflow")
+			||src=="Smartphone"&&dst=="Computer"||dst=="Smartphone"&&src=="Computer"
+			||dst=="Smartphone"&&src=="Controller"||src=="Smartphone"&&dst=="Controller"
+			||dst=="Smartphone"&&src=="switchOpenflow"||src=="Smartphone"&&dst=="switchOpenflow"
+			||dst=="Smartphone"&&src=="Access Point"||src=="Smartphone"&&dst=="Access Point"
+			||src=="Station"&&dst=="Controller"
+			||src=="Controller"&&dst=="Station"||src=="Computer"&&dst=="Station"||src=="Station"&&dst=="Computer"
+			||src=="Computer"&&dst=="Access Point"||src=="Access Point"&&dst=="Computer"){
 		Alert.show("You cannot connect these devices!");
 		src="";
 		dst="";
@@ -122,7 +112,7 @@ private function mUp(event:MouseEvent):void {
 			if(checkinport[np]!=false)
 				checkinport[np]=isInport;
 			
-			if((namme=="switchOpenflow"||namme=="wirelessRouter")&&dst!="controllerOpenflow"&&dst!="www"&&dst!="domain"&&String(line)!="wireless"){
+			if((namme=="switchOpenflow"||namme=="Access Point")&&dst!="Controller"&&dst!="www"&&dst!="domain"&&String(line)!="wireless"){
 				line._switchDeviceDestination=np;
 				if(arrayContIfacesCheck[np]==undefined){
 					arrayContIfacesCheck[np]=1;
@@ -139,25 +129,25 @@ private function mUp(event:MouseEvent):void {
 				arrayContIfacesCheck[np]=cont+1;	
 				line.can.sourcePort=line._switchPortSource;
 			}			
-			else if(namme=="computer"){
+			else if(namme=="Computer"){
 				line._checkSource=true;
 				line._computerPort=0;
 			}
-			else if(namme=="station"){
+			else if(namme=="Station"){
 				line._checkSource=true;
 				line._computerPort=0;
 			}
 			
 			line._objectDst = event.target.id;
-			if(line._objectDst=="computer"){
+			if(line._objectDst=="Computer"){
 				line._checkSource=false;
 				line._computerPort=0;
 			}
-			else if(line._objectDst=="station"){
+			else if(line._objectDst=="Station"){
 				line._checkSource=false;
 				line._computerPort=0;
 			}
-			else if((line._objectDst=="switchOpenflow"||line._objectDst=="wirelessRouter")&&src!="controllerOpenflow"&&src!="www"&&src!="domain"&&String(line)!="wireless"){
+			else if((line._objectDst=="switchOpenflow"||line._objectDst=="Access Point")&&src!="Controller"&&src!="www"&&src!="domain"&&String(line)!="wireless"){
 				np=event.target.name.slice(15,17);	
 				
 				if(checkinport[np]!=false)

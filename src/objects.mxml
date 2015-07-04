@@ -332,32 +332,30 @@
 					//this.can.removeChildAt(1);
 					//this.can.addChildAt(form,1);
 					
-					if(this.name.slice(0,14)=="switchOpenflow"){
+					if(this.name.slice(0,6)=="Switch"){
 						var checkifswitchopenflow:Boolean=true;
-						ab = int(this.name.slice(15,17));
+						ab = int(this.name.slice(7,9));
 						ye=ab;
 					}
 					
-					if(this.name.slice(0,14)=="wirelessRouter"){
+					if(this.name.slice(0,12)=="Access Point"){
 						checkifswitchopenflow=true;
-						ab = int(this.name.slice(15,17));
+						ab = int(this.name.slice(13,15));
 						ye=ab;
 					}
 					
-					if(this.name.slice(0,8)=="computer"){
+					if(this.name.slice(0,8)=="Computer"){
 						var checkifcomputer:Boolean=true;
 						ab = int(this.name.slice(9,11));
 						ye=ab;
 					}
-					if(this.name.slice(0,7)=="station"){
+					if(this.name.slice(0,7)=="Station"){
 						var checkifstation:Boolean=true;
 						ab = int(this.name.slice(8,10));
 						ye=ab;
 					}
-					var c9:String = this.name.slice(0,9);
-					var c21:String = this.name.slice(0,21);
-					if(this.name.slice(0,18)=="controllerOpenflow"){
-						ab = int(this.name.slice(19,21));
+					if(this.name.slice(0,10)=="Controller"){
+						ab = int(this.name.slice(11,13));
 						if(ab!=ye && exportControll==true){
 							aa=0;
 							ncount=0;
@@ -2570,23 +2568,23 @@
 				form=new Form();
 				this.can.addChildAt(form,1);
 				
-				if(this.name.slice(0,14)=="switchOpenflow"){
+				if(this.name.slice(0,6)=="Switch"){
 					var checkifswitchopenflow:Boolean=true;
-					ab = int(this.name.slice(15,17));
+					ab = int(this.name.slice(7,9));
 					if(ab!=parentApplication.contSwitch){
 						parentApplication.contSwitch++;
 					}
 				}	
 				
-				if(this.name.slice(0,14)=="wirelessRouter"){
+				if(this.name.slice(0,12)=="Access Point"){
 					checkifswitchopenflow=true;
-					ab = int(this.name.slice(15,17));
+					ab = int(this.name.slice(13,15));
 					if(ab!=parentApplication.contSwitch){
 						parentApplication.contSwitch++;
 					}
 				}	
 				
-				if(this.name.slice(0,8)=="computer"){
+				if(this.name.slice(0,8)=="Computer"){
 					var checkifcomputer:Boolean=true;
 					ab = int(this.name.slice(9,11));
 					if(ab!=parentApplication.contComputer){
@@ -2594,7 +2592,7 @@
 					}
 				}
 				
-				if(this.name.slice(0,7)=="station"){
+				if(this.name.slice(0,7)=="Station"){
 					var checkifstation:Boolean=true;
 					ab = int(this.name.slice(8,10));
 					if(ab!=parentApplication.contStation){
@@ -2602,8 +2600,8 @@
 					}
 				}	
 				
-				if(this.name.slice(0,18)=="controllerOpenflow"){
-					ab = int(this.name.slice(19,21));
+				if(this.name.slice(0,10)=="Controller"){
+					ab = int(this.name.slice(11,13));
 					if(ab!=parentApplication.contController){
 						parentApplication.contController++;
 					}

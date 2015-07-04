@@ -179,43 +179,43 @@ public function load(eve:ResultEvent):void{
 			link.can.destination=des;			
 			var obds:String=String(link.can.destination);
 			
-			if(obsr.slice(0,14)=="switchOpenflow"){
-				sr="switchOpenflow";
+			if(obsr.slice(0,6)=="Switch"){
+				sr="Switch";
 			}
-			if(obsr.slice(0,7)=="station"){
-				sr="station";
+			if(obsr.slice(0,7)=="Station"){
+				sr="Station";
 			}
-			else if(obsr.slice(0,14)=="wirelessRouter"){
-				sr="wirelessRouter";
+			else if(obsr.slice(0,12)=="Access Point"){
+				sr="Access Point";
 			}
-			else if(obsr.slice(0,8)=="computer"){
-				sr="computer";
+			else if(obsr.slice(0,8)=="Computer"){
+				sr="Computer";
 			}
-			else if(obsr.slice(0,18)=="controllerOpenflow"){
-				sr="controllerOpenflow";
+			else if(obsr.slice(0,10)=="Controller"){
+				sr="Controller";
 			}
 			
-			if(obds.slice(0,14)=="switchOpenflow"){
-				ds="switchOpenflow";
+			if(obds.slice(0,6)=="Switch"){
+				ds="Switch";
 			}
-			else if(obds.slice(0,14)=="wirelessRouter"){
-				ds="wirelessRouter";
+			else if(obds.slice(0,12)=="Access Point"){
+				ds="Access Point";
 			}
-			else if(obds.slice(0,8)=="computer"){
-				ds="computer";
+			else if(obds.slice(0,8)=="Computer"){
+				ds="Computer";
 			}
-			else if(obds.slice(0,7)=="station"){
-				ds="station";
+			else if(obds.slice(0,7)=="Station"){
+				ds="Station";
 			}
-			else if(obds.slice(0,18)=="controllerOpenflow"){
-				ds="controllerOpenflow";
+			else if(obds.slice(0,10)=="Controller"){
+				ds="Controller";
 			}
 			
 			link.objectDst=ds;			
 			link.objectSrc=sr;
 			
-			if(sr=="switchOpenflow"&&ds!="controllerOpenflow"){
-				np=int(obsr.slice(15,17));	
+			if(sr=="Switch"&&ds!="Controller"){
+				np=int(obsr.slice(7,9));	
 				link.switchDeviceDestination=np;
 				if(arrayContIfacesCheck[np]==undefined){
 					arrayContIfacesCheck[np]=0;
@@ -224,13 +224,13 @@ public function load(eve:ResultEvent):void{
 					arrayContIfacesCheck[np]=devicesrcport;				
 				link.switchPortSource=devicesrcport;
 				link.can.sourcePort=devicesrcport;				
-				if(obds.slice(0,18)!="controllerOpenflow")
+				if(obds.slice(0,10)!="Controller")
 					getInterfaces.push("s"+np+"-eth"+link.can.sourcePort);
 				//arrayST[np]=arrayContIfacesCheck[np];
 				}
 			
-			else if(sr=="wirelessRouter"&&link.name.slice(0,8)!="wireless"&&ds!="controllerOpenflow"){
-				np=int(obsr.slice(15,17));	
+			else if(sr=="Access Point"&&link.name.slice(0,8)!="wireless"&&ds!="Controller"){
+				np=int(obsr.slice(13,15));	
 				link.switchDeviceDestination=np;
 				if(arrayContIfacesCheck[np]==undefined){
 					arrayContIfacesCheck[np]=0;
@@ -240,22 +240,22 @@ public function load(eve:ResultEvent):void{
 				link.switchPortSource=devicesrcport;
 				link.can.sourcePort=devicesrcport;		
 				
-				if(obds.slice(0,18)!="controllerOpenflow")
+				if(obds.slice(0,10)!="Controller")
 					getInterfaces.push("s"+np+"-eth"+link.can.sourcePort);
 			}
 			
-			else if(sr=="computer"&&ds!="controllerOpenflow"){
+			else if(sr=="Computer"&&ds!="Controller"){
 				link.checkSource=true;
 				link.computerPort=0;
 			}		
 			
-			else if(sr=="station"&&ds!="controllerOpenflow"){
+			else if(sr=="Station"&&ds!="Controller"){
 				link.checkSource=true;
 				link.stationPort=0;
 			}	
 			
-			if(ds=="switchOpenflow"&&sr!="controllerOpenflow"){
-				np=int(obds.slice(15,17));	
+			if(ds=="Switch"&&sr!="Controller"){
+				np=int(obds.slice(7,9));	
 				link.switchDeviceSource=np;
 				if(arrayContIfacesCheck[np]==undefined){
 					arrayContIfacesCheck[np]=0;			
@@ -264,12 +264,12 @@ public function load(eve:ResultEvent):void{
 					arrayContIfacesCheck[np]=devicedstport;				
 				link.switchPortDestination=devicedstport;				
 				link.can.destinationPort=devicedstport;
-				if(obsr.slice(0,18)!="controllerOpenflow")
+				if(obsr.slice(0,10)!="Controller")
 					getInterfaces.push("s"+np+"-eth"+link.can.destinationPort);				
 				}
 					
-			else if(ds=="wirelessRouter"&&link.name.slice(0,8)!="wireless"&&sr!="controllerOpenflow"){
-				np=int(obds.slice(15,17));	
+			else if(ds=="Access Point"&&link.name.slice(0,8)!="wireless"&&sr!="Controller"){
+				np=int(obds.slice(7,9));	
 				link.switchDeviceSource=np;
 				if(arrayContIfacesCheck[np]==undefined){
 					arrayContIfacesCheck[np]=0;			
@@ -279,17 +279,17 @@ public function load(eve:ResultEvent):void{
 				link.switchPortDestination=devicedstport;
 				link.can.destinationPort=devicedstport;
 			
-				if(obsr.slice(0,18)!="controllerOpenflow")
+				if(obsr.slice(0,10)!="Controller")
 					getInterfaces.push("s"+np+"-eth"+link.can.destinationPort);
 				
 			}
-			else if(ds=="computer"&&sr!="controllerOpenflow"){
-				ds="computer";
+			else if(ds=="Computer"&&sr!="Controller"){
+				ds="Computer";
 				link.checkSource=false;
 				link.computerPort=0;
 			}	
-			else if(ds=="station"&&sr!="controllerOpenflow"){
-				ds="station";
+			else if(ds=="Station"&&sr!="Controller"){
+				ds="Station";
 				link.checkSource=false;
 				link.stationPort=0;
 			}	

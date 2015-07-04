@@ -36,40 +36,23 @@ public function exportControllerScriptFile():void {
 			var obb:Object=ob;
 			for(var ir:int=0;ir<(obb.objparaArrayCol.length);ir++){
 				obj=obb.objparaArrayCol[ir] as objParameter;	
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;
 				}
-				else if(ob.id=="switchOpenflow"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"){
+					ab = int(ob.name.slice(7,9));
 					ye=ab;
 				}
-				else if(ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Access Point"){
+					ab = int(ob.name.slice(13,15));
 					ye=ab;
 				}
-				else if(ob.id=="controllerOpenflow"){
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 				}
-				/*if(obj.name=="computerIPAddress"){												
-					if (obj.arrayComputerIPAddress1[ye]==null&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.ipAddress+" for "+ob.name);
-					}
-				}	
-				else if(obj.name=="switchMacAddress"){	
-					if (obj.arrayMacSwitch1[ye]==null&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.macSwitch+" for "+ob.name);
-					}
-				}
-				else if(obj.name=="controllerIPAddress"){
-					if (obj.arrayControllerIPAddress[ye]==undefined || obj.arrayControllerIPAddress[ye]=="" && expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.controllerIPAddress+" for "+ob.name);
-					}
-				}	*/										
+														
 				for(p=0;p<dropCanvas.numChildren;p++){	
 					UIob = dropCanvas.getChildAt(p);
 					if(UIob.className =='objects'){
@@ -77,52 +60,22 @@ public function exportControllerScriptFile():void {
 						obb=ob;
 						for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 							obj=obb.objparaArrayCol[ir] as objParameter;	
-							if(ob.id=="computer"){
+							if(ob.id=="Computer"){
 								ab = int(ob.name.slice(9,11));
 								ye=ab;
 							}
-							else if(ob.id=="switchOpenflow"){
-								ab = int(ob.name.slice(15,17));
+							else if(ob.id=="Switch"){
+								ab = int(ob.name.slice(7,9));
 								ye=ab;
 							}
-							else if(ob.id=="wirelessRouter"){
-								ab = int(ob.name.slice(15,17));
+							else if(ob.id=="Access Point"){
+								ab = int(ob.name.slice(13,15));
 								ye=ab;
 							}
-							else if(ob.id=="controllerOpenflow"){
-								ab = int(ob.name.slice(19,21));
+							else if(ob.id=="Controller"){
+								ab = int(ob.name.slice(11,13));
 								ye=ab;
 							}
-							/*if(obj.name=="computerIPAddress"){												
-								if (obj.arrayComputerIPAddress1[ye]==null&&expo==true){
-									expo=false;
-									HAlert.erro(HMensagens.ipAddress+" for "+ob.name);
-								}
-							}	
-							else if(obj.name=="macSwitch"){	
-								if (obj.arrayMac_Switch[ye]==null&&expo==true){
-									expo=false;
-									HAlert.erro(HMensagens.macSwitchController+" for "+ob.name);
-								}
-							}
-							else if(obj.name=="controllerIPAddress"){
-								if ((obj.arrayControllerIPAddress[ye]==undefined || obj.arrayControllerIPAddress[ye]=="") && expo==true){
-									expo=false;
-									HAlert.erro(HMensagens.controllerIPAddress+" for "+ob.name);
-								}
-							}											
-							else if(obj.name=="controllerPort"){
-								if (obj.arrayControllerPort[ye]==undefined && expo==true){
-									expo=false;
-									HAlert.erro(HMensagens.controllerPort+" for "+ob.name);
-								}
-							}
-							else if(obj.name=="flowName"){
-								if (obj.arrayFlowName[ye]==undefined && expo==true){
-									expo=false;
-									HAlert.erro(HMensagens.flowName+" for "+ob.name);
-								}
-							}	*/						
 						}
 					}
 				}
@@ -137,44 +90,8 @@ public function exportControllerScriptFile():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;					
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				/*if(ob.id=="computer"){
-				var ab:int = int(ob.name.slice(9,11));
-				ye=ab;
-				var obb:Object=ob;
-				counter1++;
-				if(counter1==1){
-				sh3 = "\n####################################################@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "#Computer - Create Interfaces----------------------#@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "####################################################@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "ovs-vsctl add-br Bridge@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);	
-				}
-				
-				sh3 = "ip tuntap add mode tap "+ob.name+"_Port@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "ip link set "+ob.name+"_Port@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "ovs-vsctl add-port Bridge "+ob.name+"_Port@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);
-				sh3 = "@@";
-				objeto_computer=sh3;
-				temp_computer.addItem(objeto_computer);	
-				}*/
-				if(ob.id=="controllerOpenflow"){
-					ab = int(ob.name.slice(19,21));
+				if(ob.id=="Controller"){
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					obb=ob;
 					
@@ -1326,17 +1243,8 @@ public function exportControllerScriptFileQoS():void {
 			for(var ir:int=0;ir<(obb.objparaArrayCol.length);ir++){
 				if(expo==true){
 				obj=obb.objparaArrayCol[ir] as objParameter;	
-				/*if(ob.id=="computer"){
-					var ab:int = int(ob.name.slice(9,11));
-					ye=ab;
-				}*/
-				/*else if(ob.id=="switchOpenflow"){
-					var ab:int = int(ob.name.slice(15,17));
-					ye=ab;
-				}*/
-				if(ob.id=="controllerOpenflow"){
-					
-					ab = int(ob.name.slice(19,21));
+				if(ob.id=="Controller"){
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					
 					for(i=0;i<obb.objparaArrayCol.length;i++){
@@ -1374,30 +1282,6 @@ public function exportControllerScriptFileQoS():void {
 					}
 					
 				}
-				/*if(obj.name=="computerIPAddress"){												
-					if (obj.arrayComputerIPAddress1[ye]==null&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.ipAddress+" for "+ob.name);
-					}
-				}	*/
-				/*else if(obj.name=="switchMacAddress"){	
-					if (obj.arrayMacSwitch1[ye]==null&&expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.macSwitch+" for "+ob.name);
-					}
-				}*/
-				/*if(obj.name=="controllerIPAddress"){
-					if (obj.arrayControllerIPAddress[ye]==undefined || obj.arrayControllerIPAddress[ye]=="" && expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.controllerIPAddress+" for "+ob.name);
-					}
-				}
-				else if(obj.name=="openflowController"){
-					if (obj.arrayOpenflowController[ye]==undefined || obj.arrayOpenflowController[ye]=="" && expo==true){
-						expo=false;
-						HAlert.erro(HMensagens.openflowController+" for "+ob.name);
-					}
-				}*/
 			}
 			}
 		}
@@ -1411,9 +1295,9 @@ public function exportControllerScriptFileQoS():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.id=="controllerOpenflow"){
+			if(ob.id=="Controller"){
 				uniqcont++;
-				ab = int(ob.name.slice(19,21));
+				ab = int(ob.name.slice(11,13));
 				ye=ab;
 				for(i=0;i<obb.objparaArrayCol.length;i++){
 					obj=obb.objparaArrayCol[i] as objParameter;

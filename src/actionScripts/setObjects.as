@@ -14,12 +14,10 @@ public function setobject(eve:Event):void {
 		PopUpManager.removePopUp(popup_ob);
 	}
 	
-	if(eve.target.name.slice(0,8)=="computer"||eve.target.name.slice(0,14)=="switchOpenflow"
-		||eve.target.name.slice(0,14)=="wirelessRouter"||eve.target.name.slice(0,7)=="station"
+	if(eve.target.name.slice(0,8)=="Computer"||eve.target.name.slice(0,14)=="Switch"
+		||eve.target.name.slice(0,14)=="Access Point"||eve.target.name.slice(0,7)=="Station"
 		||eve.target.name.slice(0,5)=="fiber"||eve.target.name.slice(0,8)=="ethernet"
-		||eve.target.name.slice(0,3)=="www"||eve.target.name.slice(0,6)=="domain"
-		||eve.target.name.slice(0,8)=="wireless"||eve.target.name.slice(0,5)=="ofdma"
-		||eve.target.name.slice(0,10)=="smartphone"){
+		||eve.target.name.slice(0,8)=="wireless"||eve.target.name.slice(0,10)=="Smartphone"){
 		//PopUpManager.removePopUp(popup_ob);
 		removeqospanel=true;
 	}

@@ -316,7 +316,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -337,8 +337,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -354,8 +357,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -388,7 +391,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -406,8 +409,11 @@ public function exportNS3File():void {
 					}
 					sh = sh+" "+ob.name.slice(0,11)+",";
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -420,8 +426,8 @@ public function exportNS3File():void {
 					}
 					sh = sh+" "+ob.name.slice(0,17)+",";
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -470,7 +476,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -534,8 +540,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -563,8 +572,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -996,7 +1005,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1017,7 +1026,7 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
 					ab = int(ob.name.slice(15,17));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1060,7 +1069,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1080,8 +1089,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Acccess Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1097,8 +1109,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1128,7 +1140,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1149,8 +1161,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1166,8 +1181,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1299,7 +1314,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1319,8 +1334,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Controller"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1336,8 +1354,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1362,7 +1380,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1383,8 +1401,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1400,8 +1421,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1426,7 +1447,7 @@ public function exportNS3File():void {
 			ob=UIob as objects;	
 			obb=ob;
 			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="computer"){
+				if(ob.id=="Computer"){
 					ab = int(ob.name.slice(9,11));
 					ye=ab;													
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1446,8 +1467,11 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if(ob.id=="switchOpenflow"||ob.id=="wirelessRouter"){
-					ab = int(ob.name.slice(15,17));
+				else if(ob.id=="Switch"||ob.id=="Access Point"){
+					if(ob.id=="Switch")
+						ab = int(ob.name.slice(7,9));
+					else
+						ab = int(ob.name.slice(13,15));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1463,8 +1487,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;

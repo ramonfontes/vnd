@@ -1048,19 +1048,20 @@
 	<mx:HBox width="100%" paddingRight="0" backgroundColor="#009ACD">
 		<local:menu borderColor="#009ACD" width="100%" height="20" ob="{this}"/>
 	</mx:HBox>
-	<mx:HBox width="100%" backgroundColor="#B1CCF7" horizontalGap="0">
-	    <mx:Button click="showPopupForNew()" toolTip="New" icon="@Embed(source='assets/1new.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-	    <mx:Button click="upload()" toolTip="Open" icon="@Embed(source='assets/1open_48.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]" />
-	    <mx:Button click="saveFile()" toolTip="Save" icon="@Embed(source='assets/1save_48.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]" />
-	    <mx:Button click="doPrint()" toolTip="Print" icon="@Embed(source='assets/1Print.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-        <mx:Button click="undo(event)" toolTip="Undo" icon="@Embed(source='assets/1Undo.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-        <mx:Button click="redo()" toolTip="Redo"  icon="@Embed(source='assets/1Redo.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-        <mx:Button click="applyZoom(dozooom())" toolTip="Zoom in"  icon="@Embed(source='assets/1ZoomIn.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-        <mx:Button click="applyZoom(dozooomOut())" toolTip="Zoom out" icon="@Embed(source='assets/1ZoomOut.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-        <mx:Button click="if(focusobject!=null){showPopup(deleteItem,focusobject)}else HAlert.informacao(HMensagens.SelectObject);" toolTip="Delete"  icon="@Embed(source='assets/delete.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
-	    <mx:Button label="Download" click="downLoad()" id="downButton" visible="false"  fillAlphas="[1.0, 1.0]" fillColors="[#F08888, #F08888]"/>
-		<mx:ProgressBar id="progressBar" includeInLayout="false" indeterminate="true" visible="false" label=" Uploading..."/>
-		<mx:ProgressBar id="progressBar2" indeterminate="true" includeInLayout="false" visible="false" label=" Downloading..."/>
+	<mx:HBox width="100%" backgroundColor="#B1CCF7" horizontalGap="0" paddingTop="0" height="40" >
+	    <mx:Button click="showPopupForNew()" height="40" toolTip="New" icon="@Embed(source='assets/1new.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+	    <mx:Button click="upload()" height="40" toolTip="Open" icon="@Embed(source='assets/1open_48.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]" />
+	    <mx:Button click="saveFile()" height="40" toolTip="Save" icon="@Embed(source='assets/1save_48.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]" />
+	    <mx:Button click="doPrint()" height="40" toolTip="Print" icon="@Embed(source='assets/1Print.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+        <mx:Button click="undo(event)" height="40" toolTip="Undo" icon="@Embed(source='assets/1Undo.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+        <mx:Button click="redo()" height="40" toolTip="Redo"  icon="@Embed(source='assets/1Redo.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0" buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+        <mx:Button click="applyZoom(dozooom())" height="40" toolTip="Zoom in"  icon="@Embed(source='assets/1ZoomIn.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+        <mx:Button click="applyZoom(dozooomOut())" height="40" toolTip="Zoom out" icon="@Embed(source='assets/1ZoomOut.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+        <mx:Button click="if(focusobject!=null){showPopup(deleteItem,focusobject)}else HAlert.informacao(HMensagens.SelectObject);" height="40" toolTip="Delete"  icon="@Embed(source='assets/delete.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+		<mx:Button click="opennew()" height="40" toolTip="New" icon="@Embed(source='assets/new.png')" fillAlphas="[0.0, 0.0, 0.0, 0.0]" alpha="1.0" cornerRadius="0"  buttonMode="true" borderColor="#B1CCF7" fillColors="[#B1CCF7, #B1CCF7]"/>
+		<mx:Button label="Download" click="downLoad()" height="40"  id="downButton" visible="false"  fillAlphas="[1.0, 1.0]" fillColors="[#F08888, #F08888]"/>
+		<mx:ProgressBar id="progressBar" height="40" includeInLayout="false" indeterminate="true" visible="false" label=" Uploading..."/>
+		<mx:ProgressBar id="progressBar2" height="40" indeterminate="true" includeInLayout="false" visible="false" label=" Downloading..."/>
 	</mx:HBox>
 			
 	<mx:HBox width="100%" height="100%" paddingTop="3" horizontalGap="3" paddingLeft="3" paddingRight="3">
@@ -1099,7 +1100,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 06/18/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/04/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

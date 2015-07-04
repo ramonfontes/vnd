@@ -102,7 +102,7 @@
 					parentApplication.exportFile();
 				else if(event.item.data=='ExportMininetScript')
 					parentApplication.exportMininetScriptFile();
-				else if(event.item.data=='ExportNS3')
+				else if(event.item.data=='ExportNS3 (Not ready)')
 					parentApplication.exportNS3File();
 				else if(event.item.data=='ExportControllerScript')
 					parentApplication.exportControllerScriptFile();	
