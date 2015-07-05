@@ -126,7 +126,6 @@
 			[Bindable] public var networkXml:XML=<network name="network"></network>; 	    
 			[Bindable] public var scenariosXml:XML=<scenarios name="scenarios"></scenarios>; 		    
 			[Bindable] public var visualizationXml:XML=<visualization name="visualizations"></visualization>; 		    
-			[Bindable] public var simulationXml:XML=<simulation name="simulations"></simulation>; 		    
 			[Bindable] public var userobjectsXml:XML=<objects name="objects"></objects>; 		    
 			[Bindable] public var viewsXml:XML=<views name="views"></views>; 		   	
 			[Bindable] public var qosArrayCollection:ArrayCollection=new ArrayCollection();
@@ -202,7 +201,6 @@
 		    networkXml.appendChild(viewsXml);
 		    rootXml.appendChild(networkXml);
 		    rootXml.appendChild(scenariosXml);
-		    scenariosXml.appendChild(simulationXml);
 		    scenariosXml.appendChild(visualizationXml);
 		    undostepsArray = new ArrayCollection();
             temaplateArrcol = new ArrayCollection();
@@ -560,8 +558,6 @@
 				objxml = <objects></objects>;
 				viwxml = <views></views>;
 				scenariosXml=<scenarios ></scenarios>; 
-				visualizationXml=<visualizations ></visualizations>; 
-				simulationXml=<simulations ></simulations>; 				
 				var xmlInfo:XMLList=objects as XMLList;
 				
 				for(var p:int=0;p<dropCanvas.numChildren;p++){					
@@ -1058,7 +1054,7 @@
          url="{userObjxmlurl}" />
     
 	
-	<mx:HTTPService id="myData" url="inputXml.xml" result="result(event)" fault="Alert.show('there is an error in input xml ')" />
+	<mx:HTTPService id="myData" url="inputXml.xml?nocache={Math.random()}"  result="result(event)" fault="Alert.show('there is an error in input xml ')" />
 	<mx:HBox width="100%" paddingRight="0" backgroundColor="#009ACD">
 		<local:menu borderColor="#009ACD" width="100%" height="20" ob="{this}"/>
 	</mx:HBox>
@@ -1114,7 +1110,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/04/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/05/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

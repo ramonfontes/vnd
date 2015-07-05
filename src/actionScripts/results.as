@@ -3,7 +3,7 @@ import mx.controls.Alert;
 import mx.rpc.events.ResultEvent;
 
 public function result(re:ResultEvent):void{
-	
+		
 	qosArrayCollection=new ArrayCollection();
 	objectsArrayCollection=new ArrayCollection();
 	linksArrayCollection=new ArrayCollection();
@@ -11,30 +11,9 @@ public function result(re:ResultEvent):void{
 	names=new Array(); 
 	clear();
 	objectsXml=<objects name="objects"/>;
-	
+		
 	qosArrayCollection=re.result.nsdlObjects.instances.qosinstance;
 		
-	for(var i:int;i<qosArrayCollection.length;i++){
-		names.push(qosArrayCollection[i].name);
-	}
-	
-	objectsArrayCollection=re.result.nsdlObjects.objects.category;
-	
-	var s:String;
-	var xmlList2:XMLList;
-	
-	for(var j:int=0;j<objectsArrayCollection.length;j++){
-		s=objectsArrayCollection[j].name;
-		xmlList = XML("<cater  name='"+s+"'/>");
-        var tempArr:ArrayCollection=objectsArrayCollection[j].object
-			
-   	 	for(var y:int=0;y<tempArr.length;y++){
-			xmlList2 = XMLList("<subcater  name='"+tempArr[y].name+"' parent='"+objectsArrayCollection[j].name+"'/>");	
-			xmlList.appendChild(xmlList2);
-		}
-		objectsXml.appendChild(xmlList);
-	}
-	
 	linksArrayCollection=re.result.nsdlObjects.links.link;
 	var xmlList:XML = XML("<cater  name='links'/>");
 	
@@ -45,6 +24,27 @@ public function result(re:ResultEvent):void{
 		xmlList.appendChild(xmlList2);
 	}		      	 
 	objectsXml.appendChild(xmlList);
+	
+	for(var i:int;i<qosArrayCollection.length;i++){
+		names.push(qosArrayCollection[i].name);
+	}
+		
+	objectsArrayCollection=re.result.nsdlObjects.objects.category;
+	var s:String;
+	var xmlList2:XMLList;		
+		
+	for(var j:int=0;j<objectsArrayCollection.length;j++){
+		s=objectsArrayCollection[j].name;
+		xmlList = XML("<cater  name='"+s+"'/>");
+        var tempArr:ArrayCollection=objectsArrayCollection[j].object
+			
+   	 	for(var y:int=0;y<tempArr.length;y++){
+			xmlList2 = XMLList("<subcater  name='"+tempArr[y].name+"' parent='"+objectsArrayCollection[j].name+"'/>");	
+			xmlList.appendChild(xmlList2);
+		}		
+		objectsXml.appendChild(xmlList);			
+	}
+	
 	allnames = names;
 } 
 		    
