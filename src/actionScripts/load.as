@@ -172,11 +172,13 @@ public function load(eve:ResultEvent):void{
 			devicedstport=xmlInfo[a].deviceDestinationPort;
 			
 			src.name=xmlInfo[a].source;
-			link.can.source=src;
+			var srcc = src
+			link.can.source=srcc;
 			var obsr:String=String(link.can.source);
 			
 			des.name=xmlInfo[a].destination;
-			link.can.destination=des;			
+			var dess = des
+			link.can.destination=dess;			
 			var obds:String=String(link.can.destination);
 			
 			if(obsr.slice(0,6)=="Switch"){

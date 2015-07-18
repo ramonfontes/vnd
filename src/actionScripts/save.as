@@ -302,6 +302,22 @@ public function saveFile():void{
 								xmlList = XMLList("<name>"+obj.arrayGetSwitch[ye]+"</name>");
 								par.appendChild(xmlList);										
 							}
+							else if(obj.name=="routerSSID"){
+								xmlList = XMLList("<name>"+obj.arrayRouterSSID1[ye]+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="channel"){
+								xmlList = XMLList("<name>"+obj.arrayGetChannel[ye]+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="ofp_version"){
+								xmlList = XMLList("<name>"+obj.arrayGetOpenFlowVersion[ye]+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="mode"){
+								xmlList = XMLList("<name>"+obj.arrayGetMode[ye]+"</name>");
+								par.appendChild(xmlList);										
+							}
 							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
 							par.appendChild(xmlList);
 							xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");

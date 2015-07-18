@@ -55,8 +55,8 @@ private function mdown(event:MouseEvent):void {
             }      
 			line.id=linkCombo.value.toString();
             line.name=line.can.name=linkCombo.value.toString()+'_'+(++numberOfNodes);			
-	            
-			line.can.source=event.target as objects;
+	        var targ = event.target
+			line.can.source=targ;
 		
         obj=event.target;
 		src=event.target.id;
@@ -176,7 +176,8 @@ private function mUp(event:MouseEvent):void {
             line.lineHeight=event.target.y+(event.target.height)/2;
 			obj.addToStartArray(line);
 			event.target.addToEndArray(line);
-			line.can.destination=event.target as objects;//destination object
+			var targ = event.target
+			line.can.destination=targ;//destination object
 			
             if(focusobject!=null){
 	        focusobject.removeFoc();

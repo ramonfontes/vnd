@@ -164,8 +164,7 @@
 			public var getopenflowversion_:String;
 			public var getmode_:String;
 			public var getchannel_:String;
-			public var mac_Switch:String;
-			
+			public var mac_Switch:String;			
 			
 			public var macSource:String="";
 			public var macDestination:String="";
@@ -250,12 +249,12 @@
 					xmlLi.appendChild(xmlList);
 					xmlList = XMLList("<"+"linkminRate"+">"+listqosMinRate[queuecont-1]+"</"+"linkminRate"+">");
 					xmlLi.appendChild(xmlList);					
-				}		
-					
+				}					
 				else{
+						
 				for(var i:int=0;i<(ob.objparaArrayCol.length);i++){
 					var obj:objParameter=ob.objparaArrayCol[i] as objParameter;
-					var valueObjArr:ArrayCollection=ob.valueObjArr;					
+					var valueObjArr:ArrayCollection=ob.valueObjArr;	
 					if(obj.id=='string'){
 						var j:int;
 						if((obj.name=="id" || obj.name=="name") ||( obj.name=="source" || obj.name=="destination") ){
@@ -396,11 +395,33 @@
 								xmlLi.appendChild(xmlList);
 							}								
 						}
-						else if(ob.id=="Access Point"||ob.id=="Switch"){
+						else if(ob.id=="Switch"){
 							if(obj.name=="switch"){
 								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetSwitch[ye]+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
-							}								
+							}	
+							else if(obj.name=="ofp_version"){
+								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetOpenFlowVersion[ye]+"</"+obj.name+">");
+								xmlLi.appendChild(xmlList);
+							}
+						}
+						else if(ob.id=="Access Point"){
+							if(obj.name=="mode"){
+								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetMode[ye]+"</"+obj.name+">");
+								xmlLi.appendChild(xmlList);
+							}
+							else if(obj.name=="switch"){
+								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetSwitch[ye]+"</"+obj.name+">");
+								xmlLi.appendChild(xmlList);
+							}
+							else if(obj.name=="channel"){
+								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetChannel[ye]+"</"+obj.name+">");
+								xmlLi.appendChild(xmlList);
+							}
+							else if(obj.name=="ofp_version"){
+								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetOpenFlowVersion[ye]+"</"+obj.name+">");
+								xmlLi.appendChild(xmlList);
+							}
 						}
 						else if(ob.id=="ethernet" || ob.id=="fiber"){
 							if(obj.name=="htb"){
@@ -1094,7 +1115,7 @@
 			<mx:HBox horizontalGap="1">
 			</mx:HBox>
 		 	</mx:VBox>
-		</mx:TabNavigator>			
+		</mx:TabNavigator>
 			<local:Preview id="preview"/>
 		</mx:VBox>			
 		
@@ -1110,7 +1131,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/05/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/18/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

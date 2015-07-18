@@ -4,7 +4,7 @@
 		 creationComplete="second()" creationPolicy="all"
 		 horizontalAlign="center" horizontalScrollPolicy="off" letterSpacing="0" textAlign="center"
 		 verticalAlign="middle" verticalGap="0" verticalScrollPolicy="off">
-	<mx:Zoom id="zoomAll" zoomHeightFrom=".5" zoomHeightTo="1" zoomWidthFrom=".5" zoomWidthTo="1"/>
+	<mx:Zoom id="zoomAll" zoomHeightFrom="1" zoomHeightTo="2" zoomWidthFrom="1" zoomWidthTo="2"/>
 	
 	<mx:Metadata>
 		[Event(name="defaultMoveEve")]
@@ -21,8 +21,8 @@
 	<mx:Metadata>
 		[Event(name="ChangedUpEveForComponent")]
 	</mx:Metadata>
-	<mx:Zoom id="myZoom" target="{this}" zoomHeightFrom="0.50" zoomHeightTo="1.00"
-			 zoomWidthFrom="0.50" zoomWidthTo="1.00"/>
+	<mx:Zoom id="myZoom" target="{this}" zoomHeightFrom="1.00" zoomHeightTo="2.00"
+			 zoomWidthFrom="1.00" zoomWidthTo="2.00"/>
 	<mx:Script>
 		<![CDATA[
 			import action_alert.HAlert;
@@ -327,7 +327,7 @@
 			} 			
 			
 			public function second():void {			
-				if(secondTime){					
+				if(secondTime){	
 					form=new Form();
 					//this.can.removeChildAt(1);
 					//this.can.addChildAt(form,1);
@@ -390,6 +390,7 @@
 						
 						for(var i:int=0;i<(objparaArrayCol.length);i++){
 							obj=objparaArrayCol[i];
+								
 							if(obj.id=='array'){	
 								var frmItem:FormItem = new FormItem();
 								frmItem.direction = "horizontal";
@@ -1772,7 +1773,7 @@
 													tb3.selectedItem = valueObjArr[o].name;
 												obj.arrayOpenFlowVersion[ye]=String(tb3.selectedItem);
 												obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
-												parentApplication.getOpenFlowVersion_ = obj.arrayOpenFlowVersion[ye];
+											//	parentApplication.getOpenFlowVersion_ = obj.arrayOpenFlowVersion[ye];
 											}
 											else {
 												
@@ -1783,7 +1784,7 @@
 									}
 									tb3.addEventListener(Event.CHANGE,change);							
 								}
-								else if(obj.name=="mode"){				
+								else if(obj.name=="mode"){		
 									obj.arrayMode[ye] = String(tb3.selectedItem);
 									frmItem.label = "Mode";
 									frmItem.addChild(tb3);
@@ -1798,7 +1799,6 @@
 													tb3.selectedItem = valueObjArr[o].name;
 												obj.arrayMode[ye]=String(tb3.selectedItem);
 												obj.arrayGetMode[ye]=tb3.selectedItem;
-												parentApplication.getMode_ = obj.arrayMode[ye];
 											}
 											else {
 												
@@ -1807,10 +1807,10 @@
 											}
 										}
 									}
-									tb3.addEventListener(Event.CHANGE,change);							
+									tb3.addEventListener(Event.CHANGE,change);	
 								}
 								
-								else if(obj.name=="channel"){		
+								else if(obj.name=="channel"){	
 									obj.arrayChannel[ye] = String(tb3.selectedItem);
 									frmItem.label = "Channel";
 									frmItem.addChild(tb3);
@@ -1825,7 +1825,6 @@
 													tb3.selectedItem = valueObjArr[o].name;
 												obj.arrayChannel[ye]=String(tb3.selectedItem);
 												obj.arrayGetChannel[ye]=tb3.selectedItem;
-												parentApplication.getChannel_ = obj.arrayChannel[ye];
 											}
 											else {
 												
@@ -1834,7 +1833,7 @@
 											}
 										}
 									}
-									tb3.addEventListener(Event.CHANGE,change);							
+									tb3.addEventListener(Event.CHANGE,change);	
 								}
 									/*	else if(obj.name=="specialController"){		
 									frmItem.label = "Special Controller";
@@ -2709,7 +2708,7 @@
 							tb.enabled=true;
 							tb.width=100;
 							tb.maxChars=10;		
-							tb.text="newd-ssid"
+							tb.text="new-ssid"
 							parentApplication.getValueRouterSSID.push(tb.text);														
 							obj.arrayRouterSSID1[ye]=tb.text;
 							obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
@@ -2816,10 +2815,7 @@
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
-							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
-								tb3.selectedIndex=0;
-							else
-								tb3.selectedItem=parentApplication.getSwitch_;
+							tb3.selectedIndex=-1;
 							frmItem.label = "OpenFlow Version";
 							frmItem.addChild(tb3);
 							obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
@@ -2831,10 +2827,7 @@
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
-							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
-								tb3.selectedIndex=0;
-							else
-								tb3.selectedItem=parentApplication.getSwitch_;
+							tb3.selectedIndex=-1;
 							frmItem.label = "Channel";
 							frmItem.addChild(tb3);
 							obj.arrayGetChannel[ye]=tb3.selectedItem;
@@ -2846,10 +2839,7 @@
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
-							if(parentApplication.getSwitch_==null||parentApplication.getSwitch_=="")
-								tb3.selectedIndex=2;
-							else
-								tb3.selectedItem=parentApplication.getSwitch_;
+							tb3.selectedIndex=-1;
 							frmItem.label = "Mode";
 							frmItem.addChild(tb3);
 							obj.arrayGetMode[ye]=tb3.selectedItem;
