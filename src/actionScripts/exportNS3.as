@@ -607,7 +607,7 @@ public function exportNS3File():void {
 		if(UIob.className=='Link'){			
 			var obLink:Link=UIob as Link;
 			if(obLink.can.lineName!="wireless"){				
-				if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
+				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
 					if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 						cont_mininet++;
 						sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(15,17)+";@@";
@@ -627,8 +627,8 @@ public function exportNS3File():void {
 						}
 					}
 				}
-				else if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")||(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
-					if(obLink.can.source.name.slice(0,8)=="computer"){
+				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+					if(obLink.can.source.name.slice(0,8)=="Computer"){
 						if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 							cont_mininet++;
 							sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+";@@";
@@ -648,7 +648,7 @@ public function exportNS3File():void {
 							}
 						}
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="computer"){
+					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
 						if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 							cont_mininet++;
 							sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+";@@";
@@ -669,7 +669,7 @@ public function exportNS3File():void {
 						}
 					}
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="computer"&&(obLink.can.destination.name.slice(0,8)=="computer"))){
+				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
 					if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 						cont_mininet++;
 						sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+";@@";
@@ -716,7 +716,7 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
+				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
 					cont_mininet++;
 					sh = "  NodeContainer all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+";@@";
 					objeto_mininet=sh;
@@ -734,8 +734,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);	
 				}
-				else if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")||(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
-					if(obLink.can.source.name.slice(0,8)=="computer"){
+				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+					if(obLink.can.source.name.slice(0,8)=="Computer"){
 						cont_mininet++;
 						sh = "  NodeContainer all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+";@@";
 						objeto_mininet=sh;
@@ -753,7 +753,7 @@ public function exportNS3File():void {
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="computer"){
+					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
 						cont_mininet++;
 						sh = "  NodeContainer all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+";@@";
 						objeto_mininet=sh;
@@ -772,7 +772,7 @@ public function exportNS3File():void {
 						temp_mininet.addItem(objeto_mininet);
 					}
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="computer"&&(obLink.can.destination.name.slice(0,8)=="computer"))){
+				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
 					cont_mininet++;
 					sh = "  NodeContainer all_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+";@@";
 					objeto_mininet=sh;
@@ -811,27 +811,27 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
+				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
 					cont_mininet++;
 					sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+"\");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);	
 				}
-				else if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")||(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
-					if(obLink.can.source.name.slice(0,8)=="computer"){
+				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+					if(obLink.can.source.name.slice(0,8)=="Computer"){
 						cont_mininet++;
 						sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+"\");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="computer"){
+					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
 						cont_mininet++;
 						sh = "  csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+"\");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="computer"&&(obLink.can.destination.name.slice(0,8)=="computer"))){
+				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
 					cont_mininet++;
 					sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+"\");@@";
 					objeto_mininet=sh;
@@ -849,7 +849,7 @@ public function exportNS3File():void {
 			var obb:Object=ob;
 			//for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 			//obj=obb.objparaArrayCol[ir] as objParameter;	
-			/*if(ob.id=="computer"){
+			/*if(ob.id=="Computer"){
 			ab = int(ob.name.slice(9,11));
 			ye=ab;
 			}
@@ -861,7 +861,7 @@ public function exportNS3File():void {
 			ab = int(ob.name.slice(15,17));
 			ye=ab;
 			}
-			else if(ob.id=="controllerOpenflow"){
+			else if(ob.id=="Controller"){
 			ab = int(ob.name.slice(19,21));
 			ye=ab;
 			}*/
@@ -891,27 +891,27 @@ public function exportNS3File():void {
 			if(UIob.className=='Link'){
 				obLink=UIob as Link;
 				if(obLink.can.lineName!="wireless"&&p>=linkc){		
-					if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
+					if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
 						cont_mininet++;
 						sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(15,17)+"p"+obLink.can.destination.name.slice(15,17)+");@@";
 						srcl=obLink.can.source.name;//.slice(15,17);
 						dstl=obLink.can.destination.name;//.slice(15,17);
 					}
-					else if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")||(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
-						if(obLink.can.source.name.slice(0,8)=="computer"){
+					else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+						if(obLink.can.source.name.slice(0,8)=="Computer"){
 							cont_mininet++;
 							sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(9,11)+"p"+obLink.can.destination.name.slice(15,17)+");@@";
 							srcl=obLink.can.source.name;//.slice(9,11);
 							dstl=obLink.can.destination.name;//.slice(15,17);
 						}
-						else if (obLink.can.destination.name.slice(0,8)=="computer"){
+						else if (obLink.can.destination.name.slice(0,8)=="Computer"){
 							cont_mininet++;
 							sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(15,17)+"p"+obLink.can.destination.name.slice(9,11)+");@@";
 							srcl=obLink.can.source.name;//.slice(15,17);
 							dstl=obLink.can.destination.name;//.slice(9,11);
 						}				
 					}	
-					else if((obLink.can.source.name.slice(0,8)=="computer"&&(obLink.can.destination.name.slice(0,8)=="computer"))){
+					else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
 						cont_mininet++;
 						sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(9,11)+"p"+obLink.can.destination.name.slice(9,11)+");@@";
 						srcl=obLink.can.source.name;//.slice(9,11);
@@ -932,7 +932,7 @@ public function exportNS3File():void {
 				ob=UIob as objects;	
 				obb=ob;
 				if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-					if(ob.id=="computer"&&p>=obc){
+					if(ob.id=="Computer"&&p>=obc){
 						ab = int(ob.name.slice(9,11));
 						ye=ab;													
 						for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -1043,8 +1043,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}							
-				else if(ob.id=="controllerOpenflow"){		
-					ab = int(ob.name.slice(19,21));
+				else if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
 					ye=ab;
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						obj=obb.objparaArrayCol[i] as objParameter;
@@ -1210,7 +1210,7 @@ public function exportNS3File():void {
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;
 			if(obLink.can.lineName!="wireless"){		
-				if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")&&(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
+				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
 					cont_mininet++;
 					sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+".GetAddress (1), 9);@@";
 					objeto_mininet=sh;
@@ -1232,8 +1232,8 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if((obLink.can.source.name.slice(0,14)=="switchOpenflow"||obLink.can.source.name.slice(0,14)=="wirelessRouter")||(obLink.can.destination.name.slice(0,14)=="switchOpenflow"||obLink.can.destination.name.slice(0,14)=="wirelessRouter")){
-					if(obLink.can.source.name.slice(0,8)=="computer"){
+				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+					if(obLink.can.source.name.slice(0,8)=="Computer"){
 						cont_mininet++;
 						sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+".GetAddress (1), 9);@@";
 						objeto_mininet=sh;
@@ -1255,7 +1255,7 @@ public function exportNS3File():void {
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="computer"){
+					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
 						cont_mininet++;
 						sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+".GetAddress (1), 9);@@";
 						objeto_mininet=sh;
@@ -1278,7 +1278,7 @@ public function exportNS3File():void {
 						temp_mininet.addItem(objeto_mininet);
 					}				
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="computer"&&(obLink.can.destination.name.slice(0,8)=="computer"))){
+				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
 					cont_mininet++;
 					sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+".GetAddress (1), 9);@@";
 					objeto_mininet=sh;

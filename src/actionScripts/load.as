@@ -216,6 +216,13 @@ public function load(eve:ResultEvent):void{
 			link.objectDst=ds;			
 			link.objectSrc=sr;
 			
+			if(link.name.slice(0,8)=="wireless")
+				link.can.lineName = "wireless"
+			else if (link.name.slice(0,5)=="fiber")
+				link.can.lineName = "fiber"
+			else if (link.name.slice(0,8)=="ethernet")
+				link.can.lineName = "ethernet"
+			
 			if(sr=="Switch"&&ds!="Controller"){
 				np=int(obsr.slice(7,9));	
 				link.switchDeviceDestination=np;

@@ -21,7 +21,6 @@ public function exportControllerScriptFile():void {
 	var emptyspace:int=1;
 	var controllerIPAddress:String;
 	var controllerPort:String;
-	
 	var ab:int;
 	var i:int;
 	var b:int;
@@ -205,54 +204,6 @@ public function exportControllerScriptFile():void {
 								var oc:String=obj.arrayOpenflowController[ye];
 							}											
 							else if(obj.name=="notes"){
-								/*if(sc=="Flowvisor"&&b==0){
-								sh1 = "\n####################################################";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								sh1 = "#SpecialControler-Flowvisor------------------------#";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								sh1 = "####################################################";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								sh1 = "#On terminal 01";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								sh1 = "flowvisor config.xml #Starts flowvisor with config.xml file";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);													
-								sh1= "\n#### FlowTable "+ob.name;
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								sh1 = "#On terminal 02";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								}
-								if(sc=="Flowvisor"){
-								sh1 = "fvctl --passwd-file=/etc/flowvisor.passwd createSlice "+flowName+" tcp:"+controllerIPAddress+ ":"+controllerPort+" email@email.com";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);													
-								sh1 = "fvctl --passwd-file=/etc/flowvisor.passwd addFlowSpace "+macSource+" "+priority+" in_port="+ingressPort+ " Slice:"+flowName+"=7";
-								objetos=sh1;								
-								temp_special_controller.addItem(objetos);													
-								sh1 = "fvctl --passwd-file=/etc/flowvisor.passwd addFlowSpace "+macSource+" "+priority+" dl_vlan="+vlanID+ " Slice:"+flowName+"=7";
-								objetos=sh1;
-								temp_special_controller.addItem(objetos);
-								}
-								if(oc=="pox"&&b==0){
-								sh2 = "\n####################################################@@";
-								objeto_openflow_controller=sh2;
-								temp_openflow_controller.addItem(objeto_openflow_controller);
-								sh2 = "#OpenflowControler-POX-----------------------------#@@";
-								objeto_openflow_controller=sh2;
-								temp_openflow_controller.addItem(objeto_openflow_controller);
-								sh2 = "####################################################@@";
-								objeto_openflow_controller=sh2;
-								temp_openflow_controller.addItem(objeto_openflow_controller);
-								sh2 = "./pox.py log.level --DEBUG forwarding.l2_learning openflow.debug";
-								objeto_openflow_controller=sh2;
-								temp_openflow_controller.addItem(objeto_openflow_controller);
-								}*/	
 								if(oc=="mul"&&counter==0){
 									counter++;
 									sh2 = "\n####################################################@@";
@@ -1066,123 +1017,6 @@ public function exportControllerScriptFile():void {
 									objeto_openflow_controller=sh2;
 									temp_openflow_controller.addItem(objeto_openflow_controller);
 									//-----------------------------------------------------------
-									
-									/*												
-									counter++;
-									sh2 = "flowOUT"+b+" = {@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    'switch':"+"\""+macSource+"\""+",@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    \"name\":"+"\""+"FlowOUT"+flowName+"\""+",@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    \"cookie\":"+"\""+'0'+"\""+",@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    \"priority\":"+"\""+priority+"\""+",@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    \"vlan-id\":"+"\""+vlanID+"\""+",@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    \"active\":"+"\""+"true"+"\""+",@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    \"actions\":"+"\""+"strip-vlan,output="+ingressPort+"\""+"@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "    }@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "pusher.set("+"flowOUT"+b+")@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "pusher.set("+"flowIN"+b+")@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									counter++;
-									sh2 = "@@";
-									objeto_openflow_controller=sh2;
-									temp_openflow_controller.addItem(objeto_openflow_controller);
-									*/
-									//ingress-port vlan-id vlan-priority ether-type tos-bits protocol src-port dst-port
-									//Assume the controller runs on localhost. Show whether the firewall is enabled or disabled.
-									//curl http://localhost:8080/wm/firewall/module/status/json
-									//Enable the firewall. By default firewall denies all traffic unless an explicit ALLOW rule is created.
-									//curl http://localhost:8080/wm/firewall/module/enable/json
-									//Adding an ALLOW rule for all flows to pass through switch 00:00:00:00:00:00:00:01.
-									//curl -X POST -d '{"switchid": "00:00:00:00:00:00:00:01"}' http://localhost:8080/wm/firewall/rules/json
-									//Adding an ALLOW rule for all flows between IP host 10.0.0.3 and host 10.0.0.7. Not specifying action implies ALLOW rule.
-									
-									//curl -X POST -d '{"src-ip": "10.0.0.3/32", "dst-ip": "10.0.0.7/32"}' http://localhost:8080/wm/firewall/rules/json
-									//curl -X POST -d '{"src-ip": "10.0.0.7/32", "dst-ip": "10.0.0.3/32"}' http://localhost:8080/wm/firewall/rules/json
-									//Adding an ALLOW rule for all flows between host mac 00:00:00:00:00:0a and host 00:00:00:00:00:0b
-									
-									//curl -X POST -d '{"src-mac": "00:00:00:00:00:0a", "dst-mac": "00:00:00:00:00:0b"}' http://localhost:8080/wm/firewall/rules/json
-									//curl -X POST -d '{"dst-mac": "00:00:00:00:00:0b", "dst-mac": "00:00:00:00:00:0a"}' http://localhost:8080/wm/firewall/rules/json
-									//Adding an ALLOW rule for ping to work between IP hosts 10.0.0.3 and 10.0.0.7.
-									
-									//curl -X POST -d '{"src-ip": "10.0.0.3/32", "dst-ip": "10.0.0.7/32", "dl-type":"ARP" }' http://localhost:8080/wm/firewall/rules/json
-									//curl -X POST -d '{"src-ip": "10.0.0.7/32", "dst-ip": "10.0.0.3/32", "dl-type":"ARP" }' http://localhost:8080/wm/firewall/rules/json
-									
-									//curl -X POST -d '{"src-ip": "10.0.0.3/32", "dst-ip": "10.0.0.7/32", "nw-proto":"ICMP" }' http://localhost:8080/wm/firewall/rules/json
-									//curl -X POST -d '{"src-ip": "10.0.0.7/32", "dst-ip": "10.0.0.3/32", "nw-proto":"ICMP" }' http://localhost:8080/wm/firewall/rules/json
-									
-									/*Adding an ALLOW rule for UDP (such as iperf) to work between IP hosts 10.0.0.4 and 10.0.0.10, and then blocking port 5010.
-									
-									curl -X POST -d '{"src-ip": "10.0.0.4/32", "dst-ip": "10.0.0.10/32", "dl-type":"ARP" }' http://localhost:8080/wm/firewall/rules/json
-									curl -X POST -d '{"src-ip": "10.0.0.10/32", "dst-ip": "10.0.0.4/32", "dl-type":"ARP" }' http://localhost:8080/wm/firewall/rules/json
-									
-									curl -X POST -d '{"src-ip": "10.0.0.4/32", "dst-ip": "10.0.0.10/32", "nw-proto":"UDP" }' http://localhost:8080/wm/firewall/rules/json
-									curl -X POST -d '{"src-ip": "10.0.0.10/32", "dst-ip": "10.0.0.4/32", "nw-proto":"UDP" }' http://localhost:8080/wm/firewall/rules/json
-									
-									curl -X POST -d '{"src-ip": "10.0.0.4/32", "dst-ip": "10.0.0.10/32", "nw-proto":"UDP", "tp-src":"5010", "action":"DENY" }' http://localhost:8080/wm/firewall/rules/json
-									curl -X POST -d '{"src-ip": "10.0.0.10/32", "dst-ip": "10.0.0.4/32", "nw-proto":"UDP", "tp-dst":"5010", "action":"DENY" }' http://localhost:8080/wm/firewall/rules/json
-									
-									curl -d '{"switch":"00:00:00:00:00:00:00:04", "name":"test3", "active":"true", "priority":"5", "actions":"output=2,set-vlan-id=100","ingress-port":"1"}' http://127.0.0.1:8080/wm/staticflowentrypusher/json
-									curl -d '{"switch":"00:00:00:00:00:00:00:04", "name":"test4", "active":"true", "priority":"5", "actions":"output=1,strip-vlan","ingress-port":"2"}' http://127.0.0.1:8080/wm/staticflowentrypusher/json
-									*/
-									//curl -X DELETE -d '{"name": "lso"}' http://127.0.0.1:8080/wm/staticflowentrypusher/json
-									
-									//route add -net 0.0.0.0/32 gw IP_DO_GATEWAY	
-									/*./qosmanager2.py -c 127.0.0.1 -p 8080 -A -t policy -O '{"name":"Enqueue'","protocol":"6","eth-type":"0x800","ingress-port":"1","ip-src":10.0.0.1","sw":"00:00:00:00:00:00:00:01","queue":"2","enqueue-port":"2"}'
-									
-									apps/flood...	ant; ./floodlight.sh
-									
-									policy --
-									id
-									name
-									sw
-									service
-									queue
-									enqueue-port
-									priority
-									
-									policy match fields --
-									protocol
-									eth-type
-									ingress-port
-									ip-src
-									ip-dst
-									tos
-									vlan-id
-									eth-src
-									eth-dst
-									src-port
-									dst-port				
-									*/
 								}									
 							}
 						}
@@ -1214,10 +1048,6 @@ public function exportControllerScriptFile():void {
 		downloadScript();
 		}				
 }
-
-//private function alertpy1():void {	
-	//HAlert.informacao(HMensagens.alertpy);
-//}
 
 public function exportControllerScriptFileQoS():void {
 	var objSend:Object = new Object;
@@ -1280,7 +1110,6 @@ public function exportControllerScriptFileQoS():void {
 						//expo=false;
 						//HAlert.erro(HMensagens.setqueueInterface+" for "+ob.name);
 					}
-					
 				}
 			}
 			}

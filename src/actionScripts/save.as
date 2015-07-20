@@ -5,9 +5,7 @@ public function saveFile():void{
 	for(var i:int=0;i<dropCanvas.numChildren;i++){
 		if((dropCanvas.getChildAt(i) as Object).className=='objects'){
 			var UIob:objects=dropCanvas.getChildAt(i) as objects;
-			
 			var ob:objects=UIob as objects;			
-			
 			var object:XML = <objects></objects>;
 			var xmlList:XMLList = XMLList("<type>nodes</type>");
 			object.appendChild(xmlList);
@@ -41,7 +39,6 @@ public function saveFile():void{
 				}
 				object.appendChild(par);
 			}
-			
 			for(var k:int=0;k<UIob.valueObjArr.length;k++){
 				if(UIob.id=="Controller"){
 					var ab:int = int(UIob.name.slice(11,13));
@@ -175,35 +172,35 @@ public function saveFile():void{
 								}
 							}
 							else{
-									par = <valueObjArr></valueObjArr>;
-									xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
-									par.appendChild(xmlList);
-									
-									if(obj.name=="controllerIPAddress"){
-										xmlList = XMLList("<name>"+obj.arrayControllerIPAddress[ye]+"</name>");
-										par.appendChild(xmlList);										
-									}
-									else if(obj.name=="controllerPort"){
-										xmlList = XMLList("<name>"+obj.arrayControllerPort[ye]+"</name>");
-										par.appendChild(xmlList);		
-									}
-									else if(obj.name=="specialController"){
-										xmlList = XMLList("<name>"+obj.arraySpecialController[ye]+"</name>");
-										par.appendChild(xmlList);		
-									}
-									else if(obj.name=="openflowController"){
-										xmlList = XMLList("<name>"+obj.arrayOpenflowController[ye]+"</name>");
-										par.appendChild(xmlList);		
-									}
-									xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
-									par.appendChild(xmlList);
-									xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
-									par.appendChild(xmlList);
-									xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
-									par.appendChild(xmlList);
-									object.appendChild(par);								
+								par = <valueObjArr></valueObjArr>;
+								xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
+								par.appendChild(xmlList);
+								
+								if(obj.name=="controllerIPAddress"){
+									xmlList = XMLList("<name>"+obj.arrayControllerIPAddress[ye]+"</name>");
+									par.appendChild(xmlList);										
+								}
+								else if(obj.name=="controllerPort"){
+									xmlList = XMLList("<name>"+obj.arrayControllerPort[ye]+"</name>");
+									par.appendChild(xmlList);		
+								}
+								else if(obj.name=="specialController"){
+									xmlList = XMLList("<name>"+obj.arraySpecialController[ye]+"</name>");
+									par.appendChild(xmlList);		
+								}
+								else if(obj.name=="openflowController"){
+									xmlList = XMLList("<name>"+obj.arrayOpenflowController[ye]+"</name>");
+									par.appendChild(xmlList);		
+								}
+								xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
+								par.appendChild(xmlList);
+								xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
+								par.appendChild(xmlList);
+								xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
+								par.appendChild(xmlList);
+								object.appendChild(par);								
 							}
-					}
+						}
 					}
 				
 				}
@@ -211,10 +208,8 @@ public function saveFile():void{
 					ab = int(UIob.name.slice(9,11));
 					ye=ab;
 					obb=ob;
-					
 					for(c=0;c<(obb.objparaArrayCol.length);c++){
 						obj=obb.objparaArrayCol[c] as objParameter;
-						
 						if(UIob.valueObjArr[k].id==obj.name){
 							par = <valueObjArr></valueObjArr>;
 							xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
@@ -230,6 +225,39 @@ public function saveFile():void{
 							}
 							else if(obj.name=="computerMacAddress"){
 								xmlList = XMLList("<name>"+obj.arrayComputerMacAddress1[ye]+"</name>");
+								par.appendChild(xmlList);		
+							}
+							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
+							par.appendChild(xmlList);
+							xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
+							par.appendChild(xmlList);
+							xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
+							par.appendChild(xmlList);
+							object.appendChild(par);
+						}
+					}
+				}
+				else if(UIob.id=="Station"){
+					ab = int(UIob.name.slice(8,10));
+					ye=ab;
+					obb=ob;
+					for(c=0;c<(obb.objparaArrayCol.length);c++){
+						obj=obb.objparaArrayCol[c] as objParameter;
+						if(UIob.valueObjArr[k].id==obj.name){
+							par = <valueObjArr></valueObjArr>;
+							xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
+							par.appendChild(xmlList);
+							
+							if(obj.name=="stationIPAddress"){
+								xmlList = XMLList("<name>"+obj.arrayStationIPAddress1[ye]+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="stationmask"){
+								xmlList = XMLList("<name>"+obj.arrayStationMask[ye]+"</name>");
+								par.appendChild(xmlList);		
+							}
+							else if(obj.name=="stationMacAddress"){
+								xmlList = XMLList("<name>"+obj.arrayStationMacAddress1[ye]+"</name>");
 								par.appendChild(xmlList);		
 							}
 							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
@@ -346,7 +374,6 @@ public function saveFile():void{
 			for(var y:int=0;y<UIob.instancArray.length;y++){
 				//var ins:Instances=UIob.instancArray[y] as Instances;
 				par = <Instances></Instances>;
-				
 				xmlList = XMLList("<id>"+UIob.instancArray[y].id+"</id>");
 				par.appendChild(xmlList);
 				xmlList = XMLList("<name>"+UIob.instancArray[y].name+"</name>");
@@ -426,10 +453,7 @@ public function saveFile():void{
 					xmlLi3.appendChild(xmlList);
 				}
 			}
-			
 			object.appendChild(xmlLi3); 
-			
-			
 		}
 		else if((dropCanvas.getChildAt(i) as Object).className=='Link'){
 			var UIobLink:Link=dropCanvas.getChildAt(i) as Link;
@@ -476,7 +500,8 @@ public function saveFile():void{
 					for(oo=0;oo<UIobLink.can.objparaArrayCol[j].option.length;oo++){
 						parOption =XMLList("<option>"+UIobLink.can.objparaArrayCol[j].option[oo].toString()+"</option>");	
 						par.appendChild(parOption);
-					}}
+					}
+				}
 				object.appendChild(par);
 			}
 			for(k=0;k<UIobLink.can.valueObjArr.length;k++){
@@ -494,7 +519,6 @@ public function saveFile():void{
 				object.appendChild(par);
 			}
 		}
-		
 		saveXml.appendChild(object);
 		
 	}  var templates:XMLList = XMLList("<templates></templates>");

@@ -15,7 +15,7 @@
 			import mx.controls.Alert;
 			import mx.managers.PopUpManager;
 			import mx.rpc.events.ResultEvent;
-			
+				
 			include 'actionScripts/zoom.as';
 	        include 'actionScripts/print.as';
 	        include 'actionScripts/save.as';
@@ -213,7 +213,6 @@
 			fileRefScript_mininet = new FileReference();
 			myData.send();
 			}
-						
 			public  function setObjectXml(ob:Object,xmlLi:XMLList):void {	
 				exportNSDL=true;
 				var ob:Object=ob;
@@ -250,8 +249,7 @@
 					xmlList = XMLList("<"+"linkminRate"+">"+listqosMinRate[queuecont-1]+"</"+"linkminRate"+">");
 					xmlLi.appendChild(xmlList);					
 				}					
-				else{
-						
+				else{						
 				for(var i:int=0;i<(ob.objparaArrayCol.length);i++){
 					var obj:objParameter=ob.objparaArrayCol[i] as objParameter;
 					var valueObjArr:ArrayCollection=ob.valueObjArr;	
@@ -273,7 +271,6 @@
 							xmlLi.appendChild(xmlList);							
 						}
 					}
-					
 					else if(obj.id=='array'){
 						checked=false;						
 						for(j=0;j<intnew;j++){
@@ -392,6 +389,12 @@
 						if(ob.id=="Computer"){
 							if(obj.name=="mask"){
 								xmlList = XMLList("<"+obj.name+">"+obj.arrayComputerMask[ye]+"</"+obj.name+">");
+								xmlLi.appendChild(xmlList);
+							}								
+						}
+						else if(ob.id=="Station"){
+							if(obj.name=="stationmask"){
+								xmlList = XMLList("<"+obj.name+">"+obj.arrayStationMask[ye]+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}								
 						}
@@ -1131,7 +1134,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/18/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/20/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

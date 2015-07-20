@@ -261,7 +261,6 @@
 					}
 				}				
 				if(eve.target.className=='ComboBox'){
-					
 					if(obj.id=="vlanID")
 						valofcombovlanid=eve.target.selectedItem;
 					else if(obj.id=="setVlanID")
@@ -2815,7 +2814,7 @@
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
-							tb3.selectedIndex=-1;
+							tb3.selectedIndex=0;
 							frmItem.label = "OpenFlow Version";
 							frmItem.addChild(tb3);
 							obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
@@ -2827,7 +2826,7 @@
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
-							tb3.selectedIndex=-1;
+							tb3.selectedIndex=0;
 							frmItem.label = "Channel";
 							frmItem.addChild(tb3);
 							obj.arrayGetChannel[ye]=tb3.selectedItem;
@@ -2839,7 +2838,7 @@
 							frmItem.direction = "horizontal";
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
-							tb3.selectedIndex=-1;
+							tb3.selectedIndex=2;
 							frmItem.label = "Mode";
 							frmItem.addChild(tb3);
 							obj.arrayGetMode[ye]=tb3.selectedItem;
