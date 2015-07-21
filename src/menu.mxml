@@ -23,7 +23,7 @@
 					//]},
 					
 					{label: "Export", children: [						
-						{label: "Export to Mininet...", type: "normal",data:"ExportMininetScript"},						
+						{label: "Export to Mininet (or Mininet-WiFi)...", type: "normal",data:"ExportMininetScript"},						
 						{label: "Export to NS3 (under development)...", type: "normal",data:"ExportNS3"},
 						{label: "Export to NSDL File...", type: "normal" ,data:"Exportation"},
 						{label: "Export to Openflow Controller...", type: "normal",data:"ExportControllerScript"},

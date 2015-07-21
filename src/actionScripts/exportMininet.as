@@ -136,7 +136,6 @@ public function exportMininetScriptFile():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			//cont_mininet++;
 			if(ob.id=="Station"||ob.id=="Access Point"){
 				isWireless=true;
 				nRadios=nRadios+1;
@@ -153,7 +152,6 @@ public function exportMininetScriptFile():void {
 					if(j==0){
 						if((obLink.can.source.name.slice(0,7)=="Station"&&(obLink.can.destination.name.slice(0,7)=="Station"))){
 							cont_mininet++;
-							nRadios=nRadios+1;
 							sh = "    net = Mininet( wirelessRadios="+nRadios+", waitTime=10 )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
@@ -202,14 +200,12 @@ public function exportMininetScriptFile():void {
 							}
 							if(isLocal=="true"){
 							cont_mininet++;
-							nRadios=nRadios+1;
 							sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=Controller, link=TCLink, switch="+switch_+" )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 							}
 							else{
 								cont_mininet++;
-								nRadios=nRadios+1;
 								sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
 								objeto_mininet=sh;
 								temp_mininet.addItem(objeto_mininet);
