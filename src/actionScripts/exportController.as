@@ -12,7 +12,6 @@ public var fileRefScript:FileReference;// = new FileReference();
 
 public function exportControllerScriptFile():void {
 	var objSend:Object = new Object;
-	//var temp_special_controller:ArrayCollection=new ArrayCollection();
 	var temp_openflow_controller:ArrayCollection=new ArrayCollection();
 	var objetos:Object=new Object();
 	var objeto_openflow_controller:Object=new Object();
@@ -187,17 +186,8 @@ public function exportControllerScriptFile():void {
 							else if(obj.name=="setStripVlan"){
 								setStripVlan = String(obj.arraySetStripVlan[ye][b]);
 							}
-							/*else if(obj.name=="setDestinationPort"){
-								setDestinationPort = obj.arraySetDestinationPort[ye][b];
-							}
-							else if(obj.name=="setSourcePort"){
-								setSourcePort = obj.arraySetSourcePort[ye][b];
-							}*/
 							else if(obj.name=="setOutput"){
 								setOutput = String(obj.arraySetOutput[ye][b]);
-							}
-							else if(obj.name=="specialController"){
-								var sc:String=obj.arraySpecialController[ye];												
 							}
 							else if(obj.name=="openflowController"){
 								var oc:String=obj.arrayOpenflowController[ye];

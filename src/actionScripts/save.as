@@ -59,8 +59,8 @@ public function saveFile():void{
 									xmlList = XMLList("<name>"+obj.arrayControllerPort[ye]+"</name>");
 									par.appendChild(xmlList);		
 								}
-								else if(obj.name=="specialController"){
-									xmlList = XMLList("<name>"+obj.arraySpecialController[ye]+"</name>");
+								else if(obj.name=="remoteLocal"){
+									xmlList = XMLList("<name>"+obj.arrayGetisRemote[ye]+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="openflowController"){
@@ -178,8 +178,8 @@ public function saveFile():void{
 									xmlList = XMLList("<name>"+obj.arrayControllerPort[ye]+"</name>");
 									par.appendChild(xmlList);		
 								}
-								else if(obj.name=="specialController"){
-									xmlList = XMLList("<name>"+obj.arraySpecialController[ye]+"</name>");
+								else if(obj.name=="remoteLocal"){
+									xmlList = XMLList("<name>"+obj.arrayGetisRemote[ye]+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="openflowController"){

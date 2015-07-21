@@ -442,9 +442,9 @@
 						}
 						else if(ob.id=="Controller"){
 							if(intnew==0){
-								if(obj.name=="specialController"){
+								if(obj.name=="remoteLocal"){
 									checked=true;
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySpecialController[ye]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.arrayGetisRemote[ye]+"</"+obj.name+">");
 									xmlLi.appendChild(xmlList);
 								}
 								else if(obj.name=="openflowController"){
@@ -533,11 +533,11 @@
 								//	}									
 									if(checked==false)	
 										xmlList = XMLList("<"+obj.name+"></"+obj.name+">");
-									if(controll==1 && (obj.name=="specialController" || obj.name=="openflowController")){}
+									if(controll==1 && (obj.name=="remoteLocal" || obj.name=="openflowController")){}
 									else if(controll==0 && (obj.name=="setVlanID"||obj.name=="vlanID"||obj.name=="macSource"||obj.name=="macDestination"||obj.name=="ipSource"||obj.name=="ipDestination"
 										||obj.name=="macSwitch"||obj.name=="setIPSource"||obj.name=="setIPDestination"||obj.name=="setMACSource"||obj.name=="setMACDestination"||obj.name=="setStripVlan")){}
 									else{
-										if(obj.name=="specialController"&&k>=1){											
+										if(obj.name=="remoteLocal"&&k>=1){											
 										}
 										else if(obj.name=="openflowController"&&k>=1){											
 										}

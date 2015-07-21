@@ -35,6 +35,8 @@
 			import mx.controls.Button;
 			import mx.controls.ComboBox;
 			import mx.controls.Label;
+			import mx.controls.RadioButton;
+			import mx.controls.RadioButtonGroup;
 			import mx.controls.Text;
 			import mx.controls.TextInput;
 			import mx.events.FlexEvent;
@@ -89,7 +91,7 @@
 			public var valofcombomode:String;
 			public var valofcombocomputermask:String;
 			public var valofcombostationmask:String;
-			public var valofcombospecialcontroller:String;
+			public var valofremoteLocal:String;
 			public var valofcomboopenflowcontroller:String;
 			public var valofcombosetstripvlan:String;
 			public var valofcombosetstripvlan1:String;
@@ -119,6 +121,8 @@
 			private var testa:Boolean=false;
 			private var j:int;
 			private var tb3:ComboBox;
+			private var radioButton:RadioButtonGroup;
+			private var rb:RadioButton = new RadioButton();
 			private var none:String;
 			private var ab:int;
 			private var checkMac:Boolean=false;
@@ -212,8 +216,8 @@
 					obj.id="setVLANPriority";
 				else if(eve.target.parent.label=="Set Vlan ID")
 					obj.id="setVlanID";
-				else if(eve.target.parent.label=="Special Controller")
-					obj.id="specialController";
+				else if(eve.target.parent.label=="Remote Controller")
+					obj.id="remoteLocal";
 				else if(eve.target.parent.label=="Switch")
 					obj.id="switch";
 				else if(eve.target.parent.label=="OpenFlow Version")
@@ -256,7 +260,14 @@
 					if(obj.id=='name'){
 						test=eve.target.text;
 					}
-				}				
+				}	
+				
+				if(eve.target.className=='RadioButton'){
+					if(obj.id=="remoteLocal"){
+						valofremoteLocal=eve.target.selected;
+				}
+				}
+				
 				if(eve.target.className=='ComboBox'){
 					if(obj.id=="vlanID")
 						valofcombovlanid=eve.target.selectedItem;
@@ -290,8 +301,6 @@
 						valofcombochannel=eve.target.selectedItem;
 					else if(obj.id=="mode")
 						valofcombomode=eve.target.selectedItem;
-					else if(obj.id=="specialController")
-						valofcombospecialcontroller=eve.target.selectedItem;
 					else if(obj.id=="mask")
 						valofcombocomputermask=eve.target.selectedItem;
 					else if(obj.id=="stationmask")
@@ -1421,6 +1430,46 @@
 								//----START OPTIONS
 								//------------------------------------------------------------------------------------------
 								//------------------------------------------------------------------------------------------	
+							else if(obj.id=='radio') {
+								if(obj.name=="remoteLocal"){
+									frmItem = new FormItem();
+									frmItem.direction = "horizontal";
+									frmItem.label =  "Remote Controller" 
+									radioButton = new RadioButtonGroup;
+									
+									if(valofremoteLocal=="true"){
+										rb = new RadioButton();
+										rb.label = "yes";
+										rb.group = radioButton;
+										rb.selected = false
+										frmItem.addChild(rb);
+										rb = new RadioButton();
+										rb.label = "no";
+										rb.group = radioButton;
+										rb.selected = true
+										frmItem.addChild(rb);
+										obj.arrayGetisRemote[ye] = rb.selected;
+										rb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);										
+									}
+									else{
+										rb = new RadioButton();
+										rb.label = "yes";
+										rb.group = radioButton;
+										rb.selected = true
+										frmItem.addChild(rb);
+										rb = new RadioButton();
+										rb.label = "no";
+										rb.group = radioButton;
+										rb.selected = false
+										frmItem.addChild(rb);
+										obj.arrayGetisRemote[ye] = rb.selected;
+										rb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);										
+									}
+									//rb.addEventListener(Event.CHANGE,change);	
+									form.addChild(frmItem);	
+								}
+							}
+							
 							else if(obj.id=='options') {	
 								if(obj.name=="macSource"){
 									frmItem = new FormItem();
@@ -1598,34 +1647,6 @@
 									tb3 = new ComboBox();
 									tb3.dataProvider = obj.option;				
 								}
-								else if(obj.name=="specialController"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = obj.name; 
-									tb3 = new ComboBox();
-									tb3.dataProvider = obj.option;
-									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-									var check:Boolean=false;								
-									for(o=0;o<valueObjArr.length;o++){									
-										if(valueObjArr[o].id==frmItem.label){
-											check=true;
-											if(parentApplication.exportControllforcombo==true){											
-												if(valofcombospecialcontroller!=null&&valofcombospecialcontroller!=""&&valofcombospecialcontroller!=valueObjArr[o].name)
-													tb3.selectedItem=valofcombospecialcontroller;
-												else
-													tb3.selectedItem = valueObjArr[o].name;
-											}
-											else {
-												tb3.selectedIndex = valueObjArr[o].name;
-											}
-										}
-										
-									}
-									if(check==false)
-										tb3.selectedIndex=-1;
-									frmItem.addChild(tb3);
-									tb3.addEventListener(Event.CHANGE,change);																
-								}
 								else if(obj.name=="openflowController"){
 									frmItem = new FormItem();
 									frmItem.direction = "horizontal";
@@ -1633,7 +1654,7 @@
 									tb3 = new ComboBox();
 									tb3.dataProvider = obj.option;
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-									check=false;								
+									var check:Boolean=false;								
 									for(o=0;o<valueObjArr.length;o++){									
 										if(valueObjArr[o].id==frmItem.label){
 											check=true;
@@ -1667,11 +1688,7 @@
 								
 								for(var o:int=0;o<valueObjArr.length;o++){
 									if(valueObjArr[o].id==frmItem.label){
-										if(obj.name=="specialController"){	
-											frmItem.label = "Special Controller";
-											obj.arraySpecialController[ye]=valueObjArr[o].combeValue;
-										}
-										else if(obj.name=="openflowController"){	
+										if(obj.name=="openflowController"){	
 											frmItem.label = "Openflow Controller";
 											obj.arrayOpenflowController[ye]=valueObjArr[o].combeValue;
 										}
@@ -1829,18 +1846,7 @@
 									}
 									tb3.addEventListener(Event.CHANGE,change);	
 								}
-									/*	else if(obj.name=="specialController"){		
-									frmItem.label = "Special Controller";
-									frmItem.addChild(tb3);
-									tb3.addEventListener(Event.CHANGE,change);
-									form.addChild(frmItem);
-									}
-									else if(obj.name=="openflowController"){		
-									frmItem.label = "Openflow Controller";
-									frmItem.addChild(tb3);
-									tb3.addEventListener(Event.CHANGE,change);
-									form.addChild(frmItem);
-									}*/
+								
 									
 								else if(obj.name=="ethernetType"||obj.name=="vlanID"||obj.name=="setVlanID"||obj.name=="macSource"||obj.name==
 									"macDestination"||obj.name=="ipDestination"||obj.name=="ipSource"||obj.name=="setIPSource"
@@ -2775,6 +2781,28 @@
 						form.addChild(frmItem);
 					}		
 					
+					if(obj.id=='radio') {
+						if(obj.name=="remoteLocal"){
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							radioButton = new RadioButtonGroup;
+							radioButton.enabled = true;
+							frmItem.label = "Remote Controller";
+							var rb:RadioButton = new RadioButton();
+							rb.label = "yes";
+							rb.group = radioButton;
+							frmItem.addChild(rb);
+							rb = new RadioButton();
+							rb.label = "no";
+							rb.selected = true;
+							rb.group = radioButton;
+							frmItem.addChild(rb);
+							obj.arrayGetisRemote[ye] = rb.selected;								
+							rb.addEventListener(FlexEvent.UPDATE_COMPLETE, change);
+							form.addChild(frmItem);
+						}
+					}
+					
 					if(obj.id=='options') {
 						if(obj.name=="switch"){	
 							frmItem = new FormItem();
@@ -2789,18 +2817,6 @@
 							frmItem.label = "Switch";
 							frmItem.addChild(tb3);
 							obj.arrayGetSwitch[ye] = tb3.selectedItem;	
-							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-							form.addChild(frmItem);
-						}
-						else if(obj.name=="specialController"){	
-							frmItem = new FormItem();
-							frmItem.direction = "horizontal";
-							tb3 = new ComboBox();
-							tb3.dataProvider = obj.option;
-							tb3.selectedIndex=0;
-							frmItem.label = "Special Controller";
-							frmItem.addChild(tb3);
-							obj.arraySpecialController[ye]=tb3.selectedItem;
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}

@@ -157,13 +157,63 @@ public function exportMininetScriptFile():void {
 							sh = "    net = Mininet( wirelessRadios="+nRadios+", waitTime=10 )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
-						}
-						else{
+							
 							cont_mininet++;
-							nRadios=nRadios+1;
-							sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+							sh = "#wirelessRadios = Number of STAs + APs@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
+							cont_mininet++;
+							sh = "#waitTime = Time (sec) necessary to connect STAs in Ad-hoc mode (it depends of each device)@@";
+							objeto_mininet=sh;
+							temp_mininet.addItem(objeto_mininet)
+						}
+						else{
+							for(p=0;p<dropCanvas.numChildren;p++){	
+								intnew=1;
+								if(p==0){
+									cont_mininet++;
+									sh = "@@";
+									objeto_mininet=sh;
+									cont_mininet++;
+									temp_mininet.addItem(objeto_mininet);
+									sh = "    print \"*** Creating nodes\"@@";
+									objeto_mininet=sh;
+									temp_mininet.addItem(objeto_mininet);
+								}
+								UIob = dropCanvas.getChildAt(p);
+								if(UIob.className =='objects'){
+									ob=UIob as objects;	
+									obb=ob;
+									if(ob.id=="Controller"){		
+									ab = int(ob.name.slice(11,13));
+									ye=ab;
+									for(i=0;i<(obb.objparaArrayCol.length);i++){
+										obj=obb.objparaArrayCol[i] as objParameter;
+									}		
+									for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+										obj=obb.objparaArrayCol[ir] as objParameter;
+										
+										if(obj.name=="remoteLocal"){												
+											var isLocal:String = obj.arrayGetisRemote[ye];	
+										}	
+									}
+									}
+								}
+							}
+							if(isLocal=="true"){
+							cont_mininet++;
+							nRadios=nRadios+1;
+							sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=Controller, link=TCLink, switch="+switch_+" )@@";
+							objeto_mininet=sh;
+							temp_mininet.addItem(objeto_mininet);
+							}
+							else{
+								cont_mininet++;
+								nRadios=nRadios+1;
+								sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+								objeto_mininet=sh;
+								temp_mininet.addItem(objeto_mininet);
+							}
 						}
 					}
 				}
@@ -172,10 +222,50 @@ public function exportMininetScriptFile():void {
 		
 	}
 	else{
-		cont_mininet++;
-		sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
-		objeto_mininet=sh;
-		temp_mininet.addItem(objeto_mininet);
+		for(p=0;p<dropCanvas.numChildren;p++){	
+			intnew=1;
+			if(p==0){
+				cont_mininet++;
+				sh = "@@";
+				objeto_mininet=sh;
+				cont_mininet++;
+				temp_mininet.addItem(objeto_mininet);
+				sh = "    print \"*** Creating nodes\"@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			UIob = dropCanvas.getChildAt(p);
+			if(UIob.className =='objects'){
+				ob=UIob as objects;	
+				obb=ob;
+				if(ob.id=="Controller"){		
+					ab = int(ob.name.slice(11,13));
+					ye=ab;
+					for(i=0;i<(obb.objparaArrayCol.length);i++){
+						obj=obb.objparaArrayCol[i] as objParameter;
+					}		
+					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+						obj=obb.objparaArrayCol[ir] as objParameter;
+						
+						if(obj.name=="remoteLocal"){												
+							isLocal = obj.arrayGetisRemote[ye];	
+						}	
+					}
+				}
+			}
+		}
+		if(isLocal=="true"){
+			cont_mininet++;
+			sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
+			objeto_mininet=sh;
+			temp_mininet.addItem(objeto_mininet);
+		}
+		else{
+			cont_mininet++;
+			sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+			objeto_mininet=sh;
+			temp_mininet.addItem(objeto_mininet);
+		}
 	}
 		
 	//----------------------------------------------------------------------
@@ -432,11 +522,23 @@ public function exportMininetScriptFile():void {
 					else if(obj.name=="controllerPort"){
 						controllerPort = obj.arrayControllerPort[ye];	
 					}	
+					else if(obj.name=="remoteLocal"){												
+						var isLocal:String = obj.arrayGetisRemote[ye];	
+					}	
+				}			
+				
+				if(isLocal=="true"){
+					cont_mininet++;
+					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', controller=Controller )@@";
+					objeto_mininet=sh;
+					temp_mininet.addItem(objeto_mininet);	
 				}					
-				cont_mininet++;
-				sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', controller=RemoteController, ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
-				objeto_mininet=sh;
-				temp_mininet.addItem(objeto_mininet);
+				else{
+					cont_mininet++;
+					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', controller=RemoteController, ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
+					objeto_mininet=sh;
+					temp_mininet.addItem(objeto_mininet);
+				}
 			}
 		} 
 	}	
@@ -647,14 +749,14 @@ public function exportMininetScriptFile():void {
 				else if((obLink.can.source.name.slice(0,7)=="Station"&&(obLink.can.destination.name.slice(0,7)=="Station"))){
 					if(stations.indexOf("sta"+obLink.can.source.name.slice(8,10))==-1){
 						cont_mininet++;
-						sh = "    net.addHoc(sta"+obLink.can.source.name.slice(8,10)+", 'adhocNet', 'g')@@";
+						sh = "    net.addHoc(sta"+obLink.can.source.name.slice(8,10)+", 'adhocNet', 'g') #node, ssid, mode@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);	
 						stations.push("sta"+obLink.can.source.name.slice(8,10))
 					}
 					if(stations.indexOf("sta"+obLink.can.destination.name.slice(8,10))==-1){	
 						cont_mininet++;
-						sh = "    net.addHoc(sta"+obLink.can.destination.name.slice(8,10)+", 'adhocNet', 'g')@@";
+						sh = "    net.addHoc(sta"+obLink.can.destination.name.slice(8,10)+", 'adhocNet', 'g') #node, ssid, mode@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						stations.push("sta"+obLink.can.destination.name.slice(8,10))

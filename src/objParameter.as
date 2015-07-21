@@ -86,6 +86,7 @@ package
 		public var arrayStationSSID1:Array=[];
 		
 		//Controller
+		public var arrayGetisRemote:Array=[];
 		public var arrayOpenflowController:Array=[];
 		public var arraySpecialController:Array=[];		
 		public var arrayFlowName:Array=[];
