@@ -15,12 +15,6 @@ public function saveFile():void{
 			object.appendChild(xmlList);
 			xmlList = XMLList("<image>"+UIob.img+"</image>");
 			object.appendChild(xmlList);
-			xmlList = XMLList("<isMOtherTemplate>"+UIob.isMOtherTemplate+"</isMOtherTemplate>");
-			object.appendChild(xmlList);
-			xmlList = XMLList("<isChildTemplatedOne>"+UIob.isChildTemplatedOne+"</isChildTemplatedOne>");
-			object.appendChild(xmlList);
-			xmlList = XMLList("<motherTemplate>"+UIob.motherTemplate+"</motherTemplate>");
-			object.appendChild(xmlList);
 			xmlList = XMLList("<x>"+UIob.x+"</x>");
 			object.appendChild(xmlList); 
 			xmlList = XMLList("<y>"+UIob.y+"</y>");
@@ -291,6 +285,10 @@ public function saveFile():void{
 								xmlList = XMLList("<name>"+obj.arrayListenPortSwitch1[ye]+"</name>");
 								par.appendChild(xmlList);										
 							}
+							else if(obj.name=="ofp_version"){
+								xmlList = XMLList("<name>"+obj.arrayGetOpenFlowVersion[ye]+"</name>");
+								par.appendChild(xmlList);										
+							}
 							else if(obj.name=="switch"){
 								xmlList = XMLList("<name>"+obj.arrayGetSwitch[ye]+"</name>");
 								par.appendChild(xmlList);										
@@ -377,12 +375,6 @@ public function saveFile():void{
 				xmlList = XMLList("<id>"+UIob.instancArray[y].id+"</id>");
 				par.appendChild(xmlList);
 				xmlList = XMLList("<name>"+UIob.instancArray[y].name+"</name>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<isMOtherTemplate>"+UIob.instancArray[y].isMOtherTemplate+"</isMOtherTemplate>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<isChildTemplatedOne>"+UIob.instancArray[y].isChildTemplatedOne+"</isChildTemplatedOne>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<motherTemplate>"+UIob.instancArray[y].motherTemplate+"</motherTemplate>");
 				par.appendChild(xmlList);
 				
 				for(j=0;j<UIob.instancArray[y].objparaArrayCol.length;j++){
@@ -474,12 +466,6 @@ public function saveFile():void{
 			xmlList = XMLList("<deviceDestinationPort>"+UIobLink.can.destinationPort+"</deviceDestinationPort>");
 			object.appendChild(xmlList);
 			
-			xmlList = XMLList("<isMOtherTemplate>"+UIobLink.can.isMOtherTemplate+"</isMOtherTemplate>");
-			object.appendChild(xmlList);
-			xmlList = XMLList("<isChildTemplatedOne>"+UIobLink.can.isChildTemplatedOne+"</isChildTemplatedOne>");
-			object.appendChild(xmlList);
-			xmlList = XMLList("<motherTemplate>"+UIobLink.can.motherTemplate+"</motherTemplate>");
-			object.appendChild(xmlList);
 			xmlList = XMLList("<lineColor>"+UIobLink.lineColor+"</lineColor>");
 			object.appendChild(xmlList);
 			xmlList = XMLList("<beginX>"+UIobLink.beginX+"</beginX>");

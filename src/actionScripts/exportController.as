@@ -88,7 +88,6 @@ public function exportControllerScriptFile():void {
 		UIob = dropCanvas.getChildAt(j);
 		if(UIob.className =='objects'){
 			ob=UIob as objects;					
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
 				if(ob.id=="Controller"){
 					ab = int(ob.name.slice(11,13));
 					ye=ab;
@@ -1020,7 +1019,7 @@ public function exportControllerScriptFile():void {
 								}									
 							}
 						}
-					}
+					
 				}
 			}
 		}		

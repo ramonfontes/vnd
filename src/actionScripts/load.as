@@ -36,18 +36,6 @@ public function load(eve:ResultEvent):void{
 			OB.name=xmlInfo[a].name;
 			OB.x=xmlInfo[a].x;
 			OB.y=xmlInfo[a].y;
-			OB.motherTemplate=xmlInfo[a].motherTemplate.toString();
-			
-			if(xmlInfo[a].isChildTemplatedOne=='true'){
-				OB.isChildTemplatedOne=true;}
-				
-			else  {OB.isChildTemplatedOne=false;}
-			
-			if(xmlInfo[a].isMOtherTemplate=='true'){
-				OB.isMOtherTemplate=true;
-			}
-			else  {OB.isMOtherTemplate=false;
-			}
 			
 			OB.img= xmlInfo[a].image;
 			OB.secondTime=true;  
@@ -163,7 +151,6 @@ public function load(eve:ResultEvent):void{
 			link.beginY=xmlInfo[a].beginY;
 			link.lineLength=xmlInfo[a].lineLength;
 			link.lineHeight=xmlInfo[a].lineHeight;
-			link.can.motherTemplate=xmlInfo[a].motherTemplate.toString();
 			link.id=xmlInfo[a].id;
 			link.can.name=xmlInfo[a].name;
 			link.name=xmlInfo[a].name;
@@ -303,19 +290,6 @@ public function load(eve:ResultEvent):void{
 				link.stationPort=0;
 			}	
 						
-			if(xmlInfo[a].isChildTemplatedOne=='true'){
-				link.can.isChildTemplatedOne=true;}
-				
-			else  {
-				link.can.isChildTemplatedOne=false;
-			}
-			if(xmlInfo[a].isMOtherTemplate=='true'){
-				link.can.isMOtherTemplate=true;
-			}
-			else {
-				link.can.isMOtherTemplate=false;
-			}
-			
 			link.can.secondTime=true;  
 			objparaArrayCol=new ArrayCollection();
 			for(b=0;b<xmlInfo[a].par.length();b++){

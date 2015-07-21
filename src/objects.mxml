@@ -131,9 +131,6 @@
 			
 			public var exportControll:Boolean=false;			
 			[Bindable] public var listFlowName:Array = new Array();						
-			public var isMOtherTemplate:Boolean;
-			public var isChildTemplatedOne:Boolean;
-			public var motherTemplate:String='';	
 			public var linesStartingArray:ArrayCollection=new ArrayCollection();
 			public var linesEndingArray:ArrayCollection=new ArrayCollection();
 			public var objparaArrayCol:ArrayCollection=new ArrayCollection();
@@ -311,16 +308,14 @@
 				for(j=0;j<valueObjArr.length;j++){
 					if(valueObjArr[j].id==obj.id){
 						bool=true;						
-						if(isChildTemplatedOne){
-							valueObjArr[j].haschanged=true;							
-						}						
+						valueObjArr[j].haschanged=true;							
 						valueObjArr[j].name=obj.name;
 						valueObjArr[j].combeValue=obj.combeValue;
 						break;
 					}
 				}				
 				if(!bool){
-					if(isChildTemplatedOne)obj.haschanged=true
+					obj.haschanged=true
 					valueObjArr.addItem(obj);
 				}
 			} 			

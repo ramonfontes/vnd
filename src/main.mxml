@@ -589,52 +589,85 @@
 					var xmlLi:XMLList;
 					if(UIob.className =='objects'){
 						var ob:objects=UIob as objects;						
-						if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-							var ab:int;
-							if(ob.id=="Computer"){
-								ab = int(ob.name.slice(9,11));
-								ye=ab;
+						var ab:int;
+						if(ob.id=="Computer"){
+							ab = int(ob.name.slice(9,11));
+							ye=ab;
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							setObjectXml(ob,xmlLi);
+						}
+						else if(ob.id=="Switch"){
+							ab = int(ob.name.slice(7,9));
+							ye=ab;
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							setObjectXml(ob,xmlLi);
+						}
+						else if(ob.id=="Access Point"){
+							ab = int(ob.name.slice(13,15));
+							ye=ab;
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							setObjectXml(ob,xmlLi);
+						}
+						else if(ob.id=="Controller"){
+							ab= int(ob.name.slice(11,13));
+							ye=ab;									
+							var obb:Object=ob;
+							for(var i:int=0;i<(obb.objparaArrayCol.length);i++){
+								var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
+								var canew:String = String(obj.arrayFlowName);
+								if(canew!="")
+									intnew = int(obj.arrayFlowName[ye].length);
+								//Alert.show(String(canew));
+							}	
+							if(intnew==0){
 								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 								setObjectXml(ob,xmlLi);
-							}
-							else if(ob.id=="Switch"){
-								ab = int(ob.name.slice(7,9));
-								ye=ab;
-								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
-								setObjectXml(ob,xmlLi);
-							}
-							else if(ob.id=="Access Point"){
-								ab = int(ob.name.slice(13,15));
-								ye=ab;
-								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
-								setObjectXml(ob,xmlLi);
-							}
-							else if(ob.id=="Controller"){
-								ab= int(ob.name.slice(11,13));
-								ye=ab;									
-								var obb:Object=ob;
-								for(var i:int=0;i<(obb.objparaArrayCol.length);i++){
-									var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
-									var canew:String = String(obj.arrayFlowName);
-									if(canew!="")
-										intnew = int(obj.arrayFlowName[ye].length);
-									//Alert.show(String(canew));
-								}	
-								if(intnew==0){
-									xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
-									setObjectXml(ob,xmlLi);
-									objxml.appendChild(xmlLi);
-									
-									if(listqosqosName.length>0){
-										for(var a:int=0;a<listqosqosName.length;a++){										
-											qoscont++;
-											xmlLi = XMLList('<'+"qosTable"+(qoscont-1)+' id="'+ob.name+'"/>');
-											//openflowxml.appendChild(xmlLi);
-											setObjectXml(ob,xmlLi);
-											openflowxml.appendChild(xmlLi);				
-										}	
-										qoscont=0;
+								objxml.appendChild(xmlLi);
+								
+								if(listqosqosName.length>0){
+									for(var a:int=0;a<listqosqosName.length;a++){										
+										qoscont++;
+										xmlLi = XMLList('<'+"qosTable"+(qoscont-1)+' id="'+ob.name+'"/>');
+										//openflowxml.appendChild(xmlLi);
+										setObjectXml(ob,xmlLi);
+										openflowxml.appendChild(xmlLi);				
+									}	
+									qoscont=0;
+								}
+								if(listQueueName.length>0){
+									for(a=0;a<listQueueName.length;a++){
+										queuecont++;
+										xmlLi = XMLList('<'+"queueConfiguration"+(queuecont-1)+' id="'+ob.name+'"/>');
+										setObjectXml(ob,xmlLi);
+										openflowxml.appendChild(xmlLi);				
 									}
+									queuecont=0;
+								}
+							}
+							else{
+							for(a=0;a<intnew;a++){	
+								if(a==0){
+								controll=0;
+								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+								setObjectXml(ob,xmlLi);
+								objxml.appendChild(xmlLi);
+								}
+								controll=1;									
+								xmlLi = XMLList('<'+"flowTable"+(xe+1)+' id="'+ob.name+'"/>');
+								setObjectXml(ob,xmlLi);
+								openflowxml.appendChild(xmlLi);
+								xe++;
+								
+								if((a+1)==intnew){
+									if(listqosqosName.length>0){
+									for(a=0;a<listqosqosName.length;a++){
+										qoscont++;
+										xmlLi = XMLList('<'+"qosTable"+(qoscont-1)+' id="'+ob.name+'"/>');
+										setObjectXml(ob,xmlLi);
+										openflowxml.appendChild(xmlLi);				
+									}
+									}
+									qoscont=0;
 									if(listQueueName.length>0){
 										for(a=0;a<listQueueName.length;a++){
 											queuecont++;
@@ -642,62 +675,26 @@
 											setObjectXml(ob,xmlLi);
 											openflowxml.appendChild(xmlLi);				
 										}
-										queuecont=0;
 									}
-								}
-								else{
-								for(a=0;a<intnew;a++){	
-									if(a==0){
-									controll=0;
-									xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
-									setObjectXml(ob,xmlLi);
-									objxml.appendChild(xmlLi);
-									}
-									controll=1;									
-									xmlLi = XMLList('<'+"flowTable"+(xe+1)+' id="'+ob.name+'"/>');
-									setObjectXml(ob,xmlLi);
-									openflowxml.appendChild(xmlLi);
-									xe++;
-									
-									if((a+1)==intnew){
-										if(listqosqosName.length>0){
-										for(a=0;a<listqosqosName.length;a++){
-											qoscont++;
-											xmlLi = XMLList('<'+"qosTable"+(qoscont-1)+' id="'+ob.name+'"/>');
-											setObjectXml(ob,xmlLi);
-											openflowxml.appendChild(xmlLi);				
-										}
-										}
-										qoscont=0;
-										if(listQueueName.length>0){
-											for(a=0;a<listQueueName.length;a++){
-												queuecont++;
-												xmlLi = XMLList('<'+"queueConfiguration"+(queuecont-1)+' id="'+ob.name+'"/>');
-												setObjectXml(ob,xmlLi);
-												openflowxml.appendChild(xmlLi);				
-											}
-										}
-										queuecont=0;
-									}								
-								}
-								xe=0;
-								}
-							}							
-							else{								
-								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
-								setObjectXml(ob,xmlLi);
-							}								
-											
-							if(ob.id=="openflowScenario" || ob.id=="flowTable")
-								openflowxml.appendChild(xmlLi);
-								
-								else if (ob.id=="Controller"){
-								}
-								
-								else
-									objxml.appendChild(xmlLi);
-							//openflowxml.appendChild(xmlLi);							
-						}
+									queuecont=0;
+								}								
+							}
+							xe=0;
+							}
+						}							
+						else{								
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							setObjectXml(ob,xmlLi);
+						}								
+										
+						if(ob.id=="openflowScenario" || ob.id=="flowTable")
+							openflowxml.appendChild(xmlLi);
+							
+							else if (ob.id=="Controller"){
+							}
+							
+							else
+								objxml.appendChild(xmlLi);
 					}
 						
 					else if(UIob.className=='Link'){
@@ -711,14 +708,11 @@
 							ab = int(obLink.name.slice(6,8));
 							ye=ab;
 						}			
-						
-						if(obLink.can.isMOtherTemplate==true || obLink.can.isChildTemplatedOne!=true ){
-							var xmlLi2:XMLList = XMLList('<link id="'+obLink.name+'" />');
-							setObjectXml(obLink,xmlLi2);
-							var xmlLi3:XMLList = XMLList('<connection source="'+obLink.can.source.name+'" destination="'+obLink.can.destination.name+'"/>');
-							xmlLi2.appendChild(xmlLi3);
-							objxml.appendChild(xmlLi2);
-						}						
+						var xmlLi2:XMLList = XMLList('<link id="'+obLink.name+'" />');
+						setObjectXml(obLink,xmlLi2);
+						var xmlLi3:XMLList = XMLList('<connection source="'+obLink.can.source.name+'" destination="'+obLink.can.destination.name+'"/>');
+						xmlLi2.appendChild(xmlLi3);
+						objxml.appendChild(xmlLi2);
 					} 
 				}
 				netxml.appendChild(objxml);
@@ -1134,7 +1128,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/20/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 07/21/15" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

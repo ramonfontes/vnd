@@ -315,63 +315,61 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}	
-						
-					}
-					cont_mininet++;
-					sh = "  Ptr<Node> "+ob.name.slice(0,11)+" = CreateObject<Node> ();@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}	
+					
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  Ptr<Node> "+ob.name.slice(0,17)+" = CreateObject<Node> ();@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  Ptr<Node> "+ob.name.slice(0,11)+" = CreateObject<Node> ();@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  Ptr<Node> "+ob.name.slice(0,17)+" = CreateObject<Node> ();@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
 		} 
@@ -390,58 +388,57 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}	
-						
-					}
-					sh = sh+" "+ob.name.slice(0,11)+",";
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}	
+					
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					sh = sh+" "+ob.name.slice(0,17)+",";
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				sh = sh+" "+ob.name.slice(0,11)+",";
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
 				}
+				sh = sh+" "+ob.name.slice(0,17)+",";
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
+				}
+				
 			}
 		}
 	}
@@ -475,118 +472,116 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}	
-						else if(obj.name=="mask"){												
-							computerMask = obj.arrayComputerMask[ye];
-						}									
-					}
-					cont_mininet++;
-					sh = "  Ptr<CsmaNetDevice> Device"+ob.name.slice(0,11)+" = CreateObject<CsmaNetDevice> ();@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  Device"+ob.name.slice(0,11)+"->SetAddress (Mac48Address::Allocate ());@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  "+ob.name.slice(0,11)+"->AddDevice (Device"+ob.name.slice(0,11)+");@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);	
-					cont_mininet++;
-					sh = "  Ptr<Ipv4> ipv4"+ob.name.slice(0,11)+" = "+ob.name.slice(0,11)+"->GetObject<Ipv4> ();@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  int32_t ifIndex"+ob.name.slice(0,11)+" = ipv4"+ob.name.slice(0,11)+"->AddInterface (Device"+ob.name.slice(0,11)+");@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  Ipv4InterfaceAddress ifInAddr"+ob.name+" = Ipv4InterfaceAddress (Ipv4Address (\""+computerIPAddress+"\"), Ipv4Mask (\""+computerMask+"\"));@@";
-					//sh = "  address.SetBase (\""+computerIPAddress+"\", \""+computerMask+"\");@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  ipv4"+ob.name.slice(0,11)+"->AddAddress (ifIndex"+ob.name.slice(0,11)+", ifInAddr"+ob.name+");@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  ipv4"+ob.name.slice(0,11)+"->SetMetric (ifIndex"+ob.name.slice(0,11)+", 1);@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  ipv4"+ob.name.slice(0,11)+"->SetUp (ifIndex"+ob.name.slice(0,11)+");@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}	
+					else if(obj.name=="mask"){												
+						computerMask = obj.arrayComputerMask[ye];
+					}									
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  Ptr<CsmaNetDevice> Device"+ob.name.slice(0,17)+" = CreateObject<CsmaNetDevice> ();@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  Device"+ob.name.slice(0,17)+"->SetAddress (Mac48Address::Allocate ());@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "  "+ob.name.slice(0,17)+"->AddDevice (Device"+ob.name.slice(0,17)+");@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-					cont_mininet++;
-					sh = "@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  Ptr<CsmaNetDevice> Device"+ob.name.slice(0,11)+" = CreateObject<CsmaNetDevice> ();@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  Device"+ob.name.slice(0,11)+"->SetAddress (Mac48Address::Allocate ());@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  "+ob.name.slice(0,11)+"->AddDevice (Device"+ob.name.slice(0,11)+");@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);	
+				cont_mininet++;
+				sh = "  Ptr<Ipv4> ipv4"+ob.name.slice(0,11)+" = "+ob.name.slice(0,11)+"->GetObject<Ipv4> ();@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  int32_t ifIndex"+ob.name.slice(0,11)+" = ipv4"+ob.name.slice(0,11)+"->AddInterface (Device"+ob.name.slice(0,11)+");@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  Ipv4InterfaceAddress ifInAddr"+ob.name+" = Ipv4InterfaceAddress (Ipv4Address (\""+computerIPAddress+"\"), Ipv4Mask (\""+computerMask+"\"));@@";
+				//sh = "  address.SetBase (\""+computerIPAddress+"\", \""+computerMask+"\");@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  ipv4"+ob.name.slice(0,11)+"->AddAddress (ifIndex"+ob.name.slice(0,11)+", ifInAddr"+ob.name+");@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  ipv4"+ob.name.slice(0,11)+"->SetMetric (ifIndex"+ob.name.slice(0,11)+", 1);@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  ipv4"+ob.name.slice(0,11)+"->SetUp (ifIndex"+ob.name.slice(0,11)+");@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  Ptr<CsmaNetDevice> Device"+ob.name.slice(0,17)+" = CreateObject<CsmaNetDevice> ();@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  Device"+ob.name.slice(0,17)+"->SetAddress (Mac48Address::Allocate ());@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "  "+ob.name.slice(0,17)+"->AddDevice (Device"+ob.name.slice(0,17)+");@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
 		} 
@@ -926,63 +921,6 @@ public function exportNS3File():void {
 				}
 			}
 		}
-		/*for(p=u;p<dropCanvas.numChildren;p++){
-			UIob = dropCanvas.getChildAt(p);
-			if(UIob.className =='objects'){
-				ob=UIob as objects;	
-				obb=ob;
-				if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-					if(ob.id=="Computer"&&p>=obc){
-						ab = int(ob.name.slice(9,11));
-						ye=ab;													
-						for(i=0;i<(obb.objparaArrayCol.length);i++){
-							obj=obb.objparaArrayCol[i] as objParameter;
-						}		
-						for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-							obj=obb.objparaArrayCol[ir] as objParameter;									
-							if(obj.name=="computerIPAddress"){												
-								computerIPAddress = obj.arrayComputerIPAddress1[ye];
-							}	
-							else if(obj.name=="computerMacAddress"){												
-								computerMacAddress = obj.arrayComputerMacAddress1[ye];
-							}	
-							else if(obj.name=="mask"){												
-								computerMask = obj.arrayComputerMask[ye];
-							}									
-						}
-						if(obLink.can.source.name==srcl&&obLink.can.destination.name==dstl){	
-							
-							cont_mininet++;
-							sh = "  Ipv4InterfaceAddress ifInAddr"+ob.name+" = Ipv4InterfaceAddress (Ipv4Address ("+computerIPAddress+"), Ipv4Mask ("+computerMask+"));@@";
-							//sh = "  address.SetBase (\""+computerIPAddress+"\", \""+computerMask+"\");@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-							cont_mininet++;
-							sh = "  ipv4A->AddAddress ("+ob.name+", ifInAddrA);@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-							cont_mininet++;
-							sh = "  ipv4A->SetMetric ("+ob.name+", 1);@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-							cont_mininet++;
-							sh = "  ipv4A->SetUp ("+ob.name+");@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-							
-							
-							
-							//objeto_mininet=sh1;
-							//temp_mininet.addItem(objeto_mininet);
-							srcl="";
-							dstl="";
-							obc=p+1;		
-							break;
-						}
-					}
-				}
-			} 
-		}*/
 	}
 	//----------------------------------------------------------------------
 	//----------------------------------------------------------------------	
@@ -1004,60 +942,58 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}	
-						
-					}
-					cont_mininet++;
-					sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.name.slice(0,11)+".Get (0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}	
+					
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					ab = int(ob.name.slice(15,17));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.name.slice(0,17)+".Get (0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.name.slice(0,11)+".Get (0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				ab = int(ob.name.slice(15,17));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.name.slice(0,17)+".Get (0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
 		} 
@@ -1068,62 +1004,60 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}							
-					}
-					cont_mininet++;
-					sh = "  serverApps"+p+".Start (Seconds (1.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}							
 				}
-				else if(ob.id=="Switch"||ob.id=="Acccess Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  serverApps"+p+".Start (Seconds (1.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  serverApps"+p+".Start (Seconds (1.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Acccess Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  serverApps"+p+".Start (Seconds (1.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
 		} 
@@ -1139,65 +1073,63 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}	
-						
-					}
-					cont_mininet++;
-					sh = "  serverApps"+p+".Stop (Seconds (10.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}	
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  serverApps"+p+".Stop (Seconds (10.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  serverApps"+p+".Stop (Seconds (10.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  serverApps"+p+".Stop (Seconds (10.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
+			
 		} 
 	}
 	cont_mininet++;
@@ -1313,63 +1245,62 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}							
-					}
-					cont_mininet++;
-					sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.name.slice(0,11)+".Get (0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}							
 				}
-				else if(ob.id=="Switch"||ob.id=="Controller"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.name.slice(0,17)+".Get (0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.name.slice(0,11)+".Get (0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Controller"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
 				}
+				cont_mininet++;
+				sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.name.slice(0,17)+".Get (0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
+				}
+				
 			}
 		} 
 	}		
@@ -1379,65 +1310,64 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}	
-						
-					}
-					cont_mininet++;
-					sh = "  clientApps"+p+".Start (Seconds (2.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}	
+					
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  clientApps"+p+".Start (Seconds (2.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  clientApps"+p+".Start (Seconds (2.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  clientApps"+p+".Start (Seconds (2.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
+			
 		} 
 	}
 	
@@ -1446,64 +1376,63 @@ public function exportNS3File():void {
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
 			obb=ob;
-			if(ob.isMOtherTemplate==true ||ob.isChildTemplatedOne!=true ){
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;													
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="computerIPAddress"){												
-							computerIPAddress = obj.arrayComputerIPAddress1[ye];
-						}	
-						else if(obj.name=="computerMacAddress"){												
-							computerMacAddress = obj.arrayComputerMacAddress1[ye];
-						}							
-					}
-					cont_mininet++;
-					sh = "  clientApps"+p+".Stop (Seconds (10.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
+			if(ob.id=="Computer"){
+				ab = int(ob.name.slice(9,11));
+				ye=ab;													
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="computerIPAddress"){												
+						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+					}	
+					else if(obj.name=="computerMacAddress"){												
+						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+					}							
 				}
-				else if(ob.id=="Switch"||ob.id=="Access Point"){
-					if(ob.id=="Switch")
-						ab = int(ob.name.slice(7,9));
-					else
-						ab = int(ob.name.slice(13,15));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;									
-						if(obj.name=="switchMacAddress"){	
-							macSwitch = obj.arrayMacSwitch1[ye];	
-						}	
-					}
-					cont_mininet++;
-					sh = "  clientApps"+p+".Stop (Seconds (10.0));@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);					
-				}							
-				else if(ob.id=="Controller"){		
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					for(i=0;i<(obb.objparaArrayCol.length);i++){
-						obj=obb.objparaArrayCol[i] as objParameter;
-					}		
-					for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-						obj=obb.objparaArrayCol[ir] as objParameter;
-						if(obj.name=="controllerIPAddress"){												
-							controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
-						}											
-						else if(obj.name=="controllerPort"){
-							controllerPort = obj.arrayControllerPort[ye];	
-						}	
-					}
+				cont_mininet++;
+				sh = "  clientApps"+p+".Stop (Seconds (10.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(ob.id=="Switch"||ob.id=="Access Point"){
+				if(ob.id=="Switch")
+					ab = int(ob.name.slice(7,9));
+				else
+					ab = int(ob.name.slice(13,15));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;									
+					if(obj.name=="switchMacAddress"){	
+						macSwitch = obj.arrayMacSwitch1[ye];	
+					}	
+				}
+				cont_mininet++;
+				sh = "  clientApps"+p+".Stop (Seconds (10.0));@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);					
+			}							
+			else if(ob.id=="Controller"){		
+				ab = int(ob.name.slice(11,13));
+				ye=ab;
+				for(i=0;i<(obb.objparaArrayCol.length);i++){
+					obj=obb.objparaArrayCol[i] as objParameter;
+				}		
+				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
+					obj=obb.objparaArrayCol[ir] as objParameter;
+					if(obj.name=="controllerIPAddress"){												
+						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+					}											
+					else if(obj.name=="controllerPort"){
+						controllerPort = obj.arrayControllerPort[ye];	
+					}	
 				}
 			}
+			
 		} 
 	}
 	

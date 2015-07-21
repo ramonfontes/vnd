@@ -24,9 +24,6 @@
 			[Bindable] public var isfocused:Boolean=false;
 			
 			public var ye:int=-1;
-			public var isMOtherTemplate:Boolean=false;
-			public var isChildTemplatedOne:Boolean=false;
-			public var motherTemplate:String=''; 
 			public var source:objects;
 			public var destination:objects;
 			public var loss:String;
@@ -79,9 +76,7 @@
 				for(var j:int=0;j<valueObjArr.length;j++){
 					if(valueObjArr[j].id==obj.id){
 						bool=true;
-						if(isChildTemplatedOne){
-							valueObjArr[j].haschanged=true;
-						}
+						valueObjArr[j].haschanged=true;
 						valueObjArr[j].name=obj.name;
 						valueObjArr[j].combeValue=obj.combeValue;
 						break;
@@ -89,7 +84,7 @@
 				}
 				
 				if(!bool){
-					if(isChildTemplatedOne)obj.haschanged=true;
+					obj.haschanged=true;
 					valueObjArr.addItem(obj);
 				}
 			} 
