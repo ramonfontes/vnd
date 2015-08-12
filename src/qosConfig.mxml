@@ -5,7 +5,7 @@
 		<![CDATA[
 			import action_alert.HAlert;
 			import action_alert.HMensagens;
-			
+			import mx.controls.Alert;
 			import mx.collections.ArrayCollection;
 			import mx.containers.Form;
 			import mx.containers.FormItem;
@@ -73,7 +73,6 @@
 			public function change(eve:Event):void {
 				var bool:Boolean=false;
 				var obj:ChangedTemp=new ChangedTemp();
-				
 				if(eve.target.parent.label=="QoS Name")
 					obj.id="name";
 				else if(eve.target.parent.label=="Switch (Disabled)")

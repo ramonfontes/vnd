@@ -2,7 +2,7 @@ import flash.display.DisplayObject;
 import flash.events.Event;
 import mx.collections.ArrayCollection;
 import mx.managers.PopUpManager;
-
+import mx.controls.Alert;
 public var aa:int=0;
 public var removeqospanel:Boolean=false;
 public var objpar1:objParameter = new objParameter();
@@ -22,7 +22,7 @@ public function setobject(eve:Event):void {
 		removeqospanel=true;
 	}
 	else
-		removeqospanel=false;
+		removeqospanel=true;
 	
 	aa++;
 	if(ViewBool){		
@@ -48,13 +48,13 @@ public function setobject(eve:Event):void {
 			focusobject.removeFoc();
 		}
 		popup_ob.Configurationpanel1.enabled;		
-		popup_ob.Qospanel.enabled;
+		//popup_ob.Qospanel.enabled;
 		
 		focusobject=eve.target;
 		focusobject.setFoc();
 		popup_ob.Configurationpanel1.removeAllChildren();
-		popup_ob.Qospanel.removeAllChildren();
-		popup_ob.Queuepanel.removeAllChildren();
+		//popup_ob.Qospanel.removeAllChildren();
+		//popup_ob.Queuepanel.removeAllChildren();
 		
 		var qos:Object=qos1;
 		var queue:Object=accessQueue;
@@ -67,23 +67,26 @@ public function setobject(eve:Event):void {
 		queue.visible=true;
 		queue.includeInLayout=true;
 		
-		popup_ob.Queuepanel.addChild(queue as DisplayObject);	
-		popup_ob.Qospanel.addChild(qos as DisplayObject);	
+		//popup_ob.Queuepanel.addChild(queue as DisplayObject);	
+		//popup_ob.Qospanel.addChild(qos as DisplayObject);	
 		popup_ob.Configurationpanel1.addChild(pg as DisplayObject);	
 		
 		if (removeqospanel==true){
-			popup_ob.canvasqos.enabled=false;
-			popup_ob.canvasqueue.enabled=false;			
+			//popup_ob.canvasqos.enabled=false;
+			//popup_ob.canvasqueue.enabled=false;			
 		}
-		else if(removeqospanel==false){			
-			popup_ob.canvasqos.enabled=true;
-			popup_ob.canvasqueue.enabled=true;
+		else if(removeqospanel==false){		
+			//popup_ob.canvasqos.enabled=true;
+			//popup_ob.canvasqueue.enabled=true;
 		}
 		popup_ob.Configurationpanel.selectedChild=popup_ob.canvasconfig;
 		
 		names = new Array();
+		//Alert.show(String(allnames.length))
 		for(i=0; i<allnames.length; i++){
 			objpar1.qosname[i]=allnames[i];
+			
+				
 			qos1.objparaArrayCol.addItem(objpar1);
 			accessQueue.objparaArrayCol.addItem(objpar1);
 		}

@@ -88,7 +88,6 @@ package
 		//Controller
 		public var arrayGetisRemote:Array=[];
 		public var arrayOpenflowController:Array=[];
-		public var arraySpecialController:Array=[];		
 		public var arrayFlowName:Array=[];
 		public var arraySlicePort:Array=[];
 		public var arrayPriority:Array=[];

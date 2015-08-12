@@ -4,12 +4,13 @@ import mx.collections.ArrayCollection;
 import mx.controls.Tree;
 import mx.events.ListEvent;
 import mx.managers.CursorManager;
+import mx.controls.Alert;
 
 private function tree_itemClick(evt:ListEvent):void {
 	var t:Tree = evt.currentTarget as Tree;
     Parent = evt.itemRenderer.data.@parent;
     child = evt.itemRenderer.data.@name;
-	
+		
 	if(child=="Computer"||"Station"||"Controller"||"Smartphone"||"Switch"||"Access Point"){
 		var objs:Array=dropCanvas.getChildren();
 		line=null;
@@ -49,6 +50,7 @@ private function network_itemClick(evt:ListEvent):void {
 	//popup_ob.Configurationpanel.enabled;
 	popup_ob.Configurationpanel.removeAllChildren();
     var dataObj:Object = evt.itemRenderer.data;
+		
 	if(dataObj.hasOwnProperty('@parent')) { 
       	var og:Object= dropCanvas.getChildByName(dataObj.@parent);
         setobject2(og);
@@ -56,6 +58,7 @@ private function network_itemClick(evt:ListEvent):void {
 		var instanceName:String = dataObj.@name;
 		//setFocusTreeObject(ac,instanceName);
 		names = new Array();
+		//Alert.show(String(allnames.length))
 		if(focustreeobject){
 			for(i=0; i<allnames.length; i++){
 				var arr:ArrayCollection=focustreeobject.objparaArrayCol as ArrayCollection;

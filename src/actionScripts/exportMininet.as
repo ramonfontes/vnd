@@ -18,8 +18,10 @@ public function exportMininetScriptFile():void {
 	var objeto_mininet:Object=new Object();
 	var cont_mininet:int=0;
 	var expo:Boolean=true;	
-	var computerMask:String;	
+	var computerMask:String;
+	var stationMask:String;
 	var computerIPAddress:String;
+	var stationIPAddress:String;
 	var arrayStationPassword:String;
 	var arrayStationSSID:String;
 	var computerMacAddress:String;
@@ -127,6 +129,10 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
+	sh = "@@";
+	objeto_mininet=sh;
+	temp_mininet.addItem(objeto_mininet);
+	cont_mininet++;
 	sh = "    \"Create a network.\"@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
@@ -157,27 +163,18 @@ public function exportMininetScriptFile():void {
 							temp_mininet.addItem(objeto_mininet);
 							
 							cont_mininet++;
-							sh = "#wirelessRadios = Number of STAs + APs@@";
+							sh = "   #wirelessRadios = Number of STAs + APs@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 							cont_mininet++;
-							sh = "#waitTime = Time (sec) necessary to connect STAs in Ad-hoc mode (it depends of each device)@@";
+							sh = "   #waitTime = Time (sec) necessary to connect STAs in Ad-hoc mode (it depends of each device)@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet)
 						}
 						else{
 							for(p=0;p<dropCanvas.numChildren;p++){	
 								intnew=1;
-								if(p==0){
-									cont_mininet++;
-									sh = "@@";
-									objeto_mininet=sh;
-									cont_mininet++;
-									temp_mininet.addItem(objeto_mininet);
-									sh = "    print \"*** Creating nodes\"@@";
-									objeto_mininet=sh;
-									temp_mininet.addItem(objeto_mininet);
-								}
+								
 								UIob = dropCanvas.getChildAt(p);
 								if(UIob.className =='objects'){
 									ob=UIob as objects;	
@@ -225,10 +222,6 @@ public function exportMininetScriptFile():void {
 				sh = "@@";
 				objeto_mininet=sh;
 				cont_mininet++;
-				temp_mininet.addItem(objeto_mininet);
-				sh = "    print \"*** Creating nodes\"@@";
-				objeto_mininet=sh;
-				temp_mininet.addItem(objeto_mininet);
 			}
 			UIob = dropCanvas.getChildAt(p);
 			if(UIob.className =='objects'){
@@ -291,7 +284,7 @@ public function exportMininetScriptFile():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="stationIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						stationIPAddress = obj.arrayStationIPAddress1[ye];
 					}	
 					else if(obj.name=="stationMacAddress"){												
 						computerMacAddress = obj.arrayComputerMacAddress1[ye];
@@ -302,58 +295,58 @@ public function exportMininetScriptFile():void {
 					else if(obj.name=="stationpassword"){												
 						arrayStationPassword = obj.arrayStationPassword1[ye];
 					}
-					else if(obj.name=="mask"){												
-						computerMask = obj.arrayComputerMask[ye];
-						if(computerMask=="255.0.0.0")
-							computerMask="8";
-						else if(computerMask=="255.128.0.0")
-							computerMask="9";
-						else if(computerMask=="255.192.0.0")
-							computerMask="10";
-						else if(computerMask=="255.224.0.0")
-							computerMask="11";
-						else if(computerMask=="255.240.0.0")
-							computerMask="12";
-						else if(computerMask=="255.248.0.0")
-							computerMask="13";
-						else if(computerMask=="255.252.0.0")
-							computerMask="14";
-						else if(computerMask=="255.254.0.0")
-							computerMask="15";
-						else if(computerMask=="255.255.0.0")
-							computerMask="16";
-						else if(computerMask=="255.255.128.0")
-							computerMask="17";
-						else if(computerMask=="255.255.192.0")
-							computerMask="18";
-						else if(computerMask=="255.255.224.0")
-							computerMask="19";
-						else if(computerMask=="255.255.240.0")
-							computerMask="20";
-						else if(computerMask=="255.255.248.0")
-							computerMask="21";
-						else if(computerMask=="255.255.252.0")
-							computerMask="22";
-						else if(computerMask=="255.255.254.0")
-							computerMask="23";
-						else if(computerMask=="255.255.255.0")
-							computerMask="24";
-						else if(computerMask=="255.255.255.128")
-							computerMask="25";
-						else if(computerMask=="255.255.255.192")
-							computerMask="26";
-						else if(computerMask=="255.255.255.224")
-							computerMask="27";
-						else if(computerMask=="255.255.255.240")
-							computerMask="28";
-						else if(computerMask=="255.255.255.248")
-							computerMask="29";
-						else if(computerMask=="255.255.255.252")
-							computerMask="30";
+					else if(obj.name=="stationmask"){												
+						stationMask = obj.arrayStationMask[ye];
+						if(stationMask=="255.0.0.0")
+							stationMask="8";
+						else if(stationMask=="255.128.0.0")
+							stationMask="9";
+						else if(stationMask=="255.192.0.0")
+							stationMask="10";
+						else if(stationMask=="255.224.0.0")
+							stationMask="11";
+						else if(stationMask=="255.240.0.0")
+							stationMask="12";
+						else if(stationMask=="255.248.0.0")
+							stationMask="13";
+						else if(stationMask=="255.252.0.0")
+							stationMask="14";
+						else if(stationMask=="255.254.0.0")
+							stationMask="15";
+						else if(stationMask=="255.255.0.0")
+							stationMask="16";
+						else if(stationMask=="255.255.128.0")
+							stationMask="17";
+						else if(stationMask=="255.255.192.0")
+							stationMask="18";
+						else if(stationMask=="255.255.224.0")
+							stationMask="19";
+						else if(stationMask=="255.255.240.0")
+							stationMask="20";
+						else if(stationMask=="255.255.248.0")
+							stationMask="21";
+						else if(stationMask=="255.255.252.0")
+							stationMask="22";
+						else if(stationMask=="255.255.254.0")
+							stationMask="23";
+						else if(stationMask=="255.255.255.0")
+							stationMask="24";
+						else if(stationMask=="255.255.255.128")
+							stationMask="25";
+						else if(stationMask=="255.255.255.192")
+							stationMask="26";
+						else if(stationMask=="255.255.255.224")
+							stationMask="27";
+						else if(stationMask=="255.255.255.240")
+							stationMask="28";
+						else if(stationMask=="255.255.255.248")
+							stationMask="29";
+						else if(stationMask=="255.255.255.252")
+							stationMask="30";
 					}										
 				}
 				cont_mininet++;
-				sh = "    sta"+ob.name.slice(8,10)+" = net.addStation( 'sta"+ob.name.slice(8,10)+"' )@@";
+				sh = "    sta"+ob.name.slice(8,10)+" = net.addStation( 'sta"+ob.name.slice(8,10)+"', ip='"+stationIPAddress+"/"+stationMask+"' )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -525,13 +518,13 @@ public function exportMininetScriptFile():void {
 				
 				if(isLocal=="true"){
 					cont_mininet++;
-					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', controller=Controller )@@";
+					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"' )@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);	
 				}					
 				else{
 					cont_mininet++;
-					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', controller=RemoteController, ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
+					sh = "    c"+ob.name.slice(11,13)+" = net.addController( 'c"+ob.name.slice(11,13)+"', ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}

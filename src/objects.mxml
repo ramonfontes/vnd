@@ -1481,6 +1481,7 @@
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1501,6 +1502,7 @@
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1531,8 +1533,9 @@
 									tb3 = new ComboBox();
 									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueComputerMacAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
+										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1550,6 +1553,7 @@
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1565,7 +1569,9 @@
 									tb3 = new ComboBox();
 									if(parentApplication.getValueComputerIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpDestination1 = parentApplication.getValueComputerIPAddress;//.split(",");
+										obj.arrayIpDestination1 = parentApplication.getValueComputerIPAddress;
+										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueStationIPAddress);//.split(",");
 										obj.arrayIpDestination1 = obj.arrayIpDestination1.concat("none");
 										tb3.dataProvider = obj.arrayIpDestination1;
 									}
@@ -1582,7 +1588,9 @@
 									//obj.arrayIpSource1 = new Array();
 									if(parentApplication.getValueComputerIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;//.split(",");
+										obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;
+										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueStationIPAddress);
 										//obj.arrayIpSource1.pop();
 										obj.arrayIpSource1 = obj.arrayIpSource1.concat("none");
 										tb3.dataProvider = obj.arrayIpSource1;
@@ -1601,7 +1609,9 @@
 									tb3 = new ComboBox();
 									if(parentApplication.getValueComputerIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpDestination1 = parentApplication.getValueComputerIPAddress;//.split(",");
+										obj.arrayIpDestination1 = parentApplication.getValueComputerIPAddress;
+										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueStationIPAddress);//.split(",");
 										obj.arrayIpDestination1 = obj.arrayIpDestination1.concat("none");
 										tb3.dataProvider = obj.arrayIpDestination1;
 									}
@@ -1617,7 +1627,9 @@
 									tb3 = new ComboBox();
 									if(parentApplication.getValueComputerIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;//.split(",");
+										obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;
+										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueStationIPAddress);
 										obj.arrayIpSource1 = obj.arrayIpSource1.concat("none");
 										tb3.dataProvider = obj.arrayIpSource1;
 									}
@@ -2731,10 +2743,12 @@
 							frmItem.label = "Station IP Address";
 							tb.width=100;
 							tb.maxChars=15;
-							tb.text="192.168.0."+ab;
+							tb.text="10.0.0."+ab;
 							lable.text=lable.text+" - "+tb.text;
 							parentApplication.getValueStationIPAddress.push(tb.text);
+							parentApplication.getValueComputerIPAddress.push(tb.text);
 							obj.arrayStationIPAddress1[ye]=tb.text;
+							
 							obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}

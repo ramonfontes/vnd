@@ -24,11 +24,11 @@ public function result(re:ResultEvent):void{
 		xmlList.appendChild(xmlList2);
 	}		      	 
 	objectsXml.appendChild(xmlList);
-	
+		
 	for(var i:int;i<qosArrayCollection.length;i++){
 		names.push(qosArrayCollection[i].name);
 	}
-		
+	
 	objectsArrayCollection=re.result.nsdlObjects.objects.category;
 	var s:String;
 	var xmlList2:XMLList;		
@@ -43,8 +43,7 @@ public function result(re:ResultEvent):void{
 			xmlList.appendChild(xmlList2);
 		}		
 		objectsXml.appendChild(xmlList);			
-	}
-	
+	}	
 	allnames = names;
 } 
 		    
