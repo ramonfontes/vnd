@@ -158,18 +158,9 @@ public function exportMininetScriptFile():void {
 					if(j==0){
 						if((obLink.can.source.name.slice(0,7)=="Station"&&(obLink.can.destination.name.slice(0,7)=="Station"))){
 							cont_mininet++;
-							sh = "    net = Mininet( wirelessRadios="+nRadios+", waitTime=10 )@@";
+							sh = "    net = Mininet( )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
-							
-							cont_mininet++;
-							sh = "   #wirelessRadios = Number of STAs + APs@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-							cont_mininet++;
-							sh = "   #waitTime = Time (sec) necessary to connect STAs in Ad-hoc mode (it depends of each device)@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet)
 						}
 						else{
 							for(p=0;p<dropCanvas.numChildren;p++){	
@@ -197,13 +188,13 @@ public function exportMininetScriptFile():void {
 							}
 							if(isLocal=="true"){
 							cont_mininet++;
-							sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=Controller, link=TCLink, switch="+switch_+" )@@";
+							sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 							}
 							else{
 								cont_mininet++;
-								sh = "    net = Mininet( wirelessRadios="+nRadios+", controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+								sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
 								objeto_mininet=sh;
 								temp_mininet.addItem(objeto_mininet);
 							}
@@ -552,6 +543,8 @@ public function exportMininetScriptFile():void {
 					if (obLink.can.source.name.slice(0,12)=="Access Point" && obLink.can.destination.name.slice(0,12)=="Access Point"){
 						cont_mininet++;
 						sh = "    net.addLink(ap"+obLink.can.source.name.slice(13,15)+", ap"+obLink.can.destination.name.slice(13,15)+", "+obLink.can.sourcePort+", "+obLink.can.destinationPort+",";
+						objeto_mininet=sh;
+						temp_mininet.addItem(objeto_mininet);
 					}
 					else if (obLink.can.source.name.slice(0,12)=="Access Point" && obLink.can.destination.name.slice(0,6)=="Switch"){
 						cont_mininet++;
@@ -626,7 +619,8 @@ public function exportMininetScriptFile():void {
 						else if(obLink.can.destination.name.slice(0,12)=="Access Point"){
 							cont_mininet++;
 							sh = "    net.addLink(h"+obLink.can.source.name.slice(9,11)+", ap"+obLink.can.destination.name.slice(13,15)+", "+0+", "+obLink.can.destinationPort+",";
-						}							
+						}
+						
 							
 						if(obLink.can.bw!=null&&obLink.can.bw!="default")
 							sh=sh.concat(" bw="+obLink.can.bw+",");	
@@ -749,6 +743,24 @@ public function exportMininetScriptFile():void {
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						stations.push("sta"+obLink.can.destination.name.slice(8,10))
+					}
+				}
+				else if((obLink.can.source.name.slice(0,7)=="Station" && obLink.can.destination.name.slice(0,8)=="Computer") || (obLink.can.source.name.slice(0,8)=="Computer" && obLink.can.destination.name.slice(0,7)=="Station")){
+					if(obLink.can.source.name.slice(0,8)=="Computer"){
+						cont_mininet++;
+						sh = "    net.addLink(h"+obLink.can.source.name.slice(9,11)+", sta"+obLink.can.destination.name.slice(8,10)+",";
+						sh=sh.substring(0, sh.length-1);
+						sh=sh.concat(")@@");						
+						objeto_mininet=sh;
+						temp_mininet.addItem(objeto_mininet);
+					}
+					if(obLink.can.source.name.slice(0,7)=="Station"){	
+						cont_mininet++;
+						sh = "    net.addLink(sta"+obLink.can.source.name.slice(8,10)+", h"+obLink.can.destination.name.slice(9,11)+",";
+						sh=sh.substring(0, sh.length-1);
+						sh=sh.concat(")@@");						
+						objeto_mininet=sh;
+						temp_mininet.addItem(objeto_mininet);
 					}
 				}
 			}

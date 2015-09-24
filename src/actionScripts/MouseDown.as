@@ -83,8 +83,7 @@ private function mUp(event:MouseEvent):void {
 			||dst=="Smartphone"&&src=="Controller"||src=="Smartphone"&&dst=="Controller"
 			||dst=="Smartphone"&&src=="Switch"||src=="Smartphone"&&dst=="Switch"
 			||dst=="Smartphone"&&src=="Access Point"||src=="Smartphone"&&dst=="Access Point"
-			||src=="Station"&&dst=="Controller"
-			||src=="Controller"&&dst=="Station"||src=="Computer"&&dst=="Station"||src=="Station"&&dst=="Computer"){
+			||src=="Station"&&dst=="Controller"||src=="Controller"&&dst=="Station"){
 		Alert.show("You cannot connect these devices!");
 		src="";
 		dst="";
