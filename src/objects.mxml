@@ -174,6 +174,8 @@
 					obj.id="stationIPAddress";
 				else if(eve.target.parent.label=="Station MAC Address")
 					obj.id="stationMacAddress";
+				else if(eve.target.parent.label=="Number of Wireless Interfaces")
+					obj.id="numberofradios";
 				else if(eve.target.parent.label=="Station Mask")
 					obj.id="stationmask";
 				else if(eve.target.parent.label=="Controller Port")
@@ -1350,6 +1352,12 @@
 										obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
 									}
 								}
+								if(obj.name=="numberofradios"){
+									frmItem.label = "Number of Wireless Interfaces";							
+									tb.width=30;
+									tb.maxChars=2;
+									obj.arrayNumberofRadios[ye]=tb.text;
+								}								
 								//-------------------------------------------------------------------------------
 								//SwitchOpenflow Configuration---------------------------------------------------
 								if(obj.name=="switchMacAddress"){
@@ -1395,8 +1403,7 @@
 								}					
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
-								form.addChild(frmItem);
-								
+								form.addChild(frmItem);								
 							}
 								
 							else if(obj.id=='boolean'){
@@ -2778,6 +2785,14 @@
 							obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}	
+						else if(obj.name=="numberofradios"){
+							frmItem.label = "Number of Wireless Interfaces";
+							tb.width=30;
+							tb.maxChars=2;
+							tb.text="1"
+							obj.arrayNumberofRadios[ye]=tb.text;
+							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+						}	
 						frmItem.addChild(tb);
 						form.addChild(frmItem);
 					}
@@ -3001,12 +3016,12 @@
 				dispatchEvent(muev);
 			}
 			
-			public function setX(x:String):void {          
-				this.x=int(x);             
+			public function setX(x:String):void {      
+				this.x=int(y);       
 			}
 			
 			public function setY(y:String):void {
-				this.y=int(y);             
+				this.y=int(y);       
 			}												
 			
 			//-----------------------------------------------------------------------------------------------------------

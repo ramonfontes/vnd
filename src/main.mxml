@@ -42,6 +42,8 @@
 			public var countNumber3:int=1;
 			public var listqosScenarioMaxRate:String;
 			public var listqosScenarioMinRate:String;
+			public var posX:Array = [];
+			public var posY:Array = [];
 			public var listqosMaxRate:Array = [];
 			public var listqosMinRate:Array = [];
 			public var listqosInterface:Array = [];
@@ -1128,7 +1130,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 09/22/15" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 2015/10/08" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

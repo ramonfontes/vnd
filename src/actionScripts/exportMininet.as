@@ -23,8 +23,10 @@ public function exportMininetScriptFile():void {
 	var computerIPAddress:String;
 	var stationIPAddress:String;
 	var arrayStationPassword:String;
+	var arrayNumberOfRadios:String;
 	var arrayStationSSID:String;
 	var computerMacAddress:String;
+	var stationMacAddress:String;
 	var controllerPort:String;
 	var countControllerSource:String;
 	var countControllerDestination:String;
@@ -278,13 +280,16 @@ public function exportMininetScriptFile():void {
 						stationIPAddress = obj.arrayStationIPAddress1[ye];
 					}	
 					else if(obj.name=="stationMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						stationMacAddress = obj.arrayStationMacAddress1[ye];
 					}
 					else if(obj.name=="stationSSID"){												
 						arrayStationSSID = obj.arrayStationSSID1[ye];
 					}
 					else if(obj.name=="stationpassword"){												
 						arrayStationPassword = obj.arrayStationPassword1[ye];
+					}
+					else if(obj.name=="numberofradios"){												
+						arrayNumberOfRadios = obj.arrayNumberofRadios[ye];
 					}
 					else if(obj.name=="stationmask"){												
 						stationMask = obj.arrayStationMask[ye];
@@ -337,7 +342,7 @@ public function exportMininetScriptFile():void {
 					}										
 				}
 				cont_mininet++;
-				sh = "    sta"+ob.name.slice(8,10)+" = net.addStation( 'sta"+ob.name.slice(8,10)+"', ip='"+stationIPAddress+"/"+stationMask+"' )@@";
+				sh = "    sta"+ob.name.slice(8,10)+" = net.addStation( 'sta"+ob.name.slice(8,10)+"', wlans="+arrayNumberOfRadios+", mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"' )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -729,7 +734,7 @@ public function exportMininetScriptFile():void {
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);				
 				}
-				else if((obLink.can.source.name.slice(0,7)=="Station"&&(obLink.can.destination.name.slice(0,7)=="Station"))){
+				else if(obLink.can.lineName=="wireless" && obLink.can.source.name.slice(0,7)=="Station" && obLink.can.destination.name.slice(0,7)=="Station"){
 					if(stations.indexOf("sta"+obLink.can.source.name.slice(8,10))==-1){
 						cont_mininet++;
 						sh = "    net.addHoc(sta"+obLink.can.source.name.slice(8,10)+", 'adhocNet', 'g') #node, ssid, mode@@";
@@ -744,6 +749,14 @@ public function exportMininetScriptFile():void {
 						temp_mininet.addItem(objeto_mininet);
 						stations.push("sta"+obLink.can.destination.name.slice(8,10))
 					}
+				}
+				else if(obLink.can.lineName=="fiber" || obLink.can.lineName=="ethernet" && obLink.can.source.name.slice(0,7)=="Station" && obLink.can.destination.name.slice(0,7)=="Station"){
+					cont_mininet++;
+					sh = "    net.addLink(sta"+obLink.can.destination.name.slice(8,10)+", sta"+obLink.can.source.name.slice(8,10)+",";
+					sh=sh.substring(0, sh.length-1);
+					sh=sh.concat(")@@");						
+					objeto_mininet=sh;
+					temp_mininet.addItem(objeto_mininet);
 				}
 				else if((obLink.can.source.name.slice(0,7)=="Station" && obLink.can.destination.name.slice(0,8)=="Computer") || (obLink.can.source.name.slice(0,8)=="Computer" && obLink.can.destination.name.slice(0,7)=="Station")){
 					if(obLink.can.source.name.slice(0,8)=="Computer"){

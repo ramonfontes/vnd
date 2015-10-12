@@ -72,6 +72,8 @@ package
 		public var arrayStationMacAddress1:Array=[];
 		public var arrayStationPassword:Array=[];
 		public var arrayStationPassword1:Array=[];
+		public var arrayNumberofRadios:Array=[];
+
 		
 		//SWitch
 		public var arraySwitch:String;

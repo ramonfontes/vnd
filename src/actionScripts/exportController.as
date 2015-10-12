@@ -777,7 +777,7 @@ public function exportControllerScriptFile():void {
 									objeto_openflow_controller=sh2;
 									temp_openflow_controller.addItem(objeto_openflow_controller);
 									counter++;
-									sh2 = "        path = '/wm/staticflowentrypusher/json'@@";
+									sh2 = "        path = '/wm/staticflowpusher/json'@@";
 									objeto_openflow_controller=sh2;
 									temp_openflow_controller.addItem(objeto_openflow_controller);
 									counter++;
@@ -863,25 +863,25 @@ public function exportControllerScriptFile():void {
 									}
 									if(ingressPort!="undefined"&&ingressPort!=""&&ingressPort!="null"){
 										counter++;
-										sh2 = "    \"ingress-port\":"+"\""+ingressPort+"\""+",@@";
+										sh2 = "    \"in_port\":"+"\""+ingressPort+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
 									if(macSource!="undefined"&&macSource!="0"&&macSource!=""&&macSource!="none"&&macSource!="null"){
 										counter++;
-										sh2 = "    \"src-mac\":"+"\""+macSource+"\""+",@@";
+										sh2 = "    \"eth_src\":"+"\""+macSource+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
 									if(macDestination!="undefined"&&macDestination!="0"&&macDestination!=""&&macDestination!="none"&&macDestination!="null"){
 										counter++;
-										sh2 = "    \"dst-mac\":"+"\""+macDestination+"\""+",@@";
+										sh2 = "    \"eth_dst\":"+"\""+macDestination+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
 									if(vlanID!="undefined"&&vlanID!="0"&&vlanID!=""&&vlanID!="null"&&vlanID!="no"&&vlanID!="none"){
 										counter++;
-										sh2 = "    \"vlan-id\":"+"\""+vlanID+"\""+",@@";
+										sh2 = "    \"eth_vlan_vid\":"+"\""+vlanID+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
@@ -893,7 +893,7 @@ public function exportControllerScriptFile():void {
 									}
 									if(ethtype!="undefined"&&ethtype!="0"&&ethtype!=""){
 										counter++;
-										sh2 = "    \"ether-type\":"+"\""+ethtype+"\""+",@@";
+										sh2 = "    \"eth_type\":"+"\""+ethtype+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
@@ -911,25 +911,25 @@ public function exportControllerScriptFile():void {
 									}
 									if(ipSource!="undefined"&&ipSource!="0"&&ipSource!=""&&ipSource!="none"&&ipSource!="null"){
 										counter++;
-										sh2 = "    \"src-ip\":"+"\""+ipSource+"\""+",@@";
+										sh2 = "    \"ipv4_src\":"+"\""+ipSource+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
 									if(ipDestination!="undefined"&&ipDestination!="0"&&ipDestination!=""&&ipDestination!="none"&&ipDestination!="null"){
 										counter++;
-										sh2 = "    \"dst-ip\":"+"\""+ipDestination+"\""+",@@";
+										sh2 = "    \"ipv4_dst\":"+"\""+ipDestination+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}											
 									if(sourcePort!="undefined"&&sourcePort!="0"&&sourcePort!=""){
 										counter++;
-										sh2 = "    \"src-port\":"+"\""+sourcePort+"\""+",@@";
+										sh2 = "    \"tp_src\":"+"\""+sourcePort+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
 									if(destinationPort!="undefined"&&destinationPort!="0"&&destinationPort!=""){
 										counter++;
-										sh2 = "    \"dst-port\":"+"\""+destinationPort+"\""+",@@";
+										sh2 = "    \"tp_dst\":"+"\""+destinationPort+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}	
@@ -943,34 +943,34 @@ public function exportControllerScriptFile():void {
 										sh2=sh2.concat("set-vlan-priority="+setVLANPriority+",");
 									}
 									if(setVlanID!="undefined"&&setVlanID!="0"&&setVlanID!=""&&setVlanID!="null"&&setVlanID!="no"&&setVlanID!="none"){
-										sh2=sh2.concat("set-vlan-id="+setVlanID+",");
+										sh2=sh2.concat("set_vlan_vid="+setVlanID+",");
 									}
 									if(setSourcePort!="undefined"&&setSourcePort!="0"&&setSourcePort!=""){
-										sh2=sh2.concat("set-src-port="+setSourcePort+",");
+										sh2=sh2.concat("set_tp_src="+setSourcePort+",");
 									}
 									if(setDestinationPort!="undefined"&&setDestinationPort!="0"&&setDestinationPort!=""){
-										sh2=sh2.concat("set-dst-port="+setDestinationPort+",");
+										sh2=sh2.concat("set_tp_dst="+setDestinationPort+",");
 									}												
 									if(setIPSource!="undefined"&&setIPSource!="0"&&setIPSource!=""&&setIPSource!="none"&&setIPSource!="null"){
-										sh2=sh2.concat("set-src-ip="+setIPSource+",");
+										sh2=sh2.concat("set_ipv4_src="+setIPSource+",");
 									}
 									if(setIPDestination!="undefined"&&setIPDestination!="0"&&setIPDestination!=""&&setIPDestination!="none"&&setIPDestination!="null"){
-										sh2=sh2.concat("set-dst-ip="+setIPDestination+",");
+										sh2=sh2.concat("set_ipv4_dst="+setIPDestination+",");
 									}
 									if(setMACSource!="undefined"&&setMACSource!="0"&&setMACSource!=""&&setMACSource!="none"&&setMACSource!="null"){
-										sh2=sh2.concat("set-src-mac="+setMACSource+",");
+										sh2=sh2.concat("set_eth_src="+setMACSource+",");
 									}
 									if(setMACDestination!="undefined"&&setMACDestination!="0"&&setMACDestination!=""&&setMACDestination!="none"&&setMACDestination!="null"){
-										sh2=sh2.concat("set-dst-mac="+setMACDestination+",");
+										sh2=sh2.concat("set_eth_dst="+setMACDestination+",");
 									}		
 									if(setTOS!="undefined"&&setTOS!="0"&&setTOS!=""&&setTOS!="null"){
-										sh2=sh2.concat("set-tos-bits="+setTOS+",");
+										sh2=sh2.concat("set_ip_tos="+setTOS+",");
 									}	
 									if(setEnqueue!="undefined"&&setEnqueue!="0"&&setEnqueue!=""){
 										sh2=sh2.concat("enqueue="+setEnqueue+",");													
 									}
 									if(setStripVlan=="yes"){
-										sh2=sh2.concat("strip-vlan"+",");													
+										sh2=sh2.concat("strip_vlan"+",");													
 									}
 									if(setOutput!="0"&&setOutput!=""){
 										sh2=sh2.concat("output="+setOutput+",");
