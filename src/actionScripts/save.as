@@ -210,15 +210,15 @@ public function saveFile():void{
 							par.appendChild(xmlList);
 							
 							if(obj.name=="computerIPAddress"){
-								xmlList = XMLList("<name>"+obj.arrayComputerIPAddress1[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.IPAddress1[ye]+"</name>");
 								par.appendChild(xmlList);										
 							}
 							else if(obj.name=="mask"){
-								xmlList = XMLList("<name>"+obj.arrayComputerMask[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.MaskAddress[ye]+"</name>");
 								par.appendChild(xmlList);		
 							}
 							else if(obj.name=="computerMacAddress"){
-								xmlList = XMLList("<name>"+obj.arrayComputerMacAddress1[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.MacAddress1[ye]+"</name>");
 								par.appendChild(xmlList);		
 							}
 							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
@@ -243,15 +243,15 @@ public function saveFile():void{
 							par.appendChild(xmlList);
 							
 							if(obj.name=="stationIPAddress"){
-								xmlList = XMLList("<name>"+obj.arrayStationIPAddress1[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.IPAddress1[ye]+"</name>");
 								par.appendChild(xmlList);										
 							}
 							else if(obj.name=="stationmask"){
-								xmlList = XMLList("<name>"+obj.arrayStationMask[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.MaskAddress[ye]+"</name>");
 								par.appendChild(xmlList);		
 							}
 							else if(obj.name=="stationMacAddress"){
-								xmlList = XMLList("<name>"+obj.arrayStationMacAddress1[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.MacAddress1[ye]+"</name>");
 								par.appendChild(xmlList);		
 							}
 							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");

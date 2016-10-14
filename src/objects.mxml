@@ -4,7 +4,7 @@
 		 creationComplete="second()" creationPolicy="all"
 		 horizontalAlign="center" horizontalScrollPolicy="off" letterSpacing="0" textAlign="center"
 		 verticalAlign="middle" verticalGap="0" verticalScrollPolicy="off">
-	<mx:Zoom id="zoomAll" zoomHeightFrom="1" zoomHeightTo="2" zoomWidthFrom="1" zoomWidthTo="2"/>
+	<mx:Zoom id="zoomAll" zoomHeightFrom="1" zoomHeightTo="2.5" zoomWidthFrom="1" zoomWidthTo="2.5"/>
 	
 	<mx:Metadata>
 		[Event(name="defaultMoveEve")]
@@ -21,8 +21,8 @@
 	<mx:Metadata>
 		[Event(name="ChangedUpEveForComponent")]
 	</mx:Metadata>
-	<mx:Zoom id="myZoom" target="{this}" zoomHeightFrom="1.00" zoomHeightTo="2.00"
-			 zoomWidthFrom="1.00" zoomWidthTo="2.00"/>
+	<mx:Zoom id="myZoom" target="{this}" zoomHeightFrom="1.00" zoomHeightTo="2.50"
+			 zoomWidthFrom="1.00" zoomWidthTo="2.50"/>
 	<mx:Script>
 		<![CDATA[
 			import action_alert.HAlert;
@@ -40,6 +40,8 @@
 			import mx.controls.Text;
 			import mx.controls.TextInput;
 			import mx.events.FlexEvent;
+			import flash.display.Sprite;
+			import mx.core.UIComponent;
 			
 			public var contClick:int=0;
 			//ACTIONS FOR CONTROLLER
@@ -84,6 +86,8 @@
 			public var listTos:Array = new Array();
 			public var listProtocol:Array = new Array();
 			public var listEthType:Array = new Array();
+			public var circle:Sprite = new Sprite();
+			public var c:UIComponent = new UIComponent();
 			
 			public var valofcomboswitch:String;
 			public var valofcomboopenflowversion:String;
@@ -129,9 +133,13 @@
 			private var checkIp:Boolean=false;
 			private var confirmUpt:Boolean=false;
 			
-			public var aa:int=0;						
+			public var aa:int=0;
+			public var type:String;
+			public var nid:int;
+			public var range:int=0;
 			public var ye:int=-1;
-			public var xye:int=0;
+			public var xye:int=0;		
+			public var iface:int=0;
 			
 			public var exportControll:Boolean=false;			
 			[Bindable] public var listFlowName:Array = new Array();						
@@ -149,13 +157,15 @@
 			[Bindable] public var instancArray:ArrayCollection=new ArrayCollection();
 					
 			public function setFoc():void {
-				this.setStyle('backgroundColor',"#d0d0d0");
-				this.setStyle('backgroundAlpha',"0.44");
+				if (this.type != "Station" && this.type != "Access Point"){
+					this.setStyle('backgroundColor',"#00FFFF");
+					this.setStyle('backgroundAlpha',"0.3");
+				}
 			}
 			
 			public function removeFoc():void {
-				this.setStyle('backgroundColor',null);
-				this.setStyle('backgroundAlpha',"1");
+					this.setStyle('backgroundColor',null);
+					this.setStyle('backgroundAlpha',"1");
 			}	
 			
 			public function change(eve:Event):void {
@@ -234,6 +244,10 @@
 					obj.id="listeningPort";	
 				else if(eve.target.parent.label=="Router SSID")
 					obj.id="routerSSID";
+				else if(eve.target.parent.label=="AP Signal Range")
+					obj.id="routerRange";
+				else if(eve.target.parent.label=="Station Signal Range")
+					obj.id="stationRange";
 				else if(eve.target.parent.label=="Station SSID")
 					obj.id="stationSSID";
 				else if(eve.target.parent.label=="Switch MAC Address_")
@@ -1263,8 +1277,9 @@
 										tb.text=this.name;
 									lable.text=tb.text;
 								}						
-									//-------------------------------------------------------------------------------
-									//Controller Configuration-------------------------------------------------------
+	
+								//-------------------------------------------------------------------------------
+								//Controller Configuration-------------------------------------------------------
 								else if(obj.name=="controllerIPAddress"){
 									frmItem.label = "Controller IP Address";
 									tb.width=100;
@@ -1294,28 +1309,28 @@
 									lable.text=lable.text+" - "+tb.text;
 									///tb.editable=false;
 									tb.maxChars=17;
-									if(parentApplication.getValueComputerIPAddress.indexOf(tb.text)!=-1){									
+									if(parentApplication.getValueIPAddress.indexOf(tb.text)!=-1){									
 										checkIp=true;
-										obj.arrayComputerIPAddress = parentApplication.getValueComputerIPAddress;
+										obj.IPAddress = parentApplication.getValueIPAddress;
 									}
 									if(checkIp==false){
-										parentApplication.getValueComputerIPAddress.push(tb.text);
-										obj.arrayComputerIPAddress1[ye]=tb.text;
-										obj.arrayComputerIPAddress = parentApplication.getValueComputerIPAddress;
+										parentApplication.getValueIPAddress.push(tb.text);
+										obj.IPAddress1[ye]=tb.text;
+										obj.IPAddress = parentApplication.getValueIPAddress;
 									}
 								}
 								if(obj.name=="computerMacAddress"){
 									frmItem.label = "Computer MAC Address";							
 									tb.width=100;
 									tb.maxChars=17;
-									if(parentApplication.getValueComputerMacAddress.indexOf(tb.text)!=-1){									
+									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){									
 										checkMac=true;								
-										obj.arrayComputerMacAddress = parentApplication.getValueComputerMacAddress;
+										obj.MacAddress = parentApplication.getValueMacAddress;
 									}
 									if(checkMac==false){
-										parentApplication.getValueComputerMacAddress.push(tb.text);
-										obj.arrayComputerMacAddress1[ye]=tb.text;
-										obj.arrayComputerMacAddress = parentApplication.getValueComputerMacAddress;
+										parentApplication.getValueMacAddress.push(tb.text);
+										obj.MacAddress1[ye]=tb.text;
+										obj.MacAddress = parentApplication.getValueMacAddress;
 									}
 								}
 								//-------------------------------------------------------------------------------
@@ -1328,28 +1343,28 @@
 									lable.text=lable.text+" - "+tb.text;
 									///tb.editable=false;
 									tb.maxChars=17;
-									if(parentApplication.getValueStationIPAddress.indexOf(tb.text)!=-1){									
+									if(parentApplication.getValueIPAddress.indexOf(tb.text)!=-1){									
 										checkIp=true;
-										obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
+										obj.IPAddress = parentApplication.getValueIPAddress;
 									}
 									if(checkIp==false){
-										parentApplication.getValueStationIPAddress.push(tb.text);
-										obj.arrayStationIPAddress1[ye]=tb.text;
-										obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
+										parentApplication.getValueIPAddress.push(tb.text);
+										obj.IPAddress1[ye]=tb.text;
+										obj.IPAddress = parentApplication.getValueIPAddress;
 									}
 								}
 								if(obj.name=="stationMacAddress"){
 									frmItem.label = "Station MAC Address";							
 									tb.width=100;
 									tb.maxChars=17;
-									if(parentApplication.getValueStationMacAddress.indexOf(tb.text)!=-1){									
+									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){									
 										checkMac=true;								
-										obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
+										obj.MacAddress = parentApplication.getValueMacAddress;
 									}
 									if(checkMac==false){
-										parentApplication.getValueStationMacAddress.push(tb.text);
-										obj.arrayStationMacAddress1[ye]=tb.text;
-										obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
+										parentApplication.getValueMacAddress.push(tb.text);
+										obj.MacAddress1[ye]=tb.text;
+										obj.MacAddress = parentApplication.getValueMacAddress;
 									}
 								}
 								if(obj.name=="numberofradios"){
@@ -1357,14 +1372,28 @@
 									tb.width=30;
 									tb.maxChars=2;
 									obj.arrayNumberofRadios[ye]=tb.text;
-								}								
+								}				
+								if(obj.name=="stationRange"){
+									frmItem.label = "Station Signal Range";
+									tb.width=60;
+									tb.enabled=true;
+									tb.maxChars=10;
+	    							parentApplication.getValueStationRange.push(tb.text);
+									obj.range1[ye]=tb.text;
+									this.range=parseInt(tb.text);
+									updateCircle()
+									obj.range = parentApplication.getValueStationRange;
+								}					
+								tb.addEventListener(Event.CHANGE,change);
+								frmItem.addChild(tb);
+								form.addChild(frmItem);
 								//-------------------------------------------------------------------------------
 								//SwitchOpenflow Configuration---------------------------------------------------
 								if(obj.name=="switchMacAddress"){
 									frmItem.label = "Switch MAC Address";
 									tb.width=100;
 									tb.enabled=true;
-									lable.text=lable.text+" - "+tb.text;
+									//lable.text=lable.text+" - "+tb.text;
 									tb.maxChars=17;
 									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){
 										checkMac=true;
@@ -1381,7 +1410,7 @@
 									frmItem.label = "Listening Port";
 									tb.width=60;
 									tb.enabled=true;
-									lable.text=lable.text+":"+tb.text;
+									//lable.text=lable.text+":"+tb.text;
 									tb.maxChars=5;
 									parentApplication.getValueListenPort.push(tb.text);
 									obj.arrayListenPortSwitch1[ye]=tb.text;
@@ -1393,9 +1422,9 @@
 								
 								if(obj.name=="routerSSID"){
 									frmItem.label = "Router SSID";
-									tb.width=60;
+									tb.width=100;
 									tb.enabled=true;
-									lable.text=lable.text+" - "+tb.text;
+									lable.text=lable.text+":"+tb.text;
 									tb.maxChars=10;
 									parentApplication.getValueRouterSSID.push(tb.text);
 									obj.arrayRouterSSID1[ye]=tb.text;
@@ -1403,7 +1432,22 @@
 								}					
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
-								form.addChild(frmItem);								
+								form.addChild(frmItem);	
+								
+								if(obj.name=="routerRange"){
+									frmItem.label = "AP Signal Range";
+									tb.width=60;
+									tb.enabled=true;
+									tb.maxChars=5;
+									parentApplication.getValueRouterRange.push(tb.text);
+									obj.range1[ye]=tb.text;
+									this.range=parseInt(tb.text);
+									updateCircle()
+									obj.range = parentApplication.getValueRouterRange;
+								}					
+								tb.addEventListener(Event.CHANGE,change);
+								frmItem.addChild(tb);
+								form.addChild(frmItem);	
 							}
 								
 							else if(obj.id=='boolean'){
@@ -1484,11 +1528,10 @@
 									frmItem.label = "Source MAC";								
 									tb3 = new ComboBox();
 									//obj.arrayMacSwitch = new Array();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueComputerMacAddress!=[]){
+									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1505,11 +1548,10 @@
 									frmItem.label = "Destination MAC";
 									tb3 = new ComboBox();
 									//obj.arrayMacSwitch = new Array();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueComputerMacAddress!=[]){
+									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1538,11 +1580,10 @@
 									frmItem.direction = "horizontal";
 									frmItem.label = "Set Source MAC"; 
 									tb3 = new ComboBox();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueComputerMacAddress!=[]){
+									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1556,11 +1597,10 @@
 									frmItem.direction = "horizontal";
 									frmItem.label = "Set Destination MAC"; 
 									tb3 = new ComboBox();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueComputerMacAddress!=[]){
+									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
 										tb3.selectedIndex=-1;
 										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueComputerMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueStationMacAddress);
+										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
@@ -1574,10 +1614,10 @@
 									frmItem.direction = "horizontal";
 									frmItem.label = "Destination IP"; 
 									tb3 = new ComboBox();
-									if(parentApplication.getValueComputerIPAddress!=[]){
+									if(parentApplication.getValueIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpDestination1 = parentApplication.getValueComputerIPAddress;
-										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										obj.arrayIpDestination1 = parentApplication.getValueIPAddress;
+										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueIPAddress);//.split(",");
 										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueStationIPAddress);//.split(",");
 										obj.arrayIpDestination1 = obj.arrayIpDestination1.concat("none");
 										tb3.dataProvider = obj.arrayIpDestination1;
@@ -1593,10 +1633,10 @@
 									frmItem.label = "Source IP"; 
 									tb3 = new ComboBox();
 									//obj.arrayIpSource1 = new Array();
-									if(parentApplication.getValueComputerIPAddress!=[]){
+									if(parentApplication.getValueIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;
-										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										obj.arrayIpSource1 = parentApplication.getValueIPAddress;
+										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueIPAddress);//.split(",");
 										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueStationIPAddress);
 										//obj.arrayIpSource1.pop();
 										obj.arrayIpSource1 = obj.arrayIpSource1.concat("none");
@@ -1614,10 +1654,10 @@
 									frmItem.direction = "horizontal";
 									frmItem.label = "Set Destination IP"; 
 									tb3 = new ComboBox();
-									if(parentApplication.getValueComputerIPAddress!=[]){
+									if(parentApplication.getValueIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpDestination1 = parentApplication.getValueComputerIPAddress;
-										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										obj.arrayIpDestination1 = parentApplication.getValueIPAddress;
+										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueIPAddress);//.split(",");
 										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueStationIPAddress);//.split(",");
 										obj.arrayIpDestination1 = obj.arrayIpDestination1.concat("none");
 										tb3.dataProvider = obj.arrayIpDestination1;
@@ -1632,10 +1672,10 @@
 									frmItem.direction = "horizontal";
 									frmItem.label = "Set Source IP"; 
 									tb3 = new ComboBox();
-									if(parentApplication.getValueComputerIPAddress!=[]){
+									if(parentApplication.getValueIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;
-										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueComputerIPAddress);//.split(",");
+										obj.arrayIpSource1 = parentApplication.getValueIPAddress;
+										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueIPAddress);//.split(",");
 										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueStationIPAddress);
 										obj.arrayIpSource1 = obj.arrayIpSource1.concat("none");
 										tb3.dataProvider = obj.arrayIpSource1;
@@ -1716,7 +1756,7 @@
 								}
 								
 								if(obj.name=="mask"){
-									obj.arrayComputerMask[ye] = tb3.selectedItem;
+									obj.MaskAddress[ye] = tb3.selectedItem;
 									frmItem.label = "Computer Mask";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
@@ -1728,18 +1768,18 @@
 													tb3.selectedItem=valofcombocomputermask;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
-												obj.arrayComputerMask[ye]=tb3.selectedItem;
+												obj.MaskAddress[ye]=tb3.selectedItem;
 											}
 											else {
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.arrayComputerMask[ye] = tb3.selectedItem;
+												obj.MaskAddress[ye] = tb3.selectedItem;
 											}
 										}
 									}
 									tb3.addEventListener(Event.CHANGE,change);							
 								}
 								if(obj.name=="stationmask"){
-									obj.arrayStationMask[ye] = tb3.selectedItem;
+									obj.MaskAddress[ye] = tb3.selectedItem;
 									frmItem.label = "Station Mask";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
@@ -1751,11 +1791,11 @@
 													tb3.selectedItem=valofcombostationmask;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
-												obj.arrayStationMask[ye]=tb3.selectedItem;
+												obj.MaskAddress[ye]=tb3.selectedItem;
 											}
 											else {
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.arrayStationMask[ye] = tb3.selectedItem;
+												obj.MaskAddress[ye] = tb3.selectedItem;
 											}
 										}
 									}
@@ -2589,6 +2629,8 @@
 				if(this.name.slice(0,6)=="Switch"){
 					var checkifswitchopenflow:Boolean=true;
 					ab = int(this.name.slice(7,9));
+					this.type = "Switch";
+					this.nid = ab;
 					if(ab!=parentApplication.contSwitch){
 						parentApplication.contSwitch++;
 					}
@@ -2597,6 +2639,8 @@
 				if(this.name.slice(0,12)=="Access Point"){
 					checkifswitchopenflow=true;
 					ab = int(this.name.slice(13,15));
+					this.type = "Access Point";
+					this.nid = ab;
 					if(ab!=parentApplication.contSwitch){
 						parentApplication.contSwitch++;
 					}
@@ -2605,6 +2649,8 @@
 				if(this.name.slice(0,8)=="Computer"){
 					var checkifcomputer:Boolean=true;
 					ab = int(this.name.slice(9,11));
+					this.type = "Computer";
+					this.nid = ab;
 					if(ab!=parentApplication.contComputer){
 						parentApplication.contComputer++;
 					}
@@ -2613,13 +2659,18 @@
 				if(this.name.slice(0,7)=="Station"){
 					var checkifstation:Boolean=true;
 					ab = int(this.name.slice(8,10));
+					this.type = "Station";
+					this.nid = ab;
 					if(ab!=parentApplication.contStation){
 						parentApplication.contStation++;
 					}
+					
 				}	
 				
 				if(this.name.slice(0,10)=="Controller"){
 					ab = int(this.name.slice(11,13));
+					this.type = "Controller";
+					this.nid = ab;
 					if(ab!=parentApplication.contController){
 						parentApplication.contController++;
 					}
@@ -2629,6 +2680,32 @@
 				//parentApplication.paraArray=objparaArrayCol;
 				for(var i:int=0;i<objparaArrayCol.length;i++){
 					var obj:objParameter=objparaArrayCol[i];
+					
+					if(this.name.slice(0,6)=="Switch"){
+						obj.nid = int(this.name.slice(7,9));
+						obj.type = "Switch";
+						
+					}	
+					
+					if(this.name.slice(0,12)=="Access Point"){
+						obj.nid = int(this.name.slice(13,15));
+						obj.type = "Access Point";
+					}	
+					
+					if(this.name.slice(0,8)=="Computer"){
+						obj.nid = int(this.name.slice(9,11));
+						obj.type = "Computer";
+					}
+					
+					if(this.name.slice(0,7)=="Station"){
+						obj.nid = int(this.name.slice(8,10));
+						obj.type = "Station";
+					}	
+					
+					if(this.name.slice(0,10)=="Controller"){
+						obj.nid = int(this.name.slice(11, 13));
+						obj.type = "Controller";
+					}
 					
 					if(obj.id=='array'){						
 						var frmItem:FormItem = new FormItem();
@@ -2703,7 +2780,7 @@
 							parentApplication.getValueMacAddress.push(tb.text);
 							obj.arrayMacSwitch1[ye]=tb.text;
 							obj.arrayMacSwitch = parentApplication.getValueMacAddress;
-							lable.text=lable.text+" - "+tb.text;
+							//lable.text=lable.text+" - "+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="listeningPort"){
@@ -2719,7 +2796,7 @@
 							parentApplication.getValueListenPort.push(tb.text);														
 							obj.arrayListenPortSwitch1[ye]=tb.text;
 							obj.arrayListenPortSwitch = parentApplication.getValueListenPort;
-							lable.text=lable.text+":"+tb.text;
+							//lable.text=lable.text+":"+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="routerSSID"){
@@ -2727,11 +2804,35 @@
 							tb.enabled=true;
 							tb.width=100;
 							tb.maxChars=10;		
-							tb.text="new-ssid"
+							tb.text="new-ssid"+this.nid;
 							parentApplication.getValueRouterSSID.push(tb.text);														
 							obj.arrayRouterSSID1[ye]=tb.text;
 							obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
 							lable.text=lable.text+":"+tb.text;
+							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+						}
+						else if(obj.name=="routerRange"){
+							frmItem.label = "AP Signal Range";
+							tb.enabled=true;
+							tb.width=60;
+							tb.maxChars=5;		
+							tb.text="33"
+							parentApplication.getValueRouterRange.push(tb.text);	
+							obj.range1[ye]=tb.text;
+							this.range=parseInt(tb.text);
+							obj.range = parentApplication.getValueRouterRange;
+							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
+						}
+						else if(obj.name=="stationRange"){
+							frmItem.label = "Station Signal Range";
+							tb.enabled=true;
+							tb.width=60;
+							tb.maxChars=5;		
+							tb.text="18"
+	   						parentApplication.getValueStationRange.push(tb.text);														
+							obj.range1[ye]=tb.text;
+							this.range=parseInt(tb.text);
+							obj.range = parentApplication.getValueStationRange;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="computerIPAddress"){
@@ -2740,10 +2841,10 @@
 							tb.maxChars=15;
 							tb.text="10.0.0."+ab;
 							lable.text=lable.text+" - "+tb.text;
-							parentApplication.getValueComputerIPAddress.push(tb.text);
-							//obj.arrayIpSource1 = parentApplication.getValueComputerIPAddress;
-							obj.arrayComputerIPAddress1[ye]=tb.text;
-							obj.arrayComputerIPAddress = parentApplication.getValueComputerIPAddress;
+							parentApplication.getValueIPAddress.push(tb.text);
+							//obj.arrayIpSource1 = parentApplication.getValueIPAddress;
+							obj.IPAddress1[ye]=tb.text;
+							obj.IPAddress = parentApplication.getValueIPAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="stationIPAddress"){
@@ -2752,11 +2853,10 @@
 							tb.maxChars=15;
 							tb.text="10.0.0."+ab;
 							lable.text=lable.text+" - "+tb.text;
-							parentApplication.getValueStationIPAddress.push(tb.text);
-							parentApplication.getValueComputerIPAddress.push(tb.text);
-							obj.arrayStationIPAddress1[ye]=tb.text;
+							parentApplication.getValueIPAddress.push(tb.text);
+							obj.IPAddress1[ye]=tb.text;
 							
-							obj.arrayStationIPAddress = parentApplication.getValueStationIPAddress;
+							obj.IPAddress = parentApplication.getValueIPAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="computerMacAddress"){
@@ -2767,9 +2867,9 @@
 								tb.text="00:00:00:00:00:0"+ab;
 							else
 								tb.text="00:00:00:00:00:"+ab;	
-							parentApplication.getValueComputerMacAddress.push(tb.text);
-							obj.arrayComputerMacAddress1[ye]=tb.text;
-							obj.arrayComputerMacAddress = parentApplication.getValueComputerMacAddress;
+							parentApplication.getValueMacAddress.push(tb.text);
+							obj.MacAddress1[ye]=tb.text;
+							obj.MacAddress = parentApplication.getValueMacAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}	
 						else if(obj.name=="stationMacAddress"){
@@ -2780,9 +2880,9 @@
 								tb.text="00:02:00:00:00:0"+ab;
 							else
 								tb.text="00:02:00:00:00:"+ab;	
-							parentApplication.getValueStationMacAddress.push(tb.text);
-							obj.arrayStationMacAddress1[ye]=tb.text;
-							obj.arrayStationMacAddress = parentApplication.getValueStationMacAddress;
+							parentApplication.getValueMacAddress.push(tb.text);
+							obj.MacAddress1[ye]=tb.text;
+							obj.MacAddress = parentApplication.getValueMacAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}	
 						else if(obj.name=="numberofradios"){
@@ -2905,7 +3005,7 @@
 							tb3.selectedIndex=0;
 							frmItem.label = "Computer Mask"; 
 							frmItem.addChild(tb3);
-							obj.arrayComputerMask[ye] = tb3.selectedItem;	
+							obj.MaskAddress[ye] = tb3.selectedItem;	
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
 							form.addChild(frmItem);
 						}
@@ -2917,7 +3017,7 @@
 							tb3.selectedIndex=0;
 							frmItem.label = "Station Mask"; 
 							frmItem.addChild(tb3);
-							obj.arrayStationMask[ye] = tb3.selectedItem;	
+							obj.MaskAddress[ye] = tb3.selectedItem;	
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
 							form.addChild(frmItem);
 						}
@@ -3021,21 +3121,50 @@
 			}
 			
 			public function setY(y:String):void {
-				this.y=int(y);       
-			}												
+				this.y=int(y);
+			}				
 			
+			private function addChildToPanel():void {
+				if (this.name.slice(0,12) == "Access Point" || this.name.slice(0,7) == "Station"){
+					var r:int = 0;
+					if (this.name.slice(0,12) == "Access Point"){
+						r = 33;
+						circle.graphics.beginFill(0x1858FE, 0.4);
+					}
+					else if (this.name.slice(0,7) == "Station"){
+						r = 18;
+						circle.graphics.beginFill(0x428357, 0.4);
+					}						
+					circle.graphics.drawCircle(0, 20, r);				
+					c.addChild(circle);
+					panel1.addChild(c);
+				}
+			}
+			
+			private function updateCircle():void {
+				circle.graphics.clear();
+				if(this.type=='Station'){
+					circle.graphics.beginFill(0x428357, 0.4);
+				}
+				else{
+					circle.graphics.beginFill(0x1858FE, 0.4);
+				}
+				circle.graphics.drawCircle(0, 20, this.range);
+			}
+					
 			//-----------------------------------------------------------------------------------------------------------
 			//-----------------------------------------------------------------------------------------------------------
 		]]>
 	</mx:Script>
+	<mx:VBox id="panel1" height="0" width="0" add="addChildToPanel()" />
 	<mx:Image id="image" width="30" height="30" scaleContent="true" source="assets/{img}"/>
 	<mx:Label id="lable" height="16" fontFamily="Arial" fontSize="10" fontWeight="bold" text="{test}"/>
 	<mx:VBox id="can" visible="false" horizontalAlign="center" includeInLayout="false"
 			 paddingBottom="10" verticalAlign="middle">
 		<mx:Label height="20" fontFamily="Verdana" fontSize="12" fontWeight="bold"
-				  text="{lable.text}"/>
-		
+				  text="{lable.text}"/>		
 		<mx:HBox width="100%" horizontalAlign="center" paddingBottom="20">
+			<mx:Box cornerRadius="3" borderStyle="solid" borderColor="0x5F4C0B" backgroundColor="0x5F4C0B" width="6" height="6" />
 			<mx:Label fontSize="12" fontWeight="bold" text="Position"/>		
 			<mx:Label fontWeight="bold" text="x:"/>
 			<mx:TextInput id="positionx" width="42" change="setX(positionx.text)" editable="false"/>

@@ -24,7 +24,7 @@
        		}
 			
 			private function myLabel_initialize():void {
-			myLabel.htmlText = "<p align=\"center\">Visual Network Description - (SDN version) is a web-based graphical\n" +
+			myLabel.htmlText = "<p align=\"center\">Visual Network Description - (SDWN version) is a web-based graphical\n" +
 				"user interface for the authoring of generic and SDN Network Scenarios.\n" +
 				"VND allows to generate scripts for <b>Mininet</b> and <b>Openflow Controllers</b>.\n" +
 				"You can also import and export <b>NSDL</b> files.</p>";

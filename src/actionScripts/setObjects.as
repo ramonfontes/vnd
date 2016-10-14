@@ -14,20 +14,22 @@ public function setobject(eve:Event):void {
 		PopUpManager.removePopUp(popup_ob);
 	}
 	
-	if(eve.target.name.slice(0,8)=="Computer"||eve.target.name.slice(0,6)=="Switch"
-		||eve.target.name.slice(0,12)=="Access Point"||eve.target.name.slice(0,7)=="Station"
-		||eve.target.name.slice(0,5)=="fiber"||eve.target.name.slice(0,8)=="ethernet"
-		||eve.target.name.slice(0,8)=="wireless"||eve.target.name.slice(0,10)=="Smartphone"){
-		//PopUpManager.removePopUp(popup_ob);
+	if(eve.target.id=="Computer"||eve.target.id=="Switch"
+		||eve.target.id=="Access Point"||eve.target.id=="Station"
+		||eve.target.id=="fiber"||eve.target.id=="ethernet"
+		||eve.target.id=="wireless"||eve.target.id=="Smartphone"){
 		removeqospanel=true;
 	}
 	else
 		removeqospanel=true;
 	
+	
 	aa++;
 	if(ViewBool){		
 		if(focusobject!=null && viewfirstTime){
-			viewsObjects.addItem(focusobject);
+			if (eve.target.id!="Station" && eve.target.id!="Access Point"){
+				viewsObjects.addItem(focusobject);
+			}
 			viewfirstTime=false;
 		}	      	 
 		var bool:Boolean=false;
@@ -43,6 +45,7 @@ public function setobject(eve:Event):void {
 		setfocusforView();
 	}
 	else{  
+		if (eve.target.id!="Station" && eve.target.id!="Access Point"){
 		removefocusforView();
 		if(focusobject!=null){
 			focusobject.removeFoc();
@@ -52,9 +55,8 @@ public function setobject(eve:Event):void {
 		
 		focusobject=eve.target;
 		focusobject.setFoc();
+		}
 		popup_ob.Configurationpanel1.removeAllChildren();
-		//popup_ob.Qospanel.removeAllChildren();
-		//popup_ob.Queuepanel.removeAllChildren();
 		
 		var qos:Object=qos1;
 		var queue:Object=accessQueue;
@@ -67,25 +69,13 @@ public function setobject(eve:Event):void {
 		queue.visible=true;
 		queue.includeInLayout=true;
 		
-		//popup_ob.Queuepanel.addChild(queue as DisplayObject);	
-		//popup_ob.Qospanel.addChild(qos as DisplayObject);	
 		popup_ob.Configurationpanel1.addChild(pg as DisplayObject);	
 		
-		if (removeqospanel==true){
-			//popup_ob.canvasqos.enabled=false;
-			//popup_ob.canvasqueue.enabled=false;			
-		}
-		else if(removeqospanel==false){		
-			//popup_ob.canvasqos.enabled=true;
-			//popup_ob.canvasqueue.enabled=true;
-		}
 		popup_ob.Configurationpanel.selectedChild=popup_ob.canvasconfig;
 		
 		names = new Array();
-		//Alert.show(String(allnames.length))
 		for(i=0; i<allnames.length; i++){
 			objpar1.qosname[i]=allnames[i];
-			
 				
 			qos1.objparaArrayCol.addItem(objpar1);
 			accessQueue.objparaArrayCol.addItem(objpar1);
@@ -98,6 +88,7 @@ public function setobject2(ob:Object):void {
 		focusobject.removeFoc(); 			  
 		removeViewFocus1();
 	}
+	
 	focusobject=ob;
 	focusobject.setFoc();
 	var pg:Object;
@@ -114,6 +105,5 @@ public function setobject2(ob:Object):void {
 					names.push(allnames[i]);
 			}
 		}
-		
 	}
 }

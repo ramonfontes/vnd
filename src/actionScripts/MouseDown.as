@@ -1,47 +1,50 @@
 import flash.events.MouseEvent;
-
 import mx.controls.Alert;
 import mx.managers.CursorManager;
 	
-private var checkinport:Array=[];
-public var cont:int;
-public var cont1:int=0;
-public var np:int;
 public var src:String;
 public var dst:String;
-private var namme:String;
+private var source:String;
+private var srcPort:int=0;
 
 private function mdown(event:MouseEvent):void {
+	
 	if(event.target.className=='objects'){
 		    var lin:Object=linksArrayCollection[linkCombo.selectedIndex];
 			line=new Link(lin.color); 
 			line._objectSrc = event.target.id;
+			
 			if(line._objectSrc=="Computer"){
-				namme="Computer";
+				source="Computer";
+				srcPort = event.target.iface++;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Station"){
-				namme="Computer";
+				source="Station";
+				srcPort = event.target.iface++;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Smartphone"){
-				namme="Smartphone";
+				source="Smartphone";
 				cont_click++;
 			}
 			else if(line._objectSrc=="Access Point"){
-				namme="Access Point";
-				np=event.target.name.slice(13,15);	
+				source="Access Point";
+				event.target.iface++;
+				srcPort = event.target.iface;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Switch"){
-				namme="Switch";
-				np=event.target.name.slice(7,9);	
+				source="Switch";
+				event.target.iface++;
+				srcPort = event.target.iface;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Controller"){
-				namme="Controller";
+				source="Controller";
 				cont_click++;
 			}
+			
 
 			for(var z:int=0;z<lin.par.length;z++){
 		        var objpar:objParameter=new objParameter();
@@ -65,17 +68,16 @@ private function mdown(event:MouseEvent):void {
     }  
 }
         
-private function mMove(event:MouseEvent):void {	
-	//line.lineHeight=dropCanvas.mouseX;
- //   line.lineLength=event.localX;	
-	
-	//Alert.show(String(line.lineHeight=dropCanvas.mouseX));
-}
        
 private function mUp(event:MouseEvent):void {
 	var bool:Object=event.target; 
 	var objs:Array=dropCanvas.getChildren();
-	dst=event.target.id;
+	var label:String;
+	var iface_:String;
+	var dstPort:int;
+	dst=event.target.id;	
+	
+	
 	if(bool==obj||src=="Computer"&&dst=="Controller"||src=="Controller"&&dst=="Computer"
 		||(String(line)=="wireless"&&src=="Controller")||(String(line)=="wireless"&&dst=="Controller")
 			||(String(line)=="wireless"&&dst=="Switch")||(String(line)=="wireless"&&src=="Switch")
@@ -88,10 +90,7 @@ private function mUp(event:MouseEvent):void {
 		src="";
 		dst="";
 		cont_click=0;
-		var tempp:String=String(bool);
-		var tempp1:String=String(objs);
-		tempp=tempp.substring(tempp.length-18, tempp.length);
-		tempp1=tempp1.substring(tempp1.length-18, tempp1.length);
+		
 		line=null;
 		obj=null;
 		CursorManager.removeAllCursors();
@@ -106,70 +105,88 @@ private function mUp(event:MouseEvent):void {
 		 if(line!=null){ 
 			line.lineName=String(line);
 			line.can.lineName=line.lineName;
-			
-			if(checkinport[np]!=false)
-				checkinport[np]=isInport;
-			
-			if((namme=="Switch"||namme=="Access Point")&&dst!="Controller"&&String(line)!="wireless"){
-				line._switchDeviceDestination=np;
-				if(arrayContIfacesCheck[np]==undefined){
-					arrayContIfacesCheck[np]=1;
-					checkinport[np]=false;
-				}
-				else if(checkinport[np]==true&&arrayContIfacesCheck[np]!=undefined){
-					arrayContIfacesCheck[np]=arrayContIfacesCheck[np]+1;
-					checkinport[np]=false;
-				}
-				
-				cont=arrayContIfacesCheck[np];
-				line._switchPortSource=cont;
-				getInterfaces.push("s"+np+"-eth"+cont);
-				arrayContIfacesCheck[np]=cont+1;	
-				line.can.sourcePort=line._switchPortSource;
-			}			
-			else if(namme=="Computer"){
-				line._checkSource=true;
-				line._computerPort=0;
-			}
-			else if(namme=="Station"){
-				line._checkSource=true;
-				line._computerPort=0;
-			}
-			
 			line._objectDst = event.target.id;
-			if(line._objectDst=="Computer"){
-				line._checkSource=false;
-				line._computerPort=0;
-			}
-			else if(line._objectDst=="Station"){
-				line._checkSource=false;
-				line._computerPort=0;
-			}
-			else if((line._objectDst=="Switch"||line._objectDst=="Access Point")&&src!="Controller"&&String(line)!="wireless"){
-				if(line._objectDst=="Switch")
-					np=event.target.name.slice(7,9);	
-				else
-					np=event.target.name.slice(13,15);	
-				
-				if(checkinport[np]!=false)
-					checkinport[np]=isInport;
-				
-				line._switchDeviceSource=np;
-				
-				if(arrayContIfacesCheck[np]==undefined){
-					arrayContIfacesCheck[np]=1;
-					checkinport[np]=false;
+			
+			if((source=="Switch" || source=="Access Point") && dst!="Controller" && String(line) != "wireless"){
+				if (src == "Access Point"){
+					label = "ap";
+					iface_ = "eth";
 				}
-				else if(checkinport[np]==true&&arrayContIfacesCheck[np]!=undefined){
-					arrayContIfacesCheck[np]=arrayContIfacesCheck[np]+1;
-					checkinport[np]=false;
+				else if (src == "Switch"){
+					label = "s";
+					iface_ = "eth";
 				}
-				cont=arrayContIfacesCheck[np];
-				line._switchPortDestination=cont;	
-				getInterfaces.push("s"+np+"-eth"+cont);
-				arrayContIfacesCheck[np]=cont+1;	
-				line.can.destinationPort=line._switchPortDestination;
+				line.srcPort=srcPort;
+				line.can.sourcePort=line.srcPort;
+				//getInterfaces.push(label+np+iface_+srcPort);
+				
+				if (dst == "Station"){
+					label = "sta";
+					iface_ = "wlan";
+				}
+				else if (dst == "Computer"){
+					label = "h";
+					iface_ = "eth";
+				}
+				dstPort = event.target.iface++; 				
+				//getInterfaces.push(label+np+iface_+dstPort);
+				line.dstPort=dstPort;
+				line.can.destinationPort=line.dstPort;	
+				line._checkSource=true;
+			}	
+			else if(source=="Access Point" && dst=="Station" && String(line)=="wireless"){
+				line.srcPort=srcPort;
+				line.can.sourcePort=line.srcPort;
+				//getInterfaces.push("ap"+np+"-wlan"+srcPort);
+				
+				dstPort = event.target.iface++; 					
+				//getInterfaces.push("sta"+np+"-wlan"+dstPort);
+				line.dstPort=dstPort;
+				line.can.destinationPort=line.dstPort;	
+				line._checkSource=true;
+				
+			}	
+			else if(source=="Station" && dst=="Access Point" && String(line)=="wireless"){
+				line.srcPort=srcPort;
+				line.can.sourcePort=line.srcPort;
+				//getInterfaces.push("sta"+np+"-wlan"+srcPort);
+				
+				dstPort = event.target.iface++; 				
+				//getInterfaces.push("ap"+np+"-wlan"+dstPort);
+				line.dstPort=dstPort;
+				line.can.destinationPort=line.dstPort;	
+				line._checkSource=true;
+			}	
+			else if((source=="Station" || source=="Computer") && dst!="Controller" && String(line) != "wireless"){
+				if(dst == "Station"){
+					label = "sta";
+					iface_ = "wlan";
+				}
+				else if(dst == "Computer"){
+					label = "h";
+					iface_ = "eth";
+				}				
+				line.srcPort=srcPort; 
+				line.can.sourcePort=line.srcPort;
+				//getInterfaces.push(label+np+iface_+srcPort);
+				
+				if(src == "Access Point"){
+					label = "ap";
+					iface_ = "eth";
+				}
+				else if(src == "Switch"){
+					label = "s";
+					iface_ = "eth";
+				}
+				event.target.iface++; 
+				dstPort = event.target.iface; 				
+				//getInterfaces.push(label+np+iface_+dstPort);
+				line.dstPort=dstPort;
+				line.can.destinationPort=line.dstPort;	
+				line._checkSource=true;
 			}
+				
+
 			saveCurrentState(event);
 			line.lineLength=event.target.x+(event.target.width)/2;
             line.lineHeight=event.target.y+(event.target.height)/2;
@@ -179,8 +196,8 @@ private function mUp(event:MouseEvent):void {
 			line.can.destination=targ;//destination object
 			
             if(focusobject!=null){
-	        focusobject.removeFoc();
-	        focusobject=null;
+		        focusobject.removeFoc();
+		        focusobject=null;
 			}	        			
 			
 	        line.can.ini();			
@@ -193,7 +210,7 @@ private function mUp(event:MouseEvent):void {
             line.addEventListener(MouseEvent.MOUSE_DOWN,setobject);
             line.addEventListener(MouseEvent.MOUSE_DOWN,saveCurrentState);
 			line=null;
-			namme="";
+			source="";
 			cont_click=0;
 			src="";
 			dst="";

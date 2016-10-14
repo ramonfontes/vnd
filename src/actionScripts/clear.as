@@ -43,15 +43,14 @@ public function clear():void{
 	 arrayContIfacesCheck=[];
 	 contSwitch=0;
 	 contComputer=0;			
-	 getValueMacAddress=[];
 	 getValueListenPort=[];
 	 getValueRouterSSID=[]
 	 getValueStationSSID=[]
-	 getValueComputerIPAddress=[];
-	 getValueComputerMacAddress=[];
-	 getValueStationIPAddress=[];
-	 getValueStationMacAddress=[];
-	 namme="";
+	 getValueRouterRange=[]
+	 getValueStationRange=[]
+	 getValueIPAddress=[];
+	 getValueMacAddress=[];
+	 source="";
 	 isInport=false;
  }
                 

@@ -5,7 +5,9 @@ package
 	public class viewObjects{ 
 		public var objects:ArrayCollection=new ArrayCollection();
 	  	public var id:String;
-	  	public var name:String;		
+	  	public var name:String;	
+		public var nid:int;
+		public var type:String;
 		public function viewObjects()
 		{
 		}

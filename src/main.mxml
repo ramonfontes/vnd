@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:local="*" xmlns:bridge="bridge.*"
 				backgroundColor="#ffffff" backgroundGradientAlphas="[1.0, 1.0]"
-				backgroundGradientColors="[#EBE8D7,#EBE8D7]" creationComplete="ini()"
+				backgroundGradientColors="[#EBE8D7,#EBE8D7]" creationComplete="ini(),loadZoom()" 
 				creationPolicy="all" horizontalGap="0" layout="vertical" paddingBottom="5"
 				paddingLeft="0" paddingRight="0" paddingTop="0" preloader="preload.CustomPreloader"
 				verticalGap="0">
@@ -104,11 +104,10 @@
 			[Bindable] public var getValueListenPort:Array;
 			[Bindable] public var getValueRouterSSID:Array;
 			[Bindable] public var getValueStationSSID:Array;
-			[Bindable] public var getValueMacAddress:Array;//=new Array;
-			[Bindable] public var getValueComputerIPAddress:Array;
-			[Bindable] public var getValueComputerMacAddress:Array;
-			[Bindable] public var getValueStationIPAddress:Array;
-			[Bindable] public var getValueStationMacAddress:Array;
+			[Bindable] public var getValueMacAddress:Array;
+			[Bindable] public var getValueIPAddress:Array;
+			[Bindable] public var getValueStationRange:Array;
+			[Bindable] public var getValueRouterRange:Array;
 			[Bindable] public var contNumberOfInterfaces:int=0;			
 			[Bindable] public var temaplateArrcol:ArrayCollection;		    
 			[Bindable] private var saveXml:XML;
@@ -318,7 +317,7 @@
 									break;
 								}	
 								else if(obj.name=="computerMACAddress"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayComputerMacAddress[ye]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.MacAddress[ye]+"</"+obj.name+">");
 									xmlLi.appendChild(xmlList);
 									//checked=true;
 									//break;
@@ -390,13 +389,13 @@
 						checked=false;
 						if(ob.id=="Computer"){
 							if(obj.name=="mask"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayComputerMask[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.MaskAddress[ye]+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}								
 						}
 						else if(ob.id=="Station"){
 							if(obj.name=="stationmask"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayStationMask[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.MaskAddress[ye]+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}								
 						}
@@ -1120,7 +1119,7 @@
 		
 		<mx:TabNavigator height="100%" width="100%" backgroundColor="#F0F0E9" >
 			<mx:Canvas label="Network" width="100%" height="100%">			
-			<mx:Canvas width="2000" height="1000" horizontalScrollPolicy="off"
+			<mx:Canvas width="2000" height="1000" horizontalScrollPolicy="off" 
 					   doubleClickEnabled="true" doubleClick="invoqPopup()"
 					   dragEnter="dragEnterHandler(event);" id="dropCanvas"
        				   dragOver="dragOverHandler(event);" resize="resizeHandler(event)"
@@ -1130,7 +1129,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDN version)   Last Update: 2015/12/07" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDWN version)  Last Update: 2016/10/14" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

@@ -43,6 +43,13 @@ package{
 		public var _switchDeviceDestination:int;
 		public var lineName:String;
 		public var tf:TextFormat;
+		public var type:String;
+		public var nid:int;
+		public var iface:int=0;
+		
+		public var srcPort:int;
+		public var dstPort:int;
+
 				
 		public function Link(num:Number){  
 			super();
@@ -173,14 +180,22 @@ package{
 		}
 
 		private function draw(event:FlexEvent=null):void{
-		  	//can.obj=this.obj;
-		    //can.name=obj.name;
 			var origin:Point = new Point(beginX,beginY);
 			var destination:Point = new Point(lineLength,lineHeight);
 			
-			//var lineThickness:Number = 2;
 			var lineAlpha:Number = 1;			
 			graphics.clear();
+			
+			var uit:UITextField = new UITextField();
+			var myFormat:UITextFormat = new UITextFormat(this.systemManager);
+			myFormat.size = 12
+			myFormat.bold=true;
+			myFormat.color=0x0066ff;
+			uit.defaultTextFormat = myFormat;
+			uit.validateNow();
+			var matrix:Matrix = new Matrix();
+			var textBitmapData:BitmapData;
+			
 			if(lineName=="wireless"){
 				graphics.lineStyle(lineThickness,lineColor,0.25);
 				graphics.drawEllipse(origin.x,origin.y,10,10);
@@ -194,22 +209,37 @@ package{
 				graphics.drawEllipse((80*destination.x/100+origin.x-80*origin.x/100),(80*destination.y/100+origin.y-80*origin.y/100),10,10);
 				graphics.drawEllipse((90*destination.x/100+origin.x-90*origin.x/100),(90*destination.y/100+origin.y-90*origin.y/100),10,10);
 				graphics.drawEllipse(destination.x,destination.y,10,10);
+				
+				if(_objectSrc=="Station" && _objectDst=="Access Point"){
+					uit.text = String("wlan"+srcPort);
+					uit.width = 240;								
+					textBitmapData = ImageSnapshot.captureBitmapData(uit);
+					
+					matrix.tx=(20*destination.x/100+origin.x-20*origin.x/100)-20;
+					matrix.ty=(20*destination.y/100+origin.y-20*origin.y/100);
+					graphics.beginBitmapFill(textBitmapData,matrix,false);
+					graphics.lineStyle(0,0,0);
+					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
+					graphics.endFill();
+				}
+				else if(_objectSrc=="Access Point" && _objectDst=="Station"){
+					uit.text = String("wlan"+dstPort);
+					uit.width = 240;
+					textBitmapData = ImageSnapshot.captureBitmapData(uit);
+					matrix.tx=(80*destination.x/100+origin.x-80*origin.x/100)-30;
+					matrix.ty=(80*destination.y/100+origin.y-80*origin.y/100);
+					graphics.beginBitmapFill(textBitmapData,matrix,false);
+					graphics.lineStyle(0,0,0);
+					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
+					graphics.endFill();
+				}
 			}
 			else{
 				graphics.lineStyle(lineThickness,lineColor,lineAlpha);
 				graphics.moveTo(origin.x,origin.y);
 				graphics.lineTo(destination.x,destination.y);			
-			}
 			
-			var uit:UITextField = new UITextField();
-			var myFormat:UITextFormat = new UITextFormat(this.systemManager);
-			myFormat.size = 12
-			myFormat.bold=true;
-			myFormat.color=0x0066ff;
-			uit.defaultTextFormat = myFormat;
-			uit.validateNow();
-			var matrix:Matrix = new Matrix();
-			var textBitmapData:BitmapData;
+	
 			if(_objectSrc=="Computer" && _objectDst=="Computer"){
 				uit.text = String("eth"+_computerPort);
 				uit.width = 240;								
@@ -235,11 +265,9 @@ package{
 				graphics.endFill();
 				
 			}
-			else if(_objectSrc=="Computer" && _checkSource==true && lineName!="wireless"){
-				//uit.text = String("Computer Port:"+_computerPort+" - s"+_switchDeviceSource+"-eth"+(_switchPortDestination)+":("+_switchPortDestination+")");
-				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
+			else if((_objectSrc=="Computer" || _objectSrc=="Station") && _checkSource==true ){
 				
-				uit.text = String("eth"+_computerPort);
+				uit.text = String("eth"+srcPort);
 				uit.width = 240;								
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
 						
@@ -251,7 +279,7 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 				
-				uit.text = String("eth"+(_switchPortDestination)+"("+_switchPortDestination+")");
+				uit.text = String("eth"+(dstPort)+"("+dstPort+")");
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -263,9 +291,8 @@ package{
 				graphics.endFill();
 				
 			}
-			else if(_objectDst=="Computer" && _checkSource==false && lineName!="wireless"){
-				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));
-				uit.text = String("eth"+(_switchPortSource)+"("+_switchPortSource+")");
+			else if((_objectDst=="Computer" || _objectDst=="Station") && _checkSource==true ){
+				uit.text = String("eth"+(srcPort)+"("+srcPort+")");
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
 				
@@ -277,7 +304,7 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 				
-				uit.text = String("eth"+_computerPort);			
+				uit.text = String("eth"+dstPort);			
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -290,10 +317,10 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 			}
-			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Access Point" ) && lineName!="wireless"){
+			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Access Point" )){
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));				
-				uit.text = String("eth"+(_switchPortSource)+"("+_switchPortSource+")");
+				uit.text = String("eth"+(srcPort)+"("+srcPort+")");
 				uit.width = 210;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
 				
@@ -306,7 +333,7 @@ package{
 				graphics.endFill();
 				
 				
-				uit.text = String("eth"+(_switchPortDestination)+"("+_switchPortDestination+")");
+				uit.text = String("eth"+(dstPort)+"("+dstPort+")");
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));				
 				uit.width = 210;
@@ -319,6 +346,7 @@ package{
 				graphics.lineStyle(0,0,0);
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
+			}
 			}
 		}
 	}

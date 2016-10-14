@@ -55,11 +55,11 @@ import flash.display.DisplayObject;
             In.x = dropCanvas.mouseX-20;
             In.y = dropCanvas.mouseY-20;
             In.addEventListener("defaultMoveEve",myMove);
-			In.addEventListener("defaultMoveEve1",mMove);
 			In.addEventListener("defaultDownEve",saveCurrentState);
 			In.addEventListener("ChangedDownEveForComponent",mdown);
 			In.addEventListener("ChangedUpEveForComponent",mUp);
-			dropCanvas.addChild(In);					
+			
+			dropCanvas.addChild(In);
 			
             type=false;
             if(focusobject!=null){

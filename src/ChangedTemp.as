@@ -4,6 +4,8 @@ package
 	{
 		public var id:String;
 	  public var name:String;
+	  public var nid:int
+	  public var type:String;
 	   public var haschanged:Boolean;
 	   public var IsCombo:Boolean;
 	   public var combeValue:String;

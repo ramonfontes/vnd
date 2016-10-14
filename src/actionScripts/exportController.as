@@ -7,8 +7,7 @@ import flash.net.FileReference;
 
 import mx.collections.ArrayCollection;
 
-public var fileRefScript:FileReference;// = new FileReference();
-//fileRefScript = new FileReference();
+public var fileRefScript:FileReference;
 
 public function exportControllerScriptFile():void {
 	var objSend:Object = new Object;
@@ -478,6 +477,13 @@ public function exportControllerScriptFile():void {
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
+									if(ipSource!="undefined"&&ipSource!="0"&&ipSource!=""&&ipSource!="none"&&ipSource!="null" ||
+										ipDestination!="undefined"&&ipDestination!="0"&&ipDestination!=""&&ipDestination!="none"&&ipDestination!="null"){
+										counter++;
+										sh2 = "flow"+b+"msg.match.dl_type = 0x0800@@";
+										objeto_openflow_controller=sh2;
+										temp_openflow_controller.addItem(objeto_openflow_controller);
+									}
 									if(ipSource!="undefined"&&ipSource!="0"&&ipSource!=""&&ipSource!="none"&&ipSource!="null"){
 										counter++;
 										sh2 = "flow"+b+"msg.match.nw_src = IPAddr(\""+ipSource+"\")@@";
@@ -513,7 +519,14 @@ public function exportControllerScriptFile():void {
 										sh2 = "flow"+b+"msg.match.dl_dst  = EthAddr(\""+macDestination+"\")@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
-									}			
+									}
+									if(sourcePort!="undefined"&&sourcePort!=""&&sourcePort!="0" ||
+										destinationPort!="undefined"&&destinationPort!=""&&destinationPort!="0"){
+										counter++;
+										sh2 = "flow"+b+"msg.match.nw_proto = 6@@";
+										objeto_openflow_controller=sh2;
+										temp_openflow_controller.addItem(objeto_openflow_controller);
+									}
 									if(sourcePort!="undefined"&&sourcePort!=""&&sourcePort!="0"){
 										counter++;
 										sh2 = "flow"+b+"msg.match.tp_src = "+sourcePort+"@@";

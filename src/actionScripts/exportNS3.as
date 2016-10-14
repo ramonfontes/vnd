@@ -324,10 +324,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}	
 					
 				}
@@ -397,10 +397,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}	
 					
 				}
@@ -481,13 +481,13 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}	
 					else if(obj.name=="mask"){												
-						computerMask = obj.arrayComputerMask[ye];
+						computerMask = obj.MaskAddress[ye];
 					}									
 				}
 				cont_mininet++;
@@ -951,10 +951,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}	
 					
 				}
@@ -1013,10 +1013,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}							
 				}
 				cont_mininet++;
@@ -1082,10 +1082,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}	
 				}
 				cont_mininet++;
@@ -1254,10 +1254,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}							
 				}
 				cont_mininet++;
@@ -1319,10 +1319,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}	
 					
 				}
@@ -1385,10 +1385,10 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="computerIPAddress"){												
-						computerIPAddress = obj.arrayComputerIPAddress1[ye];
+						computerIPAddress = obj.IPAddress1[ye];
 					}	
 					else if(obj.name=="computerMacAddress"){												
-						computerMacAddress = obj.arrayComputerMacAddress1[ye];
+						computerMacAddress = obj.MacAddress1[ye];
 					}							
 				}
 				cont_mininet++;

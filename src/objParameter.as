@@ -6,9 +6,17 @@ package
 	public class objParameter { 
 		public var option:Array=[];
 	  	public var id:String;
+		public var nid:int;
+		public var type:String;
 	  	public var name:String;
+		public var IPAddress:Array=[];
+		public var IPAddress1:Array=[];
+		public var MacAddress:Array=[];
+		public var MacAddress1:Array=[];
+		public var MaskAddress:Array=[];
+		public var range:Array=[];
+		public var range1:Array=[];
 		public var qosname:Array=[];		
-		//public var getValueMacAddress:String;
 		
 		//Link
 		public var arrayType:Array=[];
@@ -52,28 +60,19 @@ package
 		public var arrayVlanID_Switch:Array=[];
 		public var arrayMac_Switch:Array=[];
 		public var arrayGetSwitch:Array=[];
-		public var arrayGetOpenFlowVersion:Array=[];
-		
+		public var arrayGetOpenFlowVersion:Array=[];		
 		public var arrayGetMode:Array=[];
 		public var arrayGetChannel:Array=[];
 		
-		//Computer
-		public var arrayComputerIPAddress:Array=[];
-		public var arrayComputerIPAddress1:Array=[];
-		public var arrayComputerMask:Array=[];
-		public var arrayComputerMacAddress:Array=[];
-		public var arrayComputerMacAddress1:Array=[];
 		
 		//Station
-		public var arrayStationIPAddress:Array=[];
-		public var arrayStationIPAddress1:Array=[];
-		public var arrayStationMask:Array=[];
-		public var arrayStationMacAddress:Array=[];
-		public var arrayStationMacAddress1:Array=[];
 		public var arrayStationPassword:Array=[];
 		public var arrayStationPassword1:Array=[];
 		public var arrayNumberofRadios:Array=[];
-
+		public var arrayStationRange:Array=[];
+		public var arrayStationRange1:Array=[];
+		public var arrayStationSSID:Array=[];
+		public var arrayStationSSID1:Array=[];
 		
 		//SWitch
 		public var arraySwitch:String;
@@ -84,8 +83,8 @@ package
 		public var arrayMode:Array=[];
 		public var arrayRouterSSID:Array=[];
 		public var arrayRouterSSID1:Array=[];
-		public var arrayStationSSID:Array=[];
-		public var arrayStationSSID1:Array=[];
+		public var arrayRouterRange:Array=[];
+		public var arrayRouterRange1:Array=[];		
 		
 		//Controller
 		public var arrayGetisRemote:Array=[];
@@ -133,7 +132,6 @@ package
 		public var arraySetSourcePort:Array = [];
 		public var arraySetVlanID:Array = [];
 		public var arraySetTOS:Array = [];
-
 				  	
 		public function objParameter()
 		{
