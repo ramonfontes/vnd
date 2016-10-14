@@ -94,7 +94,6 @@
 			public var valofcombochannel:String;
 			public var valofcombomode:String;
 			public var valofcombocomputermask:String;
-			public var valofcombostationmask:String;
 			public var valofremoteLocal:String;
 			public var valofcomboopenflowcontroller:String;
 			public var valofcombosetstripvlan:String;
@@ -174,20 +173,14 @@
 				
 				if(eve.target.parent.label=="Controller IP Address")
 					obj.id="controllerIPAddress";
-				else if(eve.target.parent.label=="Computer IP Address")
-					obj.id="computerIPAddress";
-				else if(eve.target.parent.label=="Computer MAC Address")
-					obj.id="computerMacAddress";
-				else if(eve.target.parent.label=="Computer Mask")
+				else if(eve.target.parent.label=="IP Address")
+					obj.id="IPAddress";
+				else if(eve.target.parent.label=="MAC Address")
+					obj.id="MacAddress";
+				else if(eve.target.parent.label=="Mask")
 					obj.id="mask";
-				else if(eve.target.parent.label=="Station IP Address")
-					obj.id="stationIPAddress";
-				else if(eve.target.parent.label=="Station MAC Address")
-					obj.id="stationMacAddress";
 				else if(eve.target.parent.label=="Number of Wireless Interfaces")
 					obj.id="numberofradios";
-				else if(eve.target.parent.label=="Station Mask")
-					obj.id="stationmask";
 				else if(eve.target.parent.label=="Controller Port")
 					obj.id="controllerPort";
 				else if(eve.target.parent.label=="Destination IP")
@@ -238,19 +231,13 @@
 					obj.id="channel";
 				else if(eve.target.parent.label=="Mode")
 					obj.id="mode";
-				else if(eve.target.parent.label=="Switch MAC Address")
-					obj.id="switchMacAddress";		
 				else if(eve.target.parent.label=="Listening Port")
 					obj.id="listeningPort";	
-				else if(eve.target.parent.label=="Router SSID")
-					obj.id="routerSSID";
-				else if(eve.target.parent.label=="AP Signal Range")
-					obj.id="routerRange";
-				else if(eve.target.parent.label=="Station Signal Range")
-					obj.id="stationRange";
-				else if(eve.target.parent.label=="Station SSID")
-					obj.id="stationSSID";
-				else if(eve.target.parent.label=="Switch MAC Address_")
+				else if(eve.target.parent.label=="Signal Range")
+					obj.id="signalRange";
+				else if(eve.target.parent.label=="SSID")
+					obj.id="ssid";
+				else if(eve.target.parent.label=="Switch MAC Address")
 					obj.id="macSwitch";
 				else if(eve.target.parent.label=="Source IP")
 					obj.id="ipSource";
@@ -319,8 +306,6 @@
 						valofcombomode=eve.target.selectedItem;
 					else if(obj.id=="mask")
 						valofcombocomputermask=eve.target.selectedItem;
-					else if(obj.id=="stationmask")
-						valofcombostationmask=eve.target.selectedItem;
 					else if(obj.id=="switch")
 						valofcomboswitch=eve.target.selectedItem;
 					else
@@ -368,6 +353,13 @@
 						ab = int(this.name.slice(9,11));
 						ye=ab;
 					}
+					
+					if(this.name.slice(0,3)=="Car"){
+						var checkifcar:Boolean=true;
+						ab = int(this.name.slice(4,6));
+						ye=ab;
+					}
+					
 					if(this.name.slice(0,7)=="Station"){
 						var checkifstation:Boolean=true;
 						ab = int(this.name.slice(8,10));
@@ -1300,43 +1292,9 @@
 								//-------------------------------------------------------------------------------
 								//Controller Configuration-------------------------------------------------------
 								//-------------------------------------------------------------------------------
-								//Computer Configuration---------------------------------------------------------
-								if(obj.name=="computerIPAddress"){
-									frmItem.label = "Computer IP Address";							
-									tb.width=100;
-									if(tb.text=="")
-										tb.text="no ip defined";
-									lable.text=lable.text+" - "+tb.text;
-									///tb.editable=false;
-									tb.maxChars=17;
-									if(parentApplication.getValueIPAddress.indexOf(tb.text)!=-1){									
-										checkIp=true;
-										obj.IPAddress = parentApplication.getValueIPAddress;
-									}
-									if(checkIp==false){
-										parentApplication.getValueIPAddress.push(tb.text);
-										obj.IPAddress1[ye]=tb.text;
-										obj.IPAddress = parentApplication.getValueIPAddress;
-									}
-								}
-								if(obj.name=="computerMacAddress"){
-									frmItem.label = "Computer MAC Address";							
-									tb.width=100;
-									tb.maxChars=17;
-									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){									
-										checkMac=true;								
-										obj.MacAddress = parentApplication.getValueMacAddress;
-									}
-									if(checkMac==false){
-										parentApplication.getValueMacAddress.push(tb.text);
-										obj.MacAddress1[ye]=tb.text;
-										obj.MacAddress = parentApplication.getValueMacAddress;
-									}
-								}
-								//-------------------------------------------------------------------------------
 								//Station Configuration---------------------------------------------------------
-								if(obj.name=="stationIPAddress"){
-									frmItem.label = "Station IP Address";							
+								if(obj.name=="IPAddress"){
+									frmItem.label = "IP Address";							
 									tb.width=100;
 									if(tb.text=="")
 										tb.text="no ip defined";
@@ -1353,8 +1311,8 @@
 										obj.IPAddress = parentApplication.getValueIPAddress;
 									}
 								}
-								if(obj.name=="stationMacAddress"){
-									frmItem.label = "Station MAC Address";							
+								if(obj.name=="MacAddress"){
+									frmItem.label = "MAC Address";							
 									tb.width=100;
 									tb.maxChars=17;
 									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){									
@@ -1362,6 +1320,9 @@
 										obj.MacAddress = parentApplication.getValueMacAddress;
 									}
 									if(checkMac==false){
+										if(obj.type == "Switch" || obj.type == "Access Point"){
+											parentApplication.getValueSwitchMacAddress.push(tb.text);
+										}
 										parentApplication.getValueMacAddress.push(tb.text);
 										obj.MacAddress1[ye]=tb.text;
 										obj.MacAddress = parentApplication.getValueMacAddress;
@@ -1373,39 +1334,23 @@
 									tb.maxChars=2;
 									obj.arrayNumberofRadios[ye]=tb.text;
 								}				
-								if(obj.name=="stationRange"){
-									frmItem.label = "Station Signal Range";
+								if(obj.name=="signalRange"){
+									frmItem.label = "Signal Range";
 									tb.width=60;
 									tb.enabled=true;
 									tb.maxChars=10;
-	    							parentApplication.getValueStationRange.push(tb.text);
+	    							parentApplication.getValueSignalRange.push(tb.text);
 									obj.range1[ye]=tb.text;
 									this.range=parseInt(tb.text);
 									updateCircle()
-									obj.range = parentApplication.getValueStationRange;
+									obj.range = parentApplication.getValueSignalRange;
 								}					
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
 								form.addChild(frmItem);
 								//-------------------------------------------------------------------------------
 								//SwitchOpenflow Configuration---------------------------------------------------
-								if(obj.name=="switchMacAddress"){
-									frmItem.label = "Switch MAC Address";
-									tb.width=100;
-									tb.enabled=true;
-									//lable.text=lable.text+" - "+tb.text;
-									tb.maxChars=17;
-									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){
-										checkMac=true;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;
-									}
-									if(checkMac==false){
-										parentApplication.getValueMacAddress.push(tb.text);
-										obj.arrayMacSwitch1[ye]=tb.text;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;
-									}
-								}
-								
+												
 								if(obj.name=="listeningPort"){
 									frmItem.label = "Listening Port";
 									tb.width=60;
@@ -1420,8 +1365,8 @@
 								frmItem.addChild(tb);
 								form.addChild(frmItem);	
 								
-								if(obj.name=="routerSSID"){
-									frmItem.label = "Router SSID";
+								if(obj.name=="ssid"){
+									frmItem.label = "SSID";
 									tb.width=100;
 									tb.enabled=true;
 									lable.text=lable.text+":"+tb.text;
@@ -1433,21 +1378,7 @@
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
 								form.addChild(frmItem);	
-								
-								if(obj.name=="routerRange"){
-									frmItem.label = "AP Signal Range";
-									tb.width=60;
-									tb.enabled=true;
-									tb.maxChars=5;
-									parentApplication.getValueRouterRange.push(tb.text);
-									obj.range1[ye]=tb.text;
-									this.range=parseInt(tb.text);
-									updateCircle()
-									obj.range = parentApplication.getValueRouterRange;
-								}					
-								tb.addEventListener(Event.CHANGE,change);
-								frmItem.addChild(tb);
-								form.addChild(frmItem);	
+		
 							}
 								
 							else if(obj.id=='boolean'){
@@ -1522,93 +1453,45 @@
 							}
 							
 							else if(obj.id=='options') {	
-								if(obj.name=="macSource"){
+								
+								if(obj.name=="macSwitch" || obj.name=="setMACSource" || obj.name=="setMACDestination"
+										|| obj.name=="macDestination" || obj.name=="macSource"){
 									frmItem = new FormItem();
 									frmItem.direction = "horizontal";
-									frmItem.label = "Source MAC";								
+									if(obj.name=="macSwitch"){
+										frmItem.label = "Switch MAC Address";
+									}
+									else if(obj.name == "macDestination"){
+										frmItem.label = "Destination MAC";
+									}
+									else if(obj.name == "macSource"){
+										frmItem.label = "Source MAC";
+									}
+									else if(obj.name=="setMACSource"){
+										frmItem.label = "Set Source MAC";
+									}
+									else if(obj.name=="setMACDestination"){
+										frmItem.label = "Set Destination MAC"; 
+									}
 									tb3 = new ComboBox();
-									//obj.arrayMacSwitch = new Array();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
+									if(obj.name=="macSwitch"){
+										obj.arrayMacSwitch = parentApplication.getValueSwitchMacAddress;
 										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
 										tb3.dataProvider = obj.arrayMacSwitch;
 									}
 									else{
-										none = "none";
-										//obj.arrayMacSource[ye] = new Array();
-										//obj.arrayMacSource[ye].push(none);
-										tb3.dataProvider = none;
-									}								
-								}
-								else if(obj.name=="macDestination"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Destination MAC";
-									tb3 = new ComboBox();
-									//obj.arrayMacSwitch = new Array();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
-										tb3.dataProvider = obj.arrayMacSwitch;
-									}
-									else{
-										none = "none";
-										tb3.dataProvider = none;
+										if(parentApplication.getValueMacAddress!=[]||exportControll==true){
+											obj.arrayMacSwitch = parentApplication.getValueMacAddress;
+											obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
+											tb3.dataProvider = obj.arrayMacSwitch;
+										}
+										else{
+											none = "none";
+											tb3.dataProvider = none;
+										}
 									}
 								}
-								else if(obj.name=="macSwitch"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Switch MAC Address_";
-									tb3 = new ComboBox();
-									if(parentApplication.getValueMacAddress!=[]||exportControll==true){
-										obj.arrayMacSwitchh = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitchh = obj.arrayMacSwitchh.concat("none");
-										tb3.dataProvider = obj.arrayMacSwitchh;
-									}
-									else{
-										none = "none";
-										tb3.dataProvider = none;
-									}
-								}
-								else if(obj.name=="setMACSource"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Set Source MAC"; 
-									tb3 = new ComboBox();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
-										tb3.dataProvider = obj.arrayMacSwitch;
-									}
-									else{
-										none = "none";
-										tb3.dataProvider = none;
-									}								
-								}
-								else if(obj.name=="setMACDestination"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Set Destination MAC"; 
-									tb3 = new ComboBox();
-									if(parentApplication.getValueMacAddress!=[]||parentApplication.getValueMacAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayMacSwitch = parentApplication.getValueMacAddress;//.split(",");
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat(parentApplication.getValueMacAddress);
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
-										tb3.dataProvider = obj.arrayMacSwitch;
-									}
-									else{
-										none = "none";
-										tb3.dataProvider = none;
-									}
-								}
+		
 								else if(obj.name=="ipDestination"){
 									frmItem = new FormItem();
 									frmItem.direction = "horizontal";
@@ -1757,7 +1640,7 @@
 								
 								if(obj.name=="mask"){
 									obj.MaskAddress[ye] = tb3.selectedItem;
-									frmItem.label = "Computer Mask";
+									frmItem.label = "Mask";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
 									form.addChild(frmItem);								
@@ -1766,29 +1649,6 @@
 											if(parentApplication.exportControllforcombo==true){
 												if(valofcombocomputermask!=null&&valofcombocomputermask!=""&&valofcombocomputermask!=valueObjArr[o].name)
 													tb3.selectedItem=valofcombocomputermask;
-												else
-													tb3.selectedItem = valueObjArr[o].name;
-												obj.MaskAddress[ye]=tb3.selectedItem;
-											}
-											else {
-												tb3.selectedIndex = valueObjArr[o].name;
-												obj.MaskAddress[ye] = tb3.selectedItem;
-											}
-										}
-									}
-									tb3.addEventListener(Event.CHANGE,change);							
-								}
-								if(obj.name=="stationmask"){
-									obj.MaskAddress[ye] = tb3.selectedItem;
-									frmItem.label = "Station Mask";
-									frmItem.addChild(tb3);
-									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
-									form.addChild(frmItem);								
-									for(o=0;o<valueObjArr.length;o++){		
-										if(valueObjArr[o].id=="stationmask"){
-											if(parentApplication.exportControllforcombo==true){
-												if(valofcombostationmask!=null&&valofcombostationmask!=""&&valofcombostationmask!=valueObjArr[o].name)
-													tb3.selectedItem=valofcombostationmask;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
 												obj.MaskAddress[ye]=tb3.selectedItem;
@@ -2150,8 +2010,8 @@
 										else if(obj.name=="macSwitch"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
-											frmItem.label = "Switch MAC Address_";
-											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitchh);
+											frmItem.label = "Switch MAC Address";
+											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitch);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);
@@ -2568,7 +2428,7 @@
 								}												
 							}
 							if(i+1==objparaArrayCol.length){
-								if(checkifcomputer||checkifswitchopenflow||checkifstation){
+								if(checkifcomputer||checkifswitchopenflow||checkifstation||checkifcar){
 									frmItem = new FormItem();
 									var button:Button = new Button();
 									button.label="Apply Settings";
@@ -2644,7 +2504,17 @@
 					if(ab!=parentApplication.contSwitch){
 						parentApplication.contSwitch++;
 					}
-				}	
+				}
+				
+				if(this.name.slice(0,3)=="Car"){
+					checkifswitchopenflow=true;
+					ab = int(this.name.slice(4,6));
+					this.type = "Car";
+					this.nid = ab;
+					if(ab!=parentApplication.contCar){
+						parentApplication.contCar++;
+					}
+				}
 				
 				if(this.name.slice(0,8)=="Computer"){
 					var checkifcomputer:Boolean=true;
@@ -2767,21 +2637,6 @@
 							lable.text=lable.text+":"+tb.text;
 							obj.arrayControllerPort[ye] = tb.text;	
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-						}						
-						else if(obj.name=="switchMacAddress"){
-							frmItem.label = "Switch MAC Address";
-							tb.enabled=true;
-							tb.width=100;
-							tb.maxChars=17;			
-							if(ab<10)
-								tb.text="00:00:00:00:00:0"+ab;
-							else
-								tb.text="00:00:00:00:00:"+ab;
-							parentApplication.getValueMacAddress.push(tb.text);
-							obj.arrayMacSwitch1[ye]=tb.text;
-							obj.arrayMacSwitch = parentApplication.getValueMacAddress;
-							//lable.text=lable.text+" - "+tb.text;
-							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="listeningPort"){
 							frmItem.label = "Listening Port";
@@ -2799,8 +2654,8 @@
 							//lable.text=lable.text+":"+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
-						else if(obj.name=="routerSSID"){
-							frmItem.label = "Router SSID";
+						else if(obj.name=="ssid"){
+							frmItem.label = "SSID";
 							tb.enabled=true;
 							tb.width=100;
 							tb.maxChars=10;		
@@ -2811,44 +2666,20 @@
 							lable.text=lable.text+":"+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
-						else if(obj.name=="routerRange"){
-							frmItem.label = "AP Signal Range";
-							tb.enabled=true;
-							tb.width=60;
-							tb.maxChars=5;		
-							tb.text="33"
-							parentApplication.getValueRouterRange.push(tb.text);	
-							obj.range1[ye]=tb.text;
-							this.range=parseInt(tb.text);
-							obj.range = parentApplication.getValueRouterRange;
-							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-						}
-						else if(obj.name=="stationRange"){
-							frmItem.label = "Station Signal Range";
+						else if(obj.name=="signalRange"){
+							frmItem.label = "Signal Range";
 							tb.enabled=true;
 							tb.width=60;
 							tb.maxChars=5;		
 							tb.text="18"
-	   						parentApplication.getValueStationRange.push(tb.text);														
+	   						parentApplication.getValueSignalRange.push(tb.text);														
 							obj.range1[ye]=tb.text;
 							this.range=parseInt(tb.text);
-							obj.range = parentApplication.getValueStationRange;
+							obj.range = parentApplication.getValueSignalRange;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
-						else if(obj.name=="computerIPAddress"){
-							frmItem.label = "Computer IP Address";
-							tb.width=100;
-							tb.maxChars=15;
-							tb.text="10.0.0."+ab;
-							lable.text=lable.text+" - "+tb.text;
-							parentApplication.getValueIPAddress.push(tb.text);
-							//obj.arrayIpSource1 = parentApplication.getValueIPAddress;
-							obj.IPAddress1[ye]=tb.text;
-							obj.IPAddress = parentApplication.getValueIPAddress;
-							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-						}
-						else if(obj.name=="stationIPAddress"){
-							frmItem.label = "Station IP Address";
+						else if(obj.name=="IPAddress"){
+							frmItem.label = "IP Address";
 							tb.width=100;
 							tb.maxChars=15;
 							tb.text="10.0.0."+ab;
@@ -2859,27 +2690,17 @@
 							obj.IPAddress = parentApplication.getValueIPAddress;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
-						else if(obj.name=="computerMacAddress"){
-							frmItem.label = "Computer MAC Address";
+						else if(obj.name=="MacAddress"){
+							frmItem.label = "MAC Address";
 							tb.width=100;
 							tb.maxChars=17;
 							if(ab<10)
 								tb.text="00:00:00:00:00:0"+ab;
 							else
 								tb.text="00:00:00:00:00:"+ab;	
-							parentApplication.getValueMacAddress.push(tb.text);
-							obj.MacAddress1[ye]=tb.text;
-							obj.MacAddress = parentApplication.getValueMacAddress;
-							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
-						}	
-						else if(obj.name=="stationMacAddress"){
-							frmItem.label = "Station MAC Address";
-							tb.width=100;
-							tb.maxChars=17;
-							if(ab<10)
-								tb.text="00:02:00:00:00:0"+ab;
-							else
-								tb.text="00:02:00:00:00:"+ab;	
+							if(obj.type == "Switch" || obj.type == "Access Point"){
+								parentApplication.getValueSwitchMacAddress.push(tb.text);
+							}							
 							parentApplication.getValueMacAddress.push(tb.text);
 							obj.MacAddress1[ye]=tb.text;
 							obj.MacAddress = parentApplication.getValueMacAddress;
@@ -3003,19 +2824,7 @@
 							tb3 = new ComboBox();
 							tb3.dataProvider = obj.option;
 							tb3.selectedIndex=0;
-							frmItem.label = "Computer Mask"; 
-							frmItem.addChild(tb3);
-							obj.MaskAddress[ye] = tb3.selectedItem;	
-							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
-							form.addChild(frmItem);
-						}
-						else if(obj.name=="stationmask"){
-							frmItem = new FormItem();
-							frmItem.direction = "horizontal";
-							tb3 = new ComboBox();
-							tb3.dataProvider = obj.option;
-							tb3.selectedIndex=0;
-							frmItem.label = "Station Mask"; 
+							frmItem.label = "Mask"; 
 							frmItem.addChild(tb3);
 							obj.MaskAddress[ye] = tb3.selectedItem;	
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
@@ -3125,13 +2934,13 @@
 			}				
 			
 			private function addChildToPanel():void {
-				if (this.name.slice(0,12) == "Access Point" || this.name.slice(0,7) == "Station"){
+				if (this.name.slice(0,12) == "Access Point" || this.name.slice(0,7) == "Station" || this.name.slice(0,3) == "Car"){
 					var r:int = 0;
 					if (this.name.slice(0,12) == "Access Point"){
 						r = 33;
 						circle.graphics.beginFill(0x1858FE, 0.4);
 					}
-					else if (this.name.slice(0,7) == "Station"){
+					else if (this.name.slice(0,7) == "Station" || this.name.slice(0,3) == "Car"){
 						r = 18;
 						circle.graphics.beginFill(0x428357, 0.4);
 					}						
@@ -3143,7 +2952,7 @@
 			
 			private function updateCircle():void {
 				circle.graphics.clear();
-				if(this.type=='Station'){
+				if(this.type=='Station' || this.type=='Car'){
 					circle.graphics.beginFill(0x428357, 0.4);
 				}
 				else{

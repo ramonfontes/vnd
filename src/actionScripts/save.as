@@ -278,7 +278,7 @@ public function saveFile():void{
 							par.appendChild(xmlList);
 							
 							if(obj.name=="switchMacAddress"){
-								xmlList = XMLList("<name>"+obj.arrayMacSwitch1[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.arrayMacSwitch[ye]+"</name>");
 								par.appendChild(xmlList);										
 							}
 							else if(obj.name=="listeningPort"){
@@ -317,7 +317,7 @@ public function saveFile():void{
 							par.appendChild(xmlList);
 							
 							if(obj.name=="switchMacAddress"){
-								xmlList = XMLList("<name>"+obj.arrayMacSwitch1[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.arrayMacSwitch[ye]+"</name>");
 								par.appendChild(xmlList);										
 							}
 							else if(obj.name=="listeningPort"){

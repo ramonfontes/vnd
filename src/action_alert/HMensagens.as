@@ -38,7 +38,7 @@
 		public static const controllerPort:String = "You need to set a Controller Port";
 		public static const flowName:String = "You need to set a Flow Name";
 		public static const alertpy:String = "Attention! You need to rename 'sh file' to 'py file'.";
-		public static const Success:String = "Settings Saved!";
+		public static const Success:String = "Saved!";
 		public static const Successfull:String = "Successfull!";
 		public static const SelectObject:String = "Select an object!";
 		public static const SDNNetwork:String = "You must to configure a SDN Network!";

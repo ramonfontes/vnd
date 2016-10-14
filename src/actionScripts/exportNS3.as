@@ -348,7 +348,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -418,7 +418,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				sh = sh+" "+ob.name.slice(0,17)+",";
@@ -548,7 +548,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -972,7 +972,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -1036,7 +1036,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -1105,7 +1105,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -1277,7 +1277,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -1343,7 +1343,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;
@@ -1408,7 +1408,7 @@ public function exportNS3File():void {
 				for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 					obj=obb.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="switchMacAddress"){	
-						macSwitch = obj.arrayMacSwitch1[ye];	
+						macSwitch = obj.arrayMacSwitch[ye];	
 					}	
 				}
 				cont_mininet++;

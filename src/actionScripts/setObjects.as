@@ -14,7 +14,7 @@ public function setobject(eve:Event):void {
 		PopUpManager.removePopUp(popup_ob);
 	}
 	
-	if(eve.target.id=="Computer"||eve.target.id=="Switch"
+	if(eve.target.id=="Computer"||eve.target.id=="Switch"||eve.target.id=="Car"
 		||eve.target.id=="Access Point"||eve.target.id=="Station"
 		||eve.target.id=="fiber"||eve.target.id=="ethernet"
 		||eve.target.id=="wireless"||eve.target.id=="Smartphone"){
@@ -27,7 +27,7 @@ public function setobject(eve:Event):void {
 	aa++;
 	if(ViewBool){		
 		if(focusobject!=null && viewfirstTime){
-			if (eve.target.id!="Station" && eve.target.id!="Access Point"){
+			if (eve.target.id!="Station" && eve.target.id!="Access Point" && eve.target.id!="Car"){
 				viewsObjects.addItem(focusobject);
 			}
 			viewfirstTime=false;
@@ -45,7 +45,7 @@ public function setobject(eve:Event):void {
 		setfocusforView();
 	}
 	else{  
-		if (eve.target.id!="Station" && eve.target.id!="Access Point"){
+		if (eve.target.id!="Station" && eve.target.id!="Access Point" && eve.target.id!="Car"){
 		removefocusforView();
 		if(focusobject!=null){
 			focusobject.removeFoc();

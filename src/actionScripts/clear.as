@@ -46,10 +46,10 @@ public function clear():void{
 	 getValueListenPort=[];
 	 getValueRouterSSID=[]
 	 getValueStationSSID=[]
-	 getValueRouterRange=[]
-	 getValueStationRange=[]
+	 getValueSignalRange=[]
 	 getValueIPAddress=[];
 	 getValueMacAddress=[];
+	 getValueSwitchMacAddress=[];
 	 source="";
 	 isInport=false;
  }

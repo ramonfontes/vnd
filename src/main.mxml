@@ -97,6 +97,7 @@
 			
 			[Bindable] public var getInterfaces:Array=new Array;
 			[Bindable] public var contSwitch:int=0;
+			[Bindable] public var contCar:int=0;
 			[Bindable] public var contController:int=0;
 			[Bindable] public var contComputer:int=0;	
 			[Bindable] public var contStation:int=0;	
@@ -105,9 +106,9 @@
 			[Bindable] public var getValueRouterSSID:Array;
 			[Bindable] public var getValueStationSSID:Array;
 			[Bindable] public var getValueMacAddress:Array;
+			[Bindable] public var getValueSwitchMacAddress:Array;
 			[Bindable] public var getValueIPAddress:Array;
-			[Bindable] public var getValueStationRange:Array;
-			[Bindable] public var getValueRouterRange:Array;
+			[Bindable] public var getValueSignalRange:Array;
 			[Bindable] public var contNumberOfInterfaces:int=0;			
 			[Bindable] public var temaplateArrcol:ArrayCollection;		    
 			[Bindable] private var saveXml:XML;

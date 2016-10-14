@@ -210,7 +210,7 @@ package{
 				graphics.drawEllipse((90*destination.x/100+origin.x-90*origin.x/100),(90*destination.y/100+origin.y-90*origin.y/100),10,10);
 				graphics.drawEllipse(destination.x,destination.y,10,10);
 				
-				if(_objectSrc=="Station" && _objectDst=="Access Point"){
+				if((_objectSrc=="Station" || _objectSrc=="Car") && _objectDst=="Access Point"){
 					uit.text = String("wlan"+srcPort);
 					uit.width = 240;								
 					textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -222,7 +222,7 @@ package{
 					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 					graphics.endFill();
 				}
-				else if(_objectSrc=="Access Point" && _objectDst=="Station"){
+				else if(_objectSrc=="Access Point" && (_objectDst=="Station" || _objectDst=="Car")){
 					uit.text = String("wlan"+dstPort);
 					uit.width = 240;
 					textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -317,7 +317,7 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 			}
-			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Access Point" )){
+			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Computer" )){
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));				
 				uit.text = String("eth"+(srcPort)+"("+srcPort+")");

@@ -63,16 +63,11 @@ package
 		public var arrayGetOpenFlowVersion:Array=[];		
 		public var arrayGetMode:Array=[];
 		public var arrayGetChannel:Array=[];
-		
-		
+				
 		//Station
 		public var arrayStationPassword:Array=[];
 		public var arrayStationPassword1:Array=[];
 		public var arrayNumberofRadios:Array=[];
-		public var arrayStationRange:Array=[];
-		public var arrayStationRange1:Array=[];
-		public var arrayStationSSID:Array=[];
-		public var arrayStationSSID1:Array=[];
 		
 		//SWitch
 		public var arraySwitch:String;
@@ -83,8 +78,7 @@ package
 		public var arrayMode:Array=[];
 		public var arrayRouterSSID:Array=[];
 		public var arrayRouterSSID1:Array=[];
-		public var arrayRouterRange:Array=[];
-		public var arrayRouterRange1:Array=[];		
+
 		
 		//Controller
 		public var arrayGetisRemote:Array=[];
@@ -97,8 +91,6 @@ package
 		public var arrayMacSource:Array=[];
 		public var arrayMacDestination:Array=[];
 		public var arrayMacSwitch:Array=[];
-		public var arrayMacSwitchh:Array=[];
-		public var arrayMacSwitch1:Array=[];
 		public var arrayIngressPort:Array=[];
 		public var arrayOutPort:Array=[];
 		public var arrayDstPort:Array=[];

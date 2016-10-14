@@ -6,6 +6,7 @@ public var src:String;
 public var dst:String;
 private var source:String;
 private var srcPort:int=0;
+public var target:Object; 
 
 private function mdown(event:MouseEvent):void {
 	
@@ -13,6 +14,7 @@ private function mdown(event:MouseEvent):void {
 		    var lin:Object=linksArrayCollection[linkCombo.selectedIndex];
 			line=new Link(lin.color); 
 			line._objectSrc = event.target.id;
+			target = event.target;
 			
 			if(line._objectSrc=="Computer"){
 				source="Computer";
@@ -21,6 +23,11 @@ private function mdown(event:MouseEvent):void {
 			}
 			else if(line._objectSrc=="Station"){
 				source="Station";
+				srcPort = event.target.iface++;
+				cont_click++;
+			}
+			else if(line._objectSrc=="Car"){
+				source="Car";
 				srcPort = event.target.iface++;
 				cont_click++;
 			}
@@ -85,7 +92,8 @@ private function mUp(event:MouseEvent):void {
 			||dst=="Smartphone"&&src=="Controller"||src=="Smartphone"&&dst=="Controller"
 			||dst=="Smartphone"&&src=="Switch"||src=="Smartphone"&&dst=="Switch"
 			||dst=="Smartphone"&&src=="Access Point"||src=="Smartphone"&&dst=="Access Point"
-			||src=="Station"&&dst=="Controller"||src=="Controller"&&dst=="Station"){
+			||src=="Station"&&dst=="Controller"||src=="Controller"&&dst=="Station"
+			||src=="Car"&&dst=="Controller"){
 		Alert.show("You cannot connect these devices!");
 		src="";
 		dst="";
@@ -133,8 +141,11 @@ private function mUp(event:MouseEvent):void {
 				line.dstPort=dstPort;
 				line.can.destinationPort=line.dstPort;	
 				line._checkSource=true;
-			}	
-			else if(source=="Access Point" && dst=="Station" && String(line)=="wireless"){
+			}
+			else if((source=="Switch" || source=="Access Point") && dst!="Controller" && String(line) != "wireless"){
+				target.iface--;
+			}
+			else if(source=="Access Point" && (dst=="Station" || dst=="Car")  && String(line)=="wireless"){
 				line.srcPort=srcPort;
 				line.can.sourcePort=line.srcPort;
 				//getInterfaces.push("ap"+np+"-wlan"+srcPort);
@@ -146,7 +157,7 @@ private function mUp(event:MouseEvent):void {
 				line._checkSource=true;
 				
 			}	
-			else if(source=="Station" && dst=="Access Point" && String(line)=="wireless"){
+			else if((source=="Station" || source=="Car") && dst=="Access Point" && String(line)=="wireless"){
 				line.srcPort=srcPort;
 				line.can.sourcePort=line.srcPort;
 				//getInterfaces.push("sta"+np+"-wlan"+srcPort);
@@ -179,7 +190,7 @@ private function mUp(event:MouseEvent):void {
 					iface_ = "eth";
 				}
 				event.target.iface++; 
-				dstPort = event.target.iface; 				
+				dstPort = event.target.iface; 	
 				//getInterfaces.push(label+np+iface_+dstPort);
 				line.dstPort=dstPort;
 				line.can.destinationPort=line.dstPort;	
