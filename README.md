@@ -29,7 +29,7 @@ Main Project File - src/main.mxml
 
 
 ## Available at
-VND is available on www.ramonfontes.com/vnd
+VND is available at www.ramonfontes.com/vnd
 
 
 ## Running on locally
