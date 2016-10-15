@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		 xmlns:bridge="bridge.*"
+		 buttonMode="true" creationPolicy="all" horizontalAlign="center" paddingLeft="0"
+		 paddingTop="0">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.containers.Form;
+			import action_alert.HAlert;
+			import action_alert.HMensagens;			
+			import mx.collections.ArrayCollection;
+			import mx.containers.FormItem;
+			import mx.controls.ComboBox;
+			import mx.controls.Label;
+			import mx.controls.TextInput;
+			import mx.controls.Alert;
+			
+			[Bindable] public var form:Form=new Form();			
+			[Bindable] public var lable:Label=new Label();			
+			[Bindable] public var rec:Rectangle;			
+			[Bindable] public var img:String;			
+			[Bindable] public var isfocused:Boolean=false;
+			
+			public var ye:int=-1;
+			public var source:objects;
+			public var destination:objects;
+			public var loss:String;
+			public var delay:String;
+			public var bw:String;
+			public var htb:String;
+			public var maxqueuesize:String;
+			public var lineName:String;
+			public var sourcePort:int;
+			public var destinationPort:int;
+			public var valueObjArr:ArrayCollection=new ArrayCollection();
+			public var objparaArrayCol:ArrayCollection=new ArrayCollection();
+			public var secondTime:Boolean=false;
+			public var type:String;
+			public var nid:int;
+			public var iface:int=0;
+			public var srcPort:int;
+			public var dstPort:int;
+			
+			
+			public function change(eve:Event):void {
+				var bool:Boolean=false;
+				var obj:ChangedTemp=new ChangedTemp();
+				
+				if(eve.target.parent.label=="Bandwidth(MB/s)")
+					obj.id="bandwidth";
+				else if(eve.target.parent.label=="Loss(%)")
+					obj.id="loss";
+				else if(eve.target.parent.label=="Delay(ms)")
+					obj.id="delay";
+				else if(eve.target.parent.label=="Max Queue Size(Pkts)")
+					obj.id="maxqueue";
+				else if(eve.target.parent.label=="Hierarchical Token Bucket")
+					obj.id="htb";
+				else
+					obj.id=eve.target.parent.label;
+				
+				if(eve.target.className=='TextInput'){
+					obj.name=eve.target.text;
+					if(obj.id=='name'){
+						lable.text=eve.target.text;
+					}
+				}
+				
+				if(eve.target.className=='ComboBox') {
+					if(obj.id=="bandwidth")
+						bw=eve.target.selectedItem;
+					else if(obj.id=="htb")
+						htb=eve.target.selectedItem;
+					else
+						obj.name=eve.target.selectedIndex;
+					obj.IsCombo=true;
+					obj.combeValue=eve.target.value.toString()
+				}
+				
+				for(var j:int=0;j<valueObjArr.length;j++){
+					if(valueObjArr[j].id==obj.id){
+						bool=true;
+						valueObjArr[j].haschanged=true;
+						valueObjArr[j].name=obj.name;
+						valueObjArr[j].combeValue=obj.combeValue;
+						break;
+					}
+				}
+				
+				if(!bool){
+					obj.haschanged=true;
+					valueObjArr.addItem(obj);
+				}
+			} 
+			
+			private function appchangesobj():void {	
+				this.secondTime=true;
+				second();
+				HAlert.success(HMensagens.Success);
+			}
+			
+			public function second():void{ 			
+				this.removeChildAt(1);				
+				form=new Form();
+				
+				this.addChildAt(lable,0);
+				this.addChildAt(form,1);
+				
+				if(this.name.slice(0,8)=="ethernet"||this.name.slice(0,5)=="fiber"){
+					var ab:int = int(this.name.slice(9,11));
+					ye=ab;
+				}
+				for(var i:int=0;i<objparaArrayCol.length;i++){
+					var obj:objParameter=objparaArrayCol[i];
+					
+					if(obj.id=='string'){
+						var frmItem:FormItem = new FormItem();
+						frmItem.direction = "horizontal";
+						frmItem.label = obj.name; 
+						var tb:TextInput = new TextInput();
+						
+						if(obj.name=="id"){
+							tb.text=this.name;
+							tb.editable=false;
+						}						
+						
+						if(obj.name=="source"){
+							tb.text=this.source.name;
+							tb.editable=false;
+						}
+						
+						if(obj.name=="destination"){
+							tb.text=this.destination.name;
+							tb.editable=false;
+						}
+						
+						for(var j:int=0;j<valueObjArr.length;j++){					
+							if(obj.name==valueObjArr[j].id){
+								tb.text =valueObjArr[j].name;
+							}
+						}
+						
+						if(obj.name=='name'){
+							if(tb.text=='')
+								tb.text=this.name;
+							lable.text=tb.text;
+						}
+						
+						if(obj.name=="delay"){
+							tb.width=50;	
+							frmItem.label = "Delay(ms)"; 
+							delay=tb.text;
+							obj.delay = tb.text;
+						}
+						
+						if(obj.name=="loss"){
+							tb.width=50;	
+							frmItem.label = "Loss(%)";
+							loss=tb.text;
+							obj.loss = tb.text;
+						}
+						
+						if(obj.name=="maxqueue"){
+							frmItem.label = "Max Queue Size(Pkts)"; 
+							tb.width=50;	
+							maxqueuesize=tb.text;
+						}
+						
+						
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+						tb.addEventListener(Event.CHANGE,change);
+					}
+						
+					else if(obj.id=='boolean'){
+						frmItem = new FormItem();
+						frmItem.direction = "horizontal";
+						frmItem.label = obj.name;                          
+						var tb2:ComboBox = new ComboBox();
+						tb2.dataProvider = ['true','false'];
+						tb2.addEventListener(Event.CHANGE,change);
+						
+						for(var l:int;l<valueObjArr.length;l++){
+							if(valueObjArr[l].id==frmItem.label){
+								tb2.selectedIndex =valueObjArr[l].name;
+								break;
+							}					
+							else ;					
+						}							
+						frmItem.addChild(tb2);
+						form.addChild(frmItem);
+					}
+						
+					else if(obj.id=='options'){						
+						if(obj.name=="type"){
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name;
+							var tb3:ComboBox = new ComboBox();
+							tb3.selectedIndex=1;
+							tb3.dataProvider = obj.option;
+							frmItem.addChild(tb3);
+							tb3.addEventListener(Event.CHANGE,change);
+							tb3.enabled=false;
+							obj.linkType = "null";
+						}
+						else if(obj.name=="bandwidth"){
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name;
+							tb3 = new ComboBox();
+							tb3.dataProvider = obj.option;	
+							frmItem.label = "Bandwidth(MB/s)"; 							
+							frmItem.addChild(tb3);
+							tb3.addEventListener(Event.CHANGE,change);
+							tb3.selectedItem=bw;
+							obj.rate = bw;
+						}
+						else if(obj.name=="htb"){
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name;
+							tb3 = new ComboBox();
+							tb3.dataProvider = ['False','True'];
+							frmItem.label = "Hierarchical Token Bucket"; 							
+							frmItem.addChild(tb3);
+							tb3.addEventListener(Event.CHANGE,change);
+							tb3.selectedItem=htb;
+							//obj.arrayHTB[ye] = new Array();
+							obj.HTB = htb;
+						}
+						else{
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name;
+							tb3 = new ComboBox();						
+							tb3.dataProvider = obj.option;
+							frmItem.addChild(tb3);
+							tb3.addEventListener(Event.CHANGE,change);
+						}
+						for(var o:int;o<valueObjArr.length;o++){
+							if(valueObjArr[o].id==frmItem.label){
+								tb3.selectedIndex = valueObjArr[o].name;
+								break;
+							}
+							else ;
+						}
+						
+						form.addChild(frmItem);
+					}
+				} 
+				secondTime=false;
+			}
+			
+			public function ini():void {		
+				form=new Form();
+				this.addChildAt(lable,0);
+				this.addChildAt(form,1);
+				for(var i:int=0;i<objparaArrayCol.length;i++){
+					var obj:objParameter=objparaArrayCol[i];
+					
+					if(obj.id=='string'){
+						var frmItem:FormItem = new FormItem();
+						frmItem.direction = "horizontal";
+						frmItem.label = obj.name; 
+						
+						var tb:TextInput = new TextInput();
+						tb.addEventListener(Event.CHANGE,change);
+						
+						if( obj.name=="id" ){
+							tb.text = this.name;
+							tb.editable=false;
+						}
+						
+						if(obj.name=="name"){
+							tb.text = this.name;
+							lable.text=tb.text;							
+						}
+						
+						if(obj.name=="source"){
+							tb.text = this.source.name;
+							tb.editable=false;			
+														
+							if(this.name.slice(0,6)=="Switch"){
+								this.type = "Switch";
+								this.nid = int(this.name.slice(7,9));
+							}	
+							
+							if(this.name.slice(0,12)=="Access Point"){
+								this.type = "Access Point";
+								this.nid = int(this.name.slice(13,15));
+							}	
+							
+							if(this.name.slice(0,8)=="Computer"){
+								this.type = "Computer";
+								this.nid = int(this.name.slice(9,11));
+							}
+							
+							if(this.name.slice(0,7)=="Station"){
+								this.type = "Station";
+								this.nid = int(this.name.slice(8,10));
+							}	
+							
+							if(this.name.slice(0,10)=="Controller"){
+								this.type = "Controller";
+								this.nid = int(this.name.slice(11,13));
+							}							
+						}
+						
+						if(obj.name=="destination"){
+							tb.text = this.destination.name;
+							tb.editable=false;			
+							
+							if(this.name.slice(0,6)=="Switch"){
+								this.type = "Switch";
+								this.nid = int(this.name.slice(7,9));
+							}	
+							
+							if(this.name.slice(0,12)=="Access Point"){
+								this.type = "Access Point";
+								this.nid = int(this.name.slice(13,15));
+							}	
+							
+							if(this.name.slice(0,8)=="Computer"){
+								this.type = "Computer";
+								this.nid = int(this.name.slice(9,11));
+							}
+							
+							if(this.name.slice(0,7)=="Station"){
+								this.type = "Station";
+								this.nid = int(this.name.slice(8,10));
+							}	
+							
+							if(this.name.slice(0,10)=="Controller"){
+								this.type = "Controller";
+								this.nid = int(this.name.slice(11,13));
+							}	
+						}
+						
+						if(obj.name=="delay"){
+							frmItem.label = "Delay(ms)"; 
+							tb.width=50;	
+						}
+						
+						if(obj.name=="loss"){
+							frmItem.label = "Loss(%)"; 
+							tb.width=50;	
+						}
+						
+						if(obj.name=="maxqueue"){
+							frmItem.label = "Max Queue Size(Pkts)"; 
+							tb.width=50;	
+						}
+						
+						frmItem.addChild(tb);
+						form.addChild(frmItem);
+					}
+					
+					if(obj.id=='boolean'){
+						frmItem = new FormItem();
+						frmItem.direction = "horizontal";
+						frmItem.label = obj.name;                          
+						var tb2:ComboBox = new ComboBox();
+						tb2.dataProvider = ['true','false'];
+						frmItem.addChild(tb2);
+						tb2.addEventListener(Event.CHANGE,change);
+						form.addChild(frmItem);
+					}
+					
+					if(obj.id=='options'){
+						if(obj.name=="bandwidth"){	
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name; 
+							var tb3:ComboBox = new ComboBox();
+							tb3.dataProvider = obj.option;
+							frmItem.label = "Bandwidth(MB/s)"; 
+							frmItem.addChild(tb3);
+							bw=String(tb3.selectedItem);
+							obj.rate = bw;
+							tb3.addEventListener(Event.CHANGE,change);
+							form.addChild(frmItem);
+						}
+						else if(obj.name=="htb"){	
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name; 
+							tb3 = new ComboBox();
+							tb3.dataProvider = ['False','True'];
+							frmItem.label = "Hierarchical Token Bucket"; 
+							frmItem.addChild(tb3);
+							htb=String(tb3.selectedItem);
+							obj.HTB = htb;
+							tb3.addEventListener(Event.CHANGE,change);
+							form.addChild(frmItem);
+						}
+						else{ 
+							frmItem = new FormItem();
+							frmItem.direction = "horizontal";
+							frmItem.label = obj.name; 
+							tb3 = new ComboBox();
+							tb3.dataProvider = obj.option;
+							frmItem.addChild(tb3);
+							tb3.addEventListener(Event.CHANGE,change);
+							form.addChild(frmItem);
+						}
+						if(obj.name=="bandwidth"){					
+							tb3.selectedIndex=-1;
+						}
+						if(obj.name=="htb"){					
+							tb3.selectedIndex=0;
+						}
+						if(obj.name=="type"){					
+							tb3.selectedIndex=1;
+							tb3.enabled=false;
+						}
+					}
+				} 
+			} 
+		]]>
+		
+	</mx:Script>
+	<mx:Button label="Apply Settings" click="appchangesobj()"/>
+	<bridge:FABridge/>
+</mx:VBox>

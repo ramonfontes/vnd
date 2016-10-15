@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+		 xmlns:bridge="bridge.*"
+		 width="250" height="30%" backgroundColor="#F0F0E9" borderStyle="solid" borderThickness="1"
+		 horizontalAlign="center">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Image;
+			
+			public function setImage(img:String):void{
+				container.removeAllChildren();
+				var image:Image=new Image();
+				image.source='assets/'+img+'.png';
+				container.addChild(image);
+			}
+			public function setImageEmpty():void{
+				container.removeAllChildren();
+				
+			}
+		]]>
+	</mx:Script>
+	
+	
+	<mx:Button label="Preview" horizontalCenter="0" top="0" width="100%" fontSize="10" fontWeight="bold" cornerRadius="0" alpha="0.5"/>
+	<mx:VBox id="container" width="100%" height="100%"   horizontalAlign="center" verticalAlign="middle"/>
+	<bridge:FABridge/>
+</mx:VBox>
