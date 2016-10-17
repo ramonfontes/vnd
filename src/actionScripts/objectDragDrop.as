@@ -34,9 +34,6 @@ import flash.display.DisplayObject;
 			for(var z:int=0;z<ob1.par.length;z++){
 		      	var objpar:objParameter=new objParameter();
 				//Limpar contagem
-				if(ob1.par[z].name=="remoteLocal"){
-					qos1 = new qosConfig();
-				}
 			    objpar.id=ob1.par[z].type;
 		        objpar.name=ob1.par[z].name;
 				if(ob1.par[z].type=='options'){

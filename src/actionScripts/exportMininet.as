@@ -31,11 +31,13 @@ public function exportMininetScriptFile():void {
 	var countControllerDestination:String;
 	var countSwitchSource:String;
 	var countSwitchDestination:String;
+	var ssid:String;
 	var storeSwitches:Array=[];
 	var storeConnectivity:Array=[];
 	var stations:Array=[];
 	var exists:Boolean=false;
 	var controllerIPAddress:String;
+	var isRemote:Boolean;
 	var urlRequest:URLRequest;
 	var ab:int;
 	var p:int;
@@ -52,18 +54,7 @@ public function exportMininetScriptFile():void {
 			var ob:objects=UIob as objects;		
 			for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
 				obj=ob.objparaArrayCol[ir] as objParameter;
-				if(ob.id=="Computer"){
-					ab = int(ob.nid);
-					ye=ab;
-				}
-				else if(ob.id=="Access Point"||ob.id=="Switch"){
-					if(ob.id=="Access Point"){
-						ab = int(ob.nid);
-					}
-					else{
-						ab = int(ob.nid);		
-					}
-					ye=ab;													
+				if(ob.id=="Access Point"||ob.id=="Switch"){
 					if(obj.name=="switch"){	
 						switch_ = obj.arraySwitch;	
 						if(switch_=="user")
@@ -75,10 +66,6 @@ public function exportMininetScriptFile():void {
 						else
 							switch_="OVSKernelSwitch"
 					}
-				}
-				else if(ob.id=="Controller"){
-					ab = int(ob.nid);
-					ye=ab;
 				}
 			}
 		}
@@ -168,9 +155,7 @@ public function exportMininetScriptFile():void {
 								UIob = dropCanvas.getChildAt(p);
 								if(UIob.className =='objects'){
 									ob=UIob as objects;	
-									if(ob.id=="Controller"){		
-									ab = int(ob.nid);
-									ye=ab;
+									if(ob.id=="Controller"){
 									for(i=0;i<(ob.objparaArrayCol.length);i++){
 										obj=ob.objparaArrayCol[i] as objParameter;
 									}		
@@ -178,17 +163,17 @@ public function exportMininetScriptFile():void {
 										obj=ob.objparaArrayCol[ir] as objParameter;
 										
 										if(obj.name=="remoteLocal"){												
-											var isLocal:String = obj.arrayGetisRemote[ye];	
+											isRemote = obj.isRemote;	
 										}	
 									}
 									}
 								}
 							}
-							if(isLocal=="true"){
-							cont_mininet++;
-							sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
+							if(isRemote){
+								cont_mininet++;
+								sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
+								objeto_mininet=sh;
+								temp_mininet.addItem(objeto_mininet);
 							}
 							else{
 								cont_mininet++;
@@ -216,8 +201,6 @@ public function exportMininetScriptFile():void {
 			if(UIob.className =='objects'){
 				ob=UIob as objects;	
 				if(ob.id=="Controller"){		
-					ab = int(ob.nid);
-					ye=ab;
 					for(i=0;i<(ob.objparaArrayCol.length);i++){
 						obj=ob.objparaArrayCol[i] as objParameter;
 					}		
@@ -225,13 +208,13 @@ public function exportMininetScriptFile():void {
 						obj=ob.objparaArrayCol[ir] as objParameter;
 						
 						if(obj.name=="remoteLocal"){												
-							isLocal = obj.arrayGetisRemote[ye];	
+							isRemote = obj.isRemote;	
 						}	
 					}
 				}
 			}
 		}
-		if(isLocal=="true"){
+		if(isRemote){
 			cont_mininet++;
 			sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
 			objeto_mininet=sh;
@@ -262,31 +245,26 @@ public function exportMininetScriptFile():void {
 		UIob = dropCanvas.getChildAt(p);
 		if(UIob.className =='objects'){
 			ob=UIob as objects;	
-			if(ob.id=="Station" || ob.id=="Car"){
-				ab = int(ob.nid);
-				ye=ab;													
+			if(ob.id=="Station" || ob.id=="Car"){												
 				for(i=0;i<(ob.objparaArrayCol.length);i++){
 					var obj:objParameter=ob.objparaArrayCol[i] as objParameter;
 				}		
 				for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
 					obj=ob.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="IPAddress"){												
-						stationIPAddress = obj.IPAddress1[ye];
+						stationIPAddress = obj.IPAddress;
 					}	
 					else if(obj.name=="MacAddress"){												
-						stationMacAddress = obj.MacAddress1[ye];
+						stationMacAddress = obj.MacAddress;
 					}
 					else if(obj.name=="signalRange"){												
-						arraySignalRange = obj.range1[ye];
-					}
-					else if(obj.name=="stationpassword"){												
-						arrayStationPassword = obj.arrayStationPassword1[ye];
+						arraySignalRange = obj.range;
 					}
 					else if(obj.name=="numberofradios"){												
-						arrayNumberOfRadios = obj.arrayNumberofRadios[ye];
+						arrayNumberOfRadios = obj.numberofRadios;
 					}
 					else if(obj.name=="mask"){												
-						stationMask = obj.MaskAddress[ye];
+						stationMask = obj.MaskAddress;
 						if(stationMask=="255.0.0.0")
 							stationMask="8";
 						else if(stationMask=="255.128.0.0")
@@ -351,22 +329,20 @@ public function exportMininetScriptFile():void {
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
-			if(ob.id=="Computer"){
-				ab = int(ob.nid);
-				ye=ab;													
+			if(ob.id=="Computer"){										
 				for(i=0;i<(ob.objparaArrayCol.length);i++){
 					obj=ob.objparaArrayCol[i] as objParameter;
 				}		
 				for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
 					obj=ob.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="IPAddress"){												
-						computerIPAddress = obj.IPAddress1[ye];
+						computerIPAddress = obj.IPAddress;
 					}	
 					else if(obj.name=="MacAddress"){												
-						computerMacAddress = obj.MacAddress1[ye];
+						computerMacAddress = obj.MacAddress;
 					}	
 					else if(obj.name=="mask"){												
-						computerMask = obj.MaskAddress[ye];
+						computerMask = obj.MaskAddress;
 						if(computerMask=="255.0.0.0")
 							computerMask="8";
 						else if(computerMask=="255.128.0.0")
@@ -421,21 +397,19 @@ public function exportMininetScriptFile():void {
 				temp_mininet.addItem(objeto_mininet);
 			}
 			else if(ob.id=="Switch"){
-				ab = int(ob.nid);
-				ye=ab;
 				for(i=0;i<(ob.objparaArrayCol.length);i++){
 					obj=ob.objparaArrayCol[i] as objParameter;
 				}		
 				for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
 					obj=ob.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="MacAddress"){	
-						macSwitch = obj.MacAddress1[ye];
+						macSwitch = obj.MacAddress;
 					}	
 					else if(obj.name=="listeningPort"){	
-						listenPortSwitch = obj.arrayListenPortSwitch1[ye];
+						listenPortSwitch = obj.listenPortSwitch;
 					}
 					else if(obj.name=="ofp_version"){	
-						openFlowVersion = obj.arrayOpenFlowVersion[ye];
+						openFlowVersion = obj.openFlowVersion;
 					}
 				}
 				cont_mininet++;
@@ -454,55 +428,51 @@ public function exportMininetScriptFile():void {
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}		
-			else if(ob.id=="Access Point"){
-				ab = int(ob.nid);
-				ye=ab;
+			else if(ob.id=="Access Point"){				
 				for(i=0;i<(ob.objparaArrayCol.length);i++){
 					obj=ob.objparaArrayCol[i] as objParameter;
 				}		
 				for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
 					obj=ob.objparaArrayCol[ir] as objParameter;									
 					if(obj.name=="MacAddress"){	
-						macSwitch = obj.MacAddress1[ye];
+						macSwitch = obj.MacAddress;
 					}	
 					else if(obj.name=="listeningPort"){	
-						listenPortSwitch = obj.arrayListenPortSwitch1[ye];
+						listenPortSwitch = obj.listenPortSwitch;
 					}
 					else if(obj.name=="ofp_version"){	
-						openFlowVersion = obj.arrayOpenFlowVersion[ye];
+						openFlowVersion = obj.openFlowVersion;
 					}
 					else if(obj.name=="signalRange"){	
-						arraySignalRange = obj.range1[ye];
+						arraySignalRange = obj.range;
 					}
 					else if(obj.name=="ssid"){	
-						routerSSID = obj.arrayRouterSSID1[ye];
+						ssid = obj.ssid;
 					}
 					else if(obj.name=="mode"){	
-						mode = obj.arrayGetMode[ye];
+						mode = obj.mode;
 					}
 					else if(obj.name=="channel"){	
-						channel = obj.arrayGetChannel[ye];
+						channel = obj.channel;
 					}
 				}
 				cont_mininet++;
 				if(openFlowVersion=="1")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.1")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.2")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.3")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.4")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+routerSSID+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
 			else if(ob.id=="Controller"){		
-				ab = int(ob.nid);
-				ye=ab;
 				for(i=0;i<(ob.objparaArrayCol.length);i++){
 					obj=ob.objparaArrayCol[i] as objParameter;
 				}		
@@ -510,17 +480,16 @@ public function exportMininetScriptFile():void {
 					obj=ob.objparaArrayCol[ir] as objParameter;
 					
 					if(obj.name=="controllerIPAddress"){												
-						controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+						controllerIPAddress = obj.controllerIPAddress;	
 					}											
 					else if(obj.name=="controllerPort"){
-						controllerPort = obj.arrayControllerPort[ye];	
+						controllerPort = obj.controllerPort;	
 					}	
 					else if(obj.name=="remoteLocal"){												
-						var isLocal:String = obj.arrayGetisRemote[ye];	
+						isRemote = obj.isRemote;	
 					}	
 				}			
-				
-				if(isLocal=="true"){
+				if(isRemote){
 					cont_mininet++;
 					sh = "    c"+ob.nid+" = net.addController( 'c"+ob.nid+"' )@@";
 					objeto_mininet=sh;
@@ -535,7 +504,6 @@ public function exportMininetScriptFile():void {
 			}
 		} 
 	}	
-	//----------------------------------------------------------------------
 	//----------------------------------------------------------------------
 	for(j=0;j<dropCanvas.numChildren;j++){	
 		if(j==0){
@@ -633,7 +601,7 @@ public function exportMininetScriptFile():void {
 							cont_mininet++;
 							sh = "    net.addLink(h"+obLink.can.source.nid+", s"+obLink.can.destination.nid+",";
 						}
-						else if(obLink.can.destination.name.slice(0,12)=="Access Point"){
+						else if(obLink.can.destination.id=="Access Point"){
 							cont_mininet++;
 							sh = "    net.addLink(h"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
 						}
@@ -666,7 +634,7 @@ public function exportMininetScriptFile():void {
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
-						else if(obLink.can.destination.name.slice(0,6)=="Switch"){
+						else if(obLink.can.destination.id=="Switch"){
 							cont_mininet++;
 							sh = "    net.addLink(sta"+obLink.can.source.nid+", s"+obLink.can.destination.nid+",";
 							sh=sh.substring(0, sh.length-1);
@@ -683,7 +651,7 @@ public function exportMininetScriptFile():void {
 							cont_mininet++;
 							sh = "    net.addLink(s"+obLink.can.source.nid+", h"+obLink.can.destination.nid+",";
 						}
-						else if(obLink.can.source.name.slice(0,12)=="Access Point"){
+						else if(obLink.can.source.id=="Access Point"){
 							cont_mininet++;
 							sh = "    net.addLink(ap"+obLink.can.source.nid+", h"+obLink.can.destination.nid+",";
 						}
@@ -749,7 +717,7 @@ public function exportMininetScriptFile():void {
 				else if(obLink.can.lineName=="wireless" && obLink.can.source.id=="Station" && obLink.can.destination.id=="Station"){
 					if(stations.indexOf("sta"+obLink.can.source.nid)==-1){
 						cont_mininet++;
-						sh = "    net.addMesh(sta"+obLink.can.source.name.slice(8,10)+", ssid='meshNet', mode='g') #node, ssid, mode";
+						sh = "    net.addMesh(sta"+obLink.can.source.nid+", ssid='meshNet', mode='g') #node, ssid, mode";
 						sh=sh.concat("@@");
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);	
@@ -794,8 +762,6 @@ public function exportMininetScriptFile():void {
 		}
 	}
 	//----------------------------------------------------------------------
-	//----------------------------------------------------------------------
-	
 	for(p=0;p<dropCanvas.numChildren;p++){	
 		if(p==0){
 			cont_mininet++;
@@ -816,11 +782,10 @@ public function exportMininetScriptFile():void {
 			ob=UIob as objects;					
 			if(ob.id=="Controller"){	
 				cont_mininet++;
-				sh = "    c"+ob.name.slice(11,13)+".start()@@";
+				sh = "    c"+ob.nid+".start()@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
-			
 		}
 	}
 	for(p=0;p<dropCanvas.numChildren;p++){
@@ -828,7 +793,7 @@ public function exportMininetScriptFile():void {
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;	
 				if(exists==false && storeConnectivity.indexOf(obLink.can.source.nid)==-1 && (obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&obLink.can.destination.id=="Controller"){
-					if (obLink.can.source.name.slice(0,12)=="Access Point"){
+					if (obLink.can.source.id=="Access Point"){
 						storeConnectivity.push(obLink.can.source.nid);	
 						cont_mininet++;
 						sh = "    ap"+obLink.can.source.nid+".start( [c"+obLink.can.destination.nid;
@@ -876,7 +841,6 @@ public function exportMininetScriptFile():void {
 		countControllerSource="";
 		exists=false;
 	}	
-	//----------------------------------------------------------------------
 	//----------------------------------------------------------------------
 	cont_mininet++;
 	sh = "@@";
@@ -968,9 +932,6 @@ public function exportMininetScriptFile():void {
 		fileRefScript_mininet = new FileReference();	
 		fileRefScript_mininet.addEventListener(Event.COMPLETE, SaveToLocalMachineResultScript);
 		fileRefScript_mininet.addEventListener(ProgressEvent.PROGRESS, downloading_progress);				
-		//var request:URLRequest = new URLRequest("./scripts/"+chave+".sh");
-		//fileRefScript_mininet.download(request); 
-		//fileRefScript_mininet.download(new URLRequest("./scripts/"+chave+".sh"));
 		downloadScript();
 	}		
 }

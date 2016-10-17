@@ -35,8 +35,7 @@ public function load(eve:ResultEvent):void{
 			OB.id=xmlInfo[a].id;
 			OB.name=xmlInfo[a].name;
 			OB.x=xmlInfo[a].x;
-			OB.y=xmlInfo[a].y;
-			
+			OB.y=xmlInfo[a].y;			
 			OB.img= xmlInfo[a].image;
 			OB.secondTime=true;  
 			OB.exportControll=true;
@@ -159,49 +158,59 @@ public function load(eve:ResultEvent):void{
 			devicedstport=xmlInfo[a].deviceDestinationPort;
 			
 			src.name=xmlInfo[a].source;
-			var srcc = src
-			link.can.source=srcc;
-			var obsr:String=String(link.can.source);
+			var srcc = src;
+			link.can.source = srcc;
 			
 			des.name=xmlInfo[a].destination;
-			var dess = des
+			var dess = des;
 			link.can.destination=dess;			
-			var obds:String=String(link.can.destination);
-			
-			if(obsr.slice(0,6)=="Switch"){
+
+			if(src.name.slice(0,6)=="Switch"){
 				sr="Switch";
 			}
-			if(obsr.slice(0,7)=="Station"){
+			else if(src.name.slice(0,7)=="Station"){
 				sr="Station";
 			}
-			else if(obsr.slice(0,12)=="Access Point"){
+			else if(src.name.slice(0,3)=="Car"){
+				sr="Car";
+			}
+			else if(src.name.slice(0,10)=="Smartphone"){
+				sr="Smartphone";
+			}
+			else if(src.name.slice(0,12)=="Access Point"){
 				sr="Access Point";
 			}
-			else if(obsr.slice(0,8)=="Computer"){
+			else if(src.name.slice(0,8)=="Computer"){
 				sr="Computer";
 			}
-			else if(obsr.slice(0,10)=="Controller"){
+			else if(src.name.slice(0,10)=="Controller"){
 				sr="Controller";
 			}
 			
-			if(obds.slice(0,6)=="Switch"){
+			if(des.name.slice(0,6)=="Switch"){
 				ds="Switch";
 			}
-			else if(obds.slice(0,12)=="Access Point"){
+			else if(des.name.slice(0,12)=="Access Point"){
 				ds="Access Point";
 			}
-			else if(obds.slice(0,8)=="Computer"){
+			else if(des.name.slice(0,8)=="Computer"){
 				ds="Computer";
 			}
-			else if(obds.slice(0,7)=="Station"){
+			else if(des.name.slice(0,7)=="Station"){
 				ds="Station";
 			}
-			else if(obds.slice(0,10)=="Controller"){
+			else if(des.name.slice(0,3)=="Car"){
+				ds="Car";
+			}
+			else if(des.name.slice(0,10)=="Smartphone"){
+				ds="Smartphone";
+			}
+			else if(des.name.slice(0,10)=="Controller"){
 				ds="Controller";
 			}
 			
-			link.objectDst=ds;			
-			link.objectSrc=sr;
+			link._objectDst=ds;			
+			link._objectSrc=sr;
 			
 			if(link.name.slice(0,8)=="wireless")
 				link.can.lineName = "wireless"
@@ -210,86 +219,152 @@ public function load(eve:ResultEvent):void{
 			else if (link.name.slice(0,8)=="ethernet")
 				link.can.lineName = "ethernet"
 			
-			if(sr=="Switch"&&ds!="Controller"){
-				np=int(obsr.slice(7,9));	
-				link.switchDeviceDestination=np;
-				if(arrayContIfacesCheck[np]==undefined){
-					arrayContIfacesCheck[np]=0;
+			if((sr=="Switch" || sr=="Access Point") && ds!="Controller" && link.name.slice(0,8)!="wireless"){
+				//Source
+				if(sr=="Switch"){
+					np=int(src.name.slice(7,9));
 				}
-				if(arrayContIfacesCheck[np]<devicesrcport)
-					arrayContIfacesCheck[np]=devicesrcport;				
-				link.switchPortSource=devicesrcport;
-				link.can.sourcePort=devicesrcport;				
-				if(obds.slice(0,10)!="Controller")
-					getInterfaces.push("s"+np+"-eth"+link.can.sourcePort);
-				//arrayST[np]=arrayContIfacesCheck[np];
+				else if(sr=="AccessPoint"){
+					np=int(src.name.slice(12,14));
 				}
-			
-			else if(sr=="Access Point"&&link.name.slice(0,8)!="wireless"&&ds!="Controller"){
-				np=int(obsr.slice(13,15));	
-				link.switchDeviceDestination=np;
-				if(arrayContIfacesCheck[np]==undefined){
-					arrayContIfacesCheck[np]=0;
-				}
-				if(arrayContIfacesCheck[np]<devicesrcport)
-					arrayContIfacesCheck[np]=devicesrcport;				
-				link.switchPortSource=devicesrcport;
-				link.can.sourcePort=devicesrcport;		
-				
-				if(obds.slice(0,10)!="Controller")
-					getInterfaces.push("s"+np+"-eth"+link.can.sourcePort);
-			}
-			
-			else if(sr=="Computer"&&ds!="Controller"){
-				link.checkSource=true;
-				link.computerPort=0;
-			}		
-			
-			else if(sr=="Station"&&ds!="Controller"){
-				link.checkSource=true;
-				link.stationPort=0;
-			}	
-			
-			if(ds=="Switch"&&sr!="Controller"){
-				np=int(obds.slice(7,9));	
 				link.switchDeviceSource=np;
 				if(arrayContIfacesCheck[np]==undefined){
-					arrayContIfacesCheck[np]=0;			
+					arrayContIfacesCheck[np]=0;
+				}
+				if(arrayContIfacesCheck[np]<devicesrcport)
+					arrayContIfacesCheck[np]=devicesrcport;				
+
+				link._checkSource=true;
+				link.srcPort=devicesrcport;
+				link.can.sourcePort=link.srcPort;
+				//Destination
+				if(ds=="Car"){
+					np=int(des.name.slice(4,6));
+				}
+				else if(ds=="Station"){
+					np=int(des.name.slice(8,10));
+				}
+				else if(ds=="Computer"){
+					np=int(des.name.slice(9,11));
+				}
+				else if(ds=="Switch"){
+					np=int(des.name.slice(7,9));
+				}
+				else if(ds=="AccessPoint"){
+					np=int(des.name.slice(12,14));
+				}
+				link.switchDeviceDestination=np;
+				if(arrayContIfacesCheck[np]==undefined){
+					arrayContIfacesCheck[np]=0;
 				}
 				if(arrayContIfacesCheck[np]<devicedstport)
 					arrayContIfacesCheck[np]=devicedstport;				
-				link.switchPortDestination=devicedstport;				
-				link.can.destinationPort=devicedstport;
-				if(obsr.slice(0,10)!="Controller")
-					getInterfaces.push("s"+np+"-eth"+link.can.destinationPort);				
+
+				link.dstPort=devicedstport;
+				link.can.destinationPort=link.dstPort;
+			}
+			else if(ds!="Controller" && (sr=="Station" || sr=="Computer") && link.name.slice(0,8)!="wireless"){
+				//Destination
+				if(ds=="Switch"){
+					np=int(des.name.slice(7,9));
 				}
-					
-			else if(ds=="Access Point"&&link.name.slice(0,8)!="wireless"&&sr!="Controller"){
-				np=int(obds.slice(7,9));	
-				link.switchDeviceSource=np;
+				else if(ds=="AccessPoint"){
+					np=int(des.name.slice(12,14));
+				}
+				link.switchDeviceDestination=np;
 				if(arrayContIfacesCheck[np]==undefined){
-					arrayContIfacesCheck[np]=0;			
+					arrayContIfacesCheck[np]=0;
 				}
 				if(arrayContIfacesCheck[np]<devicedstport)
-					arrayContIfacesCheck[np]=devicedstport;			
-				link.switchPortDestination=devicedstport;
-				link.can.destinationPort=devicedstport;
-			
-				if(obsr.slice(0,10)!="Controller")
-					getInterfaces.push("s"+np+"-eth"+link.can.destinationPort);
+					arrayContIfacesCheck[np]=devicedstport;				
 				
+				link._checkSource=true;
+				link.dstPort=devicedstport;
+				link.can.destinationPort=link.dstPort;
+				//Source
+				if(sr=="Station"){
+					np=int(src.name.slice(8,10));
+				}
+				else if(sr=="Computer"){
+					np=int(src.name.slice(9,11));
+				}
+				link.switchDeviceSource=np;
+				if(arrayContIfacesCheck[np]==undefined){
+					arrayContIfacesCheck[np]=0;
+				}
+				if(arrayContIfacesCheck[np]<devicesrcport)
+					arrayContIfacesCheck[np]=devicesrcport;				
+				
+				link.srcPort=devicesrcport;
+				link.can.sourcePort=link.srcPort;
 			}
-			else if(ds=="Computer"&&sr!="Controller"){
-				ds="Computer";
-				link.checkSource=false;
-				link.computerPort=0;
-			}	
-			else if(ds=="Station"&&sr!="Controller"){
-				ds="Station";
-				link.checkSource=false;
-				link.stationPort=0;
-			}	
-						
+			else if(sr=="Access Point" && (ds=="Station" || ds=="Car") && link.name.slice(0,8)=="wireless"){
+				//Source
+				if(src.wirelessExists == false){
+					np=int(src.name.slice(12,14));
+					link.switchDeviceSource=np;
+					if(arrayContIfacesCheck[np]==undefined){
+						arrayContIfacesCheck[np]=0;
+					}
+					if(arrayContIfacesCheck[np]<devicesrcport)
+						arrayContIfacesCheck[np]=devicesrcport;	
+					
+					link._checkSource=true;
+					link.srcPort=devicesrcport;
+					link.can.sourcePort=link.srcPort;
+					src.wirelessExists = true;
+				}
+				//Destination
+				if(ds=="Car"){
+					np=int(des.name.slice(4,6));
+				}
+				else if(ds=="Station"){
+					np=int(des.name.slice(8,10));
+				}
+				link.switchDeviceDestination=np;
+				if(arrayContIfacesCheck[np]==undefined){
+					arrayContIfacesCheck[np]=0;
+				}
+				if(arrayContIfacesCheck[np]<devicedstport)
+					arrayContIfacesCheck[np]=devicedstport;				
+				
+				link.dstPort=devicedstport;
+				link.can.destinationPort=link.dstPort;
+			}
+			else if(ds=="Access Point" && (sr=="Station" || sr=="Car") && link.name.slice(0,8)=="wireless"){
+				//Destination
+				if(des.wirelessExists == false){
+					np=int(des.name.slice(12,14));
+					link.switchDeviceDestination=np;
+					if(arrayContIfacesCheck[np]==undefined){
+						arrayContIfacesCheck[np]=0;
+					}
+					if(arrayContIfacesCheck[np]<devicedstport)
+						arrayContIfacesCheck[np]=devicedstport;				
+					
+					link._checkSource=true;
+					link.dstPort=devicedstport;
+					link.can.destinationPort=link.dstPort;
+					des.wirelessExists = true;
+				}
+				//Source
+				if(sr=="Station"){
+					np=int(src.name.slice(8,10));
+				}
+				else if(sr=="Car"){
+					np=int(src.name.slice(4,6));
+				}
+				link.switchDeviceSource=np;
+				if(arrayContIfacesCheck[np]==undefined){
+					arrayContIfacesCheck[np]=0;
+				}
+				if(arrayContIfacesCheck[np]<devicesrcport)
+					arrayContIfacesCheck[np]=devicesrcport;				
+				
+				link.srcPort=devicesrcport;
+				link.can.sourcePort=link.srcPort;
+			}		
+					
 			link.can.secondTime=true;  
 			objparaArrayCol=new ArrayCollection();
 			for(b=0;b<xmlInfo[a].par.length();b++){

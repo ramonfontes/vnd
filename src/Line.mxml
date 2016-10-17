@@ -151,16 +151,14 @@
 							tb.width=50;	
 							frmItem.label = "Delay(ms)"; 
 							delay=tb.text;
-							obj.arrayDelay[ye] = new Array();
-							obj.arrayDelay[ye][0] = tb.text;
+							obj.delay = tb.text;
 						}
 						
 						if(obj.name=="loss"){
 							tb.width=50;	
 							frmItem.label = "Loss(%)";
 							loss=tb.text;
-							obj.arrayLoss[ye] = new Array();
-							obj.arrayLoss[ye][0] = tb.text;
+							obj.loss = tb.text;
 						}
 						
 						if(obj.name=="maxqueue"){
@@ -205,7 +203,7 @@
 							frmItem.addChild(tb3);
 							tb3.addEventListener(Event.CHANGE,change);
 							tb3.enabled=false;
-							obj.arrayType[ye] = "null";
+							obj.linkType = "null";
 						}
 						else if(obj.name=="bandwidth"){
 							frmItem = new FormItem();
@@ -217,7 +215,7 @@
 							frmItem.addChild(tb3);
 							tb3.addEventListener(Event.CHANGE,change);
 							tb3.selectedItem=bw;
-							obj.arrayBD[ye] = bw;
+							obj.rate = bw;
 						}
 						else if(obj.name=="htb"){
 							frmItem = new FormItem();
@@ -230,7 +228,7 @@
 							tb3.addEventListener(Event.CHANGE,change);
 							tb3.selectedItem=htb;
 							//obj.arrayHTB[ye] = new Array();
-							obj.arrayHTB[ye] = htb;
+							obj.HTB = htb;
 						}
 						else{
 							frmItem = new FormItem();
@@ -380,7 +378,7 @@
 							frmItem.label = "Bandwidth(MB/s)"; 
 							frmItem.addChild(tb3);
 							bw=String(tb3.selectedItem);
-							obj.arrayBD[ye] = bw;
+							obj.rate = bw;
 							tb3.addEventListener(Event.CHANGE,change);
 							form.addChild(frmItem);
 						}
@@ -393,7 +391,7 @@
 							frmItem.label = "Hierarchical Token Bucket"; 
 							frmItem.addChild(tb3);
 							htb=String(tb3.selectedItem);
-							obj.arrayHTB[ye] = htb;
+							obj.HTB = htb;
 							tb3.addEventListener(Event.CHANGE,change);
 							form.addChild(frmItem);
 						}

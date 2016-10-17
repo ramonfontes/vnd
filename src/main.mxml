@@ -92,7 +92,6 @@
 			private var serverSideScript:String = "uploadxml.php";
 			public var xmlInfo:XMLList;
 			public var popup_ob:objects_popup = new objects_popup();			
-			public var qos1:qosConfig = new qosConfig();
 			public var accessQueue:queueConfig = new queueConfig();
 			
 			[Bindable] public var getInterfaces:Array=new Array;
@@ -151,7 +150,6 @@
 			[Bindable] public var viewsarray:ArrayCollection=new ArrayCollection(); 
 			
 			public var xe:int = 0;
-			public var ye:int = 0;
 			public var intnew:int=0;
 			public var controll:int=0;	
 			public var flowName:String;
@@ -278,78 +276,78 @@
 						for(j=0;j<intnew;j++){
 							if (j==xe){
 								if(obj.name=="flowName"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayFlowName[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.flowName[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}								
 								else if(obj.name=="priority"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayPriority[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.priority[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}								
 								else if(obj.name=="ingressPort"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayIngressPort[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.ingressPort[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="vlanPriority"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayVlanPriority[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.priority[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="tos"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayTos[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.TOS[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="ethtype"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayEthType[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.ethType[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="sourcePort"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySrcPort[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.srcPort[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="destinationPort"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayDstPort[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.dstPort[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}	
 								else if(obj.name=="computerMACAddress"){
-									xmlList = XMLList("<"+obj.name+">"+obj.MacAddress[ye]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.MacAddress+"</"+obj.name+">");
 									xmlLi.appendChild(xmlList);
 									//checked=true;
 									//break;
 								}
 								else if(obj.name=="setSourcePort"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySetSourcePort[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.setSourcePort[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="setDestinationPort"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySetDestinationPort[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.setDestinationPort[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="setVlanPriority"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySetVLANPriority[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.setVLANPriority[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="setOutput"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySetOutput[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.setOutput[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="setEnqueue"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arraySetEnqueue[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.setEnqueue[j]+"</"+obj.name+">");
 									checked=true;
 									break;
 								}
 								else if(obj.name=="notes"){
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayNotes[ye][j]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.notes[j]+"</"+obj.name+">");
 									checked=true;
 									//xe++;
 									break;
@@ -390,68 +388,64 @@
 						checked=false;
 						if(ob.id=="Computer"){
 							if(obj.name=="mask"){
-								xmlList = XMLList("<"+obj.name+">"+obj.MaskAddress[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.MaskAddress+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}								
 						}
 						else if(ob.id=="Station"){
-							if(obj.name=="stationmask"){
-								xmlList = XMLList("<"+obj.name+">"+obj.MaskAddress[ye]+"</"+obj.name+">");
+							if(obj.name=="mask"){
+								xmlList = XMLList("<"+obj.name+">"+obj.MaskAddress+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}								
 						}
 						else if(ob.id=="Switch"){
 							if(obj.name=="switch"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetSwitch[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.switchType+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}	
 							else if(obj.name=="ofp_version"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetOpenFlowVersion[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.openFlowVersion+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}
 						}
 						else if(ob.id=="Access Point"){
 							if(obj.name=="mode"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetMode[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.mode+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}
 							else if(obj.name=="switch"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetSwitch[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.switchType+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}
 							else if(obj.name=="channel"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetChannel[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.channel+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}
 							else if(obj.name=="ofp_version"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayGetOpenFlowVersion[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.openFlowVersion+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}
 						}
 						else if(ob.id=="ethernet" || ob.id=="fiber"){
 							if(obj.name=="htb"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayHTB[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.HTB+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}		
 							else if(obj.name=="bandwidth"){
-								xmlList = XMLList("<"+obj.name+">"+obj.arrayBD[ye]+"</"+obj.name+">");
+								xmlList = XMLList("<"+obj.name+">"+obj.rate+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
 							}		
-							//else if(obj.name=="type"){
-								//xmlList = XMLList("<"+obj.name+">"+obj.arrayType[ye]+"</"+obj.name+">");
-								//xmlLi.appendChild(xmlList);
-							//}		
 						}
 						else if(ob.id=="Controller"){
 							if(intnew==0){
 								if(obj.name=="remoteLocal"){
 									checked=true;
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayGetisRemote[ye]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.isRemote+"</"+obj.name+">");
 									xmlLi.appendChild(xmlList);
 								}
 								else if(obj.name=="openflowController"){
 									checked=true;
-									xmlList = XMLList("<"+obj.name+">"+obj.arrayOpenflowController[ye]+"</"+obj.name+">");
+									xmlList = XMLList("<"+obj.name+">"+obj.openflowController+"</"+obj.name+">");
 									xmlLi.appendChild(xmlList);
 								}
 							}
@@ -461,62 +455,62 @@
 										for(j=0;j<valueObjArr.length;j++){
 											if(obj.name==valueObjArr[j].id){	
 												if(obj.name=="macSource"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arrayMacSource[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.macSource[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="setStripVlan"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arraySetStripVlan[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.setStripVlan[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="macDestination"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arrayMacDestination[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.macDestination[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="macSwitch"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arrayMac_Switch[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.mac_Switch[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="ipSource"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arrayIpSource[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.ipSource[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="ipDestination"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arrayIpDestination[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.ipDestination[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="vlanID"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arrayVlanID[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.vlanID[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="setVlanID"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arraySetVlanID[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.setVlanID[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}		
 												else if(obj.name=="setIPSource"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arraySetIPSource[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.setIPSource[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="setIPDestination"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arraySetIPDestination[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.setIPDestination[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="setMACSource"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arraySetMACSource[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.setMACSource[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}
 												else if(obj.name=="setMACDestination"){
-													xmlList = XMLList("<"+obj.name+">"+obj.arraySetMACDestination[ye][k]+"</"+obj.name+">");
+													xmlList = XMLList("<"+obj.name+">"+obj.setMACDestination[k]+"</"+obj.name+">");
 													checked=true;
 													break;
 												}		
@@ -532,7 +526,6 @@
 												}
 											}
 										}
-								//	}									
 									if(checked==false)	
 										xmlList = XMLList("<"+obj.name+"></"+obj.name+">");
 									if(controll==1 && (obj.name=="remoteLocal" || obj.name=="openflowController")){}
@@ -545,7 +538,6 @@
 										}
 										else
 											xmlLi.appendChild(xmlList);
-									//xmlList="";
 									}
 								}
 							}
@@ -594,31 +586,27 @@
 						var ab:int;
 						if(ob.id=="Computer"){
 							ab = int(ob.name.slice(9,11));
-							ye=ab;
 							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 							setObjectXml(ob,xmlLi);
 						}
 						else if(ob.id=="Switch"){
 							ab = int(ob.name.slice(7,9));
-							ye=ab;
 							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 							setObjectXml(ob,xmlLi);
 						}
 						else if(ob.id=="Access Point"){
 							ab = int(ob.name.slice(13,15));
-							ye=ab;
 							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 							setObjectXml(ob,xmlLi);
 						}
 						else if(ob.id=="Controller"){
-							ab= int(ob.name.slice(11,13));
-							ye=ab;									
+							ab= int(ob.name.slice(11,13));									
 							var obb:Object=ob;
 							for(var i:int=0;i<(obb.objparaArrayCol.length);i++){
 								var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
-								var canew:String = String(obj.arrayFlowName);
+								var canew:String = String(obj.flowName);
 								if(canew!="")
-									intnew = int(obj.arrayFlowName[ye].length);
+									intnew = int(obj.flowName.length);
 								//Alert.show(String(canew));
 							}	
 							if(intnew==0){
@@ -701,15 +689,7 @@
 						
 					else if(UIob.className=='Link'){
 						var obLink:Link=UIob as Link;
-					
-						if(obLink.name.slice(0,8)=="ethernet"){
-							ab = int(obLink.name.slice(9,11));
-							ye=ab;
-						}
-						else if(obLink.name.slice(0,5)=="fiber"){
-							ab = int(obLink.name.slice(6,8));
-							ye=ab;
-						}			
+								
 						var xmlLi2:XMLList = XMLList('<link id="'+obLink.name+'" />');
 						setObjectXml(obLink,xmlLi2);
 						var xmlLi3:XMLList = XMLList('<connection source="'+obLink.can.source.name+'" destination="'+obLink.can.destination.name+'"/>');

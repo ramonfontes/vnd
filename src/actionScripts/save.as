@@ -5,7 +5,7 @@ public function saveFile():void{
 	for(var i:int=0;i<dropCanvas.numChildren;i++){
 		if((dropCanvas.getChildAt(i) as Object).className=='objects'){
 			var UIob:objects=dropCanvas.getChildAt(i) as objects;
-			var ob:objects=UIob as objects;			
+			var ob:objects=UIob as objects;		
 			var object:XML = <objects></objects>;
 			var xmlList:XMLList = XMLList("<type>nodes</type>");
 			object.appendChild(xmlList);
@@ -35,14 +35,11 @@ public function saveFile():void{
 			}
 			for(var k:int=0;k<UIob.valueObjArr.length;k++){
 				if(UIob.id=="Controller"){
-					var ab:int = int(UIob.name.slice(11,13));
-					ye=ab;
-					var obb:Object=ob;
-					for(var c:int=0;c<(obb.objparaArrayCol.length);c++){
-							var obj:objParameter=obb.objparaArrayCol[c] as objParameter;
-							var canew:String = String(obj.arrayFlowName);
+					for(var c:int=0;c<(ob.objparaArrayCol.length);c++){
+							var obj:objParameter=ob.objparaArrayCol[c] as objParameter;
+							var canew:String = String(obj.flowName);
 							if(canew!="")
-								intnew = int(obj.arrayFlowName[ye].length);		
+								intnew = int(obj.flowName.length);		
 							
 							if(UIob.valueObjArr[k].id==obj.name){
 							if(intnew>0){							
@@ -52,107 +49,107 @@ public function saveFile():void{
 									par.appendChild(xmlList);
 								
 								if(obj.name=="controllerIPAddress"){
-									xmlList = XMLList("<name>"+obj.arrayControllerIPAddress[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.controllerIPAddress+"</name>");
 									par.appendChild(xmlList);										
 								}
 								else if(obj.name=="controllerPort"){
-									xmlList = XMLList("<name>"+obj.arrayControllerPort[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.controllerPort+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="remoteLocal"){
-									xmlList = XMLList("<name>"+obj.arrayGetisRemote[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.isRemote+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="openflowController"){
-									xmlList = XMLList("<name>"+obj.arrayOpenflowController[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.openflowController+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="flowName"){
-									xmlList = XMLList("<name>"+obj.arrayFlowName[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.flowName[a]+"</name>");
 									par.appendChild(xmlList);
 								}
 								else if(obj.name=="priority"){
-									xmlList = XMLList("<name>"+obj.arrayPriority[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.priority[a]+"</name>");
 									par.appendChild(xmlList);
 								}
 								else if(obj.name=="macSwitch"){
-									xmlList = XMLList("<name>"+obj.arrayMac_Switch[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.mac_Switch[a]+"</name>");
 									par.appendChild(xmlList);		
 								}								
 								else if(obj.name=="macSource"){
-									xmlList = XMLList("<name>"+obj.arrayMacSource[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.macSource[a]+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="macDestination"){
-									xmlList = XMLList("<name>"+obj.arrayMacDestination[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.macDestination[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="ingressPort"){
-									xmlList = XMLList("<name>"+obj.arrayIngressPort[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.ingressPort[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="vlanID"){
-									xmlList = XMLList("<name>"+obj.arrayVlanID[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.vlanID[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="vlanPriority"){
-									xmlList = XMLList("<name>"+obj.arrayVlanPriority[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.vlanPriority[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="ethtype"){
-									xmlList = XMLList("<name>"+obj.arrayEthType[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.ethType[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="protocol"){
-									xmlList = XMLList("<name>"+obj.arrayProtocol[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.protocol[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="tos"){
-									xmlList = XMLList("<name>"+obj.arrayTos[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.TOS[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setIPSource"){
-									xmlList = XMLList("<name>"+obj.arraySetIPSource[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setIPSource[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setIPDestination"){
-									xmlList = XMLList("<name>"+obj.arraySetIPDestination[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setIPDestination[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setMACSource"){
-									xmlList = XMLList("<name>"+obj.arraySetMACSource[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setMACSource[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setMACDestination"){
-									xmlList = XMLList("<name>"+obj.arraySetMACDestination[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setMACDestination[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setSourcePort"){
-									xmlList = XMLList("<name>"+obj.arraySetSourcePort[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setSourcePort[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setDestinationPort"){
-									xmlList = XMLList("<name>"+obj.arraySetDestinationPort[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setDestinationPort[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setVlanID"){
-									xmlList = XMLList("<name>"+obj.arraySetVlanID[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setVlanID[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setOutput"){
-									xmlList = XMLList("<name>"+obj.arraySetOutput[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setOutput[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setVLANPriority"){
-									xmlList = XMLList("<name>"+obj.arrayVlanPriority[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.vlanPriority[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setStripVlan"){
-									xmlList = XMLList("<name>"+obj.arraySetStripVlan[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setStripVlan[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								else if(obj.name=="setEnqueue"){
-									xmlList = XMLList("<name>"+obj.arraySetEnqueue[ye][a]+"</name>");
+									xmlList = XMLList("<name>"+obj.setEnqueue[a]+"</name>");
 									par.appendChild(xmlList);	
 								}
 								xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
@@ -161,8 +158,7 @@ public function saveFile():void{
 								par.appendChild(xmlList);
 								xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
 								par.appendChild(xmlList);
-								object.appendChild(par);
-								
+								object.appendChild(par);								
 								}
 							}
 							else{
@@ -171,19 +167,19 @@ public function saveFile():void{
 								par.appendChild(xmlList);
 								
 								if(obj.name=="controllerIPAddress"){
-									xmlList = XMLList("<name>"+obj.arrayControllerIPAddress[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.controllerIPAddress+"</name>");
 									par.appendChild(xmlList);										
 								}
 								else if(obj.name=="controllerPort"){
-									xmlList = XMLList("<name>"+obj.arrayControllerPort[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.controllerPort+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="remoteLocal"){
-									xmlList = XMLList("<name>"+obj.arrayGetisRemote[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.isRemote+"</name>");
 									par.appendChild(xmlList);		
 								}
 								else if(obj.name=="openflowController"){
-									xmlList = XMLList("<name>"+obj.arrayOpenflowController[ye]+"</name>");
+									xmlList = XMLList("<name>"+obj.openflowController+"</name>");
 									par.appendChild(xmlList);		
 								}
 								xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
@@ -195,153 +191,60 @@ public function saveFile():void{
 								object.appendChild(par);								
 							}
 						}
-					}
-				
+					}				
 				}
-				else if(UIob.id=="Computer"){
-					ab = int(UIob.name.slice(9,11));
-					ye=ab;
-					obb=ob;
-					for(c=0;c<(obb.objparaArrayCol.length);c++){
-						obj=obb.objparaArrayCol[c] as objParameter;
+				else if(UIob.id=="Access Point" || UIob.id=="Switch" || UIob.id=="Station" 
+					|| UIob.id=="Car" || UIob.id=="Smartphone" || UIob.id=="Computer"){
+					for(c=0;c<(ob.objparaArrayCol.length);c++){
+						obj=ob.objparaArrayCol[c] as objParameter;
+						
 						if(UIob.valueObjArr[k].id==obj.name){
 							par = <valueObjArr></valueObjArr>;
 							xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
 							par.appendChild(xmlList);
 							
-							if(obj.name=="computerIPAddress"){
-								xmlList = XMLList("<name>"+obj.IPAddress1[ye]+"</name>");
+							if(obj.name=="channel"){
+								xmlList = XMLList("<name>"+obj.channel+"</name>");
 								par.appendChild(xmlList);										
 							}
+							else if(obj.name=="IPAddress"){
+								xmlList = XMLList("<name>"+obj.IPAddress+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="MacAddress"){
+								xmlList = XMLList("<name>"+obj.MacAddress+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="listeningPort"){
+								xmlList = XMLList("<name>"+obj.listenPortSwitch+"</name>");
+								par.appendChild(xmlList);										
+							}					
 							else if(obj.name=="mask"){
-								xmlList = XMLList("<name>"+obj.MaskAddress[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.MaskAddress+"</name>");
 								par.appendChild(xmlList);		
-							}
-							else if(obj.name=="computerMacAddress"){
-								xmlList = XMLList("<name>"+obj.MacAddress1[ye]+"</name>");
-								par.appendChild(xmlList);		
-							}
-							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
-							par.appendChild(xmlList);
-							xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
-							par.appendChild(xmlList);
-							xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
-							par.appendChild(xmlList);
-							object.appendChild(par);
-						}
-					}
-				}
-				else if(UIob.id=="Station"){
-					ab = int(UIob.name.slice(8,10));
-					ye=ab;
-					obb=ob;
-					for(c=0;c<(obb.objparaArrayCol.length);c++){
-						obj=obb.objparaArrayCol[c] as objParameter;
-						if(UIob.valueObjArr[k].id==obj.name){
-							par = <valueObjArr></valueObjArr>;
-							xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
-							par.appendChild(xmlList);
-							
-							if(obj.name=="stationIPAddress"){
-								xmlList = XMLList("<name>"+obj.IPAddress1[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="stationmask"){
-								xmlList = XMLList("<name>"+obj.MaskAddress[ye]+"</name>");
-								par.appendChild(xmlList);		
-							}
-							else if(obj.name=="stationMacAddress"){
-								xmlList = XMLList("<name>"+obj.MacAddress1[ye]+"</name>");
-								par.appendChild(xmlList);		
-							}
-							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
-							par.appendChild(xmlList);
-							xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
-							par.appendChild(xmlList);
-							xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
-							par.appendChild(xmlList);
-							object.appendChild(par);
-						}
-					}
-				}
-				else if(UIob.id=="Switch"){
-					ab= int(UIob.name.slice(7,9));
-					ye=ab;
-					obb=ob;
-					
-					for(c=0;c<(obb.objparaArrayCol.length);c++){
-						obj=obb.objparaArrayCol[c] as objParameter;
-						
-						if(UIob.valueObjArr[k].id==obj.name){
-							par = <valueObjArr></valueObjArr>;
-							xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
-							par.appendChild(xmlList);
-							
-							if(obj.name=="switchMacAddress"){
-								xmlList = XMLList("<name>"+obj.arrayMacSwitch[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="listeningPort"){
-								xmlList = XMLList("<name>"+obj.arrayListenPortSwitch1[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="ofp_version"){
-								xmlList = XMLList("<name>"+obj.arrayGetOpenFlowVersion[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="switch"){
-								xmlList = XMLList("<name>"+obj.arrayGetSwitch[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
-							par.appendChild(xmlList);
-							xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
-							par.appendChild(xmlList);
-							xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
-							par.appendChild(xmlList);
-							object.appendChild(par);
-						}
-					}
-				}
-				else if(UIob.id=="Access Point"){
-					ab = int(UIob.name.slice(13,15));
-					ye=ab;
-					obb=ob;
-					
-					for(c=0;c<(obb.objparaArrayCol.length);c++){
-						obj=obb.objparaArrayCol[c] as objParameter;
-						
-						if(UIob.valueObjArr[k].id==obj.name){
-							par = <valueObjArr></valueObjArr>;
-							xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
-							par.appendChild(xmlList);
-							
-							if(obj.name=="switchMacAddress"){
-								xmlList = XMLList("<name>"+obj.arrayMacSwitch[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="listeningPort"){
-								xmlList = XMLList("<name>"+obj.arrayListenPortSwitch1[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="switch"){
-								xmlList = XMLList("<name>"+obj.arrayGetSwitch[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="routerSSID"){
-								xmlList = XMLList("<name>"+obj.arrayRouterSSID1[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="channel"){
-								xmlList = XMLList("<name>"+obj.arrayGetChannel[ye]+"</name>");
-								par.appendChild(xmlList);										
-							}
-							else if(obj.name=="ofp_version"){
-								xmlList = XMLList("<name>"+obj.arrayGetOpenFlowVersion[ye]+"</name>");
-								par.appendChild(xmlList);										
 							}
 							else if(obj.name=="mode"){
-								xmlList = XMLList("<name>"+obj.arrayGetMode[ye]+"</name>");
+								xmlList = XMLList("<name>"+obj.mode+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="numberofradios"){
+								xmlList = XMLList("<name>"+obj.numberofRadios+"</name>");
+								par.appendChild(xmlList);		
+							}
+							else if(obj.name=="ofp_version"){
+								xmlList = XMLList("<name>"+obj.openFlowVersion+"</name>");
+								par.appendChild(xmlList);										
+							}							
+							else if(obj.name=="signalRange"){
+								xmlList = XMLList("<name>"+obj.range+"</name>");
+								par.appendChild(xmlList);		
+							}
+							else if(obj.name=="switch"){
+								xmlList = XMLList("<name>"+obj.switchType+"</name>");
+								par.appendChild(xmlList);										
+							}
+							else if(obj.name=="ssid"){
+								xmlList = XMLList("<name>"+obj.ssid+"</name>");
 								par.appendChild(xmlList);										
 							}
 							xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
@@ -355,18 +258,18 @@ public function saveFile():void{
 					}
 				}
 				else{				
-				par = <valueObjArr></valueObjArr>;
-				xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<name>"+UIob.valueObjArr[k].name+"</name>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
-				par.appendChild(xmlList);
-				xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
-				par.appendChild(xmlList);
-				object.appendChild(par);
+					par = <valueObjArr></valueObjArr>;
+					xmlList = XMLList("<id>"+UIob.valueObjArr[k].id+"</id>");
+					par.appendChild(xmlList);
+					xmlList = XMLList("<name>"+UIob.valueObjArr[k].name+"</name>");
+					par.appendChild(xmlList);
+					xmlList = XMLList("<haschanged>"+UIob.valueObjArr[k].haschanged.toString()+"</haschanged>");
+					par.appendChild(xmlList);
+					xmlList = XMLList("<IsCombo>"+UIob.valueObjArr[k].IsCombo.toString()+"</IsCombo>");
+					par.appendChild(xmlList);
+					xmlList = XMLList("<combeValue>"+UIob.valueObjArr[k].combeValue+"</combeValue>");
+					par.appendChild(xmlList);
+					object.appendChild(par);
 				}
 			}
 			for(var y:int=0;y<UIob.instancArray.length;y++){
@@ -415,12 +318,10 @@ public function saveFile():void{
 				for(var count:int=0;count<testarray.length;count++){
 					if(testname==testarray[count].name){
 						isExist=true;
-						//Alert.show('ddscscscdcd');
 						break;
 					}
 				}
-				if(isExist){
-					
+				if(isExist){	
 					xmlList = XMLList("<name>"+UIob.linesStartingArray[ar].name+"</name>");
 					xmlLi2.appendChild(xmlList);
 				}
@@ -435,12 +336,10 @@ public function saveFile():void{
 				for(count=0;count<testarray.length;count++){
 					if(testname==testarray[count].name){
 						isExist=true;
-						//Alert.show('ddscscscdcd');
 						break;
 					}
 				}
-				if(isExist){
-					
+				if(isExist){					
 					xmlList = XMLList("<name>"+UIob.linesEndingArray[ar].name+"</name>");
 					xmlLi3.appendChild(xmlList);
 				}
@@ -449,6 +348,7 @@ public function saveFile():void{
 		}
 		else if((dropCanvas.getChildAt(i) as Object).className=='Link'){
 			var UIobLink:Link=dropCanvas.getChildAt(i) as Link;
+			
 			object = <objects></objects>;
 			xmlList = XMLList("<type>links</type>");
 			object.appendChild(xmlList);
@@ -460,12 +360,10 @@ public function saveFile():void{
 			object.appendChild(xmlList);
 			xmlList = XMLList("<destination>"+UIobLink.can.destination.name+"</destination>");
 			object.appendChild(xmlList);
-			
 			xmlList = XMLList("<deviceSourcePort>"+UIobLink.can.sourcePort+"</deviceSourcePort>");
 			object.appendChild(xmlList);
 			xmlList = XMLList("<deviceDestinationPort>"+UIobLink.can.destinationPort+"</deviceDestinationPort>");
 			object.appendChild(xmlList);
-			
 			xmlList = XMLList("<lineColor>"+UIobLink.lineColor+"</lineColor>");
 			object.appendChild(xmlList);
 			xmlList = XMLList("<beginX>"+UIobLink.beginX+"</beginX>");
@@ -480,8 +378,13 @@ public function saveFile():void{
 				par = <par></par>;
 				xmlList = XMLList("<name>"+UIobLink.can.objparaArrayCol[j].name+"</name>");
 				par.appendChild(xmlList);
-				xmlList = XMLList("<type>"+UIobLink.can.objparaArrayCol[j].id+"</type>");
-				par.appendChild(xmlList);
+				
+				if(UIobLink.id=="wireless"){
+				}
+				else{
+					xmlList = XMLList("<type>"+UIobLink.can.objparaArrayCol[j].id+"</type>");
+					par.appendChild(xmlList);
+				}
 				if(UIobLink.can.objparaArrayCol[j].id=='options'){
 					for(oo=0;oo<UIobLink.can.objparaArrayCol[j].option.length;oo++){
 						parOption =XMLList("<option>"+UIobLink.can.objparaArrayCol[j].option[oo].toString()+"</option>");	
@@ -503,14 +406,13 @@ public function saveFile():void{
 				xmlList = XMLList("<combeValue>"+UIobLink.can.valueObjArr[k].combeValue+"</combeValue>");
 				par.appendChild(xmlList);
 				object.appendChild(par);
-			}
+			}			
 		}
 		saveXml.appendChild(object);
 		
 	}  var templates:XMLList = XMLList("<templates></templates>");
 	for(var kk:int=0;kk<temaplateArrcol.length;kk++){
-		par = <template></template>;
-		
+		par = <template></template>;		
 		xmlList = XMLList("<name>"+temaplateArrcol[kk]+"</name>");
 		par.appendChild(xmlList);
 		templates.appendChild(par);
@@ -527,6 +429,5 @@ public function saveFile():void{
 	if(saveBool){
 		clear();
 		saveBool=false;
-		// Alert.show(saveBool.toString());
 	}  
 }

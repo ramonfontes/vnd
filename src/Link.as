@@ -35,18 +35,13 @@ package{
 		public var _objectSrc:String;
 		public var _objectDst:String;
 		public var _checkSource:Boolean;
-		public var _computerPort:int;
-		public var _stationPort:int;
-		public var _switchPortSource:int;
-		public var _switchPortDestination:int;
 		public var _switchDeviceSource:int;
 		public var _switchDeviceDestination:int;
 		public var lineName:String;
 		public var tf:TextFormat;
 		public var type:String;
 		public var nid:int;
-		public var iface:int=0;
-		
+		public var iface:int=0;		
 		public var srcPort:int;
 		public var dstPort:int;
 
@@ -117,34 +112,14 @@ package{
 			_objectDst = value;
 			draw();
 		}
-		
-		public function set computerPort(value:int):void{
-			_computerPort = value;
-			draw();
-		}
-		
-		public function set stationPort(value:int):void{
-			_stationPort = value;
-			draw();
-		}
-		
+				
 		public function set switchDeviceSource(value:int):void{
 			_switchDeviceSource = value;
 			draw();
 		}
 		
-		public function set switchPortSource(value:int):void{
-			_switchPortSource = value;
-			draw();
-		}
-		
 		public function set switchDeviceDestination(value:int):void{
 			_switchDeviceDestination = value;
-			draw();
-		}
-		
-		public function set switchPortDestination(value:int):void{
-			_switchPortDestination = value;
 			draw();
 		}
 		
@@ -239,9 +214,8 @@ package{
 				graphics.moveTo(origin.x,origin.y);
 				graphics.lineTo(destination.x,destination.y);			
 			
-	
 			if(_objectSrc=="Computer" && _objectDst=="Computer"){
-				uit.text = String("eth"+_computerPort);
+				uit.text = String("eth"+srcPort);
 				uit.width = 240;								
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
 				
@@ -253,7 +227,7 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 				
-				uit.text = String("eth"+_computerPort);
+				uit.text = String("eth"+dstPort);
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -292,6 +266,7 @@ package{
 				
 			}
 			else if((_objectDst=="Computer" || _objectDst=="Station") && _checkSource==true ){
+				
 				uit.text = String("eth"+(srcPort)+"("+srcPort+")");
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -317,7 +292,7 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 			}
-			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Computer" )){
+			else if((_objectDst=="Switch"||_objectDst=="Access Point") && (_objectSrc=="Switch" ||_objectSrc=="Access Point" )){
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));				
 				uit.text = String("eth"+(srcPort)+"("+srcPort+")");

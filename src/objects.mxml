@@ -26,8 +26,7 @@
 	<mx:Script>
 		<![CDATA[
 			import action_alert.HAlert;
-			import action_alert.HMensagens;
-			
+			import action_alert.HMensagens;			
 			import mx.collections.ArrayCollection;
 			import mx.containers.Form;
 			import mx.containers.FormItem;
@@ -42,53 +41,11 @@
 			import mx.events.FlexEvent;
 			import flash.display.Sprite;
 			import mx.core.UIComponent;
-			
+
 			public var contClick:int=0;
-			//ACTIONS FOR CONTROLLER
-			public var listSetIPSource:Array = new Array();
-			public var listSetIPDestination:Array = new Array();
-			public var listSetMACSource:Array = new Array();
-			public var listSetMACDestination:Array = new Array();
-			public var listSetVLANPriority:Array = new Array();
-			public var listSetSourcePort:Array = new Array();
-			public var listSetDestinationPort:Array = new Array();
-			public var listSetEnqueue:Array = new Array();
-			public var listSetOutput:Array = new Array();
-			public var listSetStripVlan:Array = new Array();
-			public var listSetTOS:Array = new Array();
-			
-			public var listSwitch:Array = new Array();
-			public var listMacSwitch:Array = new Array();
-			public var listVlanPriority:Array = new Array();
-			public var listSlicePort:Array = new Array();
-			public var listPriority:Array = new Array();
-			public var listControllerIPAddress:Array = new Array();
-			public var listControllerPort:Array = new Array();
-			public var listMacSource:Array = new Array();
-			public var listMacDestination:Array = new Array();
-			public var listIngressPort:Array = new Array();
-			public var listEthernetType:Array = new Array();
-			public var listVlanID:Array = new Array();
-			public var listSetVlanID:Array = new Array();
-			public var listOutPort:Array = new Array();
-			public var listIpSource:Array = new Array();
 			public var listNumberOfInterfaces:Array = new Array();
-			public var listVlanID_Switch:Array = new Array();
-			public var listIpDestination:Array = new Array();
-			public var listNetworkSource:Array = new Array();
-			public var listNetworkDestination:Array = new Array();
-			public var listIpProtocol:Array = new Array();
-			public var listTcpUdpSourcePort:Array = new Array();
-			public var listTcpUdpDestinationPort:Array = new Array();
-			public var listSourcePort:Array = new Array();
-			public var listDestinationPort:Array = new Array();
-			public var listNotes:Array = new Array();
-			public var listTos:Array = new Array();
-			public var listProtocol:Array = new Array();
-			public var listEthType:Array = new Array();
 			public var circle:Sprite = new Sprite();
-			public var c:UIComponent = new UIComponent();
-			
+			public var c:UIComponent = new UIComponent();			
 			public var valofcomboswitch:String;
 			public var valofcomboopenflowversion:String;
 			public var valofcombochannel:String;
@@ -121,32 +78,28 @@
 			public var ncount:int=0;
 			private var cont:int;
 			private var word:Text;
-			private var testa:Boolean=false;
 			private var j:int;
 			private var tb3:ComboBox;
 			private var radioButton:RadioButtonGroup;
 			private var rb:RadioButton = new RadioButton();
-			private var none:String;
 			private var ab:int;
+			private var testa:Boolean=false;
 			private var checkMac:Boolean=false;
 			private var checkIp:Boolean=false;
-			private var confirmUpt:Boolean=false;
-			
+			private var confirmUpt:Boolean=false;			
+			public var exportControll:Boolean=false;			
 			public var aa:int=0;
 			public var type:String;
+			public var wirelessExists:Boolean=false;
 			public var nid:int;
-			public var range:int=0;
-			public var ye:int=-1;
-			public var xye:int=0;		
+			public var range:int=0;	
 			public var iface:int=0;
-			
-			public var exportControll:Boolean=false;			
-			[Bindable] public var listFlowName:Array = new Array();						
+			public var secondTime:Boolean;
 			public var linesStartingArray:ArrayCollection=new ArrayCollection();
 			public var linesEndingArray:ArrayCollection=new ArrayCollection();
 			public var objparaArrayCol:ArrayCollection=new ArrayCollection();
-			public var secondTime:Boolean;
 			public var valueObjArr:ArrayCollection=new ArrayCollection();	
+			
 			[Bindable] public var countNumber:int=1;
 			[Bindable] public var test:String;
 			[Bindable] public var form:Form=new Form();
@@ -157,8 +110,8 @@
 					
 			public function setFoc():void {
 				if (this.type != "Station" && this.type != "Access Point"){
-					this.setStyle('backgroundColor',"#00FFFF");
-					this.setStyle('backgroundAlpha',"0.3");
+					this.setStyle('backgroundColor',"#000000");
+					this.setStyle('backgroundAlpha',"0.1");
 				}
 			}
 			
@@ -268,7 +221,7 @@
 				if(eve.target.className=='RadioButton'){
 					if(obj.id=="remoteLocal"){
 						valofremoteLocal=eve.target.selected;
-				}
+					}
 				}
 				
 				if(eve.target.className=='ComboBox'){
@@ -333,41 +286,28 @@
 			public function second():void {			
 				if(secondTime){	
 					form=new Form();
-					//this.can.removeChildAt(1);
-					//this.can.addChildAt(form,1);
 					
-					if(this.name.slice(0,6)=="Switch"){
+					if(this.id=="Switch"){
 						var checkifswitchopenflow:Boolean=true;
-						ab = int(this.name.slice(7,9));
-						ye=ab;
 					}
 					
-					if(this.name.slice(0,12)=="Access Point"){
+					if(this.id=="Access Point"){
 						checkifswitchopenflow=true;
-						ab = int(this.name.slice(13,15));
-						ye=ab;
 					}
 					
-					if(this.name.slice(0,8)=="Computer"){
+					if(this.id=="Computer"){
 						var checkifcomputer:Boolean=true;
-						ab = int(this.name.slice(9,11));
-						ye=ab;
 					}
 					
-					if(this.name.slice(0,3)=="Car"){
+					if(this.id=="Car"){
 						var checkifcar:Boolean=true;
-						ab = int(this.name.slice(4,6));
-						ye=ab;
 					}
 					
-					if(this.name.slice(0,7)=="Station"){
+					if(this.id=="Station"){
 						var checkifstation:Boolean=true;
-						ab = int(this.name.slice(8,10));
-						ye=ab;
 					}
-					if(this.name.slice(0,10)=="Controller"){
-						ab = int(this.name.slice(11,13));
-						if(ab!=ye && exportControll==true){
+					if(this.id=="Controller"){
+						if(exportControll==true){
 							aa=0;
 							ncount=0;
 							countNumber=1;
@@ -383,7 +323,6 @@
 								}
 							}							
 						}
-						ye=ab;
 					}					
 					if(exportControll==true && (ncount<(aa-1) || (aa==0))){
 						aa=nn+1;
@@ -401,7 +340,7 @@
 						
 						for(var i:int=0;i<(objparaArrayCol.length);i++){
 							obj=objparaArrayCol[i];
-								
+							
 							if(obj.id=='array'){	
 								var frmItem:FormItem = new FormItem();
 								frmItem.direction = "horizontal";
@@ -421,10 +360,8 @@
 								if(r==(aa-1) && aa!=1){
 									exportControll=false;
 									flowtab=1;
-									//tb.text="";
-									//regular=1;
 								}
-								//IF SAVE AND LOAD - LOAD MOMENT---------------------------------------------------------------
+								
 								if(obj.name=="flowName"&&checkifcontrollerpenflow==false&&exportControll!=true){								
 									var butFlowTab:Button = new Button();								
 									changesObj = new HBox();
@@ -444,7 +381,8 @@
 									changesObj.setStyle("horizontalAlign","center");
 									changesObj.percentWidth=100;
 									form.addChild(changesObj);		
-								}							
+								}	
+								
 								if(flowtab==1||exportControll==true){
 									if(obj.name=="flowName"){
 										tb.width=100;		
@@ -452,24 +390,20 @@
 										if(exportControll==true){
 											if(ncount<(aa-1)){		
 												countNumber=r+1;	
-												listFlowName[countNumber-1]=tb.text;
-												obj.arrayFlowName[ye] = new Array();			
-												for(j=0;j<listFlowName.length;j++){	
-													obj.arrayFlowName[ye].push(listFlowName[j]);
-												}
+												obj.flowName[countNumber-1]=tb.text;
 											}
 										}
 										testa=false;
 										if(regular==1){
-											if(tb.text==""&&(listFlowName[countNumber-1]==""||listFlowName[countNumber-1]==undefined)){
+											if(tb.text==""&&(obj.flowName[countNumber-1]==""||obj.flowName[countNumber-1]==undefined)){
 												testa=true;
 												regular=2;
 												HAlert.erro(HMensagens.Slice);
 											}																	
-											else if(countNumber-1!=listFlowName.length){	
-												if(tb.text!=obj.arrayFlowName[ye][countNumber-1]&&tb.text!=""){											
+											else if(countNumber-1!=obj.flowName.length){	
+												if(tb.text!=obj.flowName[countNumber-1]&&tb.text!=""){											
 													for(cont = 0; cont<countNumber;cont++){
-														if (tb.text==listFlowName[cont] || listFlowName[cont]==""){
+														if (tb.text==obj.flowName[cont] || obj.flowName[cont]==""){
 															testa=true;
 															tb.text="";
 															regular=2;
@@ -477,17 +411,16 @@
 														}
 													}
 													if(testa!=true){
-														obj.arrayFlowName[ye][countNumber-1]=tb.text;
-														listFlowName[countNumber-1]=tb.text;
+														obj.flowName[countNumber-1]=tb.text;
 													}
 												}										
-												tb.text=obj.arrayFlowName[ye][countNumber];
+												tb.text=obj.flowName[countNumber];
 												testa=true;
 												boxViewer.text=String(countNumber++);
 											}											
-											else if(tb.text!="" && countNumber-1==listFlowName.length){
+											else if(tb.text!="" && countNumber-1==obj.flowName.length){
 												for(cont = 0; cont<countNumber;cont++){
-													if (tb.text==listFlowName[cont] || listFlowName[cont]==""){
+													if (tb.text==obj.flowName[cont] || obj.flowName[cont]==""){
 														testa=true;
 														tb.text="";
 														regular=2;
@@ -496,25 +429,20 @@
 												}
 											}
 											if(testa==false){
-												listFlowName[countNumber-1]=tb.text;
-												obj.arrayFlowName[ye] = new Array();										
-												for(j=0;j<listFlowName.length;j++){	
-													obj.arrayFlowName[ye].push(listFlowName[j]);
-												}										
+												obj.flowName[countNumber-1]=tb.text;
 												tb.text="";
 												boxViewer.text=String(countNumber++);
 											}
 										}									
 										else if(regular==0){
-											if(testa!=true&&tb.text!=""&&listFlowName[countNumber-1]!=tb.text){
-												obj.arrayFlowName[ye][countNumber-1]=tb.text;
-												listFlowName[countNumber-1]=tb.text;
+											if(testa!=true&&tb.text!=""&&obj.flowName[countNumber-1]!=tb.text){
+												obj.flowName[countNumber-1]=tb.text;
 											}
 											boxViewer.text=String(countNumber--);
-											tb.text=obj.arrayFlowName[ye][countNumber-1];
+											tb.text=obj.flowName[countNumber-1];
 										}
 										else
-											tb.text=listFlowName[countNumber-1];
+											tb.text=obj.flowName[countNumber-1];
 										
 										var buttonGo:Button = new Button();
 										var butAppChanges:Button = new Button();
@@ -559,39 +487,29 @@
 										frmItem.label = "Priority";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listPriority[countNumber-1]=tb.text;
-												obj.arrayPriority[ye] = new Array();			
-												for(var oj:int=0;oj<listPriority.length;oj++){	
-													obj.arrayPriority[ye].push(listPriority[oj]);
-												}
+												obj.priority[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listPriority.length){		
-												if(listPriority[countNumber-2]==""||tb.text!=""){
-													listPriority[countNumber-2]=tb.text;		
-													obj.arrayPriority[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.priority.length){		
+												if(obj.priority[countNumber-2]==""||tb.text!=""){
+													obj.priority[countNumber-2]=tb.text;
 												}
-												tb.text=listPriority[countNumber-1];
+												tb.text=obj.priority[countNumber-1];
 											}										
-											else if(countNumber-2==listPriority.length){
-												listPriority[countNumber-2]=tb.text;
-												obj.arrayPriority[ye] = new Array();											
-												for(j=0;j<listPriority.length;j++){	
-													obj.arrayPriority[ye].push(listPriority[j]);
-												}										
+											else if(countNumber-2==obj.priority.length){
+												obj.priority[countNumber-2]=tb.text;									
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listPriority[countNumber]!=tb.text){
-												obj.arrayPriority[ye][countNumber]=tb.text;
-												listPriority[countNumber]=tb.text;
+											if(tb.text!=""&&obj.priority[countNumber]!=tb.text){
+												obj.priority[countNumber]=tb.text;
 											}
-											tb.text=listPriority[countNumber-1];
+											tb.text=obj.priority[countNumber-1];
 										}
 										else
-											tb.text=listPriority[countNumber-1];
+											tb.text=obj.priority[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -602,40 +520,29 @@
 										frmItem.label = "TOS";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listTos[countNumber-1]=tb.text;
-												obj.arrayTos[ye] = new Array();			
-												for(j=0;j<listTos.length;j++){	
-													obj.arrayTos[ye].push(listTos[j]);
-												}
+												obj.TOS[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listTos.length){	
-												if(listTos[countNumber-2]==""||tb.text!=""){
-													listTos[countNumber-2]=tb.text;		
-													obj.arrayTos[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.TOS.length){	
+												if(obj.TOS[countNumber-2]==""||tb.text!=""){
+													obj.TOS[countNumber-2]=tb.text;	
 												}
-												tb.text=listTos[countNumber-1];
+												tb.text=obj.TOS[countNumber-1];
 											}										
-											else if(countNumber-2==listTos.length){
-												listTos[countNumber-2]=tb.text;
-												obj.arrayTos[ye] = new Array();
-												
-												for(j=0;j<listTos.length;j++){	
-													obj.arrayTos[ye].push(listTos[j]);
-												}										
+											else if(countNumber-2==obj.TOS.length){
+												obj.TOS[countNumber-2]=tb.text;									
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listTos[countNumber]!=tb.text){
-												obj.arrayTos[ye][countNumber]=tb.text;
-												listTos[countNumber]=tb.text;
+											if(tb.text!=""&&obj.TOS[countNumber]!=tb.text){
+												obj.TOS[countNumber]=tb.text;
 											}
-											tb.text=listTos[countNumber-1];
+											tb.text=obj.TOS[countNumber-1];
 										}									
 										else
-											tb.text=listTos[countNumber-1];
+											tb.text=obj.TOS[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -646,40 +553,29 @@
 										frmItem.label = "Set TOS";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSetTOS[countNumber-1]=tb.text;
-												obj.arraySetTOS[ye] = new Array();			
-												for(j=0;j<listSetTOS.length;j++){	
-													obj.arraySetTOS[ye].push(listSetTOS[j]);
-												}
+												obj.setTOS[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSetTOS.length){	
-												if(listSetTOS[countNumber-2]==""||tb.text!=""){
-													listSetTOS[countNumber-2]=tb.text;		
-													obj.arraySetTOS[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.setTOS.length){	
+												if(obj.setTOS[countNumber-2]==""||tb.text!=""){
+													obj.setTOS[countNumber-2]=tb.text;		
 												}
-												tb.text=listSetTOS[countNumber-1];
+												tb.text=obj.setTOS[countNumber-1];
 											}										
-											else if(countNumber-2==listSetTOS.length){
-												listSetTOS[countNumber-2]=tb.text;
-												obj.arraySetTOS[ye] = new Array();
-												
-												for(j=0;j<listSetTOS.length;j++){	
-													obj.arraySetTOS[ye].push(listSetTOS[j]);
-												}										
+											else if(countNumber-2==obj.setTOS.length){
+												obj.setTOS[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSetTOS[countNumber]!=tb.text){
-												obj.arraySetTOS[ye][countNumber]=tb.text;
-												listSetTOS[countNumber]=tb.text;
+											if(tb.text!=""&&obj.setTOS[countNumber]!=tb.text){
+												obj.setTOS[countNumber]=tb.text;
 											}
-											tb.text=listSetTOS[countNumber-1];
+											tb.text=obj.setTOS[countNumber-1];
 										}									
 										else
-											tb.text=listSetTOS[countNumber-1];
+											tb.text=obj.setTOS[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -690,40 +586,29 @@
 										frmItem.label = "Ethernet Type";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listEthType[countNumber-1]=tb.text;
-												obj.arrayEthType[ye] = new Array();			
-												for(j=0;j<listEthType.length;j++){	
-													obj.arrayEthType[ye].push(listEthType[j]);
-												}
+												obj.ethType[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listEthType.length){	
-												if(listEthType[countNumber-2]==""||tb.text!=""){
-													listEthType[countNumber-2]=tb.text;		
-													obj.arrayEthType[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.ethType.length){	
+												if(obj.ethType[countNumber-2]==""||tb.text!=""){
+													obj.ethType[countNumber-2]=tb.text;		
 												}
-												tb.text=listEthType[countNumber-1];
+												tb.text=obj.ethType[countNumber-1];
 											}										
-											else if(countNumber-2==listEthType.length){
-												listEthType[countNumber-2]=tb.text;
-												obj.arrayEthType[ye] = new Array();
-												
-												for(j=0;j<listEthType.length;j++){	
-													obj.arrayEthType[ye].push(listEthType[j]);
-												}										
+											else if(countNumber-2==obj.ethType.length){
+												obj.ethType[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listEthType[countNumber]!=tb.text){
-												obj.arrayEthType[ye][countNumber]=tb.text;
-												listEthType[countNumber]=tb.text;
+											if(tb.text!=""&&obj.ethType[countNumber]!=tb.text){
+												obj.ethType[countNumber]=tb.text;
 											}
-											tb.text=listEthType[countNumber-1];
+											tb.text=obj.ethType[countNumber-1];
 										}									
 										else
-											tb.text=listEthType[countNumber-1];
+											tb.text=obj.ethType[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -734,40 +619,29 @@
 										frmItem.label = "Protocol Number";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listProtocol[countNumber-1]=tb.text;
-												obj.arrayProtocol[ye] = new Array();			
-												for(j=0;j<listProtocol.length;j++){	
-													obj.arrayProtocol[ye].push(listProtocol[j]);
-												}
+												obj.protocol[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listProtocol.length){	
-												if(listProtocol[countNumber-2]==""||tb.text!=""){
-													listProtocol[countNumber-2]=tb.text;		
-													obj.arrayProtocol[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.protocol.length){	
+												if(obj.protocol[countNumber-2]==""||tb.text!=""){
+													obj.protocol[countNumber-2]=tb.text;		
 												}
-												tb.text=listProtocol[countNumber-1];
+												tb.text=obj.protocol[countNumber-1];
 											}										
-											else if(countNumber-2==listProtocol.length){
-												listProtocol[countNumber-2]=tb.text;
-												obj.arrayProtocol[ye] = new Array();
-												
-												for(j=0;j<listProtocol.length;j++){	
-													obj.arrayProtocol[ye].push(listProtocol[j]);
-												}										
+											else if(countNumber-2==obj.protocol.length){
+												obj.protocol[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listProtocol[countNumber]!=tb.text){
-												obj.arrayProtocol[ye][countNumber]=tb.text;
-												listProtocol[countNumber]=tb.text;
+											if(tb.text!=""&&obj.protocol[countNumber]!=tb.text){
+												obj.protocol[countNumber]=tb.text;
 											}
-											tb.text=listProtocol[countNumber-1];
+											tb.text=obj.protocol[countNumber-1];
 										}									
 										else
-											tb.text=listProtocol[countNumber-1];
+											tb.text=obj.protocol[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -778,40 +652,29 @@
 										frmItem.label = "Ingress Port";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listIngressPort[countNumber-1]=tb.text;
-												obj.arrayIngressPort[ye] = new Array();			
-												for(j=0;j<listIngressPort.length;j++){	
-													obj.arrayIngressPort[ye].push(listIngressPort[j]);
-												}
+												obj.ingressPort[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listIngressPort.length){	
-												if(listIngressPort[countNumber-2]==""||tb.text!=""){
-													listIngressPort[countNumber-2]=tb.text;		
-													obj.arrayIngressPort[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.ingressPort.length){	
+												if(obj.ingressPort[countNumber-2]==""||tb.text!=""){
+													obj.ingressPort[countNumber-2]=tb.text;		
 												}
-												tb.text=listIngressPort[countNumber-1];
+												tb.text=obj.ingressPort[countNumber-1];
 											}										
-											else if(countNumber-2==listIngressPort.length){
-												listIngressPort[countNumber-2]=tb.text;
-												obj.arrayIngressPort[ye] = new Array();
-												
-												for(j=0;j<listIngressPort.length;j++){	
-													obj.arrayIngressPort[ye].push(listIngressPort[j]);
-												}										
+											else if(countNumber-2==obj.ingressPort.length){
+												obj.ingressPort[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listIngressPort[countNumber]!=tb.text){
-												obj.arrayIngressPort[ye][countNumber]=tb.text;
-												listIngressPort[countNumber]=tb.text;
+											if(tb.text!=""&&obj.ingressPort[countNumber]!=tb.text){
+												obj.ingressPort[countNumber]=tb.text;
 											}
-											tb.text=listIngressPort[countNumber-1];
+											tb.text=obj.ingressPort[countNumber-1];
 										}									
 										else
-											tb.text=listIngressPort[countNumber-1];
+											tb.text=obj.ingressPort[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -822,41 +685,30 @@
 										frmItem.label = "Set Source TCP/UDP Port";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSetSourcePort[countNumber-1]=tb.text;
-												obj.arraySetSourcePort[ye] = new Array();			
-												for(j=0;j<listSetSourcePort.length;j++){	
-													obj.arraySetSourcePort[ye].push(listSetSourcePort[j]);
-												}
+												obj.setSourcePort[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSetSourcePort.length){	
-												if(listSetSourcePort[countNumber-2]==""||tb.text!=""){
-													listSetSourcePort[countNumber-2]=tb.text;		
-													obj.arraySetSourcePort[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.setSourcePort.length){	
+												if(obj.setSourcePort[countNumber-2]==""||tb.text!=""){
+													obj.setSourcePort[countNumber-2]=tb.text;		
 												}
-												tb.text=listSetSourcePort[countNumber-1];
+												tb.text=obj.setSourcePort[countNumber-1];
 											}										
-											else if(countNumber-2==listSetSourcePort.length){
-												listSetSourcePort[countNumber-2]=tb.text;
-												obj.arraySetSourcePort[ye] = new Array();
-												
-												for(j=0;j<listSetSourcePort.length;j++){	
-													obj.arraySetSourcePort[ye].push(listSetSourcePort[j]);
-												}										
+											else if(countNumber-2==obj.setSourcePort.length){
+												obj.setSourcePort[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSetSourcePort[countNumber]!=tb.text){
-												obj.arraySetSourcePort[ye][countNumber]=tb.text;
-												listSetSourcePort[countNumber]=tb.text;
+											if(tb.text!=""&&obj.setSourcePort[countNumber]!=tb.text){
+												obj.setSourcePort[countNumber]=tb.text;
 											}
-											tb.text=listSetSourcePort[countNumber-1];
+											tb.text=obj.setSourcePort[countNumber-1];
 										}									
 										else
-											tb.text=listSetSourcePort[countNumber-1];
-										
+											tb.text=obj.setSourcePort[countNumber-1];
+						
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
 										form.addChild(frmItem);
@@ -866,40 +718,29 @@
 										frmItem.label = "Set Destination TCP/UDP Port";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSetDestinationPort[countNumber-1]=tb.text;
-												obj.arraySetDestinationPort[ye] = new Array();			
-												for(j=0;j<listSetDestinationPort.length;j++){	
-													obj.arraySetDestinationPort[ye].push(listSetDestinationPort[j]);
-												}
+												obj.setDestinationPort[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSetDestinationPort.length){	
-												if(listSetDestinationPort[countNumber-2]==""||tb.text!=""){
-													listSetDestinationPort[countNumber-2]=tb.text;		
-													obj.arraySetDestinationPort[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.setDestinationPort.length){	
+												if(obj.setDestinationPort[countNumber-2]==""||tb.text!=""){
+													obj.setDestinationPort[countNumber-2]=tb.text;		
 												}
-												tb.text=listSetDestinationPort[countNumber-1];
+												tb.text=obj.setDestinationPort[countNumber-1];
 											}										
-											else if(countNumber-2==listSetDestinationPort.length){
-												listSetDestinationPort[countNumber-2]=tb.text;
-												obj.arraySetDestinationPort[ye] = new Array();
-												
-												for(j=0;j<listSetDestinationPort.length;j++){	
-													obj.arraySetDestinationPort[ye].push(listSetDestinationPort[j]);
-												}										
+											else if(countNumber-2==obj.setDestinationPort.length){
+												obj.setDestinationPort[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSetDestinationPort[countNumber]!=tb.text){
-												obj.arraySetDestinationPort[ye][countNumber]=tb.text;
-												listSetDestinationPort[countNumber]=tb.text;
+											if(tb.text!=""&&obj.setDestinationPort[countNumber]!=tb.text){
+												obj.setDestinationPort[countNumber]=tb.text;
 											}
-											tb.text=listSetDestinationPort[countNumber-1];
+											tb.text=obj.setDestinationPort[countNumber-1];
 										}									
 										else
-											tb.text=listSetDestinationPort[countNumber-1];
+											tb.text=obj.setDestinationPort[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -910,41 +751,29 @@
 										frmItem.label = "Set Vlan Priority";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSetVLANPriority[countNumber-1]=tb.text;
-												obj.arraySetVLANPriority[ye] = new Array();			
-												for(j=0;j<listSetVLANPriority.length;j++){	
-													obj.arraySetVLANPriority[ye].push(listSetVLANPriority[j]);
-												}
+												obj.setVLANPriority[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSetVLANPriority.length){	
-												if(listSetVLANPriority[countNumber-2]==""||tb.text!=""){
-													listSetVLANPriority[countNumber-2]=tb.text;		
-													obj.arraySetVLANPriority[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.setVLANPriority.length){	
+												if(obj.setVLANPriority[countNumber-2]==""||tb.text!=""){
+													obj.setVLANPriority[countNumber-2]=tb.text;		
 												}
-												tb.text=listSetVLANPriority[countNumber-1];
-												//test=true;
+												tb.text=obj.setVLANPriority[countNumber-1];
 											}										
-											else if(countNumber-2==listSetVLANPriority.length){
-												listSetVLANPriority[countNumber-2]=tb.text;
-												obj.arraySetVLANPriority[ye] = new Array();
-												
-												for(j=0;j<listSetVLANPriority.length;j++){	
-													obj.arraySetVLANPriority[ye].push(listSetVLANPriority[j]);
-												}										
+											else if(countNumber-2==obj.setVLANPriority.length){
+												obj.setVLANPriority[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSetVLANPriority[countNumber]!=tb.text){
-												obj.arraySetVLANPriority[ye][countNumber]=tb.text;
-												listSetVLANPriority[countNumber]=tb.text;
+											if(tb.text!=""&&obj.setVLANPriority[countNumber]!=tb.text){
+												obj.setVLANPriority[countNumber]=tb.text;
 											}
-											tb.text=listSetVLANPriority[countNumber-1];
+											tb.text=obj.setVLANPriority[countNumber-1];
 										}									
 										else
-											tb.text=listSetVLANPriority[countNumber-1];
+											tb.text=obj.setVLANPriority[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -955,41 +784,29 @@
 										frmItem.label = "Vlan Priority";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listVlanPriority[countNumber-1]=tb.text;
-												obj.arrayVlanPriority[ye] = new Array();			
-												for(j=0;j<listVlanPriority.length;j++){	
-													obj.arrayVlanPriority[ye].push(listVlanPriority[j]);
-												}
+												obj.vlanPriority[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listVlanPriority.length){	
-												if(listVlanPriority[countNumber-2]==""||tb.text!=""){
-													listVlanPriority[countNumber-2]=tb.text;		
-													obj.arrayVlanPriority[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.vlanPriority.length){	
+												if(obj.vlanPriority[countNumber-2]==""||tb.text!=""){
+													obj.vlanPriority[countNumber-2]=tb.text;		
 												}
-												tb.text=listVlanPriority[countNumber-1];
-												//test=true;
+												tb.text=obj.vlanPriority[countNumber-1];
 											}										
-											else if(countNumber-2==listVlanPriority.length){
-												listVlanPriority[countNumber-2]=tb.text;
-												obj.arrayVlanPriority[ye] = new Array();
-												
-												for(j=0;j<listVlanPriority.length;j++){	
-													obj.arrayVlanPriority[ye].push(listVlanPriority[j]);
-												}										
+											else if(countNumber-2==obj.vlanPriority.length){
+												obj.vlanPriority[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listVlanPriority[countNumber]!=tb.text){
-												obj.arrayVlanPriority[ye][countNumber]=tb.text;
-												listVlanPriority[countNumber]=tb.text;
+											if(tb.text!=""&&obj.vlanPriority[countNumber]!=tb.text){
+												obj.vlanPriority[countNumber]=tb.text;
 											}
-											tb.text=listVlanPriority[countNumber-1];
+											tb.text=obj.vlanPriority[countNumber-1];
 										}									
 										else
-											tb.text=listVlanPriority[countNumber-1];
+											tb.text=obj.vlanPriority[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -1000,41 +817,29 @@
 										frmItem.label = "Set Enqueue";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSetEnqueue[countNumber-1]=tb.text;
-												obj.arraySetEnqueue[ye] = new Array();			
-												for(j=0;j<listSetEnqueue.length;j++){	
-													obj.arraySetEnqueue[ye].push(listSetEnqueue[j]);
-												}
+												obj.setEnqueue[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSetEnqueue.length){	
-												if(listSetEnqueue[countNumber-2]==""||tb.text!=""){
-													listSetEnqueue[countNumber-2]=tb.text;		
-													obj.arraySetEnqueue[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.setEnqueue.length){	
+												if(obj.setEnqueue[countNumber-2]==""||tb.text!=""){
+													obj.setEnqueue[countNumber-2]=tb.text;		
 												}
-												tb.text=listSetEnqueue[countNumber-1];
-												//test=true;
+												tb.text=obj.setEnqueue[countNumber-1];
 											}										
-											else if(countNumber-2==listSetEnqueue.length){
-												listSetEnqueue[countNumber-2]=tb.text;
-												obj.arraySetEnqueue[ye] = new Array();
-												
-												for(j=0;j<listSetEnqueue.length;j++){	
-													obj.arraySetEnqueue[ye].push(listSetEnqueue[j]);
-												}										
+											else if(countNumber-2==obj.setEnqueue.length){
+												obj.setEnqueue[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSetEnqueue[countNumber]!=tb.text){
-												obj.arraySetEnqueue[ye][countNumber]=tb.text;
-												listSetEnqueue[countNumber]=tb.text;
+											if(tb.text!=""&&obj.setEnqueue[countNumber]!=tb.text){
+												obj.setEnqueue[countNumber]=tb.text;
 											}
-											tb.text=listSetEnqueue[countNumber-1];
+											tb.text=obj.setEnqueue[countNumber-1];
 										}									
 										else
-											tb.text=listSetEnqueue[countNumber-1];
+											tb.text=obj.setEnqueue[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -1045,41 +850,29 @@
 										frmItem.label = "Set Output";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSetOutput[countNumber-1]=tb.text;										
-												obj.arraySetOutput[ye] = new Array();			
-												for(j=0;j<listSetOutput.length;j++){	
-													obj.arraySetOutput[ye].push(listSetOutput[j]);
-												}
+												obj.setOutput[countNumber-1]=tb.text;										
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSetOutput.length){	
-												if(listSetOutput[countNumber-2]==""||tb.text!=""){
-													listSetOutput[countNumber-2]=tb.text;		
-													obj.arraySetOutput[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.setOutput.length){	
+												if(obj.setOutput[countNumber-2]==""||tb.text!=""){
+													obj.setOutput[countNumber-2]=tb.text;		
 												}
-												tb.text=listSetOutput[countNumber-1];
-												//test=true;
+												tb.text=obj.setOutput[countNumber-1];
 											}										
-											else if(countNumber-2==listSetOutput.length){
-												listSetOutput[countNumber-2]=tb.text;
-												obj.arraySetOutput[ye] = new Array();
-												
-												for(j=0;j<listSetOutput.length;j++){	
-													obj.arraySetOutput[ye].push(listSetOutput[j]);
-												}										
+											else if(countNumber-2==obj.setOutput.length){
+												obj.setOutput[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSetOutput[countNumber]!=tb.text){
-												obj.arraySetOutput[ye][countNumber]=tb.text;
-												listSetOutput[countNumber]=tb.text;
+											if(tb.text!=""&&obj.setOutput[countNumber]!=tb.text){
+												obj.setOutput[countNumber]=tb.text;
 											}
-											tb.text=listSetOutput[countNumber-1];
+											tb.text=obj.setOutput[countNumber-1];
 										}									
 										else
-											tb.text=listSetOutput[countNumber-1];
+											tb.text=obj.setOutput[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -1090,41 +883,29 @@
 										frmItem.label = "Source TCP/UDP Port";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listSourcePort[countNumber-1]=tb.text;
-												obj.arraySrcPort[ye] = new Array();			
-												for(j=0;j<listSourcePort.length;j++){	
-													obj.arraySrcPort[ye].push(listSourcePort[j]);
-												}
+												obj.sourcePort[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listSourcePort.length){	
-												if(listSourcePort[countNumber-2]==""||tb.text!=""){
-													listSourcePort[countNumber-2]=tb.text;		
-													obj.arraySrcPort[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.sourcePort.length){	
+												if(obj.sourcePort[countNumber-2]==""||tb.text!=""){
+													obj.sourcePort[countNumber-2]=tb.text;		
 												}
-												tb.text=listSourcePort[countNumber-1];
-												//test=true;
+												tb.text=obj.sourcePort[countNumber-1];
 											}										
-											else if(countNumber-2==listSourcePort.length){
-												listSourcePort[countNumber-2]=tb.text;
-												obj.arraySrcPort[ye] = new Array();
-												
-												for(j=0;j<listSourcePort.length;j++){	
-													obj.arraySrcPort[ye].push(listSourcePort[j]);
-												}										
+											else if(countNumber-2==obj.sourcePort.length){
+												obj.sourcePort[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listSourcePort[countNumber]!=tb.text){
-												obj.arraySrcPort[ye][countNumber]=tb.text;
-												listSourcePort[countNumber]=tb.text;
+											if(tb.text!=""&&obj.sourcePort[countNumber]!=tb.text){
+												obj.sourcePort[countNumber]=tb.text;
 											}
-											tb.text=listSourcePort[countNumber-1];
+											tb.text=obj.sourcePort[countNumber-1];
 										}									
 										else
-											tb.text=listSourcePort[countNumber-1];
+											tb.text=obj.sourcePort[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -1135,41 +916,29 @@
 										frmItem.label = "Destination TCP/UDP Port";
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listDestinationPort[countNumber-1]=tb.text;
-												obj.arrayDstPort[ye] = new Array();			
-												for(j=0;j<listDestinationPort.length;j++){	
-													obj.arrayDstPort[ye].push(listDestinationPort[j]);
-												}
+												obj.destinationPort[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listDestinationPort.length){	
-												if(listDestinationPort[countNumber-2]==""||tb.text!=""){
-													listDestinationPort[countNumber-2]=tb.text;		
-													obj.arrayDstPort[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.destinationPort.length){	
+												if(obj.destinationPort[countNumber-2]==""||tb.text!=""){
+													obj.destinationPort[countNumber-2]=tb.text;		
 												}
-												tb.text=listDestinationPort[countNumber-1];
-												//test=true;
+												tb.text=obj.destinationPort[countNumber-1];
 											}										
-											else if(countNumber-2==listDestinationPort.length){
-												listDestinationPort[countNumber-2]=tb.text;
-												obj.arrayDstPort[ye] = new Array();
-												
-												for(j=0;j<listSourcePort.length;j++){	
-													obj.arrayDstPort[ye].push(listDestinationPort[j]);
-												}										
+											else if(countNumber-2==obj.destinationPort.length){
+												obj.destinationPort[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listDestinationPort[countNumber]!=tb.text){
-												obj.arrayDstPort[ye][countNumber]=tb.text;
-												listDestinationPort[countNumber]=tb.text;
+											if(tb.text!=""&&obj.destinationPort[countNumber]!=tb.text){
+												obj.destinationPort[countNumber]=tb.text;
 											}
-											tb.text=listDestinationPort[countNumber-1];
+											tb.text=obj.destinationPort[countNumber-1];
 										}									
 										else
-											tb.text=listDestinationPort[countNumber-1];
+											tb.text=obj.destinationPort[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -1185,47 +954,34 @@
 										contein3.setStyle("horizontalAlign","center");
 										contein3.percentWidth=100;
 										form.addChild(contein3);
-									}
-										
+									}										
 									else if(obj.name=="notes"){
 										tb.width=100;
 										if(exportControll==true){
 											if(ncount<(aa-1)){
-												listNotes[countNumber-1]=tb.text;
-												obj.arrayNotes[ye] = new Array();			
-												for(j=0;j<listNotes.length;j++){	
-													obj.arrayNotes[ye].push(listNotes[j]);
-												}
+												obj.notes[countNumber-1]=tb.text;
 											}
 										}
 										if(regular==1){
-											if(countNumber-2!=listNotes.length){	
-												if(listNotes[countNumber-2]==""||tb.text!=""){
-													listNotes[countNumber-2]=tb.text;		
-													obj.arrayNotes[ye][countNumber-2]=tb.text;
+											if(countNumber-2!=obj.notes.length){	
+												if(obj.notes[countNumber-2]==""||tb.text!=""){
+													obj.notes[countNumber-2]=tb.text;		
 												}
-												tb.text=listNotes[countNumber-1];
-												//test=true;
+												tb.text=obj.notes[countNumber-1];
 											}										
-											else if(countNumber-2==listNotes.length){
-												listNotes[countNumber-2]=tb.text;
-												obj.arrayNotes[ye] = new Array();
-												
-												for(j=0;j<listNotes.length;j++){	
-													obj.arrayNotes[ye].push(listNotes[j]);
-												}										
+											else if(countNumber-2==obj.notes.length){
+												obj.notes[countNumber-2]=tb.text;
 												tb.text="";
 											}
 										}	
 										else if(regular==0){
-											if(tb.text!=""&&listNotes[countNumber]!=tb.text){
-												obj.arrayNotes[ye][countNumber]=tb.text;
-												listNotes[countNumber]=tb.text;
+											if(tb.text!=""&&obj.notes[countNumber]!=tb.text){
+												obj.notes[countNumber]=tb.text;
 											}
-											tb.text=listNotes[countNumber-1];
+											tb.text=obj.notes[countNumber-1];
 										}
 										else
-											tb.text=listNotes[countNumber-1];
+											tb.text=obj.notes[countNumber-1];
 										
 										tb.addEventListener(Event.CHANGE,change);
 										frmItem.addChild(tb);
@@ -1243,11 +999,6 @@
 									}
 								}							
 							}						
-							//------------------------------------------------------------------------------------------
-							//------------------------------------------------------------------------------------------
-							//----START STRINGS
-							//------------------------------------------------------------------------------------------
-							//------------------------------------------------------------------------------------------					
 							if(obj.id=='string'){	
 								frmItem = new FormItem();
 								frmItem.direction = "horizontal";
@@ -1269,46 +1020,33 @@
 										tb.text=this.name;
 									lable.text=tb.text;
 								}						
-	
-								//-------------------------------------------------------------------------------
-								//Controller Configuration-------------------------------------------------------
 								else if(obj.name=="controllerIPAddress"){
 									frmItem.label = "Controller IP Address";
 									tb.width=100;
 									tb.maxChars=15;
 									lable.text=lable.text+" - "+tb.text;
-									obj.arrayControllerIPAddress[ye] = new Array();
-									obj.arrayControllerIPAddress[ye][0] = tb.text;								
+									obj.controllerIPAddress = tb.text;								
 								}
 								else if(obj.name=="controllerPort"){
 									frmItem.label = "Controller Port";
 									tb.width=60;
 									tb.maxChars=4;
-									//tb.text="6633";
-									//obj.arrayControllerPort[ye] = new Array();
 									lable.text=lable.text+":"+tb.text;
-									obj.arrayControllerPort[ye] = tb.text;								
+									obj.controllerPort = tb.text;								
 								}
-								//-------------------------------------------------------------------------------
-								//Controller Configuration-------------------------------------------------------
-								//-------------------------------------------------------------------------------
-								//Station Configuration---------------------------------------------------------
 								if(obj.name=="IPAddress"){
 									frmItem.label = "IP Address";							
 									tb.width=100;
 									if(tb.text=="")
 										tb.text="no ip defined";
 									lable.text=lable.text+" - "+tb.text;
-									///tb.editable=false;
 									tb.maxChars=17;
 									if(parentApplication.getValueIPAddress.indexOf(tb.text)!=-1){									
 										checkIp=true;
-										obj.IPAddress = parentApplication.getValueIPAddress;
 									}
 									if(checkIp==false){
 										parentApplication.getValueIPAddress.push(tb.text);
-										obj.IPAddress1[ye]=tb.text;
-										obj.IPAddress = parentApplication.getValueIPAddress;
+										obj.IPAddress = tb.text;
 									}
 								}
 								if(obj.name=="MacAddress"){
@@ -1317,22 +1055,20 @@
 									tb.maxChars=17;
 									if(parentApplication.getValueMacAddress.indexOf(tb.text)!=-1){									
 										checkMac=true;								
-										obj.MacAddress = parentApplication.getValueMacAddress;
 									}
 									if(checkMac==false){
 										if(obj.type == "Switch" || obj.type == "Access Point"){
 											parentApplication.getValueSwitchMacAddress.push(tb.text);
 										}
 										parentApplication.getValueMacAddress.push(tb.text);
-										obj.MacAddress1[ye]=tb.text;
-										obj.MacAddress = parentApplication.getValueMacAddress;
+										obj.MacAddress = tb.text;
 									}
 								}
 								if(obj.name=="numberofradios"){
 									frmItem.label = "Number of Wireless Interfaces";							
 									tb.width=30;
 									tb.maxChars=2;
-									obj.arrayNumberofRadios[ye]=tb.text;
+									obj.numberofRadios = tb.text;
 								}				
 								if(obj.name=="signalRange"){
 									frmItem.label = "Signal Range";
@@ -1340,26 +1076,21 @@
 									tb.enabled=true;
 									tb.maxChars=10;
 	    							parentApplication.getValueSignalRange.push(tb.text);
-									obj.range1[ye]=tb.text;
+									obj.range = tb.text;
 									this.range=parseInt(tb.text);
 									updateCircle()
-									obj.range = parentApplication.getValueSignalRange;
 								}					
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
 								form.addChild(frmItem);
-								//-------------------------------------------------------------------------------
-								//SwitchOpenflow Configuration---------------------------------------------------
-												
+						
 								if(obj.name=="listeningPort"){
 									frmItem.label = "Listening Port";
 									tb.width=60;
 									tb.enabled=true;
-									//lable.text=lable.text+":"+tb.text;
 									tb.maxChars=5;
 									parentApplication.getValueListenPort.push(tb.text);
-									obj.arrayListenPortSwitch1[ye]=tb.text;
-									obj.arrayListenPortSwitch = parentApplication.getValueListenPort;
+									obj.listenPortSwitch = tb.text;
 								}						
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
@@ -1372,15 +1103,13 @@
 									lable.text=lable.text+":"+tb.text;
 									tb.maxChars=10;
 									parentApplication.getValueRouterSSID.push(tb.text);
-									obj.arrayRouterSSID1[ye]=tb.text;
-									obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
+									obj.ssid = tb.text;
 								}					
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
 								form.addChild(frmItem);	
 		
-							}
-								
+							}								
 							else if(obj.id=='boolean'){
 								frmItem = new FormItem();
 								frmItem.direction = "horizontal";
@@ -1395,23 +1124,11 @@
 										tb2.selectedIndex =valueObjArr[l].name;
 										break;
 									}
-									else ;
+									else;
 								}			
 								frmItem.addChild(tb2);
-								form.addChild(frmItem);
-								
+								form.addChild(frmItem);								
 							}
-								//------------------------------------------------------------------------------------------
-								//------------------------------------------------------------------------------------------
-								//----END STRINGS
-								//------------------------------------------------------------------------------------------
-								//------------------------------------------------------------------------------------------	
-								
-								//------------------------------------------------------------------------------------------
-								//------------------------------------------------------------------------------------------
-								//----START OPTIONS
-								//------------------------------------------------------------------------------------------
-								//------------------------------------------------------------------------------------------	
 							else if(obj.id=='radio') {
 								if(obj.name=="remoteLocal"){
 									frmItem = new FormItem();
@@ -1430,7 +1147,7 @@
 										rb.group = radioButton;
 										rb.selected = true
 										frmItem.addChild(rb);
-										obj.arrayGetisRemote[ye] = rb.selected;
+										obj.isRemote = rb.selected;
 										rb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);										
 									}
 									else{
@@ -1444,16 +1161,13 @@
 										rb.group = radioButton;
 										rb.selected = false
 										frmItem.addChild(rb);
-										obj.arrayGetisRemote[ye] = rb.selected;
+										obj.isRemote = rb.selected;
 										rb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);										
 									}
-									//rb.addEventListener(Event.CHANGE,change);	
 									form.addChild(frmItem);	
 								}
-							}
-							
-							else if(obj.id=='options') {	
-								
+							}							
+							else if(obj.id=='options') {								
 								if(obj.name=="macSwitch" || obj.name=="setMACSource" || obj.name=="setMACDestination"
 										|| obj.name=="macDestination" || obj.name=="macSource"){
 									frmItem = new FormItem();
@@ -1475,97 +1189,46 @@
 									}
 									tb3 = new ComboBox();
 									if(obj.name=="macSwitch"){
-										obj.arrayMacSwitch = parentApplication.getValueSwitchMacAddress;
-										obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
-										tb3.dataProvider = obj.arrayMacSwitch;
+										obj.MacSwitch = parentApplication.getValueSwitchMacAddress;
+										obj.MacSwitch = obj.MacSwitch.concat("none");
+										tb3.dataProvider = obj.MacSwitch;
 									}
 									else{
 										if(parentApplication.getValueMacAddress!=[]||exportControll==true){
-											obj.arrayMacSwitch = parentApplication.getValueMacAddress;
-											obj.arrayMacSwitch = obj.arrayMacSwitch.concat("none");
-											tb3.dataProvider = obj.arrayMacSwitch;
+											obj.MacSwitch = parentApplication.getValueMacAddress;
+											obj.MacSwitch = obj.MacSwitch.concat("none");
+											tb3.dataProvider = obj.MacSwitch;
 										}
 										else{
-											none = "none";
-											tb3.dataProvider = none;
+											tb3.dataProvider = "none";
 										}
 									}
-								}
-		
-								else if(obj.name=="ipDestination"){
+								}		
+								else if(obj.name=="ipDestination" || obj.name=="setIPDestination"
+								|| obj.name=="setIPSource" || obj.name=="ipSource"){
 									frmItem = new FormItem();
 									frmItem.direction = "horizontal";
-									frmItem.label = "Destination IP"; 
+									if(obj.name=="ipDestination"){
+										frmItem.label = "Destination IP"; 
+									}
+									else if(obj.name=="setIPDestination"){
+										frmItem.label = "Set Destination IP";
+									}
+									else if(obj.name=="setIPSource"){
+										frmItem.label = "Set Source IP";
+									}
+									else if(obj.name=="ipSource"){
+										frmItem.label = "Source IP";
+									}
 									tb3 = new ComboBox();
 									if(parentApplication.getValueIPAddress!=[]){
 										tb3.selectedIndex=-1;
-										obj.arrayIpDestination1 = parentApplication.getValueIPAddress;
-										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueIPAddress);//.split(",");
-										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueStationIPAddress);//.split(",");
-										obj.arrayIpDestination1 = obj.arrayIpDestination1.concat("none");
-										tb3.dataProvider = obj.arrayIpDestination1;
+										obj.listIPAddress = parentApplication.getValueIPAddress;
+										obj.listIPAddress = obj.listIPAddress.concat("none");
+										tb3.dataProvider = obj.listIPAddress;
 									}
 									else{
-										none = "none";
-										tb3.dataProvider = none;
-									}							
-								}
-								else if(obj.name=="ipSource"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Source IP"; 
-									tb3 = new ComboBox();
-									//obj.arrayIpSource1 = new Array();
-									if(parentApplication.getValueIPAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayIpSource1 = parentApplication.getValueIPAddress;
-										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueIPAddress);//.split(",");
-										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueStationIPAddress);
-										//obj.arrayIpSource1.pop();
-										obj.arrayIpSource1 = obj.arrayIpSource1.concat("none");
-										tb3.dataProvider = obj.arrayIpSource1;
-									}
-									else{
-										none = "none";
-										//obj.arrayIpSource[ye] = new Array();
-										//obj.arrayIpSource[ye].push(none);
-										tb3.dataProvider = none;
-									}							
-								}	
-								else if(obj.name=="setIPDestination"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Set Destination IP"; 
-									tb3 = new ComboBox();
-									if(parentApplication.getValueIPAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayIpDestination1 = parentApplication.getValueIPAddress;
-										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueIPAddress);//.split(",");
-										//obj.arrayIpDestination1 = obj.arrayIpDestination1.concat(parentApplication.getValueStationIPAddress);//.split(",");
-										obj.arrayIpDestination1 = obj.arrayIpDestination1.concat("none");
-										tb3.dataProvider = obj.arrayIpDestination1;
-									}
-									else{
-										none = "none";
-										tb3.dataProvider = none;
-									}							
-								}
-								else if(obj.name=="setIPSource"){
-									frmItem = new FormItem();
-									frmItem.direction = "horizontal";
-									frmItem.label = "Set Source IP"; 
-									tb3 = new ComboBox();
-									if(parentApplication.getValueIPAddress!=[]){
-										tb3.selectedIndex=-1;
-										obj.arrayIpSource1 = parentApplication.getValueIPAddress;
-										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueIPAddress);//.split(",");
-										//obj.arrayIpSource1 = obj.arrayIpSource1.concat(parentApplication.getValueStationIPAddress);
-										obj.arrayIpSource1 = obj.arrayIpSource1.concat("none");
-										tb3.dataProvider = obj.arrayIpSource1;
-									}
-									else{
-										none = "none";
-										tb3.dataProvider = none;
+										tb3.dataProvider = "none";
 									}							
 								}
 								else if(obj.name=="setVlanID"){
@@ -1609,8 +1272,7 @@
 											else {
 												tb3.selectedIndex = valueObjArr[o].name;
 											}
-										}
-										
+										}										
 									}
 									if(check==false)
 										tb3.selectedIndex=-1;
@@ -1632,14 +1294,14 @@
 									if(valueObjArr[o].id==frmItem.label){
 										if(obj.name=="openflowController"){	
 											frmItem.label = "Openflow Controller";
-											obj.arrayOpenflowController[ye]=valueObjArr[o].combeValue;
+											obj.openflowController=valueObjArr[o].combeValue;
 										}
 										break;
 									}						
 								}
 								
 								if(obj.name=="mask"){
-									obj.MaskAddress[ye] = tb3.selectedItem;
+									obj.MaskAddress = tb3.selectedLabel;
 									frmItem.label = "Mask";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
@@ -1651,11 +1313,11 @@
 													tb3.selectedItem=valofcombocomputermask;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
-												obj.MaskAddress[ye]=tb3.selectedItem;
+												obj.MaskAddress = tb3.selectedLabel;
 											}
 											else {
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.MaskAddress[ye] = tb3.selectedItem;
+												obj.MaskAddress = tb3.selectedLabel;
 											}
 										}
 									}
@@ -1677,7 +1339,7 @@
 												else
 													tb3.selectedItem = valueObjArr[o].name;
 												obj.arraySwitch=String(tb3.selectedItem);
-												obj.arrayGetSwitch[ye]=tb3.selectedItem;
+												obj.switchType = tb3.selectedLabel;
 												parentApplication.getSwitch_ = obj.arraySwitch;
 											}
 											else {
@@ -1689,7 +1351,7 @@
 									tb3.addEventListener(Event.CHANGE,change);							
 								}
 								else if(obj.name=="ofp_version"){									
-									obj.arrayOpenFlowVersion[ye] = String(tb3.selectedItem);
+									obj.openFlowVersion = String(tb3.selectedItem);
 									frmItem.label = "OpenFlow Version";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
@@ -1701,21 +1363,19 @@
 													tb3.selectedItem=valofcomboopenflowversion;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
-												obj.arrayOpenFlowVersion[ye]=String(tb3.selectedItem);
-												obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
-											//	parentApplication.getOpenFlowVersion_ = obj.arrayOpenFlowVersion[ye];
+												obj.openFlowVersion = tb3.selectedLabel;
 											}
 											else {
 												
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.arrayOpenFlowVersion[ye] = tb3.selectedItem;
+												obj.openFlowVersion = tb3.selectedLabel;
 											}
 										}
 									}
 									tb3.addEventListener(Event.CHANGE,change);							
 								}
 								else if(obj.name=="mode"){		
-									obj.arrayMode[ye] = String(tb3.selectedItem);
+									obj.mode = String(tb3.selectedItem);
 									frmItem.label = "Mode";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
@@ -1727,21 +1387,19 @@
 													tb3.selectedItem=valofcombomode;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
-												obj.arrayMode[ye]=String(tb3.selectedItem);
-												obj.arrayGetMode[ye]=tb3.selectedItem;
+												obj.mode = tb3.selectedLabel;
 											}
 											else {
 												
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.arrayMode[ye] = tb3.selectedItem;
+												obj.mode = tb3.selectedLabel;
 											}
 										}
 									}
 									tb3.addEventListener(Event.CHANGE,change);	
-								}
-								
+								}								
 								else if(obj.name=="channel"){	
-									obj.arrayChannel[ye] = String(tb3.selectedItem);
+									obj.channel = tb3.selectedLabel;
 									frmItem.label = "Channel";
 									frmItem.addChild(tb3);
 									tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);								
@@ -1753,20 +1411,17 @@
 													tb3.selectedItem=valofcombochannel;
 												else
 													tb3.selectedItem = valueObjArr[o].name;
-												obj.arrayChannel[ye]=String(tb3.selectedItem);
-												obj.arrayGetChannel[ye]=tb3.selectedItem;
+												obj.channel = tb3.selectedLabel;
 											}
 											else {
 												
 												tb3.selectedIndex = valueObjArr[o].name;
-												obj.arrayChannel[ye] = tb3.selectedItem;
+												obj.channel = tb3.selectedLabel;
 											}
 										}
 									}
 									tb3.addEventListener(Event.CHANGE,change);	
-								}
-								
-									
+								}	
 								else if(obj.name=="ethernetType"||obj.name=="vlanID"||obj.name=="setVlanID"||obj.name=="macSource"||obj.name==
 									"macDestination"||obj.name=="ipDestination"||obj.name=="ipSource"||obj.name=="setIPSource"
 									||obj.name=="setIPDestination"||obj.name=="setMACDestination"||obj.name=="setMACSource"
@@ -1805,50 +1460,34 @@
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){				
-													listVlanID[countNumber-1]=tb3.selectedLabel;
+													obj.vlanID[countNumber-1]=tb3.selectedLabel;
 													if(valofcombovlanid1==null){
-														listVlanID[countNumber-1]=null;
+														obj.vlanID[countNumber-1]=null;
 													}
-													obj.arrayVlanID[ye] = new Array();								
-													for(j=0;j<listVlanID.length;j++){	
-														obj.arrayVlanID[ye].push(listVlanID[j]);
-													}	
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listVlanID.length){	
-													if(listVlanID[countNumber-2]==undefined || listVlanID[countNumber-2]=="" || listVlanID[countNumber-2]==null || valofcombo!=listVlanID[countNumber-2]){
-														listVlanID[countNumber-2]=valofcombovlanid;
+												if(countNumber-2!=obj.vlanID.length){	
+													if(obj.vlanID[countNumber-2]==undefined || obj.vlanID[countNumber-2]=="" || obj.vlanID[countNumber-2]==null || valofcombo!=obj.vlanID[countNumber-2]){
+														obj.vlanID[countNumber-2]=valofcombovlanid;
 														valofcombovlanid="";
-														obj.arrayVlanID[ye] = new Array();
-														for(j=0;j<listVlanID.length;j++){	
-															obj.arrayVlanID[ye].push(listVlanID[j]);
-														}	
 													}
-													tb3.selectedItem=listVlanID[countNumber-1];
+													tb3.selectedItem=obj.vlanID[countNumber-1];
 												}					
-												else if(countNumber-2==listVlanID.length){
-													listVlanID[countNumber-2]=valofcombovlanid;
+												else if(countNumber-2==obj.vlanID.length){
+													obj.vlanID[countNumber-2]=valofcombovlanid;
 													valofcombovlanid="";
-													obj.arrayVlanID[ye] = new Array();
-													for(j=0;j<listVlanID.length;j++){	
-														obj.arrayVlanID[ye].push(listVlanID[j]);
-													}										
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listVlanID[countNumber]==undefined || listVlanID[countNumber]=="" || listVlanID[countNumber]==null || valofcombovlanid!=listVlanID[countNumber]){
-													listVlanID[countNumber]=valofcombovlanid;									
+												if(obj.vlanID[countNumber]==undefined || obj.vlanID[countNumber]=="" || obj.vlanID[countNumber]==null || valofcombovlanid!=obj.vlanID[countNumber]){
+													obj.vlanID[countNumber]=valofcombovlanid;									
 												}
-												tb3.selectedItem=listVlanID[countNumber-1];
-												obj.arrayVlanID[ye] = new Array();
-												for(j=0;j<listVlanID.length;j++){	
-													obj.arrayVlanID[ye].push(listVlanID[j]);
-												}
+												tb3.selectedItem=obj.vlanID[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listVlanID[countNumber-1];								
+												tb3.selectedItem=obj.vlanID[countNumber-1];								
 											}							
 										}
 										else if(obj.name=="setVlanID"){
@@ -1861,454 +1500,309 @@
 											form.addChild(frmItem);			
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listSetVlanID[countNumber-1]=tb3.selectedLabel;
+													obj.setVlanID[countNumber-1]=tb3.selectedLabel;
 													if(valofcombosetvlanid1==null){
-														listSetVlanID[countNumber-1]=null;
+														obj.setVlanID[countNumber-1]=null;
 													}								
-													obj.arraySetVlanID[ye] = new Array();
-													for(j=0;j<listSetVlanID.length;j++){	
-														obj.arraySetVlanID[ye].push(listSetVlanID[j]);
-													}	
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listSetVlanID.length){			
-													if(listSetVlanID[countNumber-2]==undefined || listSetVlanID[countNumber-2]=="" || listSetVlanID[countNumber-2]==null || valofcombosetvlanid!=listSetVlanID[countNumber-2]){
-														listSetVlanID[countNumber-2]=valofcombosetvlanid;
-														obj.arraySetVlanID[ye] = new Array();
-														for(j=0;j<listSetVlanID.length;j++){	
-															obj.arraySetVlanID[ye].push(listSetVlanID[j]);
-														}
+												if(countNumber-2!=obj.setVlanID.length){			
+													if(obj.setVlanID[countNumber-2]==undefined || obj.setVlanID[countNumber-2]=="" || obj.setVlanID[countNumber-2]==null || valofcombosetvlanid!=obj.setVlanID[countNumber-2]){
+														obj.setVlanID[countNumber-2]=valofcombosetvlanid;
 													}
-													tb3.selectedItem=listSetVlanID[countNumber-1];
+													tb3.selectedItem=obj.setVlanID[countNumber-1];
 												}					
-												else if(countNumber-2==listSetVlanID.length){
-													listSetVlanID[countNumber-2]=valofcombosetvlanid;
-													obj.arraySetVlanID[ye] = new Array();
-													for(j=0;j<listSetVlanID.length;j++){	
-														obj.arraySetVlanID[ye].push(listSetVlanID[j]);
-													}											
+												else if(countNumber-2==obj.setVlanID.length){
+													obj.setVlanID[countNumber-2]=valofcombosetvlanid;
 													tb3.selectedIndex=-1;								
 												}
 											}	
 											else if(regular==0){
-												if(listSetVlanID[countNumber]==undefined || listSetVlanID[countNumber]=="" || listSetVlanID[countNumber]==null || valofcombosetvlanid!=listSetVlanID[countNumber]){
-													listSetVlanID[countNumber]=valofcombosetvlanid;									
+												if(obj.setVlanID[countNumber]==undefined || obj.setVlanID[countNumber]=="" || obj.setVlanID[countNumber]==null || valofcombosetvlanid!=obj.setVlanID[countNumber]){
+													obj.setVlanID[countNumber]=valofcombosetvlanid;									
 												}
-												tb3.selectedItem=listSetVlanID[countNumber-1];
-												obj.arraySetVlanID[ye] = new Array();
-												for(j=0;j<listSetVlanID.length;j++){	
-													obj.arraySetVlanID[ye].push(listSetVlanID[j]);
-												}
+												tb3.selectedItem=obj.setVlanID[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listSetVlanID[countNumber-1];								
+												tb3.selectedItem=obj.setVlanID[countNumber-1];								
 											}		
 										}
 										else if(obj.name=="macSource"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Source MAC"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitch);
+											tb3.dataProvider = new ArrayCollection(obj.MacSwitch);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listMacSource[countNumber-1]=tb3.selectedLabel;
-													obj.arrayMacSource[ye] = new Array();
-													for(j=0;j<listMacSource.length;j++){	
-														obj.arrayMacSource[ye].push(listMacSource[j]);
-													}	
+													obj.macSource[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listMacSource.length){			
-													if(listMacSource[countNumber-2]==undefined || listMacSource[countNumber-2]=="" || listMacSource[countNumber-2]==null || valofcombomacsource!=listMacSource[countNumber-2]){
-														listMacSource[countNumber-2]=valofcombomacsource;
-														obj.arrayMacSource[ye] = new Array();
-														for(j=0;j<listMacSource.length;j++){	
-															obj.arrayMacSource[ye].push(listMacSource[j]);
-														}
+												if(countNumber-2!=obj.macSource.length){			
+													if(obj.macSource[countNumber-2]==undefined || obj.macSource[countNumber-2]=="" || obj.macSource[countNumber-2]==null || valofcombomacsource!=obj.macSource[countNumber-2]){
+														obj.macSource[countNumber-2]=valofcombomacsource;
 													}
-													tb3.selectedItem=listMacSource[countNumber-1];
+													tb3.selectedItem=obj.macSource[countNumber-1];
 												}					
-												else if(countNumber-2==listMacSource.length){
-													listMacSource[countNumber-2]=valofcombomacsource;
-													obj.arrayMacSource[ye] = new Array();
-													for(j=0;j<listMacSource.length;j++){	
-														obj.arrayMacSource[ye].push(listMacSource[j]);
-													}										
+												else if(countNumber-2==obj.macSource.length){
+													obj.macSource[countNumber-2]=valofcombomacsource;
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listMacSource[countNumber]==undefined || listMacSource[countNumber]=="" || listMacSource[countNumber]==null || valofcombomacsource!=listMacSource[countNumber]){
-													listMacSource[countNumber]=valofcombomacsource;									
+												if(obj.macSource[countNumber]==undefined || obj.macSource[countNumber]=="" || obj.macSource[countNumber]==null || valofcombomacsource!=obj.macSource[countNumber]){
+													obj.macSource[countNumber]=valofcombomacsource;									
 												}
-												tb3.selectedItem=listMacSource[countNumber-1];
-												obj.arrayMacSource[ye] = new Array();
-												for(j=0;j<listMacSource.length;j++){	
-													obj.arrayMacSource[ye].push(listMacSource[j]);
-												}
+												tb3.selectedItem=obj.macSource[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listMacSource[countNumber-1];				
+												tb3.selectedItem=obj.macSource[countNumber-1];				
 											}
 										}
 										else if(obj.name=="macDestination"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Destination MAC";
-											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitch);
+											tb3.dataProvider = new ArrayCollection(obj.MacSwitch);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listMacDestination[countNumber-1]=tb3.selectedLabel;
-													obj.arrayMacDestination[ye] = new Array();
-													for(j=0;j<listMacDestination.length;j++){	
-														obj.arrayMacDestination[ye].push(listMacDestination[j]);
-													}	
+													obj.macDestination[countNumber-1]=tb3.selectedLabel;	
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listMacDestination.length){			
-													if(listMacDestination[countNumber-2]==undefined || listMacDestination[countNumber-2]=="" || listMacDestination[countNumber-2]==null || valofcombomacdestination!=listMacDestination[countNumber-2]){
-														listMacDestination[countNumber-2]=valofcombomacdestination;
-														obj.arrayMacDestination[ye] = new Array();
-														for(j=0;j<listMacDestination.length;j++){	
-															obj.arrayMacDestination[ye].push(listMacDestination[j]);
-														}	
+												if(countNumber-2!=obj.macDestination.length){			
+													if(obj.macDestination[countNumber-2]==undefined || obj.macDestination[countNumber-2]=="" || obj.macDestination[countNumber-2]==null || valofcombomacdestination!=obj.macDestination[countNumber-2]){
+														obj.macDestination[countNumber-2]=valofcombomacdestination;	
 													}
-													tb3.selectedItem=listMacDestination[countNumber-1];
+													tb3.selectedItem=obj.macDestination[countNumber-1];
 												}					
-												else if(countNumber-2==listMacDestination.length){
-													listMacDestination[countNumber-2]=valofcombomacdestination;
-													obj.arrayMacDestination[ye] = new Array();
-													for(j=0;j<listMacDestination.length;j++){	
-														obj.arrayMacDestination[ye].push(listMacDestination[j]);
-													}										
+												else if(countNumber-2==obj.macDestination.length){
+													obj.macDestination[countNumber-2]=valofcombomacdestination;								
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listMacDestination[countNumber]==undefined || listMacDestination[countNumber]=="" || listMacDestination[countNumber]==null || valofcombomacdestination!=listMacDestination[countNumber]){
-													listMacDestination[countNumber]=valofcombomacdestination;									
+												if(obj.macDestination[countNumber]==undefined || obj.macDestination[countNumber]=="" || obj.macDestination[countNumber]==null || valofcombomacdestination!=obj.macDestination[countNumber]){
+													obj.macDestination[countNumber]=valofcombomacdestination;									
 												}
-												tb3.selectedItem=listMacDestination[countNumber-1];
-												obj.arrayMacDestination[ye] = new Array();
-												for(j=0;j<listMacDestination.length;j++){	
-													obj.arrayMacDestination[ye].push(listMacDestination[j]);
-												}
+												tb3.selectedItem=obj.macDestination[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listMacDestination[countNumber-1];	
+												tb3.selectedItem=obj.macDestination[countNumber-1];	
 											}
 										}
 										else if(obj.name=="macSwitch"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Switch MAC Address";
-											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitch);
+											tb3.dataProvider = new ArrayCollection(obj.MacSwitch);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listMacSwitch[countNumber-1]=tb3.selectedLabel;
-													obj.arrayMac_Switch[ye] = new Array();
-													for(j=0;j<listMacSwitch.length;j++){	
-														obj.arrayMac_Switch[ye].push(listMacSwitch[j]);								
-													}
+													obj.listMacSwitch[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listMacSwitch.length){			
-													if(listMacSwitch[countNumber-2]==undefined || listMacSwitch[countNumber-2]=="" || listMacSwitch[countNumber-2]==null || valofcombomacswitch!=listMacSwitch[countNumber-2]){
-														listMacSwitch[countNumber-2]=valofcombomacswitch;
-														obj.arrayMac_Switch[ye] = new Array();
-														for(j=0;j<listMacSwitch.length;j++){	
-															obj.arrayMac_Switch[ye].push(listMacSwitch[j]);
-														}		
+												if(countNumber-2!=obj.listMacSwitch.length){			
+													if(obj.listMacSwitch[countNumber-2]==undefined || obj.listMacSwitch[countNumber-2]=="" || obj.listMacSwitch[countNumber-2]==null || valofcombomacswitch!=obj.listMacSwitch[countNumber-2]){
+														obj.listMacSwitch[countNumber-2]=valofcombomacswitch;
 													}
-													tb3.selectedItem=listMacSwitch[countNumber-1];
+													tb3.selectedItem=obj.listMacSwitch[countNumber-1];
 												}					
-												else if(countNumber-2==listMacSwitch.length){
-													listMacSwitch[countNumber-2]=valofcombomacswitch;
-													obj.arrayMac_Switch[ye] = new Array();
-													for(j=0;j<listMacSwitch.length;j++){	
-														obj.arrayMac_Switch[ye].push(listMacSwitch[j]);
-													}		
+												else if(countNumber-2==obj.listMacSwitch.length){
+													obj.listMacSwitch[countNumber-2]=valofcombomacswitch;
 													tb3.selectedIndex=-1;								
 												}
 											}	
 											else if(regular==0){
-												if(listMacSwitch[countNumber]==undefined || listMacSwitch[countNumber]=="" || listMacSwitch[countNumber]==null || valofcombomacswitch!=listMacSwitch[countNumber]){
-													listMacSwitch[countNumber]=valofcombomacswitch;									
+												if(obj.listMacSwitch[countNumber]==undefined || obj.listMacSwitch[countNumber]=="" || obj.listMacSwitch[countNumber]==null || valofcombomacswitch!=obj.listMacSwitch[countNumber]){
+													obj.listMacSwitch[countNumber]=valofcombomacswitch;									
 												}
-												tb3.selectedItem=listMacSwitch[countNumber-1];
-												obj.arrayMac_Switch[ye] = new Array();
-												for(j=0;j<listMacSwitch.length;j++){	
-													obj.arrayMac_Switch[ye].push(listMacSwitch[j]);
-												}
+												tb3.selectedItem=obj.listMacSwitch[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listMacSwitch[countNumber-1];
+												tb3.selectedItem=obj.listMacSwitch[countNumber-1];
 											}	
 										}
 										else if(obj.name=="ipDestination"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Destination IP"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayIpDestination1);
+											tb3.dataProvider = new ArrayCollection(obj.listIPAddress);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);	
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listIpDestination[countNumber-1]=tb3.selectedLabel;
-													obj.arrayIpDestination[ye] = new Array();
-													for(j=0;j<listIpDestination.length;j++){	
-														obj.arrayIpDestination[ye].push(listIpDestination[j]);
-													}	
+													obj.ipDestination[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listIpDestination.length){			
-													if(listIpDestination[countNumber-2]==undefined || listIpDestination[countNumber-2]=="" || listIpDestination[countNumber-2]==null || valofcomboipdestination!=listIpDestination[countNumber-2]){
-														listIpDestination[countNumber-2]=valofcomboipdestination;
-														obj.arrayIpDestination[ye] = new Array();
-														for(j=0;j<listIpDestination.length;j++){	
-															obj.arrayIpDestination[ye].push(listIpDestination[j]);
-														}
+												if(countNumber-2!=obj.ipDestination.length){			
+													if(obj.ipDestination[countNumber-2]==undefined || obj.ipDestination[countNumber-2]=="" || obj.ipDestination[countNumber-2]==null || valofcomboipdestination!=obj.ipDestination[countNumber-2]){
+														obj.ipDestination[countNumber-2]=valofcomboipdestination;
 													}
-													tb3.selectedItem=listIpDestination[countNumber-1];
+													tb3.selectedItem=obj.ipDestination[countNumber-1];
 												}					
-												else if(countNumber-2==listIpDestination.length){
-													listIpDestination[countNumber-2]=valofcomboipdestination;
-													obj.arrayIpDestination[ye] = new Array();
-													for(j=0;j<listIpDestination.length;j++){	
-														obj.arrayIpDestination[ye].push(listIpDestination[j]);
-													}										
+												else if(countNumber-2==obj.ipDestination.length){
+													obj.ipDestination[countNumber-2]=valofcomboipdestination;
 													tb3.selectedIndex=-1;
 												}
 											}
 											else if(regular==0){
-												if(listIpDestination[countNumber]==undefined || listIpDestination[countNumber]=="" || listIpDestination[countNumber]==null || valofcomboipdestination!=listIpDestination[countNumber]){
-													listIpDestination[countNumber]=valofcomboipdestination;									
+												if(obj.ipDestination[countNumber]==undefined || obj.ipDestination[countNumber]=="" || obj.ipDestination[countNumber]==null || valofcomboipdestination!=obj.ipDestination[countNumber]){
+													obj.ipDestination[countNumber]=valofcomboipdestination;									
 												}
-												tb3.selectedItem=listIpDestination[countNumber-1];
-												obj.arrayIpDestination[ye] = new Array();
-												for(j=0;j<listIpDestination.length;j++){	
-													obj.arrayIpDestination[ye].push(listIpDestination[j]);
-												}
+												tb3.selectedItem=obj.ipDestination[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listIpDestination[countNumber-1];
+												tb3.selectedItem=obj.ipDestination[countNumber-1];
 											}
 										}
 										else if(obj.name=="ipSource"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Source IP"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayIpSource1);
+											tb3.dataProvider = new ArrayCollection(obj.listIPAddress);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);	
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listIpSource[countNumber-1]=tb3.selectedLabel;
-													obj.arrayIpSource[ye] = new Array();
-													for(j=0;j<listIpSource.length;j++){	
-														obj.arrayIpSource[ye].push(listIpSource[j]);
-													}	
+													obj.ipSource[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listIpSource.length){			
-													if(listIpSource[countNumber-2]==undefined || listIpSource[countNumber-2]=="" || listIpSource[countNumber-2]==null || valofcomboipsource!=listIpSource[countNumber-2]){
-														listIpSource[countNumber-2]=valofcomboipsource;									
-														obj.arrayIpSource[ye] = new Array();
-														for(j=0;j<listIpSource.length;j++){	
-															obj.arrayIpSource[ye].push(listIpSource[j]);
-														}
+												if(countNumber-2!=obj.ipSource.length){			
+													if(obj.ipSource[countNumber-2]==undefined || obj.ipSource[countNumber-2]=="" || obj.ipSource[countNumber-2]==null || valofcomboipsource!=obj.ipSource[countNumber-2]){
+														obj.ipSource[countNumber-2]=valofcomboipsource;									
 													}
-													tb3.selectedItem=listIpSource[countNumber-1];
+													tb3.selectedItem=obj.ipSource[countNumber-1];
 												}					
-												else if(countNumber-2==listIpSource.length){
-													listIpSource[countNumber-2]=valofcomboipsource;									
-													obj.arrayIpSource[ye] = new Array();
-													for(j=0;j<listIpSource.length;j++){	
-														obj.arrayIpSource[ye].push(listIpSource[j]);
-													}		
+												else if(countNumber-2==obj.ipSource.length){
+													obj.ipSource[countNumber-2]=valofcomboipsource;									
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listIpSource[countNumber]==undefined || listIpSource[countNumber]=="" || listIpSource[countNumber]==null || valofcomboipsource!=listIpSource[countNumber]){
-													listIpSource[countNumber]=valofcomboipsource;									
+												if(obj.ipSource[countNumber]==undefined || obj.ipSource[countNumber]=="" || obj.ipSource[countNumber]==null || valofcomboipsource!=obj.ipSource[countNumber]){
+													obj.ipSource[countNumber]=valofcomboipsource;									
 												}
-												tb3.selectedItem=listIpSource[countNumber-1];
-												obj.arrayIpSource[ye] = new Array();
-												for(j=0;j<listIpSource.length;j++){	
-													obj.arrayIpSource[ye].push(listIpSource[j]);
-												}							
+												tb3.selectedItem=obj.ipSource[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listIpSource[countNumber-1];
+												tb3.selectedItem=obj.ipSource[countNumber-1];
 											}
 										}
-											//ACTIONS------------------------------------------------------------------------------
 										else if(obj.name=="setIPSource"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Set Source IP"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayIpSource1);
+											tb3.dataProvider = new ArrayCollection(obj.listIPAddress);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);	
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listSetIPSource[countNumber-1]=tb3.selectedLabel;
-													obj.arraySetIPSource[ye] = new Array();
-													for(j=0;j<listSetIPSource.length;j++){	
-														obj.arraySetIPSource[ye].push(listSetIPSource[j]);
-													}	
+													obj.setIPSource[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listSetIPSource.length){			
-													if(listSetIPSource[countNumber-2]==undefined || listSetIPSource[countNumber-2]=="" || listSetIPSource[countNumber-2]==null || valofcombosetipsource!=listSetIPSource[countNumber-2]){
-														listSetIPSource[countNumber-2]=valofcombosetipsource;									
-														obj.arraySetIPSource[ye] = new Array();
-														for(j=0;j<listSetIPSource.length;j++){	
-															obj.arraySetIPSource[ye].push(listSetIPSource[j]);
-														}	
+												if(countNumber-2!=obj.setIPSource.length){			
+													if(obj.setIPSource[countNumber-2]==undefined || obj.setIPSource[countNumber-2]=="" || obj.setIPSource[countNumber-2]==null || valofcombosetipsource!=obj.setIPSource[countNumber-2]){
+														obj.setIPSource[countNumber-2]=valofcombosetipsource;
 													}
-													tb3.selectedItem=listSetIPSource[countNumber-1];
+													tb3.selectedItem=obj.setIPSource[countNumber-1];
 												}					
-												else if(countNumber-2==listSetIPSource.length){
-													listSetIPSource[countNumber-2]=valofcombosetipsource;									
-													obj.arraySetIPSource[ye] = new Array();
-													for(j=0;j<listSetIPSource.length;j++){	
-														obj.arraySetIPSource[ye].push(listSetIPSource[j]);
-													}		
+												else if(countNumber-2==obj.setIPSource.length){
+													obj.setIPSource[countNumber-2]=valofcombosetipsource;
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listSetIPSource[countNumber]==undefined || listSetIPSource[countNumber]=="" || listSetIPSource[countNumber]==null || valofcombosetipsource!=listSetIPSource[countNumber]){
-													listSetIPSource[countNumber]=valofcombosetipsource;									
+												if(obj.setIPSource[countNumber]==undefined || obj.setIPSource[countNumber]=="" || obj.setIPSource[countNumber]==null || valofcombosetipsource!=obj.setIPSource[countNumber]){
+													obj.setIPSource[countNumber]=valofcombosetipsource;									
 												}
-												tb3.selectedItem=listSetIPSource[countNumber-1];
-												obj.arraySetIPSource[ye] = new Array();
-												for(j=0;j<listSetIPSource.length;j++){	
-													obj.arraySetIPSource[ye].push(listSetIPSource[j]);
-												}							
+												tb3.selectedItem=obj.setIPSource[countNumber-1];						
 											}
 											else{
-												tb3.selectedItem=listSetIPSource[countNumber-1];
+												tb3.selectedItem=obj.setIPSource[countNumber-1];
 											}
 										}
 										else if(obj.name=="setIPDestination"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Set Destination IP"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayIpDestination1);
+											tb3.dataProvider = new ArrayCollection(obj.listIPAddress);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);		
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listSetIPDestination[countNumber-1]=tb3.selectedLabel;
-													obj.arraySetIPDestination[ye] = new Array();
-													for(j=0;j<listSetIPDestination.length;j++){	
-														obj.arraySetIPDestination[ye].push(listSetIPDestination[j]);
-													}	
+													obj.setIPDestination[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listSetIPDestination.length){			
-													if(listSetIPDestination[countNumber-2]==undefined || listSetIPDestination[countNumber-2]=="" || listSetIPDestination[countNumber-2]==null || valofcombosetipdestination!=listSetIPDestination[countNumber-2]){
-														listSetIPDestination[countNumber-2]=valofcombosetipdestination;									
-														obj.arraySetIPDestination[ye] = new Array();
-														for(j=0;j<listSetIPDestination.length;j++){	
-															obj.arraySetIPDestination[ye].push(listSetIPDestination[j]);
-														}
+												if(countNumber-2!=obj.setIPDestination.length){			
+													if(obj.setIPDestination[countNumber-2]==undefined || obj.setIPDestination[countNumber-2]=="" || obj.setIPDestination[countNumber-2]==null || valofcombosetipdestination!=obj.setIPDestination[countNumber-2]){
+														obj.setIPDestination[countNumber-2]=valofcombosetipdestination;									
 													}
-													tb3.selectedItem=listSetIPDestination[countNumber-1];
+													tb3.selectedItem=obj.setIPDestination[countNumber-1];
 												}					
-												else if(countNumber-2==listSetIPDestination.length){
-													listSetIPDestination[countNumber-2]=valofcombosetipdestination;									
-													obj.arraySetIPDestination[ye] = new Array();
-													for(j=0;j<listSetIPDestination.length;j++){	
-														obj.arraySetIPDestination[ye].push(listSetIPDestination[j]);
-													}		
+												else if(countNumber-2==obj.setIPDestination.length){
+													obj.setIPDestination[countNumber-2]=valofcombosetipdestination;	
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listSetIPDestination[countNumber]==undefined || listSetIPDestination[countNumber]=="" || listSetIPDestination[countNumber]==null || valofcombosetipdestination!=listSetIPDestination[countNumber]){
-													listSetIPDestination[countNumber]=valofcombosetipdestination;									
+												if(obj.setIPDestination[countNumber]==undefined || obj.setIPDestination[countNumber]=="" || obj.setIPDestination[countNumber]==null || valofcombosetipdestination!=obj.setIPDestination[countNumber]){
+													obj.setIPDestination[countNumber]=valofcombosetipdestination;									
 												}
-												tb3.selectedItem=listSetIPDestination[countNumber-1];
-												obj.arraySetIPDestination[ye] = new Array();
-												for(j=0;j<listSetIPDestination.length;j++){	
-													obj.arraySetIPDestination[ye].push(listSetIPDestination[j]);
-												}							
+												tb3.selectedItem=obj.setIPDestination[countNumber-1];						
 											}
 											else{
-												tb3.selectedItem=listSetIPDestination[countNumber-1];
+												tb3.selectedItem=obj.setIPDestination[countNumber-1];
 											}
 										}
 										else if(obj.name=="setMACSource"){
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Set Source MAC"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitch);
+											tb3.dataProvider = new ArrayCollection(obj.MacSwitch);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listSetMACSource[countNumber-1]=tb3.selectedLabel;
-													obj.arraySetMACSource[ye] = new Array();
-													for(j=0;j<listSetMACSource.length;j++){	
-														obj.arraySetMACSource[ye].push(listSetMACSource[j]);
-													}	
+													obj.setMACSource[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listSetMACSource.length){			
-													if(listSetMACSource[countNumber-2]==undefined || listSetMACSource[countNumber-2]=="" || listSetMACSource[countNumber-2]==null || valofcombosetmacsource!=listSetMACSource[countNumber-2]){
-														listSetMACSource[countNumber-2]=valofcombosetmacsource;									
-														obj.arraySetMACSource[ye] = new Array();
-														for(j=0;j<listSetMACSource.length;j++){	
-															obj.arraySetMACSource[ye].push(listSetMACSource[j]);
-														}	
+												if(countNumber-2!=obj.setMACSource.length){			
+													if(obj.setMACSource[countNumber-2]==undefined || obj.setMACSource[countNumber-2]=="" || obj.setMACSource[countNumber-2]==null || valofcombosetmacsource!=obj.setMACSource[countNumber-2]){
+														obj.setMACSource[countNumber-2]=valofcombosetmacsource;									
 													}
-													tb3.selectedItem=listSetMACSource[countNumber-1];
+													tb3.selectedItem=obj.setMACSource[countNumber-1];
 												}					
-												else if(countNumber-2==listSetMACSource.length){
-													listSetMACSource[countNumber-2]=valofcombosetmacsource;									
-													obj.arraySetMACSource[ye] = new Array();
-													for(j=0;j<listSetMACSource.length;j++){	
-														obj.arraySetMACSource[ye].push(listSetMACSource[j]);
-													}		
+												else if(countNumber-2==obj.setMACSource.length){
+													obj.setMACSource[countNumber-2]=valofcombosetmacsource;									
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listSetMACSource[countNumber]==undefined || listSetMACSource[countNumber]=="" || listSetMACSource[countNumber]==null || valofcombosetmacsource!=listSetMACSource[countNumber]){
-													listSetMACSource[countNumber]=valofcombosetmacsource;									
+												if(obj.setMACSource[countNumber]==undefined || obj.setMACSource[countNumber]=="" || obj.setMACSource[countNumber]==null || valofcombosetmacsource!=obj.setMACSource[countNumber]){
+													obj.setMACSource[countNumber]=valofcombosetmacsource;									
 												}
-												tb3.selectedItem=listSetMACSource[countNumber-1];
-												obj.arraySetMACSource[ye] = new Array();
-												for(j=0;j<listSetMACSource.length;j++){	
-													obj.arraySetMACSource[ye].push(listSetMACSource[j]);
-												}							
+												tb3.selectedItem=obj.setMACSource[countNumber-1];						
 											}
 											else{
 												tb3.selectedIndex=-1;
@@ -2318,48 +1812,32 @@
 											frmItem = new FormItem();
 											frmItem.direction = "horizontal";
 											frmItem.label = "Set Destination MAC"; 
-											tb3.dataProvider = new ArrayCollection(obj.arrayMacSwitch);
+											tb3.dataProvider = new ArrayCollection(obj.MacSwitch);
 											frmItem.addChild(tb3);	
 											tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listSetMACDestination[countNumber-1]=tb3.selectedLabel;
-													obj.arraySetMACDestination[ye] = new Array();
-													for(j=0;j<listSetMACDestination.length;j++){	
-														obj.arraySetMACDestination[ye].push(listSetMACDestination[j]);
-													}	
+													obj.setMACDestination[countNumber-1]=tb3.selectedLabel;
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listSetMACDestination.length){			
-													if(listSetMACDestination[countNumber-2]==undefined || listSetMACDestination[countNumber-2]=="" || listSetMACDestination[countNumber-2]==null || valofcombosetmacdestination!=listSetMACDestination[countNumber-2]){
-														listSetMACDestination[countNumber-2]=valofcombosetmacdestination;									
-														obj.arraySetMACDestination[ye] = new Array();
-														for(j=0;j<listSetMACDestination.length;j++){	
-															obj.arraySetMACDestination[ye].push(listSetMACDestination[j]);
-														}
+												if(countNumber-2!=obj.setMACDestination.length){			
+													if(obj.setMACDestination[countNumber-2]==undefined || obj.setMACDestination[countNumber-2]=="" || obj.setMACDestination[countNumber-2]==null || valofcombosetmacdestination!=obj.setMACDestination[countNumber-2]){
+														obj.setMACDestination[countNumber-2]=valofcombosetmacdestination;									
 													}
-													tb3.selectedItem=listSetMACDestination[countNumber-1];
+													tb3.selectedItem=obj.setMACDestination[countNumber-1];
 												}					
-												else if(countNumber-2==listSetMACDestination.length){
-													listSetMACDestination[countNumber-2]=valofcombosetmacdestination;									
-													obj.arraySetMACDestination[ye] = new Array();
-													for(j=0;j<listSetMACDestination.length;j++){	
-														obj.arraySetMACDestination[ye].push(listSetMACDestination[j]);
-													}		
+												else if(countNumber-2==obj.setMACDestination.length){
+													obj.setMACDestination[countNumber-2]=valofcombosetmacdestination;									
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listSetMACDestination[countNumber]==undefined || listSetMACDestination[countNumber]=="" || listSetMACDestination[countNumber]==null || valofcombosetmacdestination!=listSetMACDestination[countNumber]){
-													listSetMACDestination[countNumber]=valofcombosetmacdestination;									
+												if(obj.setMACDestination[countNumber]==undefined || obj.setMACDestination[countNumber]=="" || obj.setMACDestination[countNumber]==null || valofcombosetmacdestination!=obj.setMACDestination[countNumber]){
+													obj.setMACDestination[countNumber]=valofcombosetmacdestination;									
 												}
-												tb3.selectedItem=listSetMACDestination[countNumber-1];
-												obj.arraySetMACDestination[ye] = new Array();
-												for(j=0;j<listSetMACDestination.length;j++){	
-													obj.arraySetMACDestination[ye].push(listSetMACDestination[j]);
-												}							
+												tb3.selectedItem=obj.setMACDestination[countNumber-1];							
 											}
 											else{
 												tb3.selectedIndex=-1;
@@ -2375,48 +1853,32 @@
 											form.addChild(frmItem);
 											if(exportControll==true){
 												if(ncount<(aa-1)){
-													listSetStripVlan[countNumber-1]=tb3.selectedLabel;
+													obj.setStripVlan[countNumber-1]=tb3.selectedLabel;
 													if(valofcombosetstripvlan1==null){
-														listVlanID[countNumber-1]=null;
+														obj.setStripVlan[countNumber-1]=null;
 													}
-													obj.arraySetStripVlan[ye] = new Array();
-													for(j=0;j<listSetStripVlan.length;j++){	
-														obj.arraySetStripVlan[ye].push(listSetStripVlan[j]);
-													}	
 												}
 											}
 											if(regular==1){
-												if(countNumber-2!=listSetStripVlan.length){			
-													if(listSetStripVlan[countNumber-2]==undefined || listSetStripVlan[countNumber-2]=="" || listSetStripVlan[countNumber-2]==null || valofcombosetstripvlan!=listSetStripVlan[countNumber-2]){
-														listSetStripVlan[countNumber-2]=valofcombosetstripvlan;
-														obj.arraySetStripVlan[ye] = new Array();
-														for(j=0;j<listSetStripVlan.length;j++){	
-															obj.arraySetStripVlan[ye].push(listSetStripVlan[j]);
-														}	
+												if(countNumber-2!=obj.setStripVlan.length){			
+													if(obj.setStripVlan[countNumber-2]==undefined || obj.setStripVlan[countNumber-2]=="" || obj.setStripVlan[countNumber-2]==null || valofcombosetstripvlan!=obj.setStripVlan[countNumber-2]){
+														obj.setStripVlan[countNumber-2]=valofcombosetstripvlan;
 													}
-													tb3.selectedItem=listSetStripVlan[countNumber-1];
+													tb3.selectedItem=obj.setStripVlan[countNumber-1];
 												}					
-												else if(countNumber-2==listSetStripVlan.length){
-													listSetStripVlan[countNumber-2]=valofcombosetstripvlan;
-													obj.arraySetStripVlan[ye] = new Array();
-													for(j=0;j<listSetStripVlan.length;j++){	
-														obj.arraySetStripVlan[ye].push(listSetStripVlan[j]);
-													}										
+												else if(countNumber-2==obj.setStripVlan.length){
+													obj.setStripVlan[countNumber-2]=valofcombosetstripvlan;
 													tb3.selectedIndex=-1;
 												}
 											}	
 											else if(regular==0){
-												if(listSetStripVlan[countNumber]==undefined || listSetStripVlan[countNumber]=="" || listSetStripVlan[countNumber]==null || valofcombosetstripvlan!=listSetStripVlan[countNumber]){
-													listSetStripVlan[countNumber]=valofcombosetstripvlan;									
+												if(obj.setStripVlan[countNumber]==undefined || obj.setStripVlan[countNumber]=="" || obj.setStripVlan[countNumber]==null || valofcombosetstripvlan!=obj.setStripVlan[countNumber]){
+													obj.setStripVlan[countNumber]=valofcombosetstripvlan;									
 												}
-												tb3.selectedItem=listSetStripVlan[countNumber-1];
-												obj.arraySetStripVlan[ye] = new Array();
-												for(j=0;j<listSetStripVlan.length;j++){	
-													obj.arraySetStripVlan[ye].push(listSetStripVlan[j]);
-												}
+												tb3.selectedItem=obj.setStripVlan[countNumber-1];
 											}
 											else{
-												tb3.selectedItem=listSetStripVlan[countNumber-1];
+												tb3.selectedItem=obj.setStripVlan[countNumber-1];
 											}
 										}
 									}
@@ -2495,8 +1957,7 @@
 						parentApplication.contSwitch++;
 					}
 				}	
-				
-				if(this.name.slice(0,12)=="Access Point"){
+				else if(this.name.slice(0,12)=="Access Point"){
 					checkifswitchopenflow=true;
 					ab = int(this.name.slice(13,15));
 					this.type = "Access Point";
@@ -2505,8 +1966,7 @@
 						parentApplication.contSwitch++;
 					}
 				}
-				
-				if(this.name.slice(0,3)=="Car"){
+				else if(this.name.slice(0,3)=="Car"){
 					checkifswitchopenflow=true;
 					ab = int(this.name.slice(4,6));
 					this.type = "Car";
@@ -2515,8 +1975,7 @@
 						parentApplication.contCar++;
 					}
 				}
-				
-				if(this.name.slice(0,8)=="Computer"){
+				else if(this.name.slice(0,8)=="Computer"){
 					var checkifcomputer:Boolean=true;
 					ab = int(this.name.slice(9,11));
 					this.type = "Computer";
@@ -2525,19 +1984,16 @@
 						parentApplication.contComputer++;
 					}
 				}
-				
-				if(this.name.slice(0,7)=="Station"){
+				else if(this.name.slice(0,7)=="Station"){
 					var checkifstation:Boolean=true;
 					ab = int(this.name.slice(8,10));
 					this.type = "Station";
 					this.nid = ab;
 					if(ab!=parentApplication.contStation){
 						parentApplication.contStation++;
-					}
-					
+					}					
 				}	
-				
-				if(this.name.slice(0,10)=="Controller"){
+				else if(this.name.slice(0,10)=="Controller"){
 					ab = int(this.name.slice(11,13));
 					this.type = "Controller";
 					this.nid = ab;
@@ -2546,15 +2002,12 @@
 					}
 				}	
 				
-				ye=ab;
-				//parentApplication.paraArray=objparaArrayCol;
 				for(var i:int=0;i<objparaArrayCol.length;i++){
 					var obj:objParameter=objparaArrayCol[i];
 					
 					if(this.name.slice(0,6)=="Switch"){
 						obj.nid = int(this.name.slice(7,9));
-						obj.type = "Switch";
-						
+						obj.type = "Switch";						
 					}	
 					
 					if(this.name.slice(0,12)=="Access Point"){
@@ -2622,9 +2075,7 @@
 							tb.maxChars=15;
 							tb.enabled=true;
 							tb.text="127.0.0.1";
-							//tb.text="127.0.0.1:663"+(parentApplication.contController+parentApplication.contSwitch+2);	
-							obj.arrayControllerIPAddress[ye] = new Array();
-							obj.arrayControllerIPAddress[ye][0] = tb.text;							
+							obj.controllerIPAddress = tb.text;							
 							lable.text=lable.text+" - "+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
@@ -2633,9 +2084,8 @@
 							tb.text="663"+(parentApplication.contController+2);
 							tb.width=60;
 							tb.maxChars=4;		
-							//obj.arrayControllerPort[ye] = new Array();
 							lable.text=lable.text+":"+tb.text;
-							obj.arrayControllerPort[ye] = tb.text;	
+							obj.controllerPort = tb.text;	
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="listeningPort"){
@@ -2643,15 +2093,9 @@
 							tb.enabled=true;
 							tb.width=60;
 							tb.maxChars=5;			
-							//if(ab<10)
-							//tb.text="00:00:00:00:00:0"+ab;
-							//else
-							//tb.text="00:00:00:00:00:"+ab;
 							tb.text="667"+(parentApplication.contSwitch+2);							
 							parentApplication.getValueListenPort.push(tb.text);														
-							obj.arrayListenPortSwitch1[ye]=tb.text;
-							obj.arrayListenPortSwitch = parentApplication.getValueListenPort;
-							//lable.text=lable.text+":"+tb.text;
+							obj.listenPortSwitch = tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="ssid"){
@@ -2661,8 +2105,7 @@
 							tb.maxChars=10;		
 							tb.text="new-ssid"+this.nid;
 							parentApplication.getValueRouterSSID.push(tb.text);														
-							obj.arrayRouterSSID1[ye]=tb.text;
-							obj.arrayRouterSSID = parentApplication.getValueRouterSSID;
+							obj.ssid = tb.text;
 							lable.text=lable.text+":"+tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
@@ -2670,12 +2113,16 @@
 							frmItem.label = "Signal Range";
 							tb.enabled=true;
 							tb.width=60;
-							tb.maxChars=5;		
-							tb.text="18"
+							tb.maxChars=5;	
+							if(this.id == "Access Point"){
+								tb.text="33";
+							}
+							else{
+								tb.text="18";
+							}
 	   						parentApplication.getValueSignalRange.push(tb.text);														
-							obj.range1[ye]=tb.text;
+							obj.range = tb.text;
 							this.range=parseInt(tb.text);
-							obj.range = parentApplication.getValueSignalRange;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="IPAddress"){
@@ -2685,9 +2132,7 @@
 							tb.text="10.0.0."+ab;
 							lable.text=lable.text+" - "+tb.text;
 							parentApplication.getValueIPAddress.push(tb.text);
-							obj.IPAddress1[ye]=tb.text;
-							
-							obj.IPAddress = parentApplication.getValueIPAddress;
+							obj.IPAddress = tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}
 						else if(obj.name=="MacAddress"){
@@ -2702,8 +2147,7 @@
 								parentApplication.getValueSwitchMacAddress.push(tb.text);
 							}							
 							parentApplication.getValueMacAddress.push(tb.text);
-							obj.MacAddress1[ye]=tb.text;
-							obj.MacAddress = parentApplication.getValueMacAddress;
+							obj.MacAddress = tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}	
 						else if(obj.name=="numberofradios"){
@@ -2711,7 +2155,7 @@
 							tb.width=30;
 							tb.maxChars=2;
 							tb.text="1"
-							obj.arrayNumberofRadios[ye]=tb.text;
+							obj.numberofRadios = tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 						}	
 						frmItem.addChild(tb);
@@ -2727,7 +2171,6 @@
 						tb2.selectedIndex=0;
 						frmItem.addChild(tb2);
 						tb2.addEventListener(Event.CHANGE,change);
-						//obj.par[i].value=tb2.value.toString();
 						form.addChild(frmItem);
 					}		
 					
@@ -2747,7 +2190,7 @@
 							rb.selected = true;
 							rb.group = radioButton;
 							frmItem.addChild(rb);
-							obj.arrayGetisRemote[ye] = rb.selected;								
+							obj.isRemote = rb.selected;								
 							rb.addEventListener(FlexEvent.UPDATE_COMPLETE, change);
 							form.addChild(frmItem);
 						}
@@ -2766,7 +2209,7 @@
 								tb3.selectedItem=parentApplication.getSwitch_;
 							frmItem.label = "Switch";
 							frmItem.addChild(tb3);
-							obj.arrayGetSwitch[ye] = tb3.selectedItem;	
+							obj.switchType = tb3.selectedLabel;	
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}
@@ -2778,7 +2221,7 @@
 							tb3.selectedIndex=0;
 							frmItem.label = "OpenFlow Version";
 							frmItem.addChild(tb3);
-							obj.arrayGetOpenFlowVersion[ye]=tb3.selectedItem;
+							obj.openFlowVersion = tb3.selectedLabel;
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}
@@ -2790,7 +2233,7 @@
 							tb3.selectedIndex=0;
 							frmItem.label = "Channel";
 							frmItem.addChild(tb3);
-							obj.arrayGetChannel[ye]=tb3.selectedItem;
+							obj.channel = tb3.selectedLabel
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}
@@ -2802,7 +2245,7 @@
 							tb3.selectedIndex=2;
 							frmItem.label = "Mode";
 							frmItem.addChild(tb3);
-							obj.arrayGetMode[ye]=tb3.selectedItem;
+							obj.mode = tb3.selectedLabel;
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
 							form.addChild(frmItem);
 						}
@@ -2814,7 +2257,7 @@
 							tb3.selectedIndex=-1;
 							frmItem.label = "Openflow Controller";
 							frmItem.addChild(tb3);
-							obj.arrayOpenflowController[ye]=tb3.selectedItem;
+							obj.openflowController=tb3.selectedLabel;
 							tb3.addEventListener(Event.CHANGE,change);
 							form.addChild(frmItem);
 						}
@@ -2826,7 +2269,7 @@
 							tb3.selectedIndex=0;
 							frmItem.label = "Mask"; 
 							frmItem.addChild(tb3);
-							obj.MaskAddress[ye] = tb3.selectedItem;	
+							obj.MaskAddress = tb3.selectedLabel;	
 							tb3.addEventListener(FlexEvent.UPDATE_COMPLETE,change);													
 							form.addChild(frmItem);
 						}
@@ -2856,7 +2299,6 @@
 			
 			public function listnerAddHandler():void {
 				this.removeEventListener(MouseEvent.CLICK,down2);
-				//this.removeEventListener(MouseEvent.MOUSE_DOWN,down2);
 				this.removeEventListener(MouseEvent.MOUSE_UP,up2);
 				this.addEventListener(MouseEvent.MOUSE_DOWN,down);
 				this.addEventListener(MouseEvent.MOUSE_UP,stopdrag);
@@ -2870,7 +2312,6 @@
 				this.removeEventListener(MouseEvent.MOUSE_MOVE,mymove);
 				this.addEventListener(MouseEvent.MOUSE_MOVE,mmove);
 				this.addEventListener(MouseEvent.CLICK,down2);
-				//this.addEventListener(MouseEvent.MOUSE_DOWN,down2);
 				this.addEventListener(MouseEvent.MOUSE_UP,up2);
 			}
 			
@@ -2934,13 +2375,13 @@
 			}				
 			
 			private function addChildToPanel():void {
-				if (this.name.slice(0,12) == "Access Point" || this.name.slice(0,7) == "Station" || this.name.slice(0,3) == "Car"){
+				if (this.id == "Access Point" || this.id == "Station" || this.id == "Car"){
 					var r:int = 0;
 					if (this.name.slice(0,12) == "Access Point"){
 						r = 33;
 						circle.graphics.beginFill(0x1858FE, 0.4);
 					}
-					else if (this.name.slice(0,7) == "Station" || this.name.slice(0,3) == "Car"){
+					else if (this.id == "Station" || this.id == "Car"){
 						r = 18;
 						circle.graphics.beginFill(0x428357, 0.4);
 					}						
@@ -2952,7 +2393,7 @@
 			
 			private function updateCircle():void {
 				circle.graphics.clear();
-				if(this.type=='Station' || this.type=='Car'){
+				if(this.id=='Station' || this.id=='Car'){
 					circle.graphics.beginFill(0x428357, 0.4);
 				}
 				else{

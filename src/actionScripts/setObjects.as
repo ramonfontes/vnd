@@ -58,14 +58,11 @@ public function setobject(eve:Event):void {
 		}
 		popup_ob.Configurationpanel1.removeAllChildren();
 		
-		var qos:Object=qos1;
 		var queue:Object=accessQueue;
 		var pg:Object=eve.target.can;
 		
 		pg.visible=true;
 		pg.includeInLayout=true;
-		qos.visible=true;
-		qos.includeInLayout=true;
 		queue.visible=true;
 		queue.includeInLayout=true;
 		
@@ -74,12 +71,6 @@ public function setobject(eve:Event):void {
 		popup_ob.Configurationpanel.selectedChild=popup_ob.canvasconfig;
 		
 		names = new Array();
-		for(i=0; i<allnames.length; i++){
-			objpar1.qosname[i]=allnames[i];
-				
-			qos1.objparaArrayCol.addItem(objpar1);
-			accessQueue.objparaArrayCol.addItem(objpar1);
-		}
 	}
 }
 

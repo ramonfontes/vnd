@@ -5,8 +5,7 @@ import mx.managers.CursorManager;
 public var src:String;
 public var dst:String;
 private var source:String;
-private var srcPort:int=0;
-public var target:Object; 
+public var targetSrc:Object; 
 
 private function mdown(event:MouseEvent):void {
 	
@@ -14,21 +13,18 @@ private function mdown(event:MouseEvent):void {
 		    var lin:Object=linksArrayCollection[linkCombo.selectedIndex];
 			line=new Link(lin.color); 
 			line._objectSrc = event.target.id;
-			target = event.target;
+			targetSrc = event.target;
 			
 			if(line._objectSrc=="Computer"){
 				source="Computer";
-				srcPort = event.target.iface++;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Station"){
 				source="Station";
-				srcPort = event.target.iface++;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Car"){
 				source="Car";
-				srcPort = event.target.iface++;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Smartphone"){
@@ -37,21 +33,16 @@ private function mdown(event:MouseEvent):void {
 			}
 			else if(line._objectSrc=="Access Point"){
 				source="Access Point";
-				event.target.iface++;
-				srcPort = event.target.iface;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Switch"){
 				source="Switch";
-				event.target.iface++;
-				srcPort = event.target.iface;
 				cont_click++;
 			}
 			else if(line._objectSrc=="Controller"){
 				source="Controller";
 				cont_click++;
-			}
-			
+			}			
 
 			for(var z:int=0;z<lin.par.length;z++){
 		        var objpar:objParameter=new objParameter();
@@ -77,15 +68,14 @@ private function mdown(event:MouseEvent):void {
         
        
 private function mUp(event:MouseEvent):void {
-	var bool:Object=event.target; 
+	var targetDst:Object=event.target; 
 	var objs:Array=dropCanvas.getChildren();
 	var label:String;
 	var iface_:String;
 	var dstPort:int;
-	dst=event.target.id;	
+	dst=targetDst.id;	
 	
-	
-	if(bool==obj||src=="Computer"&&dst=="Controller"||src=="Controller"&&dst=="Computer"
+	if(targetDst==obj||src=="Computer"&&dst=="Controller"||src=="Controller"&&dst=="Computer"
 		||(String(line)=="wireless"&&src=="Controller")||(String(line)=="wireless"&&dst=="Controller")
 			||(String(line)=="wireless"&&dst=="Switch")||(String(line)=="wireless"&&src=="Switch")
 			||src=="Smartphone"&&dst=="Computer"||dst=="Smartphone"&&src=="Computer"
@@ -113,7 +103,7 @@ private function mUp(event:MouseEvent):void {
 		 if(line!=null){ 
 			line.lineName=String(line);
 			line.can.lineName=line.lineName;
-			line._objectDst = event.target.id;
+			line._objectDst = targetDst.id;
 			
 			if((source=="Switch" || source=="Access Point") && dst!="Controller" && String(line) != "wireless"){
 				if (src == "Access Point"){
@@ -124,33 +114,49 @@ private function mUp(event:MouseEvent):void {
 					label = "s";
 					iface_ = "eth";
 				}
-				line.srcPort=srcPort;
+				targetSrc.iface++;
+				line.srcPort=targetSrc.iface;
 				line.can.sourcePort=line.srcPort;
 				//getInterfaces.push(label+np+iface_+srcPort);
 				
 				if (dst == "Station"){
 					label = "sta";
 					iface_ = "wlan";
+					dstPort = targetDst.iface++; 
 				}
 				else if (dst == "Computer"){
 					label = "h";
 					iface_ = "eth";
+					dstPort = targetDst.iface++;
 				}
-				dstPort = event.target.iface++; 				
+				else if (dst == "Switch"){
+					label = "s";
+					iface_ = "eth";
+					targetDst.iface++; 
+					dstPort = targetDst.iface;	
+				}
+				else if (dst == "Access Point"){
+					label = "ap";
+					iface_ = "eth";
+					targetDst.iface++;	
+					dstPort = targetDst.iface; 
+				}				
+							
 				//getInterfaces.push(label+np+iface_+dstPort);
-				line.dstPort=dstPort;
+				line.dstPort = dstPort;
 				line.can.destinationPort=line.dstPort;	
 				line._checkSource=true;
 			}
-			else if((source=="Switch" || source=="Access Point") && dst!="Controller" && String(line) != "wireless"){
-				target.iface--;
-			}
 			else if(source=="Access Point" && (dst=="Station" || dst=="Car")  && String(line)=="wireless"){
-				line.srcPort=srcPort;
+				if(targetSrc.wirelessExists == false){
+					targetSrc.iface++;
+					targetSrc.wirelessExists = true;
+				}
+				line.srcPort=targetSrc.iface;
 				line.can.sourcePort=line.srcPort;
 				//getInterfaces.push("ap"+np+"-wlan"+srcPort);
 				
-				dstPort = event.target.iface++; 					
+				dstPort = targetDst.iface++; 					
 				//getInterfaces.push("sta"+np+"-wlan"+dstPort);
 				line.dstPort=dstPort;
 				line.can.destinationPort=line.dstPort;	
@@ -158,45 +164,49 @@ private function mUp(event:MouseEvent):void {
 				
 			}	
 			else if((source=="Station" || source=="Car") && dst=="Access Point" && String(line)=="wireless"){
-				line.srcPort=srcPort;
+				line.srcPort=targetSrc.iface++;
 				line.can.sourcePort=line.srcPort;
 				//getInterfaces.push("sta"+np+"-wlan"+srcPort);
 				
-				dstPort = event.target.iface++; 				
+				if(targetDst.wirelessExists == false){
+					targetDst.iface++;
+					targetDst.wirelessExists = true;
+				}
+				dstPort = event.target.iface; 				
 				//getInterfaces.push("ap"+np+"-wlan"+dstPort);
 				line.dstPort=dstPort;
 				line.can.destinationPort=line.dstPort;	
 				line._checkSource=true;
-			}	
+			}
+	
 			else if((source=="Station" || source=="Computer") && dst!="Controller" && String(line) != "wireless"){
-				if(dst == "Station"){
+				if(src == "Station"){
 					label = "sta";
 					iface_ = "wlan";
 				}
-				else if(dst == "Computer"){
+				else if(src == "Computer"){
 					label = "h";
 					iface_ = "eth";
 				}				
-				line.srcPort=srcPort; 
+				line.srcPort=targetSrc.iface++; 
 				line.can.sourcePort=line.srcPort;
 				//getInterfaces.push(label+np+iface_+srcPort);
 				
-				if(src == "Access Point"){
+				if(dst == "Access Point"){
 					label = "ap";
 					iface_ = "eth";
 				}
-				else if(src == "Switch"){
+				else if(dst == "Switch"){
 					label = "s";
 					iface_ = "eth";
 				}
-				event.target.iface++; 
-				dstPort = event.target.iface; 	
+				targetDst.iface++; 
+				dstPort = targetDst.iface; 	
 				//getInterfaces.push(label+np+iface_+dstPort);
 				line.dstPort=dstPort;
 				line.can.destinationPort=line.dstPort;	
 				line._checkSource=true;
-			}
-				
+			}				
 
 			saveCurrentState(event);
 			line.lineLength=event.target.x+(event.target.width)/2;
@@ -204,7 +214,7 @@ private function mUp(event:MouseEvent):void {
 			obj.addToStartArray(line);
 			event.target.addToEndArray(line);
 			var targ = event.target
-			line.can.destination=targ;//destination object
+			line.can.destination=targ;
 			
             if(focusobject!=null){
 		        focusobject.removeFoc();
@@ -216,7 +226,6 @@ private function mUp(event:MouseEvent):void {
 			dropCanvas.setChildIndex(line,0);
             CursorManager.removeAllCursors();
             objectsTree.dragEnabled=true;
-        	//networkTree.dragEnabled=true;
             setNetworkTree();
             line.addEventListener(MouseEvent.MOUSE_DOWN,setobject);
             line.addEventListener(MouseEvent.MOUSE_DOWN,saveCurrentState);

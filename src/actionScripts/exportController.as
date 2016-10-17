@@ -1,6 +1,6 @@
 import action_alert.HAlert;
 import action_alert.HMensagens;
-
+import mx.controls.Alert;
 import flash.events.Event;
 import flash.events.ProgressEvent;
 import flash.net.FileReference;
@@ -23,173 +23,115 @@ public function exportControllerScriptFile():void {
 	var i:int;
 	var b:int;
 	var p:int;
-		
-	//CHECK VALUES;
-	//----------------------------------------------------------------------
-	for(p=0;p<dropCanvas.numChildren;p++){	
-		var UIob:Object = dropCanvas.getChildAt(p);
-		if(UIob.className =='objects'){
-			var ob:objects=UIob as objects;		
-			var obb:Object=ob;
-			for(var ir:int=0;ir<(obb.objparaArrayCol.length);ir++){
-				obj=obb.objparaArrayCol[ir] as objParameter;	
-				if(ob.id=="Computer"){
-					ab = int(ob.name.slice(9,11));
-					ye=ab;
-				}
-				else if(ob.id=="Switch"){
-					ab = int(ob.name.slice(7,9));
-					ye=ab;
-				}
-				else if(ob.id=="Access Point"){
-					ab = int(ob.name.slice(13,15));
-					ye=ab;
-				}
-				else if(ob.id=="Controller"){
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-				}
-														
-				for(p=0;p<dropCanvas.numChildren;p++){	
-					UIob = dropCanvas.getChildAt(p);
-					if(UIob.className =='objects'){
-						ob=UIob as objects;		
-						obb=ob;
-						for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
-							obj=obb.objparaArrayCol[ir] as objParameter;	
-							if(ob.id=="Computer"){
-								ab = int(ob.name.slice(9,11));
-								ye=ab;
-							}
-							else if(ob.id=="Switch"){
-								ab = int(ob.name.slice(7,9));
-								ye=ab;
-							}
-							else if(ob.id=="Access Point"){
-								ab = int(ob.name.slice(13,15));
-								ye=ab;
-							}
-							else if(ob.id=="Controller"){
-								ab = int(ob.name.slice(11,13));
-								ye=ab;
-							}
-						}
-					}
-				}
-			}
-		}
-	}				
-	//----------------------------------------------------------------------
-	//----------------------------------------------------------------------
+	
 	for(var j:int=0;j<dropCanvas.numChildren;j++){	
 		intnew=1;
-		UIob = dropCanvas.getChildAt(j);
+		var UIob:Object = dropCanvas.getChildAt(j);
 		if(UIob.className =='objects'){
-			ob=UIob as objects;					
+			var ob:objects=UIob as objects;					
 				if(ob.id=="Controller"){
 					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					obb=ob;
+					var obb:Object=ob;
 					
 					for(i=0;i<(obb.objparaArrayCol.length);i++){
 						var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
-						var canew:String = String(obj.arrayFlowName);
+						var canew:String = String(obj.flowName);
 						if(canew!="")
-							intnew = int(obj.arrayFlowName[ye].length);
+							intnew = int(obj.flowName.length);
 					}
 					
 					for(b=0;b<intnew;b++){
 						for(var o:int=0;o<(obb.objparaArrayCol.length);o++){
 							obj=obb.objparaArrayCol[o] as objParameter;	
 							if(obj.name=="flowName"){
-								flowName = obj.arrayFlowName[ye][b];
+								flowName = obj.flowName[b];
 							}
 							else if(obj.name=="macSwitch"){
-								mac_Switch = "00:00:"+obj.arrayMac_Switch[ye][b];											
+								mac_Switch = "00:00:"+obj.mac_Switch[b];											
 							}	
 							else if(obj.name=="controllerIPAddress"){
-								controllerIPAddress = obj.arrayControllerIPAddress[ye][0];	
+								controllerIPAddress = obj.controllerIPAddress;	
 							}											
 							else if(obj.name=="controllerPort"){
-								controllerPort = obj.arrayControllerPort[ye];	
+								controllerPort = obj.controllerPort;	
 							}										
 							else if(obj.name=="macSource"){
-								macSource = String(obj.arrayMacSource[ye][b]);										
+								macSource = String(obj.macSource[b]);										
 							}
 							else if(obj.name=="macDestination"){
-								macDestination = String(obj.arrayMacDestination[ye][b]);	
+								macDestination = String(obj.macDestination[b]);	
 							}
 							else if(obj.name=="ingressPort"){
-								ingressPort = String(obj.arrayIngressPort[ye][b]);										
+								ingressPort = String(obj.ingressPort[b]);										
 							}
 							else if(obj.name=="sourcePort"){
-								sourcePort = obj.arraySrcPort[ye][b];										
+								sourcePort = obj.srcPort[b];										
 							}
 							else if(obj.name=="destinationPort"){
-								destinationPort = obj.arrayDstPort[ye][b];										
+								destinationPort = obj.dstPort[b];										
 							}
 							else if(obj.name=="priority"){
-								priority = String(obj.arrayPriority[ye][b]);										
+								priority = String(obj.priority[b]);										
 							}											
 							else if(obj.name=="vlanID"){
-								vlanID = String(obj.arrayVlanID[ye][b]);													
+								vlanID = String(obj.vlanID[b]);													
 							}											
 							else if(obj.name=="vlanPriority"){
-								vlanPriority = obj.arrayVlanPriority[ye][b];
+								vlanPriority = obj.vlanPriority[b];
 							}
 							else if(obj.name=="ipSource"){
-								ipSource = String(obj.arrayIpSource[ye][b]);
+								ipSource = String(obj.ipSource[b]);
 							}
 							else if(obj.name=="ipDestination"){
-								ipDestination = String(obj.arrayIpDestination[ye][b]);	
+								ipDestination = String(obj.ipDestination[b]);	
 							}
 							else if(obj.name=="tos"){
-								tos = obj.arrayTos[ye][0];											
+								tos = obj.TOS[b];											
 							}
 							else if(obj.name=="ethtype"){
-								ethtype = obj.arrayEthType[ye][0];											
+								ethtype = obj.ethType[b];											
 							}
 							else if(obj.name=="protocol"){
-								protocol = obj.arrayProtocol[ye][0];											
+								protocol = obj.protocol[b];											
 							}
 							else if(obj.name=="setVLANPriority"){
-								setVLANPriority = obj.arraySetVLANPriority[ye][b];													
+								setVLANPriority = obj.setVLANPriority[b];													
 							}
 							else if(obj.name=="setSourcePort"){
-								setSourcePort = obj.arraySetSourcePort[ye][b];
+								setSourcePort = obj.setSourcePort[b];
 							}
 							else if(obj.name=="setDestinationPort"){
-								setDestinationPort = obj.arraySetDestinationPort[ye][b];	
+								setDestinationPort = obj.setDestinationPort[b];	
 							}
 							else if(obj.name=="setVlanID"){
-								setVlanID = String(obj.arraySetVlanID[ye][b]);	
+								setVlanID = String(obj.setVlanID[b]);	
 							}
 							else if(obj.name=="setIPSource"){
-								setIPSource = String(obj.arraySetIPSource[ye][b]);													
+								setIPSource = String(obj.setIPSource[b]);													
 							}
 							else if(obj.name=="setIPDestination"){
-								setIPDestination = String(obj.arraySetIPDestination[ye][b]);
+								setIPDestination = String(obj.setIPDestination[b]);
 							}
 							else if(obj.name=="setMACSource"){
-								setMACSource = String(obj.arraySetMACSource[ye][b]);	
+								setMACSource = String(obj.setMACSource[b]);	
 							}
 							else if(obj.name=="setMACDestination"){
-								setMACDestination = String(obj.arraySetMACDestination[ye][b]);	
+								setMACDestination = String(obj.setMACDestination[b]);	
 							}
 							else if(obj.name=="setTOS"){
-								setTOS = obj.arraySetTOS[ye][b];
+								setTOS = obj.setTOS[b];
 							}
 							else if(obj.name=="setEnqueue"){
-								setEnqueue = obj.arraySetEnqueue[ye][b];
+								setEnqueue = obj.setEnqueue[b];
 							}
 							else if(obj.name=="setStripVlan"){
-								setStripVlan = String(obj.arraySetStripVlan[ye][b]);
+								setStripVlan = String(obj.setStripVlan[b]);
 							}
 							else if(obj.name=="setOutput"){
-								setOutput = String(obj.arraySetOutput[ye][b]);
+								setOutput = String(obj.setOutput[b]);
 							}
 							else if(obj.name=="openflowController"){
-								var oc:String=obj.arrayOpenflowController[ye];
+								var oc:String=obj.openflowController;
 							}											
 							else if(obj.name=="notes"){
 								if(oc=="mul"&&counter==0){
@@ -1049,366 +991,4 @@ public function exportControllerScriptFile():void {
 		//fileRefScript.download(new URLRequest("./scripts/"+chave+".sh"));
 		downloadScript();
 		}				
-}
-
-public function exportControllerScriptFileQoS():void {
-	var objSend:Object = new Object;
-	var temp_openflow_controller:ArrayCollection=new ArrayCollection();
-	var objetos:Object=new Object();
-	var objeto_openflow_controller:Object=new Object();
-	var counter:int=0;
-	var counterqueue:int=0;
-	var counterqueue1:int=0;
-	var expo:Boolean=true;
-	var uniqcont:int=0;
-	var intnew:int;
-	//var fileRefScript:FileReference;
-	var i:int;
-	var ab:int;
-	var b:int;
-	
-	for(var p:int=0;p<dropCanvas.numChildren;p++){	
-		var UIob:Object = dropCanvas.getChildAt(p);
-		if(UIob.className =='objects'){
-			var ob:objects=UIob as objects;		
-			var obb:Object=ob;
-			for(var ir:int=0;ir<(obb.objparaArrayCol.length);ir++){
-				if(expo==true){
-				obj=obb.objparaArrayCol[ir] as objParameter;	
-				if(ob.id=="Controller"){
-					ab = int(ob.name.slice(11,13));
-					ye=ab;
-					
-					for(i=0;i<obb.objparaArrayCol.length;i++){
-						var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
-					}
-					
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];
-						var canew:int = obj.arrayqosName.length;						
-					}
-					
-					if(canew==0){
-						//expo=false;
-						//HAlert.erro(HMensagens.setqos+" for "+ob.name);
-					}
-					
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];
-						canew = obj.arrayqueueName.length;
-					}
-					
-					if(canew==0){
-						//expo=false;
-						//HAlert.erro(HMensagens.setqueue+" for "+ob.name);
-					}
-					
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];
-						canew = obj.arrayqueueInterface.length;						
-					}
-					
-					if(canew==0){
-						//expo=false;
-						//HAlert.erro(HMensagens.setqueueInterface+" for "+ob.name);
-					}
-				}
-			}
-			}
-		}
-	}
-	
-	if(expo==true){
-	//CHECK VALUES
-	//----------------------------------------------------------------------
-	for(p=0;p<dropCanvas.numChildren;p++){	
-		UIob = dropCanvas.getChildAt(p);
-		if(UIob.className =='objects'){
-			ob=UIob as objects;	
-			obb=ob;
-			if(ob.id=="Controller"){
-				uniqcont++;
-				ab = int(ob.name.slice(11,13));
-				ye=ab;
-				for(i=0;i<obb.objparaArrayCol.length;i++){
-					obj=obb.objparaArrayCol[i] as objParameter;
-				}		
-				for(var o:int=0;o<obb.objparaArrayCol.length;o++){
-					obj=obb.objparaArrayCol[o] as objParameter;					
-					if(obj.name=="controllerIPAddress"){
-						var controllerIPAddress:String = obj.arrayControllerIPAddress[ye][0];						
-					}
-					else if(obj.name=="openflowController"){
-						var oc:String=obj.arrayOpenflowController[ye];
-					}
-				}		
-				if(uniqcont==1){					
-				for(i=0;i<qos1.objparaArrayCol.length;i++){
-					obj=qos1.objparaArrayCol[i];
-					canew = obj.arrayqueueInterface.length;
-					if(canew!=0)
-						intnew = obj.arrayqueueInterface.length;
-				}
-				
-				for(b=0;b<intnew;b++){
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];			
-						if(counterqueue==0){
-							counterqueue++;
-							sh2 = "#Script created by VND - Visual Network Description @@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);
-							counterqueue++;
-							sh2 = "####################################################@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);
-							counterqueue++;
-							sh2 = "#QoS Configuration @@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);							
-							counterqueue++;
-							sh2 = "####################################################@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);	
-							counterqueue++;
-							sh2 = "#You can start floodlight controller with command: ant; ./floodlight.sh inside the directory .../apps/floodlight-qos-beta/@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);
-							counterqueue++;
-							sh2 = "#You must enable QoS with ./qosmanager2.py" +
-								" -e inside the directory /floodlight/apps/floodlight-qos-beta/apps/qos\n@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);
-							counterqueue++;
-							sh2 = "@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);
-						}						
-						if(obj.qosname[i]=="interface"){
-							counterqueue++;
-							if(obj.arrayqueueInterface[b]!=""&&counterqueue==8){
-								sh2 = ("ovs-vsctl -- set Port "+obj.arrayqueueInterface[b]+" qos=@newqos \\ @@");		
-							}
-							else if(obj.arrayqueueInterface[b]){
-								sh2 = ("-- set Port "+obj.arrayqueueInterface[b]+" qos=@newqos \\ @@");		
-							}
-								
-						}						
-					}
-					objeto_openflow_controller=sh2;
-					temp_openflow_controller.addItem(objeto_openflow_controller);	
-				}
-				
-				for(i=0;i<qos1.objparaArrayCol.length;i++){
-					obj=qos1.objparaArrayCol[i];
-					canew = obj.arrayqueueName.length;
-					if(canew!=0)
-						intnew = int(obj.arrayqueueName.length);
-				}
-				for(b=0;b<intnew;b++){
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];						
-						if(b==0&&obj.qosname[i]=="queuename"){
-							counterqueue1++;
-							sh2 = "-- --id=@newqos create QoS type=linux-htb ";
-							if(obj.arrayqueueIfaceMinRate!=""&&obj.arrayqueueIfaceMinRate!="")
-								sh2=sh2.concat("other-config:min-rate="+obj.arrayqueueIfaceMinRate+" ");
-							if(obj.arrayqueueIfaceMaxRate!=""&&obj.arrayqueueIfaceMaxRate!="")
-								sh2=sh2.concat("other-config:max-rate="+obj.arrayqueueIfaceMaxRate+" ");
-							sh2=sh2.concat("queues=0=@q0");
-						}						
-						if(obj.qosname[i]=="queuename"&&b>0){
-							if(obj.arrayqueueName[b]!=""){
-								sh2 = sh2.concat(","+b+"=@q"+b);	
-							}
-						}
-					}									
-				}
-				if(intnew!=0){
-				sh2=sh2.concat(" \\ @@");
-				objeto_openflow_controller=sh2;
-				temp_openflow_controller.addItem(objeto_openflow_controller);
-				}
-				
-				for(b=0;b<intnew;b++){
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];						
-						if(obj.qosname[i]=="queuename"){
-							counterqueue1++;
-							sh2 = "-- --id=@q"+b+" create Queue ";
-							if(obj.arrayqueueMinRate[b]!=null&&obj.arrayqueueMinRate[b]!="")
-								sh2=sh2.concat("other-config:min-rate="+obj.arrayqueueMinRate[b]+" ");
-							if(obj.arrayqueueMaxRate[b]!=null&&obj.arrayqueueMaxRate[b]!="")
-								sh2=sh2.concat("other-config:max-rate="+obj.arrayqueueMaxRate[b]+" ");
-							sh2=sh2.concat("\\ @@");
-							if(b+1==intnew)
-								sh2=sh2.substring(0, sh2.length-4)+"@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);							
-						}
-					}
-				}
-				
-				for(i=0;i<qos1.objparaArrayCol.length;i++){
-					obj=qos1.objparaArrayCol[i];
-					canew = obj.arrayqosName.length;
-					if(canew!=0)
-						intnew = obj.arrayqosName.length;
-				}
-				for(b=0;b<intnew;b++){
-					for(i=0;i<qos1.objparaArrayCol.length;i++){
-						obj=qos1.objparaArrayCol[i];						
-						if(oc=="floodlight"&&counter==0){							
-							counter++;
-							sh2 = "@@";
-							objeto_openflow_controller=sh2;
-							temp_openflow_controller.addItem(objeto_openflow_controller);
-						}
-						
-						
-						if(oc=="floodlight"){
-						//counter++;
-								
-						if(obj.qosname[i]=="name"&&expo==true){
-							counter++;
-							if(obj.arrayqosName[b]!=""){
-							sh2 = "./qospath2.py ";		
-							sh2 = sh2.concat("--add ");								
-							sh2 = sh2.concat("--name ");
-							sh2 = sh2.concat(obj.arrayqosName[b]+" ");
-							}
-							else if(obj.arrayqosName[b]==""){								
-							//	HAlert.erro(HMensagens.qosNamee+" for "+ob.name);
-								//expo=false;
-							}
-						}
-						
-						if(obj.qosname[i]=="ipsrc"&&expo==true){
-							if(obj.arrayqosSourceIP[b]!=""){
-							sh2 = sh2.concat("-S "+obj.arrayqosSourceIP[b]+" ");
-							//sh2 = sh2.concat("\"ip-src\":\""+obj.arrayqosSourceIP[ye][b]+"\",");	
-							}
-							else if(obj.arrayqosSourceIP[b]==""){								
-							//	HAlert.erro(HMensagens.qosipsrc+" for "+ob.name);
-							//	expo=false;
-							}
-						}	
-						if(obj.qosname[i]=="ipdst"&&expo==true){
-							if(obj.arrayqosDestinationIP[b]!=""){
-							sh2 = sh2.concat("-D "+obj.arrayqosDestinationIP[b]+" ");
-							//sh2 = sh2.concat("\"ip-dst\":\""+obj.arrayqosDestinationIP[ye][b]+"\", ");	
-							}
-							else if(obj.arrayqosDestinationIP[b]==""){								
-							//	HAlert.erro(HMensagens.qosipdst+" for "+ob.name);
-							//	expo=false;
-							}
-						}
-						
-						if(obj.qosname[i]=="sw"){												
-						}	
-						if(obj.qosname[i]=="ethtype"&&expo==true){							
-							if(obj.arrayqosEthType[b]!=""){							
-								sh2 = sh2.concat("--json ");							
-								sh2 = sh2.concat("'{");							
-								sh2 = sh2.concat("\"eth-type\":\""+obj.arrayqosEthType[b]+"\",");
-							}
-							else if(obj.arrayqosEthType[b]==""){								
-							//	HAlert.erro(HMensagens.qosethtype+" for "+ob.name);
-							//	expo=false;
-							}
-						}
-						if(obj.qosname[i]=="priority"&&expo==true){
-							if(obj.arrayqosPriority[b]!=""){							
-								sh2 = sh2.concat("\"priority\":\""+obj.arrayqosPriority[b]+"\",");
-							}
-							else if(obj.arrayqosPriority[b]==""){								
-								//	HAlert.erro(HMensagens.qosProtocol+" for "+ob.name);
-								//	expo=false;
-							}
-						}
-						if(obj.qosname[i]=="protocol"&&expo==true){
-							if(obj.arrayqosProtocol[b]!=""){							
-								sh2 = sh2.concat("\"protocol\":\""+obj.arrayqosProtocol[b]+"\",");
-							}
-							else if(obj.arrayqosProtocol[b]==""){								
-							//	HAlert.erro(HMensagens.qosProtocol+" for "+ob.name);
-							//	expo=false;
-							}
-						}
-						if(obj.qosname[i]=="queue"&&obj.arrayqosQueue[b]!=""){
-							if(obj.arrayqosQueue[b]!=""){
-								sh2 = sh2.concat("\"queue\":\""+obj.arrayqosQueue[b]+"\",");
-							}
-							else if(obj.arrayqosQueue[b]==""){								
-							//	HAlert.erro(HMensagens.qosqueue+" for "+ob.name);
-							//	expo=false;
-							}
-						}
-						if(obj.qosname[i]=="ingress-port"&&obj.arrayqosIngressPort[b]!=""){
-							//sh2 = sh2.concat("\"ingress-port\":\""+obj.arrayqosIngressPort[ye][b]+"\",");	
-						}
-						if(obj.qosname[i]=="tos"&&obj.arrayqosTos[b]!=""){
-							//sh2 = sh2.concat("\"tos\":\""+obj.arrayqosTos[ye][b]+"\",");	
-						}
-						if(obj.qosname[i]=="vlanid"&&obj.arrayqosVlanID[b]!=""){
-							//sh2 = sh2.concat("\"vlan-id\":\""+obj.arrayqosVlanID[ye][b]+"\",");	
-						}
-						if(obj.qosname[i]=="ethsrc"&&obj.arrayqosSourceEth[b]!=""){
-							//sh2 = sh2.concat("\"eth-src\":\""+obj.arrayqosSourceEth[ye][b]+"\",");
-						}
-						if(obj.qosname[i]=="ethdst"&&obj.arrayqosDestinationEth[b]!=""){
-							//sh2 = sh2.concat("\"eth-dst\":\""+obj.arrayqosDestinationEth[ye][b]+"\",");
-						}
-						if(obj.qosname[i]=="srcport"&&obj.arrayqosSourcePort[b]!=""){
-							//sh2 = sh2.concat("\"src-port\":\""+obj.arrayqosSourcePort[ye][b]+"\",");
-						}
-						if(obj.qosname[i]=="dstport"&&obj.arrayqosDestinationPort[b]!=""){
-							//sh2 = sh2.concat("\"dst-port\":\""+obj.arrayqosDestinationPort[ye][b]+"\",");
-						}
-						
-						if((i+1)==qos1.objparaArrayCol.length){
-							sh2=sh2.substring(0, sh2.length-1);
-							sh2 = sh2.concat("}' ");
-							sh2 = sh2.concat("-c "+controllerIPAddress+" -p 8080@@");
-						}
-						}
-					}
-					objeto_openflow_controller=sh2;
-					temp_openflow_controller.addItem(objeto_openflow_controller);
-					//counter++;
-					//sh2 = "@@";
-					///objeto_openflow_controller=sh2;
-					//temp_openflow_controller.addItem(objeto_openflow_controller);
-				}
-			}
-		}
-	}
-	}
-	//----------------------------------------------------------------------
-	//----------------------------------------------------------------------
-	
-	if(expo==true){
-		counter++;
-		sh2 = "";
-		objeto_openflow_controller=sh2;
-		temp_openflow_controller.addItem(objeto_openflow_controller);
-		var rand:Number = Math.random();
-		var numeroRan:Number = Math.round(rand * 99999);
-		//var chave:String;
-		chave = "QoSCode"+String(numeroRan);
-		objSend.emptyspace=1;
-		objSend.chave=chave;
-		objSend.gtemp_openflow_controller=temp_openflow_controller;
-		objSend.count=(counter+counterqueue+counterqueue1);
-		createscript_controller.send(objSend);
-		fileRefScript = new FileReference();
-		fileRefScript.addEventListener(Event.COMPLETE, SaveToLocalMachineResultScript);
-		fileRefScript.addEventListener(ProgressEvent.PROGRESS, downloading_progress);				
-		//var request:URLRequest = new URLRequest("./scripts/"+chave+".sh");
-		//fileRefScript.download(new URLRequest("./scripts/"+chave+".sh"));
-		//alertpy();		
-		downloadScript();
-		//Alert.show(chave);
-	}				
-}
 }
