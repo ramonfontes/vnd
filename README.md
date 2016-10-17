@@ -46,4 +46,3 @@ If you want to run VND on locally, you have to install a Web Server, PHP (can be
 
 ## Miscellaneous
 Whether you want to colaborate with VND, you can reach me via email (ramonreisfontes@gmail.com).
-At the moment I am PhD Student (focusing on SDN and NFV, mainly) and unfortunately I can't continue working on VND. Therefore, let me know if you improve the code, please. ;)
