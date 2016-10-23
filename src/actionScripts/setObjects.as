@@ -4,7 +4,6 @@ import mx.collections.ArrayCollection;
 import mx.managers.PopUpManager;
 import mx.controls.Alert;
 public var aa:int=0;
-public var removeqospanel:Boolean=false;
 public var objpar1:objParameter = new objParameter();
 
 public function setobject(eve:Event):void {
@@ -18,11 +17,7 @@ public function setobject(eve:Event):void {
 		||eve.target.id=="Access Point"||eve.target.id=="Station"
 		||eve.target.id=="fiber"||eve.target.id=="ethernet"
 		||eve.target.id=="wireless"||eve.target.id=="Smartphone"){
-		removeqospanel=true;
 	}
-	else
-		removeqospanel=true;
-	
 	
 	aa++;
 	if(ViewBool){		
@@ -46,30 +41,21 @@ public function setobject(eve:Event):void {
 	}
 	else{  
 		if (eve.target.id!="Station" && eve.target.id!="Access Point" && eve.target.id!="Car"){
-		removefocusforView();
-		if(focusobject!=null){
-			focusobject.removeFoc();
+			removefocusforView();
+			if(focusobject!=null){
+				focusobject.removeFoc();
+			}
+			popup_ob.Configurationpanel1.enabled;		
+			
+			focusobject=eve.target;
+			focusobject.setFoc();
 		}
-		popup_ob.Configurationpanel1.enabled;		
-		//popup_ob.Qospanel.enabled;
-		
-		focusobject=eve.target;
-		focusobject.setFoc();
-		}
-		popup_ob.Configurationpanel1.removeAllChildren();
-		
-		var queue:Object=accessQueue;
-		var pg:Object=eve.target.can;
-		
+		popup_ob.Configurationpanel1.removeAllChildren();		
+		var pg:Object=eve.target.can;		
 		pg.visible=true;
-		pg.includeInLayout=true;
-		queue.visible=true;
-		queue.includeInLayout=true;
-		
-		popup_ob.Configurationpanel1.addChild(pg as DisplayObject);	
-		
-		popup_ob.Configurationpanel.selectedChild=popup_ob.canvasconfig;
-		
+		pg.includeInLayout=true;		
+		popup_ob.Configurationpanel1.addChild(pg as DisplayObject);			
+		popup_ob.Configurationpanel.selectedChild=popup_ob.canvasconfig;		
 		names = new Array();
 	}
 }
@@ -91,10 +77,6 @@ public function setobject2(ob:Object):void {
 		names = new Array();
 		for(var i:int=0; i<allnames.length; i++){
 			var arr:ArrayCollection=focusobject.objparaArrayCol as ArrayCollection;
-			for(var x:int = 0;x<arr.length;x++){
-				if( arr[x].id=='qosinstance' && allnames[i] == arr[x].name)
-					names.push(allnames[i]);
-			}
 		}
 	}
 }

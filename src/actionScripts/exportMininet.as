@@ -142,45 +142,37 @@ public function exportMininetScriptFile():void {
 				var obLink:Link=UIob as Link;
 				if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"||obLink.can.lineName=="ethernet"){		
 					if(j==0){
-						if((obLink.can.source.id=="Station"&&(obLink.can.destination.id=="Station"))){
+						for(p=0;p<dropCanvas.numChildren;p++){	
+							intnew=1;
+							
+							UIob = dropCanvas.getChildAt(p);
+							if(UIob.className =='objects'){
+								ob=UIob as objects;	
+								if(ob.id=="Controller"){
+								for(i=0;i<(ob.objparaArrayCol.length);i++){
+									obj=ob.objparaArrayCol[i] as objParameter;
+								}		
+								for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
+									obj=ob.objparaArrayCol[ir] as objParameter;
+									
+									if(obj.name=="remoteLocal"){												
+										isRemote = obj.isRemote;	
+									}	
+								}
+								}
+							}
+						}
+						if(isRemote){
 							cont_mininet++;
-							sh = "    net = Mininet( )@@";
+							sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
 						else{
-							for(p=0;p<dropCanvas.numChildren;p++){	
-								intnew=1;
-								
-								UIob = dropCanvas.getChildAt(p);
-								if(UIob.className =='objects'){
-									ob=UIob as objects;	
-									if(ob.id=="Controller"){
-									for(i=0;i<(ob.objparaArrayCol.length);i++){
-										obj=ob.objparaArrayCol[i] as objParameter;
-									}		
-									for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
-										obj=ob.objparaArrayCol[ir] as objParameter;
-										
-										if(obj.name=="remoteLocal"){												
-											isRemote = obj.isRemote;	
-										}	
-									}
-									}
-								}
-							}
-							if(isRemote){
-								cont_mininet++;
-								sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
-								objeto_mininet=sh;
-								temp_mininet.addItem(objeto_mininet);
-							}
-							else{
-								cont_mininet++;
-								sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
-								objeto_mininet=sh;
-								temp_mininet.addItem(objeto_mininet);
-							}
+							cont_mininet++;
+							sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+							objeto_mininet=sh;
+							temp_mininet.addItem(objeto_mininet);
 						}
 					}
 				}
@@ -315,7 +307,6 @@ public function exportMininetScriptFile():void {
 
 				}
 				cont_mininet++;
-				
 				if(ob.id=="Car"){
 					sh = "    car"+ob.nid+" = net.addCar( 'car"+ob.nid+"', wlans="+arrayNumberOfRadios+", " +
 					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', position='"+ob.x+","+(1000-ob.y)+",0', " +
@@ -428,7 +419,7 @@ public function exportMininetScriptFile():void {
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}		
-			else if(ob.id=="Access Point"){				
+			else if(ob.id=="Access Point"){		
 				for(i=0;i<(ob.objparaArrayCol.length);i++){
 					obj=ob.objparaArrayCol[i] as objParameter;
 				}		
@@ -871,10 +862,12 @@ public function exportMininetScriptFile():void {
 		x = y;		
 	}
 	
-	cont_mininet++;
-	sh = "    net.plotGraph(max_x="+(x+20)+", max_y="+(y+20)+")@@";
-	objeto_mininet=sh;
-	temp_mininet.addItem(objeto_mininet);
+	if(isWireless){
+		cont_mininet++;
+		sh = "    net.plotGraph(max_x="+(x+20)+", max_y="+(y+20)+")@@";
+		objeto_mininet=sh;
+		temp_mininet.addItem(objeto_mininet);
+	}
 	cont_mininet++;
 	sh = "@@";
 	objeto_mininet=sh;

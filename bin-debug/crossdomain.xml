@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <cross-domain-policy>
-   <allow-http-request-headers-from domain="*" headers="*" secure="false" />
-   <allow-access-from domain="*" secure="false" />
+	<allow-http-request-headers-from
+		domain="*" headers="*" secure="false" />
+	<allow-access-from domain="*" secure="false" />
 </cross-domain-policy>

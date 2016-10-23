@@ -17,17 +17,11 @@
 					{label: "Open from local machine...", type: "normal",data:"upload"},
 					{label: "Save on local machine...", type: "normal",data:"save"},
 					
-					//{label: "Import Library file", children: [
-						//{label: "Import from Server...", type: "normal" ,data:"Import"},
-						//{label: "Export to server...", type: "normal",data:"Export"}, 
-					//]},
-					
 					{label: "Export", children: [						
 						{label: "Export to Mininet (or Mininet-WiFi)...", type: "normal",data:"ExportMininetScript"},						
 						{label: "Export to NS3 (under development)...", type: "normal",data:"ExportNS3"},
 						{label: "Export to NSDL File...", type: "normal" ,data:"Exportation"},
 						{label: "Export to Openflow Controller...", type: "normal",data:"ExportControllerScript"},
-						//{label: "Export to QoS...", type: "normal",data:"ExportControllerScriptQoS"},
 					]},
 					
 					{label: "Print Network Scenario...", type: "normal",data:"print"} 
@@ -51,31 +45,12 @@
 					{label: "Configuration", type: "normal",data:"",enabled: false}
 				]},
 				{label: "About", children: [
-					{label: "Code on GitHub",data:"code" },
-					{label: "Docker",data:"docker" },
-					{label: "Publications",data:"publications" },		
+					{label: "Source Code",data:"code" },
+					{label: "Docker",data:"docker" },		
 					{label: "Videos",data:"videos" },
 					{label: "About VND (SDN version)",data:"aboutvnd" }
 				]}
 				
-				
-				/*{label: "File", children: [
-				{label: "SubMenuItem A-1",children: [
-				{label: "SubMenuItem A-1" },
-				{label: "SubMenuItem A-2" } 
-				] },
-				{label: "SubMenuItem A-2", type: "normal",} 
-				]},
-				{label: "Edit", type: "check", toggled: true},
-				{label: "Options", type: "check", toggled: false},
-				{label: "MenuItem D", children: [
-				{label: "SubMenuItem D-1", type: "radio", 
-				groupName: "g1"},
-				{label: "SubMenuItem D-2", type: "radio", 
-				groupName: "g1", toggled: true}, 
-				{label: "SubMenuItem D-3", type: "radio", 
-				groupName: "g1"} 
-				]} */ 
 			];
 			private function menuHandler(event:MenuEvent):void {
 				if(event.item.data=='clear'){

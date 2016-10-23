@@ -14,35 +14,9 @@ public function clear():void{
 	 
 	 
 	 countNumber3=1;
-	 listqosScenarioMaxRate="";
-	 listqosScenarioMinRate="";
-	 listqosMaxRate = [];
-	 listqosMinRate = [];
-	 listqosInterface = [];
-	 listqosqosName = [];				
-	 listqosSwitch = [];
-	 listqosService = [];
-	 listqosQueue = [];
-	 listqosEnqueuePort = [];
-	 listqosPriority = [];
-	 listqosProtocol = [];
-	 listqosEthType = [];
-	 listqosIngressPort = [];
-	 listqosSourceIP = [];
-	 listqosDestinationIP = [];
-	 listqosTos = [];
-	 listqosVlanID = [];
-	 listqosEthSource = [];
-	 listqosEthDestination = [];
-	 listqosSourcePort = [];
-	 listqosDestinationPort = [];
-	 listQueueName = [];
-	 qoscont=0;
-	 queuecont=0;
 	 countNumber1=1;
 	 arrayContIfacesCheck=[];
-	 contSwitch=0;
-	 contComputer=0;			
+	 contSwitch=670;
 	 getValueListenPort=[];
 	 getValueRouterSSID=[]
 	 getValueStationSSID=[]

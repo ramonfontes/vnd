@@ -1107,8 +1107,7 @@
 								}					
 								tb.addEventListener(Event.CHANGE,change);
 								frmItem.addChild(tb);
-								form.addChild(frmItem);	
-		
+								form.addChild(frmItem);			
 							}								
 							else if(obj.id=='boolean'){
 								frmItem = new FormItem();
@@ -1426,8 +1425,7 @@
 									"macDestination"||obj.name=="ipDestination"||obj.name=="ipSource"||obj.name=="setIPSource"
 									||obj.name=="setIPDestination"||obj.name=="setMACDestination"||obj.name=="setMACSource"
 									||obj.name=="sourcePort"||obj.name=="setMACSource"||obj.name=="macSwitch"||obj.name=="setStripVlan"){
-									if(flowtab==1||exportControll==true){
-										
+									if(flowtab==1||exportControll==true){										
 										for(j=0;j<valueObjArr.length;j++){
 											if(obj.name==valueObjArr[j].id){
 												tb3 = new ComboBox();				
@@ -1971,27 +1969,18 @@
 					ab = int(this.name.slice(4,6));
 					this.type = "Car";
 					this.nid = ab;
-					if(ab!=parentApplication.contCar){
-						parentApplication.contCar++;
-					}
 				}
 				else if(this.name.slice(0,8)=="Computer"){
 					var checkifcomputer:Boolean=true;
 					ab = int(this.name.slice(9,11));
 					this.type = "Computer";
 					this.nid = ab;
-					if(ab!=parentApplication.contComputer){
-						parentApplication.contComputer++;
-					}
 				}
 				else if(this.name.slice(0,7)=="Station"){
 					var checkifstation:Boolean=true;
 					ab = int(this.name.slice(8,10));
 					this.type = "Station";
-					this.nid = ab;
-					if(ab!=parentApplication.contStation){
-						parentApplication.contStation++;
-					}					
+					this.nid = ab;				
 				}	
 				else if(this.name.slice(0,10)=="Controller"){
 					ab = int(this.name.slice(11,13));
@@ -2038,8 +2027,7 @@
 						tb.addEventListener(Event.CHANGE,change);
 						
 						if(obj.name=="flowName"){
-							tb.width=100;							
-							//Start - Buttons of Controls
+							tb.width=100;			
 							butAppChanges = new Button();
 							changesObj = new HBox();
 							
@@ -2060,7 +2048,6 @@
 						tb.width=140;
 						tb.addEventListener(Event.CHANGE,change);								
 						
-						//General Configuration----------------------------------------------------------
 						if( obj.name=="id" ){
 							tb.text =  this.name;
 							tb.editable=false;	
@@ -2093,7 +2080,7 @@
 							tb.enabled=true;
 							tb.width=60;
 							tb.maxChars=5;			
-							tb.text="667"+(parentApplication.contSwitch+2);							
+							tb.text="6"+(parentApplication.contSwitch+2);							
 							parentApplication.getValueListenPort.push(tb.text);														
 							obj.listenPortSwitch = tb.text;
 							tb.addEventListener(FlexEvent.UPDATE_COMPLETE,change);
@@ -2402,8 +2389,6 @@
 				circle.graphics.drawCircle(0, 20, this.range);
 			}
 					
-			//-----------------------------------------------------------------------------------------------------------
-			//-----------------------------------------------------------------------------------------------------------
 		]]>
 	</mx:Script>
 	<mx:VBox id="panel1" height="0" width="0" add="addChildToPanel()" />

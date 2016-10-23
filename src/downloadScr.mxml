@@ -26,7 +26,6 @@
     
 			public function donothing():void {
 				jumpTo("./scripts/"+parentApplication.chave+".sh");
-				//jumpTo("http://ramonfontes.com/vnd/bin-debug/scripts/"+parentApplication.chave+".sh");
 				PopUpManager.removePopUp(this);
 				FlexGlobals.topLevelApplication.enabled=true;
        		}

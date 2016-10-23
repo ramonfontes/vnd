@@ -4,15 +4,12 @@ import mx.rpc.events.ResultEvent;
 
 public function result(re:ResultEvent):void{
 		
-	qosArrayCollection=new ArrayCollection();
 	objectsArrayCollection=new ArrayCollection();
 	linksArrayCollection=new ArrayCollection();
 	linksNames=new Array(); 
 	names=new Array(); 
 	clear();
 	objectsXml=<objects name="objects"/>;
-		
-	qosArrayCollection=re.result.nsdlObjects.instances.qosinstance;
 		
 	linksArrayCollection=re.result.nsdlObjects.links.link;
 	var xmlList:XML = XML("<cater  name='links'/>");
@@ -24,10 +21,6 @@ public function result(re:ResultEvent):void{
 		xmlList.appendChild(xmlList2);
 	}		      	 
 	objectsXml.appendChild(xmlList);
-		
-	for(var i:int;i<qosArrayCollection.length;i++){
-		names.push(qosArrayCollection[i].name);
-	}
 	
 	objectsArrayCollection=re.result.nsdlObjects.objects.category;
 	var s:String;
@@ -48,19 +41,13 @@ public function result(re:ResultEvent):void{
 } 
 		    
 public function userObjresult(re:ResultEvent):void{
-	qosArrayCollection=new ArrayCollection();
 	objectsArrayCollection=new ArrayCollection();
 	linksArrayCollection=new ArrayCollection();   
 	linksNames=new Array(); 
 	names=new Array(); 
 	clear();
 	objectsXml=<objects name="objects"/>;  
-	qosArrayCollection=re.result.nsdlObjects.instances.qosinstance;
-	
-	for(var i:int;i<qosArrayCollection.length;i++){
-		names.push(qosArrayCollection[i].name);
-	}
-		         
+         
 	objectsArrayCollection=re.result.nsdlObjects.objects.category;
 	
 	for(var j:int=0;j<objectsArrayCollection.length;j++){

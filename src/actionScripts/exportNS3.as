@@ -330,7 +330,7 @@ public function exportNS3File():void {
 					
 				}
 				cont_mininet++;
-				sh = "  Ptr<Node> "+ob.name.slice(0,11)+" = CreateObject<Node> ();@@";
+				sh = "  Ptr<Node> "+ob.id+" = CreateObject<Node> ();@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);					
 			}
@@ -345,7 +345,7 @@ public function exportNS3File():void {
 					}	
 				}
 				cont_mininet++;
-				sh = "  Ptr<Node> "+ob.name.slice(0,17)+" = CreateObject<Node> ();@@";
+				sh = "  Ptr<Node> "+ob.id+" = CreateObject<Node> ();@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}							
@@ -393,7 +393,7 @@ public function exportNS3File():void {
 					}	
 					
 				}
-				sh = sh+" "+ob.name.slice(0,11)+",";
+				sh = sh+" "+ob.id+",";
 			}
 			else if(ob.id=="Switch"||ob.id=="Access Point"){
 
@@ -406,7 +406,7 @@ public function exportNS3File():void {
 						macSwitch = obj.MacSwitch.toString();	
 					}	
 				}
-				sh = sh+" "+ob.name.slice(0,17)+",";
+				sh = sh+" "+ob.id+",";
 			}							
 			else if(ob.id=="Controller"){		
 				for(i=0;i<(obb.objparaArrayCol.length);i++){
@@ -576,83 +576,83 @@ public function exportNS3File():void {
 		if(UIob.className=='Link'){			
 			var obLink:Link=UIob as Link;
 			if(obLink.can.lineName!="wireless"){				
-				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 						cont_mininet++;
-						sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(15,17)+";@@";
+						sh = "  CsmaHelper csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+";@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						if(obLink.can.bw!=null&&obLink.can.bw!="default"){
 							cont_mininet++;
-							sh = "  csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(15,17)+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
+							sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
 						if(obLink.can.delay!=""&&obLink.can.delay!=null){
 							cont_mininet++;
-							sh = "  csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(15,17)+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
+							sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
 					}
 				}
-				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
-					if(obLink.can.source.name.slice(0,8)=="Computer"){
+				else if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")||(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+					if(obLink.can.source.id=="Computer"){
 						if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 							cont_mininet++;
-							sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+";@@";
+							sh = "  CsmaHelper csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+";@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 							if(obLink.can.bw!=null&&obLink.can.bw!="default"){
 								cont_mininet++;
-								sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
+								sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
 								objeto_mininet=sh;
 								temp_mininet.addItem(objeto_mininet);
 							}
 							if(obLink.can.delay!=""&&obLink.can.delay!=null){
 								cont_mininet++;
-								sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
+								sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
 								objeto_mininet=sh;
 								temp_mininet.addItem(objeto_mininet);
 							}
 						}
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
+					else if (obLink.can.destination.id=="Computer"){
 						if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 							cont_mininet++;
-							sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+";@@";
+							sh = "  CsmaHelper csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+";@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 							if(obLink.can.bw!=null&&obLink.can.bw!="default"){
 								cont_mininet++;
-								sh = "  csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
+								sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
 								objeto_mininet=sh;
 								temp_mininet.addItem(objeto_mininet);
 							}
 							if(obLink.can.delay!=""&&obLink.can.delay!=null){
 								cont_mininet++;
-								sh = "  csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
+								sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
 								objeto_mininet=sh;
 								temp_mininet.addItem(objeto_mininet);
 							}
 						}
 					}
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
+				else if((obLink.can.source.id=="Computer"&&(obLink.can.destination.id=="Computer"))){
 					if(obLink.can.bw!=null&&obLink.can.bw!="default"||(obLink.can.delay!=""&&obLink.can.delay!=null)){
 						cont_mininet++;
-						sh = "  CsmaHelper csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+";@@";
+						sh = "  CsmaHelper csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+";@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						if(obLink.can.bw!=null&&obLink.can.bw!="default"){
 							cont_mininet++;
-							sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
+							sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"DataRate\", StringValue (\""+obLink.can.bw+"\"));@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
 						if(obLink.can.delay!=""&&obLink.can.delay!=null){
 							cont_mininet++;
-							sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
+							sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".SetChannelAttribute (\"Delay\", StringValue (\""+obLink.can.delay+"\"));@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
@@ -685,77 +685,77 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					cont_mininet++;
-					sh = "  NodeContainer all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+";@@";
+					sh = "  NodeContainer all_"+obLink.can.source.id+"_"+obLink.can.destination.id+";@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 					cont_mininet++;
-					sh = "  all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+".Add ("+obLink.can.source.name.slice(0,17)+");@@";
+					sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.source.id+");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 					cont_mininet++;
-					sh = "  all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+".Add ("+obLink.can.destination.name.slice(0,17)+");@@";
+					sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.destination.id+");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 					cont_mininet++;
-					sh = "  NetDeviceContainer ndc_p"+obLink.can.source.name.slice(15,17)+"p"+obLink.can.destination.name.slice(15,17)+" = csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".Install (all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+");@@";
+					sh = "  NetDeviceContainer ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+" = csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".Install (all_"+obLink.can.source.id+"_"+obLink.can.destination.id+");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);	
 				}
-				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
-					if(obLink.can.source.name.slice(0,8)=="Computer"){
+				else if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")||(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+					if(obLink.can.source.id=="Computer"){
 						cont_mininet++;
-						sh = "  NodeContainer all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+";@@";
+						sh = "  NodeContainer all_"+obLink.can.source.id+"_"+obLink.can.destination.id+";@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						cont_mininet++;
-						sh = "  all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+".Add ("+obLink.can.source.name.slice(0,11)+");@@";
+						sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.source.id+");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						cont_mininet++;
-						sh = "  all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+".Add ("+obLink.can.destination.name.slice(0,17)+");@@";
+						sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.destination.id+");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);		
 						cont_mininet++;
-						sh = "  NetDeviceContainer ndc_p"+obLink.can.source.name.slice(9,11)+"p"+obLink.can.destination.name.slice(15,17)+" = csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+".Install (all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+");@@";
+						sh = "  NetDeviceContainer ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+" = csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".Install (all_"+obLink.can.source.id+"_"+obLink.can.destination.id+");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
+					else if (obLink.can.destination.id=="Computer"){
 						cont_mininet++;
-						sh = "  NodeContainer all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+";@@";
+						sh = "  NodeContainer all_"+obLink.can.source.id+"_"+obLink.can.destination.id+";@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						cont_mininet++;
-						sh = "  all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+".Add ("+obLink.can.source.name.slice(0,17)+");@@";
+						sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.source.id+");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						cont_mininet++;
-						sh = "  all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+".Add ("+obLink.can.destination.name.slice(0,11)+");@@";
+						sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.destination.id+");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);	
 						cont_mininet++;
-						sh = "  NetDeviceContainer ndc_p"+obLink.can.source.name.slice(15,17)+"p"+obLink.can.destination.name.slice(9,11)+" = csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+".Install (all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+");@@";
+						sh = "  NetDeviceContainer ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+" = csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".Install (all_"+obLink.can.source.id+"_"+obLink.can.destination.id+");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
+				else if((obLink.can.source.id=="Computer"&&(obLink.can.destination.id=="Computer"))){
 					cont_mininet++;
-					sh = "  NodeContainer all_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+";@@";
+					sh = "  NodeContainer all_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+";@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 					cont_mininet++;
-					sh = "  all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+".Add ("+obLink.can.source.name.slice(0,11)+");@@";
+					sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.source.id+");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 					cont_mininet++;
-					sh = "  all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+".Add ("+obLink.can.destination.name.slice(0,11)+");@@";
+					sh = "  all_"+obLink.can.source.id+"_"+obLink.can.destination.id+".Add ("+obLink.can.destination.id+");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);	
 					cont_mininet++;
-					sh = "  NetDeviceContainer ndc_p"+obLink.can.source.name.slice(9,11)+"p"+obLink.can.destination.name.slice(9,11)+" = csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".Install (all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+");@@";
+					sh = "  NetDeviceContainer ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+" = csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".Install (all_"+obLink.can.source.id+"_"+obLink.can.destination.id+");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 					
@@ -780,29 +780,29 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					cont_mininet++;
-					sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+"\");@@";
+					sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".EnablePcapAll(\"all_"+obLink.can.source.id+"_"+obLink.can.destination.id+"\");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);	
 				}
-				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
-					if(obLink.can.source.name.slice(0,8)=="Computer"){
+				else if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")||(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+					if(obLink.can.source.id=="Computer"){
 						cont_mininet++;
-						sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(15,17)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+"\");@@";
+						sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".EnablePcapAll(\"all_"+obLink.can.source.id+"_"+obLink.can.destination.id+"\");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
+					else if (obLink.can.destination.id=="Computer"){
 						cont_mininet++;
-						sh = "  csma_bridge_"+obLink.can.source.name.slice(15,17)+"_"+obLink.can.destination.name.slice(9,11)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+"\");@@";
+						sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".EnablePcapAll(\"all_"+obLink.can.source.id+"_"+obLink.can.destination.id+"\");@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
+				else if((obLink.can.source.id=="Computer"&&(obLink.can.destination.id=="Computer"))){
 					cont_mininet++;
-					sh = "  csma_bridge_"+obLink.can.source.name.slice(9,11)+"_"+obLink.can.destination.name.slice(9,11)+".EnablePcapAll(\"all_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+"\");@@";
+					sh = "  csma_bridge_"+obLink.can.source.nid+"_"+obLink.can.destination.nid+".EnablePcapAll(\"all_"+obLink.can.source.id+"_"+obLink.can.destination.id+"\");@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);					
 				}
@@ -819,15 +819,15 @@ public function exportNS3File():void {
 			//for(ir=0;ir<(obb.objparaArrayCol.length);ir++){
 			//obj=obb.objparaArrayCol[ir] as objParameter;	
 			/*if(ob.id=="Computer"){
-			ab = int(ob.name.slice(9,11));
+			ab = int(ob.nid);
 			ye=ab;
 			}
 			else if(ob.id=="switchOpenflow"){
-			ab = int(ob.name.slice(15,17));
+			ab = int(ob.nid);
 			ye=ab;
 			}
 			else if(ob.id=="wirelessRouter"){
-			ab = int(ob.name.slice(15,17));
+			ab = int(ob.nid);
 			ye=ab;
 			}
 			else if(ob.id=="Controller"){
@@ -860,29 +860,29 @@ public function exportNS3File():void {
 			if(UIob.className=='Link'){
 				obLink=UIob as Link;
 				if(obLink.can.lineName!="wireless"&&p>=linkc){		
-					if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+					if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 						cont_mininet++;
-						sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(15,17)+"p"+obLink.can.destination.name.slice(15,17)+");@@";
+						sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+" = address.Assign (ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+");@@";
 						srcl=obLink.can.source.name;//.slice(15,17);
 						dstl=obLink.can.destination.name;//.slice(15,17);
 					}
-					else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
-						if(obLink.can.source.name.slice(0,8)=="Computer"){
+					else if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")||(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+						if(obLink.can.source.id=="Computer"){
 							cont_mininet++;
-							sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(9,11)+"p"+obLink.can.destination.name.slice(15,17)+");@@";
+							sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+" = address.Assign (ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+");@@";
 							srcl=obLink.can.source.name;//.slice(9,11);
 							dstl=obLink.can.destination.name;//.slice(15,17);
 						}
-						else if (obLink.can.destination.name.slice(0,8)=="Computer"){
+						else if (obLink.can.destination.id=="Computer"){
 							cont_mininet++;
-							sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(15,17)+"p"+obLink.can.destination.name.slice(9,11)+");@@";
+							sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+" = address.Assign (ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+");@@";
 							srcl=obLink.can.source.name;//.slice(15,17);
 							dstl=obLink.can.destination.name;//.slice(9,11);
 						}				
 					}	
-					else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
+					else if((obLink.can.source.id=="Computer"&&(obLink.can.destination.id=="Computer"))){
 						cont_mininet++;
-						sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+" = address.Assign (ndc_p"+obLink.can.source.name.slice(9,11)+"p"+obLink.can.destination.name.slice(9,11)+");@@";
+						sh1 = "  Ipv4InterfaceContainer iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+" = address.Assign (ndc_p"+obLink.can.source.nid+"p"+obLink.can.destination.nid+");@@";
 						srcl=obLink.can.source.name;//.slice(9,11);
 						dstl=obLink.can.destination.name;//.slice(9,11);
 					}
@@ -931,7 +931,7 @@ public function exportNS3File():void {
 					
 				}
 				cont_mininet++;
-				sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.name.slice(0,11)+".Get (0));@@";
+				sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.id+".Get (0));@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -946,7 +946,7 @@ public function exportNS3File():void {
 					}	
 				}
 				cont_mininet++;
-				sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.name.slice(0,17)+".Get (0));@@";
+				sh = "  ApplicationContainer serverApps"+p+" = echoServer0.Install ("+ob.id+".Get (0));@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);					
 			}							
@@ -1092,9 +1092,9 @@ public function exportNS3File():void {
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;
 			if(obLink.can.lineName!="wireless"){		
-				if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")&&(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
+				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					cont_mininet++;
-					sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,17)+".GetAddress (1), 9);@@";
+					sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+".GetAddress (1), 9);@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet)
 					cont_mininet++;
@@ -1114,10 +1114,10 @@ public function exportNS3File():void {
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if((obLink.can.source.name.slice(0,6)=="Switch"||obLink.can.source.name.slice(0,12)=="Access Point")||(obLink.can.destination.name.slice(0,6)=="Switch"||obLink.can.destination.name.slice(0,12)=="Access Point")){
-					if(obLink.can.source.name.slice(0,8)=="Computer"){
+				else if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")||(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+					if(obLink.can.source.id=="Computer"){
 						cont_mininet++;
-						sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,17)+".GetAddress (1), 9);@@";
+						sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+".GetAddress (1), 9);@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet)
 						cont_mininet++;
@@ -1137,9 +1137,9 @@ public function exportNS3File():void {
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 					}
-					else if (obLink.can.destination.name.slice(0,8)=="Computer"){
+					else if (obLink.can.destination.id=="Computer"){
 						cont_mininet++;
-						sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,17)+"_"+obLink.can.destination.name.slice(0,11)+".GetAddress (1), 9);@@";
+						sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+".GetAddress (1), 9);@@";
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet)
 						cont_mininet++;
@@ -1160,9 +1160,9 @@ public function exportNS3File():void {
 						temp_mininet.addItem(objeto_mininet);
 					}				
 				}	
-				else if((obLink.can.source.name.slice(0,8)=="Computer"&&(obLink.can.destination.name.slice(0,8)=="Computer"))){
+				else if((obLink.can.source.id=="Computer"&&(obLink.can.destination.id=="Computer"))){
 					cont_mininet++;
-					sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.name.slice(0,11)+"_"+obLink.can.destination.name.slice(0,11)+".GetAddress (1), 9);@@";
+					sh = "  UdpEchoClientHelper echoClient"+p+" (iface_"+obLink.can.source.id+"_"+obLink.can.destination.id+".GetAddress (1), 9);@@";
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet)
 					cont_mininet++;
@@ -1209,7 +1209,7 @@ public function exportNS3File():void {
 					}							
 				}
 				cont_mininet++;
-				sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.name.slice(0,11)+".Get (0));@@";
+				sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.id+".Get (0));@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -1224,7 +1224,7 @@ public function exportNS3File():void {
 					}	
 				}
 				cont_mininet++;
-				sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.name.slice(0,17)+".Get (0));@@";
+				sh = "  ApplicationContainer clientApps"+p+" = echoClient0.Install ("+ob.id+".Get (0));@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);					
 			}							

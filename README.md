@@ -33,7 +33,7 @@ VND is available on www.ramonfontes.com/vnd
 
 
 ## Running on locally
-If you want to run VND on locally, you have to install a Web Server, PHP Server, Flash Plugin and open /bin-debug/main.html file on your browser.  
+If you want to run the VND on locally, you have to install a Web Server, PHP (can be a newest version), Flash Plugin and open /bin-debug/index.html file on your browser.  
 
 **Alternatively you can run a docker container with all features installed from: https://registry.hub.docker.com/u/ramonfontes/vnd/**
 
@@ -46,3 +46,4 @@ If you want to run VND on locally, you have to install a Web Server, PHP Server,
 
 ## Miscellaneous
 Whether you want to colaborate with VND, you can reach me via email (ramonreisfontes@gmail.com).
+At the moment I am PhD Student (focusing on SDN and NFV, mainly) and unfortunately I can't continue working on VND. Therefore, let me know if you improve the code, please. ;)

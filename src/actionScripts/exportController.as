@@ -47,7 +47,7 @@ public function exportControllerScriptFile():void {
 								flowName = obj.flowName[b];
 							}
 							else if(obj.name=="macSwitch"){
-								mac_Switch = "00:00:"+obj.mac_Switch[b];											
+								mac_Switch = "00:00:"+obj.MacSwitch[b];											
 							}	
 							else if(obj.name=="controllerIPAddress"){
 								controllerIPAddress = obj.controllerIPAddress;	
@@ -56,7 +56,7 @@ public function exportControllerScriptFile():void {
 								controllerPort = obj.controllerPort;	
 							}										
 							else if(obj.name=="macSource"){
-								macSource = String(obj.macSource[b]);										
+								macSource = String(obj.macSource[b]);
 							}
 							else if(obj.name=="macDestination"){
 								macDestination = String(obj.macDestination[b]);	
@@ -372,7 +372,6 @@ public function exportControllerScriptFile():void {
 								}
 								if(oc=="pox"){
 									counter++;
-									//sh2 = "# flow"+b+": @@";
 									sh2 = "#"+flowName+": @@";
 									objeto_openflow_controller=sh2;
 									temp_openflow_controller.addItem(objeto_openflow_controller);
@@ -450,7 +449,7 @@ public function exportControllerScriptFile():void {
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(macSource!="undefined"&&macSource!="0"&&macSource!=""&&macSource!="none"&&macSource!="null"){
+									if(macSource!=""&&macSource!="none"&&macSource!="null"){
 										counter++;
 										sh2 = "flow"+b+"msg.match.dl_src  = EthAddr(\""+macSource+"\")@@";
 										objeto_openflow_controller=sh2;
@@ -462,20 +461,20 @@ public function exportControllerScriptFile():void {
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(sourcePort!="undefined"&&sourcePort!=""&&sourcePort!="0" ||
-										destinationPort!="undefined"&&destinationPort!=""&&destinationPort!="0"){
+									if(sourcePort!=""&&sourcePort!="null" ||
+										destinationPort!=""&&destinationPort!="null"){
 										counter++;
 										sh2 = "flow"+b+"msg.match.nw_proto = 6@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(sourcePort!="undefined"&&sourcePort!=""&&sourcePort!="0"){
+									if(sourcePort!=""&&sourcePort!="null"&&sourcePort!=null){
 										counter++;
 										sh2 = "flow"+b+"msg.match.tp_src = "+sourcePort+"@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(destinationPort!="undefined"&&destinationPort!=""&&destinationPort!="0"){
+									if(destinationPort!=""&&destinationPort!="null"&&destinationPort!=null){
 										counter++;
 										sh2 = "flow"+b+"msg.match.tp_dst = "+destinationPort+"@@";
 										objeto_openflow_controller=sh2;
@@ -509,19 +508,19 @@ public function exportControllerScriptFile():void {
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(setEnqueue!="undefined"&&setEnqueue!="0"&&setEnqueue!=""){
+									if(setEnqueue!=""){
 										counter++;
 										sh2="flow"+b+"enqueue = of.ofp_action_enqueue (enqueue = "+setEnqueue+")@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);											
 									}
-									if(setSourcePort!="undefined"&&setSourcePort!="0"&&setSourcePort!=""){
+									if(setSourcePort!=""){
 										counter++;
 										sh2="flow"+b+"srcPort = of.ofp_action_tp_port.set_src = (tp_port = "+setSourcePort+")@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(setDestinationPort!="undefined"&&setDestinationPort!="0"&&setDestinationPort!=""){
+									if(setDestinationPort!=""){
 										counter++;
 										sh2="flow"+b+"dstPort = of.ofp_action_tp_port.set_dst = (tp_port = "+setDestinationPort+")@@";
 										objeto_openflow_controller=sh2;
@@ -864,25 +863,25 @@ public function exportControllerScriptFile():void {
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(ipSource!="undefined"&&ipSource!="0"&&ipSource!=""&&ipSource!="none"&&ipSource!="null"){
+									if(ipSource!="undefined"&&ipSource!="0"&&ipSource!=""&&ipSource!="none"&&ipSource!=null&&ipSource!="null"){
 										counter++;
 										sh2 = "    \"ipv4_src\":"+"\""+ipSource+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(ipDestination!="undefined"&&ipDestination!="0"&&ipDestination!=""&&ipDestination!="none"&&ipDestination!="null"){
+									if(ipDestination!="undefined"&&ipDestination!="0"&&ipDestination!=""&&ipDestination!="none"&&ipDestination!=null&&ipDestination!="null"){
 										counter++;
 										sh2 = "    \"ipv4_dst\":"+"\""+ipDestination+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}											
-									if(sourcePort!="undefined"&&sourcePort!="0"&&sourcePort!=""){
+									if(sourcePort!="undefined"&&sourcePort!="0"&&sourcePort!=""&&sourcePort!=null){
 										counter++;
 										sh2 = "    \"tp_src\":"+"\""+sourcePort+"\""+",@@";
 										objeto_openflow_controller=sh2;
 										temp_openflow_controller.addItem(objeto_openflow_controller);
 									}
-									if(destinationPort!="undefined"&&destinationPort!="0"&&destinationPort!=""){
+									if(destinationPort!="undefined"&&destinationPort!="0"&&destinationPort!=""&&destinationPort!=null){
 										counter++;
 										sh2 = "    \"tp_dst\":"+"\""+destinationPort+"\""+",@@";
 										objeto_openflow_controller=sh2;

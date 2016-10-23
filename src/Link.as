@@ -44,7 +44,6 @@ package{
 		public var iface:int=0;		
 		public var srcPort:int;
 		public var dstPort:int;
-
 				
 		public function Link(num:Number){  
 			super();

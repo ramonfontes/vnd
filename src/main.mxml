@@ -10,7 +10,6 @@
 		<![CDATA[
 			import action_alert.HAlert;
 			import action_alert.HMensagens;
-			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.managers.PopUpManager;
@@ -40,33 +39,8 @@
 			public var exportControllforcombo:Boolean=false;
 			public var isInport:Boolean=false;
 			public var countNumber3:int=1;
-			public var listqosScenarioMaxRate:String;
-			public var listqosScenarioMinRate:String;
 			public var posX:Array = [];
 			public var posY:Array = [];
-			public var listqosMaxRate:Array = [];
-			public var listqosMinRate:Array = [];
-			public var listqosInterface:Array = [];
-			public var listqosqosName:Array = [];				
-			public var listqosSwitch:Array = [];
-			public var listqosService:Array = [];
-			public var listqosQueue:Array = [];
-			public var listqosEnqueuePort:Array = [];
-			public var listqosPriority:Array = [];
-			public var listqosProtocol:Array = [];
-			public var listqosEthType:Array = [];
-			public var listqosIngressPort:Array = [];
-			public var listqosSourceIP:Array = [];
-			public var listqosDestinationIP:Array = [];
-			public var listqosTos:Array = [];
-			public var listqosVlanID:Array = [];
-			public var listqosEthSource:Array = [];
-			public var listqosEthDestination:Array = [];
-			public var listqosSourcePort:Array = [];
-			public var listqosDestinationPort:Array = [];
-			public var listQueueName:Array = [];
-			public var qoscont:int=0;
-			public var queuecont:int=0;
 						
 			public var chave:String;
 			public var countNumber1:int=1;
@@ -91,16 +65,11 @@
 			private var urlRequest:URLRequest;
 			private var serverSideScript:String = "uploadxml.php";
 			public var xmlInfo:XMLList;
-			public var popup_ob:objects_popup = new objects_popup();			
-			public var accessQueue:queueConfig = new queueConfig();
+			public var popup_ob:objects_popup = new objects_popup();	
 			
 			[Bindable] public var getInterfaces:Array=new Array;
-			[Bindable] public var contSwitch:int=0;
-			[Bindable] public var contCar:int=0;
+			[Bindable] public var contSwitch:int=670;
 			[Bindable] public var contController:int=0;
-			[Bindable] public var contComputer:int=0;	
-			[Bindable] public var contStation:int=0;	
-			//[Bindable] public var getValueMacAddress:String="";
 			[Bindable] public var getValueListenPort:Array;
 			[Bindable] public var getValueRouterSSID:Array;
 			[Bindable] public var getValueStationSSID:Array;
@@ -128,8 +97,7 @@
 			[Bindable] public var scenariosXml:XML=<scenarios name="scenarios"></scenarios>; 		    
 			[Bindable] public var visualizationXml:XML=<visualization name="visualizations"></visualization>; 		    
 			[Bindable] public var userobjectsXml:XML=<objects name="objects"></objects>; 		    
-			[Bindable] public var viewsXml:XML=<views name="views"></views>; 		   	
-			[Bindable] public var qosArrayCollection:ArrayCollection=new ArrayCollection();
+			[Bindable] public var viewsXml:XML=<views name="views"></views>;
 			[Bindable] public var objectsArrayCollection:ArrayCollection=new ArrayCollection();		    
 			[Bindable] public var linksArrayCollection:ArrayCollection=new ArrayCollection();
 			[Bindable] private var xmlurl:String;            
@@ -165,7 +133,6 @@
 			public var getmode_:String;
 			public var getchannel_:String;
 			public var mac_Switch:String;			
-			
 			public var macSource:String="";
 			public var macDestination:String="";
 			public var vlanPriority:String="";
@@ -194,24 +161,23 @@
 			public var tos:String="";
 		    
 			public function ini():void {
-			//this.addEventListener(MouseEvent.CLICK, clickHandler);
-		   	this.addEventListener(KeyboardEvent.KEY_DOWN,keyPressed);
-		   	networkXml.appendChild(userobjectsXml);
-		    networkXml.appendChild(viewsXml);
-		    rootXml.appendChild(networkXml);
-		    rootXml.appendChild(scenariosXml);
-		    scenariosXml.appendChild(visualizationXml);
-		    undostepsArray = new ArrayCollection();
-            temaplateArrcol = new ArrayCollection();
-            urlRequest = new URLRequest(serverSideScript);
-			fileReferenceList = new FileReferenceList();
-			fileReferenceList.addEventListener(Event.SELECT, fileSelectedHandler);
-			userObjfileReferenceList = new FileReferenceList();
-			userObjfileReferenceList.addEventListener(Event.SELECT, userObjfileSelectedHandler);
-		    xml.ignoreWhitespace = true;
-           	xml.prettyPrinting = false;
-			fileRefScript_mininet = new FileReference();
-			myData.send();
+			   	this.addEventListener(KeyboardEvent.KEY_DOWN,keyPressed);
+			   	networkXml.appendChild(userobjectsXml);
+			    networkXml.appendChild(viewsXml);
+			    rootXml.appendChild(networkXml);
+			    rootXml.appendChild(scenariosXml);
+			    scenariosXml.appendChild(visualizationXml);
+			    undostepsArray = new ArrayCollection();
+	            temaplateArrcol = new ArrayCollection();
+	            urlRequest = new URLRequest(serverSideScript);
+				fileReferenceList = new FileReferenceList();
+				fileReferenceList.addEventListener(Event.SELECT, fileSelectedHandler);
+				userObjfileReferenceList = new FileReferenceList();
+				userObjfileReferenceList.addEventListener(Event.SELECT, userObjfileSelectedHandler);
+			    xml.ignoreWhitespace = true;
+	           	xml.prettyPrinting = false;
+				fileRefScript_mininet = new FileReference();
+				myData.send();
 			}
 			public  function setObjectXml(ob:Object,xmlLi:XMLList):void {	
 				exportNSDL=true;
@@ -219,37 +185,6 @@
 				if(ob.className=='Link'){
 					ob=ob.can;
 				}
-				if(listqosqosName.length>0&&qoscont>=1){
-					xmlList = XMLList("<"+"qosName"+">"+listqosqosName[qoscont-1]+"</"+"qosName"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"sourceIP"+">"+listqosSourceIP[qoscont-1]+"</"+"sourceIP"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"destinationIP"+">"+listqosDestinationIP[qoscont-1]+"</"+"destinationIP"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"ethType"+">"+listqosEthType[qoscont-1]+"</"+"ethType"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"protocol"+">"+listqosProtocol[qoscont-1]+"</"+"protocol"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"queue"+">"+listqosQueue[qoscont-1]+"</"+"queue"+">");
-					xmlLi.appendChild(xmlList);					
-				}
-				else if(listQueueName.length>0&&queuecont>=1){
-					for(var a:int=0;a<listqosInterface.length;a++){
-						xmlList = XMLList("<"+"qosInterface"+">"+listqosInterface[a]+"</"+"qosInterface"+">");
-						xmlLi.appendChild(xmlList);
-					}
-					xmlList = XMLList("<"+"scenarioMaxRate"+">"+listqosScenarioMaxRate+"</"+"scenarioMaxRate"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"scenarioMinRate"+">"+listqosScenarioMinRate+"</"+"scenarioMinRate"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"queueName"+">"+listQueueName[queuecont-1]+"</"+"queueName"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"linkmaxRate"+">"+listqosMaxRate[queuecont-1]+"</"+"linkmaxRate"+">");
-					xmlLi.appendChild(xmlList);
-					xmlList = XMLList("<"+"linkminRate"+">"+listqosMinRate[queuecont-1]+"</"+"linkminRate"+">");
-					xmlLi.appendChild(xmlList);					
-				}					
-				else{						
 				for(var i:int=0;i<(ob.objparaArrayCol.length);i++){
 					var obj:objParameter=ob.objparaArrayCol[i] as objParameter;
 					var valueObjArr:ArrayCollection=ob.valueObjArr;	
@@ -318,8 +253,6 @@
 								else if(obj.name=="computerMACAddress"){
 									xmlList = XMLList("<"+obj.name+">"+obj.MacAddress+"</"+obj.name+">");
 									xmlLi.appendChild(xmlList);
-									//checked=true;
-									//break;
 								}
 								else if(obj.name=="setSourcePort"){
 									xmlList = XMLList("<"+obj.name+">"+obj.setSourcePort[j]+"</"+obj.name+">");
@@ -349,10 +282,8 @@
 								else if(obj.name=="notes"){
 									xmlList = XMLList("<"+obj.name+">"+obj.notes[j]+"</"+obj.name+">");
 									checked=true;
-									//xe++;
 									break;
 								}
-								
 							}
 						}						
 						if(checked==false){
@@ -381,7 +312,7 @@
 						
 						else if(controll==0 && (obj.name=="setStripVlan")){}
 						else{
-						xmlLi.appendChild(xmlList);
+							xmlLi.appendChild(xmlList);
 						}
 					}
 					else if(obj.id=='options'){
@@ -545,7 +476,7 @@
 					}
 					}
 				} 
-				}
+				
 				if(ob.className=='objects'){
 				}
 			}
@@ -571,7 +502,6 @@
 			public function exportFile():void {
 				xml = <nsdl></nsdl>;
 				netxml = <network></network>;
-				//tempatexml= <templates></templates>;
 				openflowxml = <openflow></openflow>;
 				objxml = <objects></objects>;
 				viwxml = <views></views>;
@@ -585,89 +515,43 @@
 						var ob:objects=UIob as objects;						
 						var ab:int;
 						if(ob.id=="Computer"){
-							ab = int(ob.name.slice(9,11));
-							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.nid+'"/>');
 							setObjectXml(ob,xmlLi);
 						}
 						else if(ob.id=="Switch"){
-							ab = int(ob.name.slice(7,9));
-							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.nid+'"/>');
 							setObjectXml(ob,xmlLi);
 						}
 						else if(ob.id=="Access Point"){
-							ab = int(ob.name.slice(13,15));
-							xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+							xmlLi = XMLList('<'+ob.id+' id="'+ob.nid+'"/>');
 							setObjectXml(ob,xmlLi);
 						}
-						else if(ob.id=="Controller"){
-							ab= int(ob.name.slice(11,13));									
+						else if(ob.id=="Controller"){							
 							var obb:Object=ob;
 							for(var i:int=0;i<(obb.objparaArrayCol.length);i++){
 								var obj:objParameter=obb.objparaArrayCol[i] as objParameter;
 								var canew:String = String(obj.flowName);
 								if(canew!="")
 									intnew = int(obj.flowName.length);
-								//Alert.show(String(canew));
 							}	
 							if(intnew==0){
 								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
 								setObjectXml(ob,xmlLi);
 								objxml.appendChild(xmlLi);
-								
-								if(listqosqosName.length>0){
-									for(var a:int=0;a<listqosqosName.length;a++){										
-										qoscont++;
-										xmlLi = XMLList('<'+"qosTable"+(qoscont-1)+' id="'+ob.name+'"/>');
-										//openflowxml.appendChild(xmlLi);
-										setObjectXml(ob,xmlLi);
-										openflowxml.appendChild(xmlLi);				
-									}	
-									qoscont=0;
-								}
-								if(listQueueName.length>0){
-									for(a=0;a<listQueueName.length;a++){
-										queuecont++;
-										xmlLi = XMLList('<'+"queueConfiguration"+(queuecont-1)+' id="'+ob.name+'"/>');
-										setObjectXml(ob,xmlLi);
-										openflowxml.appendChild(xmlLi);				
-									}
-									queuecont=0;
-								}
 							}
 							else{
-							for(a=0;a<intnew;a++){	
+							for(var a:int=0;a<intnew;a++){	
 								if(a==0){
-								controll=0;
-								xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
-								setObjectXml(ob,xmlLi);
-								objxml.appendChild(xmlLi);
-								}
-								controll=1;									
-								xmlLi = XMLList('<'+"flowTable"+(xe+1)+' id="'+ob.name+'"/>');
-								setObjectXml(ob,xmlLi);
-								openflowxml.appendChild(xmlLi);
-								xe++;
-								
-								if((a+1)==intnew){
-									if(listqosqosName.length>0){
-									for(a=0;a<listqosqosName.length;a++){
-										qoscont++;
-										xmlLi = XMLList('<'+"qosTable"+(qoscont-1)+' id="'+ob.name+'"/>');
-										setObjectXml(ob,xmlLi);
-										openflowxml.appendChild(xmlLi);				
+									controll=0;
+									xmlLi = XMLList('<'+ob.id+' id="'+ob.name+'"/>');
+									setObjectXml(ob,xmlLi);
+									objxml.appendChild(xmlLi);
 									}
-									}
-									qoscont=0;
-									if(listQueueName.length>0){
-										for(a=0;a<listQueueName.length;a++){
-											queuecont++;
-											xmlLi = XMLList('<'+"queueConfiguration"+(queuecont-1)+' id="'+ob.name+'"/>');
-											setObjectXml(ob,xmlLi);
-											openflowxml.appendChild(xmlLi);				
-										}
-									}
-									queuecont=0;
-								}								
+									controll=1;									
+									xmlLi = XMLList('<'+"flowTable"+(xe+1)+' id="'+ob.name+'"/>');
+									setObjectXml(ob,xmlLi);
+									openflowxml.appendChild(xmlLi);
+									xe++;							
 							}
 							xe=0;
 							}
@@ -770,8 +654,7 @@
 			public function tagChanged():void {
 				focustreeobject = null;
 			}
-			//END OTHERS----------------------------------------------------------------------------------
-			//START EVENTS--------------------------------------------------------------------------------
+
 			private function keyPressed(evt:KeyboardEvent):void{
 				if(evt.type=='keyUp'){
 					ViewBool=false;
@@ -807,8 +690,7 @@
 				fileReference.addEventListener(ProgressEvent.PROGRESS, uploading_progress);
 				fileReference.upload(urlRequest);
 			}			
-			//END EVENTS--------------------------------------------------------------------------------
-			//START SAVE--------------------------------------------------------------------------------
+
 			private function SaveToServerResult(ev:ResultEvent):void{
 				downloadingxmlurl=ev.result.a.aa.toString();
 				downButton.visible=true;
@@ -824,8 +706,7 @@
 				progressBar2.visible=false;
 				progressBar2.includeInLayout=false;
 			}
-			//END SAVE----------------------------------------------------------------------------------
-			//START LINKS-------------------------------------------------------------------------------
+
 			private function resizeHandler(eve:Event):void {
 				var objs:Array=eve.target.getChildren()
 				for(var i:int=0;i<objs.length;i++){					
@@ -835,7 +716,6 @@
 				}
 			}			
 			private function listnerremoverHandler():void {
-				// if(linkCombo.selectedIndex!=-1){
 				var objs:Array=dropCanvas.getChildren();
 				for(var i:int=0;i<objs.length;i++){
 					if(!objs[i].hasOwnProperty('lineLength') ){
@@ -922,22 +802,21 @@
 			public function userObjuploadeFileDlete():void{
 				userObjdeletexml.send();
 			}			
-			//END UPLOAD--------------------------------------------------------------------------------
-			//START DOWNLOAD----------------------------------------------------------------------------
+
 			private function downLoad():void {          
-				fileRef = new FileReference();
+				fileRef = new FileReference();				
 				fileRef.addEventListener(Event.COMPLETE, SaveToLocalMachineResult);
 				fileRef.addEventListener(ProgressEvent.PROGRESS, downloading_progress);
+				downloadingxmlurl = "./scripts/" + downloadingxmlurl;
 				var request:URLRequest = new URLRequest(downloadingxmlurl);
-				fileRef.download(request); 
+				fileRef.download(request);
 			}
 								
 			private function downloading_progress(event:Event):void {
 				progressBar2.visible=true;
 				progressBar2.includeInLayout=true;
 			}
-			//END DOWNLOAD------------------------------------------------------------------------------
-			//START ITEM--------------------------------------------------------------------------------
+
 			public function deleteItem(ob:Object):void {
 				if(ob!=null){
 					if(ob.className=='Link'){
@@ -948,12 +827,10 @@
 							if(source.name.slice(0,6)=="Switch"){
 								dell = int(source.name.slice(7,9));
 								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.sourcePort)));
-								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
 							}
 							else{
 								dell = int(source.name.slice(13,15));
 								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.sourcePort)));
-								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
 							}
 						}
 						var dest:objects=dropCanvas.getChildByName(ob.can.destination.name) as objects;
@@ -962,12 +839,10 @@
 							if(source.name.slice(0,6)=="Switch"){
 								dell = int(dest.name.slice(7,9));
 								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.destinationPort)));
-								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
 							}
 							else{
 								dell = int(dest.name.slice(13,15));
 								getInterfaces.splice(String("s"+dell+"-eth"+(Link(ob).can.destinationPort)));
-								//arrayContIfacesCheck[dell]=arrayContIfacesCheck[dell];
 							}
 						}														
 						dropCanvas.removeChild(ob as DisplayObject);
@@ -996,7 +871,7 @@
 	
 	<mx:HTTPService id="deletedownloadedxml"
          method="post"
-         url="deletedownloadedxml.php">
+         url="./scripts/deletedownloadedxml.php">
     <mx:request>
         <filename>{this.downloadingxmlurl}</filename>
     </mx:request>
@@ -1040,7 +915,7 @@
 
     <mx:HTTPService id="localXmlservice"
          method="post" result="SaveToServerResult(event)"  
-         url="localXml.php" >
+         url="./scripts/localXml.php" >
     <mx:request>
         <localXml>{this.saveXml}</localXml>
     </mx:request>
@@ -1052,8 +927,7 @@
     <mx:HTTPService id="userObjgetlocalXmlservice" 
          method="post" result="userObjresult(event)"
          url="{userObjxmlurl}" />
-    
-	
+    	
 	<mx:HTTPService id="myData" url="inputXml.xml?nocache={Math.random()}"  result="result(event)" fault="Alert.show('there is an error in input xml ')" />
 	<mx:HBox width="100%" paddingRight="0" backgroundColor="#009ACD">
 		<local:menu borderColor="#009ACD" width="100%" height="20" ob="{this}"/>
@@ -1110,7 +984,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDWN version)  Last Update: 2016/10/14" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDWN version)  Last Update: 2016/10/23" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	
