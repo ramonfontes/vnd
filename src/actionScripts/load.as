@@ -167,46 +167,74 @@ public function load(eve:ResultEvent):void{
 
 			if(src.name.slice(0,6)=="Switch"){
 				sr="Switch";
+				src.id = sr;
+				src.nid = int(src.name.slice(7,9));
 			}
 			else if(src.name.slice(0,7)=="Station"){
 				sr="Station";
+				src.id = sr;
+				src.nid = int(src.name.slice(8,10));
 			}
 			else if(src.name.slice(0,3)=="Car"){
 				sr="Car";
+				src.id = sr;
+				src.nid = int(src.name.slice(4,6));
 			}
 			else if(src.name.slice(0,10)=="Smartphone"){
 				sr="Smartphone";
+				src.id = sr;
+				src.nid = int(src.name.slice(11,13));
 			}
 			else if(src.name.slice(0,12)=="Access Point"){
 				sr="Access Point";
+				src.id = sr;
+				src.nid = int(src.name.slice(13,15));
 			}
 			else if(src.name.slice(0,8)=="Computer"){
 				sr="Computer";
+				src.id = sr;
+				src.nid = int(src.name.slice(9,11));
 			}
 			else if(src.name.slice(0,10)=="Controller"){
 				sr="Controller";
+				src.id = sr;
+				src.nid = int(src.name.slice(11,13));
 			}
 			
 			if(des.name.slice(0,6)=="Switch"){
 				ds="Switch";
+				des.id = ds;
+				des.nid = int(des.name.slice(7,9));
 			}
 			else if(des.name.slice(0,12)=="Access Point"){
 				ds="Access Point";
+				des.id = ds;
+				des.nid = int(des.name.slice(13,15));
 			}
 			else if(des.name.slice(0,8)=="Computer"){
 				ds="Computer";
+				des.id = ds;
+				des.nid = int(des.name.slice(9,11));
 			}
 			else if(des.name.slice(0,7)=="Station"){
 				ds="Station";
+				des.id = ds;
+				des.nid = int(des.name.slice(8,10));
 			}
 			else if(des.name.slice(0,3)=="Car"){
 				ds="Car";
+				des.id = ds;
+				des.nid = int(des.name.slice(4,6));
 			}
 			else if(des.name.slice(0,10)=="Smartphone"){
 				ds="Smartphone";
+				des.id = ds;
+				des.nid = int(des.name.slice(11,13));
 			}
 			else if(des.name.slice(0,10)=="Controller"){
 				ds="Controller";
+				des.id = ds;
+				des.nid = int(des.name.slice(11,13));
 			}
 			
 			link._objectDst=ds;			

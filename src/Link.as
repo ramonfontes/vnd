@@ -187,10 +187,19 @@ package{
 				if((_objectSrc=="Station" || _objectSrc=="Car") && _objectDst=="Access Point"){
 					uit.text = String("wlan"+srcPort);
 					uit.width = 240;								
-					textBitmapData = ImageSnapshot.captureBitmapData(uit);
-					
+					textBitmapData = ImageSnapshot.captureBitmapData(uit);					
 					matrix.tx=(20*destination.x/100+origin.x-20*origin.x/100)-20;
 					matrix.ty=(20*destination.y/100+origin.y-20*origin.y/100);
+					graphics.beginBitmapFill(textBitmapData,matrix,false);
+					graphics.lineStyle(0,0,0);
+					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
+					graphics.endFill();
+					
+					uit.text = String("wlan1");
+					uit.width = 240;								
+					textBitmapData = ImageSnapshot.captureBitmapData(uit);					
+					matrix.tx=(80*destination.x/100+origin.x-80*origin.x/100)-30;
+					matrix.ty=(80*destination.y/100+origin.y-80*origin.y/100);
 					graphics.beginBitmapFill(textBitmapData,matrix,false);
 					graphics.lineStyle(0,0,0);
 					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
@@ -202,6 +211,16 @@ package{
 					textBitmapData = ImageSnapshot.captureBitmapData(uit);
 					matrix.tx=(80*destination.x/100+origin.x-80*origin.x/100)-30;
 					matrix.ty=(80*destination.y/100+origin.y-80*origin.y/100);
+					graphics.beginBitmapFill(textBitmapData,matrix,false);
+					graphics.lineStyle(0,0,0);
+					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
+					graphics.endFill();
+					
+					uit.text = String("wlan1");
+					uit.width = 240;								
+					textBitmapData = ImageSnapshot.captureBitmapData(uit);					
+					matrix.tx=(20*destination.x/100+origin.x-20*origin.x/100)-20;
+					matrix.ty=(20*destination.y/100+origin.y-20*origin.y/100);
 					graphics.beginBitmapFill(textBitmapData,matrix,false);
 					graphics.lineStyle(0,0,0);
 					graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
@@ -252,7 +271,12 @@ package{
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
 				
-				uit.text = String("eth"+(dstPort)+"("+dstPort+")");
+				if(_objectDst=="Computer" || _objectDst=="Station"){
+					uit.text = String("eth"+dstPort);
+				}
+				else{
+					uit.text = String("eth"+(dstPort)+"("+dstPort+")");
+				}
 				//getInterfaces.push("s"+_switchDeviceSource+"-eth"+(_switchPortDestination-1));
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
@@ -261,12 +285,16 @@ package{
 				graphics.beginBitmapFill(textBitmapData,matrix,false);
 				graphics.lineStyle(0,0,0);
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
-				graphics.endFill();
-				
+				graphics.endFill();				
 			}
 			else if((_objectDst=="Computer" || _objectDst=="Station") && _checkSource==true ){
 				
-				uit.text = String("eth"+(srcPort)+"("+srcPort+")");
+				if(_objectSrc=="Computer" || _objectSrc=="Station"){
+					uit.text = String("eth"+srcPort);
+				}
+				else{
+					uit.text = String("eth"+(srcPort)+"("+srcPort+")");
+				}
 				uit.width = 240;
 				textBitmapData = ImageSnapshot.captureBitmapData(uit);
 				
@@ -277,7 +305,7 @@ package{
 				graphics.lineStyle(0,0,0);
 				graphics.drawRect(matrix.tx,matrix.ty,uit.measuredWidth,uit.measuredHeight);
 				graphics.endFill();
-				
+					
 				uit.text = String("eth"+dstPort);			
 				//getInterfaces.push("s"+_switchDeviceDestination+"-eth"+(_switchPortSource-1));
 				uit.width = 240;

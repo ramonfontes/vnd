@@ -289,24 +289,38 @@
 					
 					if(this.id=="Switch"){
 						var checkifswitchopenflow:Boolean=true;
+						ab = int(this.name.slice(7,9));
+						this.type = "Switch";
+						this.nid = ab;
 					}
-					
-					if(this.id=="Access Point"){
+					else if(this.id=="Access Point"){
 						checkifswitchopenflow=true;
+						ab = int(this.name.slice(13,15));
+						this.type = "Access Point";
+						this.nid = ab;
 					}
-					
-					if(this.id=="Computer"){
+					else if(this.id=="Computer"){
 						var checkifcomputer:Boolean=true;
+						ab = int(this.name.slice(9,11));
+						this.type = "Computer";
+						this.nid = ab;
 					}
-					
-					if(this.id=="Car"){
+					else if(this.id=="Car"){
 						var checkifcar:Boolean=true;
+						ab = int(this.name.slice(4,6));
+						this.type = "Car";
+						this.nid = ab;
 					}
-					
-					if(this.id=="Station"){
+					else if(this.id=="Station"){
 						var checkifstation:Boolean=true;
+						ab = int(this.name.slice(8,10));
+						this.type = "Station";
+						this.nid = ab;
 					}
-					if(this.id=="Controller"){
+					else if(this.id=="Controller"){
+						ab = int(this.name.slice(11,13));
+						this.type = "Controller";
+						this.nid = ab;
 						if(exportControll==true){
 							aa=0;
 							ncount=0;

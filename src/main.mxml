@@ -984,7 +984,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDWN version)  Last Update: 2016/10/23" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDWN version)  Last Update: 2016/10/24" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	

@@ -618,7 +618,12 @@ public function exportMininetScriptFile():void {
 					else if(obLink.can.source.id=="Station" ) {
 						if(obLink.can.destination.id=="Access Point"){
 							cont_mininet++;
-							sh = "    net.addLink(sta"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
+							if(obLink.can.lineName=="ethernet"){
+								sh = "    net.addLink(sta"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+", link='wired',";
+							}
+							else{
+								sh = "    net.addLink(sta"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
+							}
 							sh=sh.substring(0, sh.length-1);
 							sh=sh.concat(")@@");
 							
@@ -676,7 +681,12 @@ public function exportMininetScriptFile():void {
 						}
 						else if(obLink.can.source.id=="Access Point"){
 							cont_mininet++;
-							sh = "    net.addLink(ap"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+",";
+							if(obLink.can.lineName=="ethernet"){
+								sh = "    net.addLink(ap"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+", link='wired',";
+							}
+							else{
+								sh = "    net.addLink(ap"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+",";
+							}
 							sh=sh.substring(0, sh.length-1);
 							sh=sh.concat(")@@");
 							

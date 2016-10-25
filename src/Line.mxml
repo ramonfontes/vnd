@@ -286,23 +286,23 @@
 								this.type = "Switch";
 								this.nid = int(this.name.slice(7,9));
 							}	
-							
-							if(this.name.slice(0,12)=="Access Point"){
+							else if(this.name.slice(0,12)=="Access Point"){
 								this.type = "Access Point";
 								this.nid = int(this.name.slice(13,15));
 							}	
-							
-							if(this.name.slice(0,8)=="Computer"){
+							else if(this.name.slice(0,8)=="Computer"){
 								this.type = "Computer";
 								this.nid = int(this.name.slice(9,11));
 							}
-							
-							if(this.name.slice(0,7)=="Station"){
+							else if(this.name.slice(0,10)=="Smartphone"){
+								this.type = "Car";
+								this.nid = int(this.name.slice(11,13));
+							}
+							else if(this.name.slice(0,7)=="Station"){
 								this.type = "Station";
 								this.nid = int(this.name.slice(8,10));
 							}	
-							
-							if(this.name.slice(0,10)=="Controller"){
+							else if(this.name.slice(0,10)=="Controller"){
 								this.type = "Controller";
 								this.nid = int(this.name.slice(11,13));
 							}							
@@ -316,23 +316,27 @@
 								this.type = "Switch";
 								this.nid = int(this.name.slice(7,9));
 							}	
-							
-							if(this.name.slice(0,12)=="Access Point"){
+							else if(this.name.slice(0,12)=="Access Point"){
 								this.type = "Access Point";
 								this.nid = int(this.name.slice(13,15));
 							}	
-							
-							if(this.name.slice(0,8)=="Computer"){
+							else if(this.name.slice(0,8)=="Computer"){
 								this.type = "Computer";
 								this.nid = int(this.name.slice(9,11));
 							}
-							
-							if(this.name.slice(0,7)=="Station"){
+							else if(this.name.slice(0,3)=="Car"){
+								this.type = "Car";
+								this.nid = int(this.name.slice(4,6));
+							}
+							else if(this.name.slice(0,10)=="Smartphone"){
+								this.type = "Car";
+								this.nid = int(this.name.slice(11,13));
+							}
+							else if(this.name.slice(0,7)=="Station"){
 								this.type = "Station";
 								this.nid = int(this.name.slice(8,10));
 							}	
-							
-							if(this.name.slice(0,10)=="Controller"){
+							else if(this.name.slice(0,10)=="Controller"){
 								this.type = "Controller";
 								this.nid = int(this.name.slice(11,13));
 							}	
