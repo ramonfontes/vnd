@@ -28,7 +28,7 @@ Using Mininet and Floodlight Controller - https://www.youtube.com/watch?v=Vh3TAP
 Main Project File - src/main.mxml
 
 
-## Access it
+## How to access
 VND is available on www.ramonfontes.com/vnd
 
 
