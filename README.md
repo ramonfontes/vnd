@@ -21,8 +21,8 @@ Using Link Configuration to Mininet - https://www.youtube.com/watch?v=tMaCsnCwnO
 ### Videos Related to SDN/OpenFlow
 Unbricking a Router - https://www.youtube.com/watch?v=8QW4vKnEs94  
 Wireless Network - https://www.youtube.com/watch?v=Bcu90aQGvqk  
-Packet Analysis with Wireshark - https://www.youtube.com/watch?v=i5HiR-ys1JI  
-Using Mininet and Floodlight Controller - https://www.youtube.com/watch?v=Vh3TAP9RIE8  
+Packet Analysis with Wireshark - https://www .youtube.com/watch?v=i5HiR-ys1JI  
+Using Mininet and Floodlight Controller - https://www.youtube.com/watch?v=Vh3TAP9RIE8  
 
 ## Files
 Main Project File - src/main.mxml
@@ -33,7 +33,7 @@ VND is available on www.ramonfontes.com/vnd
 
 
 ## Running on locally
-If you want to run the VND on locally, you have to install a Web Server, PHP (can be a newest version), Flash Plugin and open /bin-debug/index.html file on your browser.  
+If you want to run the VND on locally, you have to install a Web Server, PHP (can be a newest version), Flash Plugin and open /bin-debug/index.html file on your browser. Write permission to /scripts is also required.  
 
 **Alternatively you can run a docker container with all features installed from: https://registry.hub.docker.com/u/ramonfontes/vnd/**
 
