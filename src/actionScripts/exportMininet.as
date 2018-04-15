@@ -88,19 +88,15 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "from mininet.net import Mininet@@";
+	sh = "from mininet.wifi.net import Mininet_wifi@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "from mininet.node import Controller, RemoteController, OVSKernelSwitch, IVSSwitch, UserSwitch@@";
+	sh = "from mininet.node import Controller, RemoteController@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "from mininet.link import Link, TCLink@@";
-	objeto_mininet=sh;
-	temp_mininet.addItem(objeto_mininet);
-	cont_mininet++;
-	sh = "from mininet.cli import CLI@@";
+	sh = "from mininet.wifi.cli import CLI_wifi@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
@@ -164,13 +160,13 @@ public function exportMininetScriptFile():void {
 						}
 						if(isRemote){
 							cont_mininet++;
-							sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
+							sh = "    net = Mininet_wifi( controller=Controller )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
 						else{
 							cont_mininet++;
-							sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+							sh = "    net = Mininet_wifi( controller=RemoteController )@@";
 							objeto_mininet=sh;
 							temp_mininet.addItem(objeto_mininet);
 						}
@@ -208,13 +204,13 @@ public function exportMininetScriptFile():void {
 		}
 		if(isRemote){
 			cont_mininet++;
-			sh = "    net = Mininet( controller=Controller, link=TCLink, switch="+switch_+" )@@";
+			sh = "    net = Mininet_wifi( controller=Controller )@@";
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
 		}
 		else{
 			cont_mininet++;
-			sh = "    net = Mininet( controller=RemoteController, link=TCLink, switch="+switch_+" )@@";
+			sh = "    net = Mininet_wifi( controller=RemoteController )@@";
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
 		}
@@ -887,7 +883,7 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "    CLI( net )@@";
+	sh = "    CLI_wifi( net )@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
