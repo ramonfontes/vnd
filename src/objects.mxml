@@ -2116,7 +2116,7 @@
 							tb.width=60;
 							tb.maxChars=5;	
 							if(this.id == "Access Point"){
-								tb.text="33";
+								tb.text="100";
 							}
 							else{
 								tb.text="18";
@@ -2379,7 +2379,7 @@
 				if (this.id == "Access Point" || this.id == "Station" || this.id == "Car"){
 					var r:int = 0;
 					if (this.name.slice(0,12) == "Access Point"){
-						r = 33;
+						r = 100;
 						circle.graphics.beginFill(0x1858FE, 0.4);
 					}
 					else if (this.id == "Station" || this.id == "Car"){

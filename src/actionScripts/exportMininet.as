@@ -1,9 +1,9 @@
-import action_alert.HMensagens;
+																																																																																																																																																																																																																																																																																																																															import action_alert.HMensagens;
 
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.events.ProgressEvent;
-import flash.net.FileReference;
+import flash.net.FileReference;																																															
 import flash.net.URLRequest;
 
 import mx.collections.ArrayCollection;
@@ -76,15 +76,15 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "\n\"\"\"@@";
+	sh = "@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "Script created by VND - Visual Network Description (SDN version)@@";
+	sh = "\"Script created by VND - Visual Network Description (SDN version)\"@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "\"\"\"@@";
+	sh = "@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
@@ -100,7 +100,7 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "from mininet.log import setLogLevel@@";
+	sh = "from mininet.log import setLogLevel, info@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
@@ -226,7 +226,7 @@ public function exportMininetScriptFile():void {
 			objeto_mininet=sh;
 			cont_mininet++;
 			temp_mininet.addItem(objeto_mininet);
-			sh = "    print \"*** Creating nodes\"@@";
+			sh = "    info(\"*** Creating nodes\\n\")@@";
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
 		}
@@ -445,17 +445,17 @@ public function exportMininetScriptFile():void {
 				}
 				cont_mininet++;
 				if(openFlowVersion=="1")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.1")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.2")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.3")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else if(openFlowVersion=="1.4")
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				else
-					sh = "    ap"+ob.nid+" = net.addBaseStation( 'ap"+ob.nid+"', ssid='"+ssid+"', mode= '"+mode+"', channel= '"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -499,7 +499,7 @@ public function exportMininetScriptFile():void {
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
 			cont_mininet++;
-			sh = "    print \"*** Creating links\"@@";
+			sh = "    info(\"*** Creating links\\n\")@@";
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
 		}
@@ -593,7 +593,6 @@ public function exportMininetScriptFile():void {
 							sh = "    net.addLink(h"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
 						}
 						
-							
 						if(obLink.can.bw!=null&&obLink.can.bw!="default")
 							sh=sh.concat(" bw="+obLink.can.bw+",");	
 						if(obLink.can.delay!=""&&obLink.can.delay!=null)
@@ -616,15 +615,11 @@ public function exportMininetScriptFile():void {
 							cont_mininet++;
 							if(obLink.can.lineName=="ethernet"){
 								sh = "    net.addLink(sta"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+", link='wired',";
-							}
-							else{
-								sh = "    net.addLink(sta"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
-							}
-							sh=sh.substring(0, sh.length-1);
-							sh=sh.concat(")@@");
-							
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
+								sh=sh.substring(0, sh.length-1);
+								sh=sh.concat(")@@");							
+								objeto_mininet=sh;
+								temp_mininet.addItem(objeto_mininet);
+							}							
 						}
 						else if(obLink.can.destination.id=="Switch"){
 							cont_mininet++;
@@ -679,15 +674,11 @@ public function exportMininetScriptFile():void {
 							cont_mininet++;
 							if(obLink.can.lineName=="ethernet"){
 								sh = "    net.addLink(ap"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+", link='wired',";
-							}
-							else{
-								sh = "    net.addLink(ap"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+",";
-							}
-							sh=sh.substring(0, sh.length-1);
-							sh=sh.concat(")@@");
-							
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
+								sh=sh.substring(0, sh.length-1);
+								sh=sh.concat(")@@");
+								objeto_mininet=sh;
+								temp_mininet.addItem(objeto_mininet);
+							}												
 						}
 					}
 				}
@@ -766,9 +757,27 @@ public function exportMininetScriptFile():void {
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
 			cont_mininet++;
-			sh = "    print \"*** Starting network\"@@";
+			sh = "    info(\"*** Starting network\\n\")@@";
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
+			cont_mininet++;
+			sh = "    net.configureWifiNodes()@@";
+			objeto_mininet=sh;
+			temp_mininet.addItem(objeto_mininet);
+			cont_mininet++;
+			sh = "@@";
+			objeto_mininet=sh;
+			temp_mininet.addItem(objeto_mininet);
+			if(isWireless){
+				cont_mininet++;
+				sh = "    net.plotGraph(max_x="+(x+20)+", max_y="+(y+20)+")@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+				cont_mininet++;
+				sh = "@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
 			cont_mininet++;
 			sh = "    net.build()@@";
 			objeto_mininet=sh;
@@ -868,18 +877,12 @@ public function exportMininetScriptFile():void {
 		x = y;		
 	}
 	
-	if(isWireless){
-		cont_mininet++;
-		sh = "    net.plotGraph(max_x="+(x+20)+", max_y="+(y+20)+")@@";
-		objeto_mininet=sh;
-		temp_mininet.addItem(objeto_mininet);
-	}
 	cont_mininet++;
 	sh = "@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "    print \"*** Running CLI\"@@";
+	sh = "    info(\"*** Running CLI\\n\")@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
@@ -891,7 +894,7 @@ public function exportMininetScriptFile():void {
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
-	sh = "    print \"*** Stopping network\"@@";
+	sh = "    info(\"*** Stopping network\\n\")@@";
 	objeto_mininet=sh;
 	temp_mininet.addItem(objeto_mininet);
 	cont_mininet++;
