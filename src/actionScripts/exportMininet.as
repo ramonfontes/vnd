@@ -1,14 +1,14 @@
 																																																																																																																																																																																																																																																																																																																															import action_alert.HMensagens;
-
-import flash.events.Event;
-import flash.events.IOErrorEvent;
-import flash.events.ProgressEvent;
-import flash.net.FileReference;																																															
-import flash.net.URLRequest;
-
-import mx.collections.ArrayCollection;
-import mx.controls.Alert;
-import mx.events.Request;
+																																																																																																																																																																																																																																																																																																																															
+																																																																																																																																																																																																																																																																																																																															import flash.events.Event;
+																																																																																																																																																																																																																																																																																																																															import flash.events.IOErrorEvent;
+																																																																																																																																																																																																																																																																																																																															import flash.events.ProgressEvent;
+																																																																																																																																																																																																																																																																																																																															import flash.net.FileReference;
+																																																																																																																																																																																																																																																																																																																															import flash.net.URLRequest;
+																																																																																																																																																																																																																																																																																																																															
+																																																																																																																																																																																																																																																																																																																															import mx.collections.ArrayCollection;
+																																																																																																																																																																																																																																																																																																																															import mx.controls.Alert;
+																																																																																																																																																																																																																																																																																																																															import mx.events.Request;
 public var fileRefScript_mininet:FileReference;// = new FileReference();
 
 public function exportMininetScriptFile():void {
@@ -136,7 +136,8 @@ public function exportMininetScriptFile():void {
 			UIob = dropCanvas.getChildAt(j);
 			if(UIob.className=='Link'){
 				var obLink:Link=UIob as Link;
-				if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"||obLink.can.lineName=="ethernet"){		
+				if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"
+					|| obLink.can.lineName=="ethernet"){		
 					if(j==0){
 						for(p=0;p<dropCanvas.numChildren;p++){	
 							intnew=1;
@@ -158,23 +159,18 @@ public function exportMininetScriptFile():void {
 								}
 							}
 						}
-						if(isRemote){
-							cont_mininet++;
-							sh = "    net = Mininet_wifi( controller=Controller )@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-						}
-						else{
-							cont_mininet++;
-							sh = "    net = Mininet_wifi( controller=RemoteController )@@";
-							objeto_mininet=sh;
-							temp_mininet.addItem(objeto_mininet);
-						}
+						var controllertype:String = "Controller";
+						if(isRemote)
+							controllertype = "RemoteController";
+	
+						cont_mininet++;
+						sh = "    net = Mininet_wifi( controller="+controllertype+" )@@";
+						objeto_mininet=sh;
+						temp_mininet.addItem(objeto_mininet);
 					}
 				}
 			}
-		}
-		
+		}		
 	}
 	else{
 		for(p=0;p<dropCanvas.numChildren;p++){	
@@ -300,18 +296,17 @@ public function exportMininetScriptFile():void {
 						else if(stationMask=="255.255.255.252")
 							stationMask="30";
 					}
-
 				}
 				cont_mininet++;
 				if(ob.id=="Car"){
 					sh = "    car"+ob.nid+" = net.addCar( 'car"+ob.nid+"', wlans="+arrayNumberOfRadios+", " +
-					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', position='"+ob.x+","+(1000-ob.y)+",0', " +
-					"range="+arraySignalRange+" )@@";
+					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', " +
+					"position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
 				}
 				else{
 					sh = "    sta"+ob.nid+" = net.addStation( 'sta"+ob.nid+"', wlans="+arrayNumberOfRadios+", " +
-					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', position='"+ob.x+","+(1000-ob.y)+",0', " +
-					"range="+arraySignalRange+" )@@";					
+					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', " +
+					"position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";					
 				}
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
@@ -379,7 +374,8 @@ public function exportMininetScriptFile():void {
 					}										
 				}
 				cont_mininet++;
-				sh = "    h"+ob.nid+" = net.addHost( 'h"+ob.nid+"', mac='"+computerMacAddress+"', ip='"+computerIPAddress+"/"+computerMask+"' )@@";
+				sh = "    h"+ob.nid+" = net.addHost( 'h"+ob.nid+"', mac='"+computerMacAddress+"', " +
+					"ip='"+computerIPAddress+"/"+computerMask+"' )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -400,18 +396,22 @@ public function exportMininetScriptFile():void {
 					}
 				}
 				cont_mininet++;
+				var ofproto:String = '';
 				if(openFlowVersion=="1")
-					sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow10', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
-				else if(openFlowVersion=="1.1")
-					sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow11', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
-				else if(openFlowVersion=="1.2")
-					sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow12', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
-				else if(openFlowVersion=="1.3")
-					sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow13', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
-				else if(openFlowVersion=="1.4")
-					sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow14', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
-				else
-					sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
+					ofproto = '10';
+				else if(openFlowVersion=="1.1")	
+					ofproto = '11';
+				else if(openFlowVersion=="1.2")	
+					ofproto = '12';
+				else if(openFlowVersion=="1.3")	
+					ofproto = '13';
+				else if(openFlowVersion=="1.4")	
+					ofproto = '14';
+				else if(openFlowVersion=="1.5")	
+					ofproto = '15';
+						
+				sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow"+ofproto+"', " +
+					"listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}		
@@ -444,18 +444,25 @@ public function exportMininetScriptFile():void {
 					}
 				}
 				cont_mininet++;
+				
+				var ofproto:String = '';
 				if(openFlowVersion=="1")
-					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
-				else if(openFlowVersion=="1.1")
-					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
-				else if(openFlowVersion=="1.2")
-					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
-				else if(openFlowVersion=="1.3")
-					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
-				else if(openFlowVersion=="1.4")
-					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
-				else
-					sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					ofproto = '10';
+				else if(openFlowVersion=="1.1")	
+					ofproto = '11';
+				else if(openFlowVersion=="1.2")	
+					ofproto = '12';
+				else if(openFlowVersion=="1.3")	
+					ofproto = '13';
+				else if(openFlowVersion=="1.4")	
+					ofproto = '14';
+				else if(openFlowVersion=="1.5")	
+					ofproto = '15';
+						
+				sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', " +
+					"ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', " +
+					"position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+", " +
+					"protocols='OpenFlow"+ofproto+"' )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 			}
@@ -466,6 +473,8 @@ public function exportMininetScriptFile():void {
 				for(ir=0;ir<(ob.objparaArrayCol.length);ir++){
 					obj=ob.objparaArrayCol[ir] as objParameter;
 					
+					controllerIPAddress = "127.0.0.1";
+					controllerPort = "6653";
 					if(obj.name=="controllerIPAddress"){												
 						controllerIPAddress = obj.controllerIPAddress;	
 					}											
@@ -475,19 +484,12 @@ public function exportMininetScriptFile():void {
 					else if(obj.name=="remoteLocal"){												
 						isRemote = obj.isRemote;	
 					}	
-				}			
-				if(isRemote){
-					cont_mininet++;
-					sh = "    c"+ob.nid+" = net.addController( 'c"+ob.nid+"' )@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);	
-				}					
-				else{
-					cont_mininet++;
-					sh = "    c"+ob.nid+" = net.addController( 'c"+ob.nid+"', ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
 				}
+				cont_mininet++;
+				sh = "    c"+ob.nid+" = net.addController( 'c"+ob.nid+"', " +
+					"ip='"+controllerIPAddress+"', port="+controllerPort+" )@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
 			}
 		} 
 	}	
@@ -508,7 +510,8 @@ public function exportMininetScriptFile():void {
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;
 			if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"||obLink.can.lineName=="ethernet"){		
-				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")
+					&& (obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					if (obLink.can.source.id=="Access Point" && obLink.can.destination.id=="Access Point"){
 						cont_mininet++;
 						sh = "    net.addLink(ap"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
@@ -582,15 +585,18 @@ public function exportMininetScriptFile():void {
 						temp_mininet.addItem(objeto_mininet);
 						}				
 				}
-				else if((obLink.can.source.id=="Computer" || obLink.can.source.id=="Station")&&(obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
+				else if((obLink.can.source.id=="Computer" || obLink.can.source.id=="Station")
+					&& (obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					if(obLink.can.source.id=="Computer"){
 						if(obLink.can.destination.id=="Switch"){
 							cont_mininet++;
-							sh = "    net.addLink(h"+obLink.can.source.nid+", s"+obLink.can.destination.nid+",";
+							sh = "    net.addLink(h"+obLink.can.source.nid+", " +
+								"s"+obLink.can.destination.nid+",";
 						}
 						else if(obLink.can.destination.id=="Access Point"){
 							cont_mininet++;
-							sh = "    net.addLink(h"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+",";
+							sh = "    net.addLink(h"+obLink.can.source.nid+", " +
+								"ap"+obLink.can.destination.nid+",";
 						}
 						
 						if(obLink.can.bw!=null&&obLink.can.bw!="default")
@@ -614,7 +620,8 @@ public function exportMininetScriptFile():void {
 						if(obLink.can.destination.id=="Access Point"){
 							cont_mininet++;
 							if(obLink.can.lineName=="ethernet"){
-								sh = "    net.addLink(sta"+obLink.can.source.nid+", ap"+obLink.can.destination.nid+", link='wired',";
+								sh = "    net.addLink(sta"+obLink.can.source.nid+", " +
+									"ap"+obLink.can.destination.nid+", link='wired',";
 								sh=sh.substring(0, sh.length-1);
 								sh=sh.concat(")@@");							
 								objeto_mininet=sh;
@@ -623,7 +630,8 @@ public function exportMininetScriptFile():void {
 						}
 						else if(obLink.can.destination.id=="Switch"){
 							cont_mininet++;
-							sh = "    net.addLink(sta"+obLink.can.source.nid+", s"+obLink.can.destination.nid+",";
+							sh = "    net.addLink(sta"+obLink.can.source.nid+", " +
+								"s"+obLink.can.destination.nid+",";
 							sh=sh.substring(0, sh.length-1);
 							sh=sh.concat(")@@");
 							
@@ -632,15 +640,18 @@ public function exportMininetScriptFile():void {
 						}
 					}
 				}
-				else if((obLink.can.source.id=="Switch"|| obLink.can.source.id=="Access Point")&&(obLink.can.destination.id=="Computer"||obLink.can.destination.id=="Station")){
+				else if((obLink.can.source.id=="Switch"|| obLink.can.source.id=="Access Point")
+					&& (obLink.can.destination.id=="Computer"||obLink.can.destination.id=="Station")){
 					if (obLink.can.destination.id=="Computer"){						
 						if(obLink.can.source.id=="Switch"){
 							cont_mininet++;
-							sh = "    net.addLink(s"+obLink.can.source.nid+", h"+obLink.can.destination.nid+",";
+							sh = "    net.addLink(s"+obLink.can.source.nid+", " +
+								"h"+obLink.can.destination.nid+",";
 						}
 						else if(obLink.can.source.id=="Access Point"){
 							cont_mininet++;
-							sh = "    net.addLink(ap"+obLink.can.source.nid+", h"+obLink.can.destination.nid+",";
+							sh = "    net.addLink(ap"+obLink.can.source.nid+", " +
+								"h"+obLink.can.destination.nid+",";
 						}
 						
 						if(obLink.can.bw!=null&&obLink.can.bw!="default")
@@ -663,7 +674,8 @@ public function exportMininetScriptFile():void {
 					else if (obLink.can.destination.id=="Station"){
 						if(obLink.can.source.id=="Switch"){
 							cont_mininet++;
-							sh = "    net.addLink(s"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+",";
+							sh = "    net.addLink(s"+obLink.can.source.nid+", " +
+								"sta"+obLink.can.destination.nid+",";
 							sh=sh.substring(0, sh.length-1);
 							sh=sh.concat(")@@");
 							
@@ -673,7 +685,8 @@ public function exportMininetScriptFile():void {
 						else if(obLink.can.source.id=="Access Point"){
 							cont_mininet++;
 							if(obLink.can.lineName=="ethernet"){
-								sh = "    net.addLink(ap"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+", link='wired',";
+								sh = "    net.addLink(ap"+obLink.can.source.nid+", " +
+									"sta"+obLink.can.destination.nid+", link='wired',";
 								sh=sh.substring(0, sh.length-1);
 								sh=sh.concat(")@@");
 								objeto_mininet=sh;
@@ -684,7 +697,8 @@ public function exportMininetScriptFile():void {
 				}
 				else if((obLink.can.source.id=="Computer"&&(obLink.can.destination.id=="Computer"))){
 						cont_mininet++;
-						sh = "    net.addLink(h"+obLink.can.source.nid+", h"+obLink.can.destination.nid+",";
+						sh = "    net.addLink(h"+obLink.can.source.nid+", " +
+							"h"+obLink.can.destination.nid+",";
 						if(obLink.can.bw!=null&&obLink.can.bw!="default")
 							sh=sh.concat(" bw="+obLink.can.bw+",");	
 						if(obLink.can.delay!=""&&obLink.can.delay!=null)
@@ -702,10 +716,12 @@ public function exportMininetScriptFile():void {
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);				
 				}
-				else if(obLink.can.lineName=="wireless" && obLink.can.source.id=="Station" && obLink.can.destination.id=="Station"){
+				else if(obLink.can.lineName=="wireless" && obLink.can.source.id=="Station" 
+					&& obLink.can.destination.id=="Station"){
 					if(stations.indexOf("sta"+obLink.can.source.nid)==-1){
 						cont_mininet++;
-						sh = "    net.addMesh(sta"+obLink.can.source.nid+", ssid='meshNet', mode='g') #node, ssid, mode";
+						sh = "    net.addMesh(sta"+obLink.can.source.nid+", ssid='meshNet', " +
+							"mode='g') #node, ssid, mode";
 						sh=sh.concat("@@");
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);	
@@ -713,25 +729,30 @@ public function exportMininetScriptFile():void {
 					}
 					if(stations.indexOf("sta"+obLink.can.destination.nid)==-1){	
 						cont_mininet++;
-						sh = "    net.addMesh(sta"+obLink.can.destination.nid+", ssid='meshNet', mode='g') #node, ssid, mode";
+						sh = "    net.addMesh(sta"+obLink.can.destination.nid+", ssid='meshNet', " +
+							"mode='g') #node, ssid, mode";
 						sh=sh.concat("@@");
 						objeto_mininet=sh;
 						temp_mininet.addItem(objeto_mininet);
 						stations.push("sta"+obLink.can.destination.nid)
 					}
 				}
-				else if(obLink.can.lineName=="fiber" || obLink.can.lineName=="ethernet" && obLink.can.source.id=="Station" && obLink.can.destination.id=="Station"){
+				else if(obLink.can.lineName=="fiber" || obLink.can.lineName=="ethernet" 
+					&& obLink.can.source.id=="Station" && obLink.can.destination.id=="Station"){
 					cont_mininet++;
-					sh = "    net.addLink(sta"+obLink.can.destination.nid+", sta"+obLink.can.source.nid+",";
+					sh = "    net.addLink(sta"+obLink.can.destination.nid+", " +
+						"sta"+obLink.can.source.nid+",";
 					sh=sh.substring(0, sh.length-1);
 					sh=sh.concat(")@@");						
 					objeto_mininet=sh;
 					temp_mininet.addItem(objeto_mininet);
 				}
-				else if((obLink.can.source.id=="Station" && obLink.can.destination.id=="Computer") || (obLink.can.source.id=="Computer" && obLink.can.destination.id=="Station")){
+				else if((obLink.can.source.id=="Station" && obLink.can.destination.id=="Computer") 
+					|| (obLink.can.source.id=="Computer" && obLink.can.destination.id=="Station")){
 					if(obLink.can.source.id=="Computer"){
 						cont_mininet++;
-						sh = "    net.addLink(h"+obLink.can.source.nid+", sta"+obLink.can.destination.nid+",";
+						sh = "    net.addLink(h"+obLink.can.source.nid+", " +
+							"sta"+obLink.can.destination.nid+",";
 						sh=sh.substring(0, sh.length-1);
 						sh=sh.concat(")@@");						
 						objeto_mininet=sh;
@@ -739,7 +760,8 @@ public function exportMininetScriptFile():void {
 					}
 					if(obLink.can.source.name.slice(0,7)=="Station"){	
 						cont_mininet++;
-						sh = "    net.addLink(sta"+obLink.can.source.nid+", h"+obLink.can.destination.nid+",";
+						sh = "    net.addLink(sta"+obLink.can.source.nid+", " +
+							"h"+obLink.can.destination.nid+",";
 						sh=sh.substring(0, sh.length-1);
 						sh=sh.concat(")@@");						
 						objeto_mininet=sh;
@@ -798,48 +820,43 @@ public function exportMininetScriptFile():void {
 		UIob = dropCanvas.getChildAt(p);
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;	
-				if(exists==false && storeConnectivity.indexOf(obLink.can.source.nid)==-1 && (obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")&&obLink.can.destination.id=="Controller"){
-					if (obLink.can.source.id=="Access Point"){
-						storeConnectivity.push(obLink.can.source.nid);	
-						cont_mininet++;
-						sh = "    ap"+obLink.can.source.nid+".start( [c"+obLink.can.destination.nid;
-						countControllerDestination=obLink.can.destination.nid.toString();	
-						countSwitchSource=obLink.can.source.nid.toString();
-						exists=true;	
-					}
-					else{
-						storeConnectivity.push(obLink.can.source.nid);	
-						cont_mininet++;
-						sh = "    s"+obLink.can.source.nid+".start( [c"+obLink.can.destination.nid;
-						countControllerDestination=obLink.can.destination.nid.toString();	
-						countSwitchSource=obLink.can.source.nid.toString();
-						exists=true;
-					}
-					sh = sh+"] )@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-				}
-				else if(exists==false && storeConnectivity.indexOf(obLink.can.destination.nid)==-1 && (obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")&&obLink.can.source.id=="Controller"){
-					if(obLink.can.destination.id=="Access Point"){
-						storeConnectivity.push(obLink.can.destination.nid);	
-						cont_mininet++;
-						sh = "    ap"+obLink.can.destination.nid+".start( [c"+obLink.can.source.nid;
-						countControllerSource=obLink.can.source.nid.toString();	
-						countSwitchDestination=obLink.can.destination.nid.toString();	
-						exists=true;
-					}
-					else{
-						storeConnectivity.push(obLink.can.destination.nid);	
-						cont_mininet++;
-						sh = "    s"+obLink.can.destination.nid+".start( [c"+obLink.can.source.nid;
-						countControllerSource=obLink.can.source.nid.toString();	
-						countSwitchDestination=obLink.can.destination.nid.toString();	
-						exists=true;
-					}
-					sh = sh+"] )@@";
-					objeto_mininet=sh;
-					temp_mininet.addItem(objeto_mininet);
-				}
+			if(exists==false && storeConnectivity.indexOf(obLink.can.source.nid)==-1
+				&& (obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point") 
+				&& obLink.can.destination.id=="Controller"){
+				var node:String = 'ap';
+				if (obLink.can.source.id=="Switch")
+					node = 's';
+					
+				storeConnectivity.push(obLink.can.source.nid);	
+				cont_mininet++;
+				sh = "    "+node+""+obLink.can.source.nid+".start( [c"+obLink.can.destination.nid;
+				countControllerDestination=obLink.can.destination.nid.toString();	
+				countSwitchSource=obLink.can.source.nid.toString();
+				exists=true;
+			
+				sh = sh+"] )@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
+			else if(exists==false && storeConnectivity.indexOf(obLink.can.destination.nid)==-1 
+				&& (obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")
+				&& obLink.can.source.id=="Controller"){
+				
+				var node:String = 'ap';
+				if (obLink.can.destination.id=="Switch")
+					node = 's';
+
+				storeConnectivity.push(obLink.can.destination.nid);	
+				cont_mininet++;
+				sh = "    "+node+""+obLink.can.destination.nid+".start( [c"+obLink.can.source.nid;
+				countControllerSource=obLink.can.source.nid.toString();	
+				countSwitchDestination=obLink.can.destination.nid.toString();	
+				exists=true;
+				
+				sh = sh+"] )@@";
+				objeto_mininet=sh;
+				temp_mininet.addItem(objeto_mininet);
+			}
 		} 
 		countSwitchDestination="";
 		countSwitchSource="";
