@@ -267,52 +267,7 @@ public function exportMininetScriptFile():void {
 					}
 					else if(obj.name=="mask"){												
 						stationMask = obj.MaskAddress;
-						if(stationMask=="255.0.0.0")
-							stationMask="8";
-						else if(stationMask=="255.128.0.0")
-							stationMask="9";
-						else if(stationMask=="255.192.0.0")
-							stationMask="10";
-						else if(stationMask=="255.224.0.0")
-							stationMask="11";
-						else if(stationMask=="255.240.0.0")
-							stationMask="12";
-						else if(stationMask=="255.248.0.0")
-							stationMask="13";
-						else if(stationMask=="255.252.0.0")
-							stationMask="14";
-						else if(stationMask=="255.254.0.0")
-							stationMask="15";
-						else if(stationMask=="255.255.0.0")
-							stationMask="16";
-						else if(stationMask=="255.255.128.0")
-							stationMask="17";
-						else if(stationMask=="255.255.192.0")
-							stationMask="18";
-						else if(stationMask=="255.255.224.0")
-							stationMask="19";
-						else if(stationMask=="255.255.240.0")
-							stationMask="20";
-						else if(stationMask=="255.255.248.0")
-							stationMask="21";
-						else if(stationMask=="255.255.252.0")
-							stationMask="22";
-						else if(stationMask=="255.255.254.0")
-							stationMask="23";
-						else if(stationMask=="255.255.255.0")
-							stationMask="24";
-						else if(stationMask=="255.255.255.128")
-							stationMask="25";
-						else if(stationMask=="255.255.255.192")
-							stationMask="26";
-						else if(stationMask=="255.255.255.224")
-							stationMask="27";
-						else if(stationMask=="255.255.255.240")
-							stationMask="28";
-						else if(stationMask=="255.255.255.248")
-							stationMask="29";
-						else if(stationMask=="255.255.255.252")
-							stationMask="30";
+						stationMask = ipaddr(stationMask);
 					}
 				}
 				cont_mininet++;
@@ -343,52 +298,7 @@ public function exportMininetScriptFile():void {
 					}	
 					else if(obj.name=="mask"){												
 						computerMask = obj.MaskAddress;
-						if(computerMask=="255.0.0.0")
-							computerMask="8";
-						else if(computerMask=="255.128.0.0")
-							computerMask="9";
-						else if(computerMask=="255.192.0.0")
-							computerMask="10";
-						else if(computerMask=="255.224.0.0")
-							computerMask="11";
-						else if(computerMask=="255.240.0.0")
-							computerMask="12";
-						else if(computerMask=="255.248.0.0")
-							computerMask="13";
-						else if(computerMask=="255.252.0.0")
-							computerMask="14";
-						else if(computerMask=="255.254.0.0")
-							computerMask="15";
-						else if(computerMask=="255.255.0.0")
-							computerMask="16";
-						else if(computerMask=="255.255.128.0")
-							computerMask="17";
-						else if(computerMask=="255.255.192.0")
-							computerMask="18";
-						else if(computerMask=="255.255.224.0")
-							computerMask="19";
-						else if(computerMask=="255.255.240.0")
-							computerMask="20";
-						else if(computerMask=="255.255.248.0")
-							computerMask="21";
-						else if(computerMask=="255.255.252.0")
-							computerMask="22";
-						else if(computerMask=="255.255.254.0")
-							computerMask="23";
-						else if(computerMask=="255.255.255.0")
-							computerMask="24";
-						else if(computerMask=="255.255.255.128")
-							computerMask="25";
-						else if(computerMask=="255.255.255.192")
-							computerMask="26";
-						else if(computerMask=="255.255.255.224")
-							computerMask="27";
-						else if(computerMask=="255.255.255.240")
-							computerMask="28";
-						else if(computerMask=="255.255.255.248")
-							computerMask="29";
-						else if(computerMask=="255.255.255.252")
-							computerMask="30";
+						computerMask = ipaddr(computerMask);
 					}										
 				}
 				cont_mininet++;
@@ -415,18 +325,7 @@ public function exportMininetScriptFile():void {
 				}
 				cont_mininet++;
 				var ofproto:String = '';
-				if(openFlowVersion=="1")
-					ofproto = '10';
-				else if(openFlowVersion=="1.1")	
-					ofproto = '11';
-				else if(openFlowVersion=="1.2")	
-					ofproto = '12';
-				else if(openFlowVersion=="1.3")	
-					ofproto = '13';
-				else if(openFlowVersion=="1.4")	
-					ofproto = '14';
-				else if(openFlowVersion=="1.5")	
-					ofproto = '15';
+				ofproto = ofprotoversion(openFlowVersion);
 						
 				sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow"+ofproto+"', " +
 					"listenPort="+listenPortSwitch+", mac='"+macSwitch+"' )@@";
@@ -461,22 +360,10 @@ public function exportMininetScriptFile():void {
 						channel = obj.channel;
 					}
 				}
-				cont_mininet++;
-				
 				var ofproto:String = '';
-				if(openFlowVersion=="1")
-					ofproto = '10';
-				else if(openFlowVersion=="1.1")	
-					ofproto = '11';
-				else if(openFlowVersion=="1.2")	
-					ofproto = '12';
-				else if(openFlowVersion=="1.3")	
-					ofproto = '13';
-				else if(openFlowVersion=="1.4")	
-					ofproto = '14';
-				else if(openFlowVersion=="1.5")	
-					ofproto = '15';
-						
+				ofproto = ofprotoversion(openFlowVersion);
+				
+				cont_mininet++;
 				sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', " +
 					"ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', \n" +
 					"        position='"+ob.x+","+((1000-ob.y)-(1000-ob.y-max_y))+",0', range="+arraySignalRange+", " +
@@ -978,4 +865,71 @@ public function exportMininetScriptFile():void {
 		fileRefScript_mininet.addEventListener(ProgressEvent.PROGRESS, downloading_progress);				
 		downloadScript();
 	}		
+}
+
+
+public function ofprotoversion(version:String):String{
+	if(version=="1")
+		version = '10';
+	else if(version=="1.1")	
+		version = '11';
+	else if(openFlowVersion=="1.2")	
+		version = '12';
+	else if(version=="1.3")	
+		version = '13';
+	else if(version=="1.4")	
+		version = '14';
+	else if(version=="1.5")	
+		version = '15';
+	return version;
+}
+
+public function ipaddr(mask:String):String{
+	if(mask=="255.0.0.0")
+		mask="8";
+	else if(mask=="255.128.0.0")
+		mask="9";
+	else if(mask=="255.192.0.0")
+		mask="10";
+	else if(mask=="255.224.0.0")
+		mask="11";
+	else if(mask=="255.240.0.0")
+		mask="12";
+	else if(mask=="255.248.0.0")
+		mask="13";
+	else if(mask=="255.252.0.0")
+		mask="14";
+	else if(mask=="255.254.0.0")
+		mask="15";
+	else if(mask=="255.255.0.0")
+		mask="16";
+	else if(mask=="255.255.128.0")
+		mask="17";
+	else if(mask=="255.255.192.0")
+		mask="18";
+	else if(mask=="255.255.224.0")
+		mask="19";
+	else if(mask=="255.255.240.0")
+		mask="20";
+	else if(mask=="255.255.248.0")
+		mask="21";
+	else if(mask=="255.255.252.0")
+		mask="22";
+	else if(mask=="255.255.254.0")
+		mask="23";
+	else if(mask=="255.255.255.0")
+		mask="24";
+	else if(mask=="255.255.255.128")
+		mask="25";
+	else if(mask=="255.255.255.192")
+		mask="26";
+	else if(mask=="255.255.255.224")
+		mask="27";
+	else if(mask=="255.255.255.240")
+		mask="28";
+	else if(mask=="255.255.255.248")
+		mask="29";
+	else if(mask=="255.255.255.252")
+		mask="30";
+	return mask;
 }
