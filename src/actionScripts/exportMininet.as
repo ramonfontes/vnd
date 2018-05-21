@@ -213,6 +213,25 @@ public function exportMininetScriptFile():void {
 		
 	//----------------------------------------------------------------------
 	//----------------------------------------------------------------------
+	var min_x:int=0;
+	var min_y:int=0;
+	var max_x:int=0;
+	var max_y:int=0;
+	for(p=0;p<dropCanvas.numChildren;p++){	
+		UIob = dropCanvas.getChildAt(p);
+		if(UIob.className =='objects'){
+			ob=UIob as objects;	
+			if (ob.x < min_x)
+				min_x = ob.x;
+			if (ob.y < min_y)
+				min_y = ob.y;
+			if (ob.x > max_x)
+				max_x = ob.x;
+			if (ob.y > max_y)
+				max_y = ob.y;
+		}
+	}
+	
 	for(p=0;p<dropCanvas.numChildren;p++){	
 		intnew=1;
 		if(p==0){
@@ -300,12 +319,12 @@ public function exportMininetScriptFile():void {
 				if(ob.id=="Car"){
 					sh = "    car"+ob.nid+" = net.addCar( 'car"+ob.nid+"', wlans="+arrayNumberOfRadios+", " +
 					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', " +
-					"position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";
+					"\n        position='"+ob.x+","+((1000-ob.y)-(1000-ob.y-max_y))+",0', range="+arraySignalRange+" )@@";
 				}
 				else{
 					sh = "    sta"+ob.nid+" = net.addStation( 'sta"+ob.nid+"', wlans="+arrayNumberOfRadios+", " +
 					"mac='"+stationMacAddress+"', ip='"+stationIPAddress+"/"+stationMask+"', " +
-					"position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+" )@@";					
+					"\n        position='"+ob.x+","+((1000-ob.y)-(1000-ob.y-max_y))+",0', range="+arraySignalRange+" )@@";					
 				}
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
@@ -459,8 +478,8 @@ public function exportMininetScriptFile():void {
 					ofproto = '15';
 						
 				sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', " +
-					"ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', " +
-					"position='"+ob.x+","+(1000-ob.y)+",0', range="+arraySignalRange+", " +
+					"ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', \n" +
+					"        position='"+ob.x+","+((1000-ob.y)-(1000-ob.y-max_y))+",0', range="+arraySignalRange+", " +
 					"protocols='OpenFlow"+ofproto+"' )@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
@@ -789,9 +808,16 @@ public function exportMininetScriptFile():void {
 			sh = "@@";
 			objeto_mininet=sh;
 			temp_mininet.addItem(objeto_mininet);
+			var max_g:int = max_x;
+			var min_g:int = min_x;
+			if (max_y > max_x)
+				max_g = max_y;
+			if (min_y < min_x)
+				min_g = min_y;
 			if(isWireless){
 				cont_mininet++;
-				sh = "    net.plotGraph(max_x="+(x+20)+", max_y="+(y+20)+")@@";
+				sh = "    net.plotGraph(min_x="+(min_g+50)+", min_y="+(min_g+50)
+					+", max_x="+(max_g+50)+", max_y="+(max_g+50)+")@@";
 				objeto_mininet=sh;
 				temp_mininet.addItem(objeto_mininet);
 				cont_mininet++;
