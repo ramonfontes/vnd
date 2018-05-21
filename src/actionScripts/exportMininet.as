@@ -1,15 +1,14 @@
-																																																																																																																																																																																																																																																																																																																															import action_alert.HMensagens;
-																																																																																																																																																																																																																																																																																																																															
-																																																																																																																																																																																																																																																																																																																															import flash.events.Event;
-																																																																																																																																																																																																																																																																																																																															import flash.events.IOErrorEvent;
-																																																																																																																																																																																																																																																																																																																															import flash.events.ProgressEvent;
-																																																																																																																																																																																																																																																																																																																															import flash.net.FileReference;
-																																																																																																																																																																																																																																																																																																																															import flash.net.URLRequest;
-																																																																																																																																																																																																																																																																																																																															
-																																																																																																																																																																																																																																																																																																																															import mx.collections.ArrayCollection;
-																																																																																																																																																																																																																																																																																																																															import mx.controls.Alert;
-																																																																																																																																																																																																																																																																																																																															import mx.events.Request;
-public var fileRefScript_mininet:FileReference;// = new FileReference();
+import action_alert.HMensagens;
+import flash.events.Event;
+import flash.events.IOErrorEvent;
+import flash.events.ProgressEvent;
+import flash.net.FileReference;																																															
+import flash.net.URLRequest;
+
+import mx.collections.ArrayCollection;
+import mx.controls.Alert;
+import mx.events.Request;
+public var fileRefScript_mininet:FileReference;// = new FileReference();																																																																																																																																																																																																																																																																																																																															import action_alert.HMensagens;
 
 public function exportMininetScriptFile():void {
 	var objSend:Object = new Object;
