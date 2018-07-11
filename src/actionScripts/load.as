@@ -244,8 +244,8 @@ public function load(eve:ResultEvent):void{
 				link.can.lineName = "wireless"
 			else if (link.name.slice(0,5)=="fiber")
 				link.can.lineName = "fiber"
-			else if (link.name.slice(0,8)=="ethernet")
-				link.can.lineName = "ethernet"
+			else if (link.name.slice(0,3)=="utp")
+				link.can.lineName = "utp"
 			
 			if((sr=="Switch" || sr=="Access Point") && ds!="Controller" && link.name.slice(0,8)!="wireless"){
 				//Source

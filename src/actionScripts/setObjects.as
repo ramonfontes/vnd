@@ -15,7 +15,7 @@ public function setobject(eve:Event):void {
 	
 	if(eve.target.id=="Computer"||eve.target.id=="Switch"||eve.target.id=="Car"
 		||eve.target.id=="Access Point"||eve.target.id=="Station"
-		||eve.target.id=="fiber"||eve.target.id=="ethernet"
+		||eve.target.id=="fiber"||eve.target.id=="utp"
 		||eve.target.id=="wireless"||eve.target.id=="Smartphone"){
 	}
 	

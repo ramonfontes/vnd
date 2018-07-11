@@ -107,7 +107,7 @@
 				this.addChildAt(lable,0);
 				this.addChildAt(form,1);
 				
-				if(this.name.slice(0,8)=="ethernet"||this.name.slice(0,5)=="fiber"){
+				if(this.name.slice(0,3)=="utp"||this.name.slice(0,5)=="fiber"){
 					var ab:int = int(this.name.slice(9,11));
 					ye=ab;
 				}

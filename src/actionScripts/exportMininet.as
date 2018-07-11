@@ -31,6 +31,8 @@ public function exportMininetScriptFile():void {
 	var countSwitchSource:String;
 	var countSwitchDestination:String;
 	var ssid:String;
+	var ofproto:String;
+	var node:String;
 	var storeSwitches:Array=[];
 	var storeConnectivity:Array=[];
 	var stations:Array=[];
@@ -136,7 +138,7 @@ public function exportMininetScriptFile():void {
 			if(UIob.className=='Link'){
 				var obLink:Link=UIob as Link;
 				if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"
-					|| obLink.can.lineName=="ethernet"){		
+					|| obLink.can.lineName=="utp"){		
 					if(j==0){
 						for(p=0;p<dropCanvas.numChildren;p++){	
 							intnew=1;
@@ -324,7 +326,6 @@ public function exportMininetScriptFile():void {
 					}
 				}
 				cont_mininet++;
-				var ofproto:String = '';
 				ofproto = ofprotoversion(openFlowVersion);
 						
 				sh = "    s"+ob.nid+" = net.addSwitch( 's"+ob.nid+"', protocols='OpenFlow"+ofproto+"', " +
@@ -360,10 +361,8 @@ public function exportMininetScriptFile():void {
 						channel = obj.channel;
 					}
 				}
-				var ofproto:String = '';
-				ofproto = ofprotoversion(openFlowVersion);
-				
 				cont_mininet++;
+				ofproto = ofprotoversion(openFlowVersion);
 				sh = "    ap"+ob.nid+" = net.addAccessPoint( 'ap"+ob.nid+"', " +
 					"ssid='"+ssid+"', mode='"+mode+"', channel='"+channel+"', \n" +
 					"        position='"+ob.x+","+((1000-ob.y)-(1000-ob.y-max_y))+",0', range="+arraySignalRange+", " +
@@ -414,7 +413,7 @@ public function exportMininetScriptFile():void {
 		UIob = dropCanvas.getChildAt((dropCanvas.numChildren-1)-j);
 		if(UIob.className=='Link'){
 			obLink=UIob as Link;
-			if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"||obLink.can.lineName=="ethernet"){		
+			if(obLink.can.lineName=="wireless"||obLink.can.lineName=="fiber"||obLink.can.lineName=="utp"){		
 				if((obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point")
 					&& (obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")){
 					if (obLink.can.source.id=="Access Point" && obLink.can.destination.id=="Access Point"){
@@ -524,7 +523,7 @@ public function exportMininetScriptFile():void {
 					else if(obLink.can.source.id=="Station" ) {
 						if(obLink.can.destination.id=="Access Point"){
 							cont_mininet++;
-							if(obLink.can.lineName=="ethernet"){
+							if(obLink.can.lineName=="utp"){
 								sh = "    net.addLink(sta"+obLink.can.source.nid+", " +
 									"ap"+obLink.can.destination.nid+", link='wired',";
 								sh=sh.substring(0, sh.length-1);
@@ -589,7 +588,7 @@ public function exportMininetScriptFile():void {
 						}
 						else if(obLink.can.source.id=="Access Point"){
 							cont_mininet++;
-							if(obLink.can.lineName=="ethernet"){
+							if(obLink.can.lineName=="utp"){
 								sh = "    net.addLink(ap"+obLink.can.source.nid+", " +
 									"sta"+obLink.can.destination.nid+", link='wired',";
 								sh=sh.substring(0, sh.length-1);
@@ -642,7 +641,7 @@ public function exportMininetScriptFile():void {
 						stations.push("sta"+obLink.can.destination.nid)
 					}
 				}
-				else if(obLink.can.lineName=="fiber" || obLink.can.lineName=="ethernet" 
+				else if(obLink.can.lineName=="fiber" || obLink.can.lineName=="utp" 
 					&& obLink.can.source.id=="Station" && obLink.can.destination.id=="Station"){
 					cont_mininet++;
 					sh = "    net.addLink(sta"+obLink.can.destination.nid+", " +
@@ -735,7 +734,7 @@ public function exportMininetScriptFile():void {
 			if(exists==false && storeConnectivity.indexOf(obLink.can.source.nid)==-1
 				&& (obLink.can.source.id=="Switch"||obLink.can.source.id=="Access Point") 
 				&& obLink.can.destination.id=="Controller"){
-				var node:String = 'ap';
+				node = 'ap';
 				if (obLink.can.source.id=="Switch")
 					node = 's';
 					
@@ -754,7 +753,7 @@ public function exportMininetScriptFile():void {
 				&& (obLink.can.destination.id=="Switch"||obLink.can.destination.id=="Access Point")
 				&& obLink.can.source.id=="Controller"){
 				
-				var node:String = 'ap';
+				node = 'ap';
 				if (obLink.can.destination.id=="Switch")
 					node = 's';
 

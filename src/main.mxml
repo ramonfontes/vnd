@@ -357,7 +357,7 @@
 								xmlLi.appendChild(xmlList);
 							}
 						}
-						else if(ob.id=="ethernet" || ob.id=="fiber"){
+						else if(ob.id=="utp" || ob.id=="fiber"){
 							if(obj.name=="htb"){
 								xmlList = XMLList("<"+obj.name+">"+obj.HTB+"</"+obj.name+">");
 								xmlLi.appendChild(xmlList);
@@ -984,7 +984,7 @@
 		</mx:TabNavigator>
 	</mx:HBox>	
 	<mx:HBox width="100%" horizontalAlign="center" paddingRight="0" backgroundColor="#F0F0E9">
-		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Description - (SDWN version)  Last Update: 2018/04/24" textAlign="center"/>
+		<mx:Label fontSize="12" fontWeight="bold" text="Visual Network Descriptor - (SDWN version)  Last Update: 2018/07/11" textAlign="center"/>
 	</mx:HBox>
 	
 	<bridge:FABridge/>	
