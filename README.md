@@ -31,10 +31,6 @@ Using Mininet and Floodlight Controller - https://www.youtube.com/watch?v=Vh3TAP
 Main Project File - src/main.mxml
 
 
-## How to access
-VND is available on www.ramonfontes.com/vnd
-
-
 ## Running on locally
 If you want to run the VND on locally, you have to install a Web Server, PHP (can be a newest version), Flash Plugin and open /bin-debug/index.html file on your browser. Write permission to /scripts is also required.  
 
