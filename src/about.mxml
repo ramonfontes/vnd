@@ -24,7 +24,7 @@
        		}
 			
 			private function myLabel_initialize():void {
-			myLabel.htmlText = "<p align=\"center\">Visual Network Description - (SDWN version) is a web-based graphical\n" +
+			myLabel.htmlText = "<p align=\"center\">Visual Network Descriptor - (SDWN version) is a web-based graphical\n" +
 				"user interface for the authoring of generic and SDWN Network Scenarios.\n" +
 				"VND allows to generate scripts for <b>Mininet</b> and <b>Openflow Controllers</b>.\n" +
 				"You can also import and export <b>NSDL</b> files.</p>";
@@ -45,7 +45,7 @@
 		]]>
 	</mx:Script>
 	<mx:Image id="image" source="assets/logo.png"/> 
-	<mx:Label text="Visual Network Description - (SDWN version)" fontSize="14" fontWeight="bold" fontFamily="Arial" horizontalCenter="0" verticalCenter="-25" color="black"/>
+	<mx:Label text="Visual Network Descriptor - (SDWN version)" fontSize="14" fontWeight="bold" fontFamily="Arial" horizontalCenter="0" verticalCenter="-25" color="black"/>
 	<mx:Label>
 		
 	</mx:Label>
